@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2022-08-25 17:22:14
- * @LastEditors: 张祥 zhangxiang@sidri.com
+ * @LastEditTime: 2025-05-20 05:27:31
+ * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \DTSWeekly_zhyq\README.md
 -->
@@ -106,9 +106,5 @@ yarn lint
         效果可运行代码查看
         ```
         
-## 其他
 
-**DTS官网地址：**[https://dtsdoc.g-bim.cn/](https://dtsdoc.g-bim.cn/)
-
-**接口文档：**[http://sdk.g-bim.cn/doc/api/index.html](http://sdk.g-bim.cn/doc/api/index.html) -- 以安装的cloud软件版本里面的文档为准 
 
