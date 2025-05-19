@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Title</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                background: url('./images/popup_content@2x.png') no-repeat;
+                background-size: cover;
+                width: 320px;
+                height: 350px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                color: #fff;
+            }
+            .top {
+                font-size: 24px;
+                color: #fa8e40;
+                letter-spacing: 1px;
+            }
+            .content {
+                width: 80%;
+            }
+            .content p{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 19px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="top">景区分布</div>
+            <div class="content">
+                <p><span class="title">当前人流:</span> <span class="num">5000</span> 人</p>
+                <p><span class="title">当前车流:</span> <span class="num">500</span> 辆</p>
+                <p><span class="title">景点设施:</span> <span>良好</span></p>
+                <p><span class="title">负责人:</span> <span>李xx</span></p>
+                <p><span class="title">开放时间:</span> <span>2022-02-02</span></p>
+                <p><span class="title">门票价格:</span> <span>500</span></p>
+                <p><span class="title">邮政编码:</span> <span>xxxxx</span></p>
+                <p><span class="title">网址:</span> <span>http://xx</span></p>
+                <p><span class="title">气候:</span> <span>舒适</span></p>
+                <p><span class="title">交通</span> <span>良好</span></p>
+
+            </div>
+        </div>
+        <script>
+            function getRandom(){
+                return Math.round(Math.random()*10000 + 500)
+            }
+            flowNum.innerText = getRandom()
+            flowDensity.innerText = getRandom()
+        </script>
+    </body>
+</html>

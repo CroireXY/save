@@ -1,0 +1,30 @@
+{
+    "marker3d": [
+        {
+            "name": "Point_Y_3"
+        },
+        {
+            "name": "Point_G_1"
+        },
+        {
+            "name": "Point_R_5"
+        },
+        {
+            "name": "Point_R_2"
+        },
+        {
+            "name": "Point_B_7"
+        }
+    ],
+    "other": [
+        {
+            "path": "/Game/Common/Asset_Bank/Mesh/Car/BP_Car_JiuHuChe"
+        },
+        {
+            "path": "/JC_CustomAssets/Material/M_material"
+        },
+        {
+            "path": "/JC_CustomAssets/VehicleLibrary/Exhibition/轿车_04"
+        }
+    ]
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: "Digital";
+            src: url("./images/Digital-7-Mono.ttf");
+            font-weight: normal;
+            font-style: normal;
+        }
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body, p {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .pop-container {
+            position: relative;
+            height: 50px;
+            display: flex;
+        }
+        .right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 330px;
+            height: 450px;
+            color: white;
+            --borderWidth: 3px;
+            background: rgba(29, 31, 32,1);
+            position: relative;
+            border-radius: var(--borderWidth);
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        .right::before {
+            content: '';
+            position: absolute;
+            top: calc(-1 * var(--borderWidth));
+            left: calc(-1 * var(--borderWidth));
+            height: calc(100% + var(--borderWidth) * 2);
+            width: calc(100% + var(--borderWidth) * 2);
+            background: #2980B9; /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, transparent, #6DD5FA, #2980B9); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, transparent, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            border-radius: calc(2 * var(--borderWidth));
+            z-index: -1;
+            animation: animatedgradient 3s ease alternate infinite;
+            background-size: 300% 300%;
+        }
+
+        #place {
+            font-size: 28px;
+        }
+
+        .title {
+            font-weight: bolder;
+            font-size: 22px;
+            margin-right: 15px;
+        }
+        .content {
+            width: 80%;
+        }
+        .content p{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 22px;
+        }
+
+        .num {
+            font-family: Digital-7Mono, Digital;
+            font-size: 25px;
+        }
+
+        @keyframes animatedgradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="pop-container">
+
+    <div class="right">
+        <div class="top">
+            <h3 id="place">智慧规划-社区</h3>
+        </div>
+        <div class="content">
+            <p><span class="title">实有人口:</span> <span class="num" id="act">5000</span> 人</p>
+            <p><span class="title">流动人口:</span> <span class="num flow" id="flow">500</span> 人</p>
+            <p><span class="title">社区面积:</span> <span class="num flow">1200</span> m²</p>
+            <p><span class="title">楼栋数:</span> <span class="num flow">500</span> 栋</p>
+            <p><span class="title">门禁数:</span> <span class="num flow">500</span> 个</p>
+            <p><span class="title">摄像头:</span> <span class="num flow">3300</span> 个</p>
+            <p><span class="title">小区户数:</span> <span class="num flow">2300</span> 户</p>
+            <p><span class="title">单元门数:</span> <span class="num flow">2300</span> 个</p>
+            <p><span class="title">楼层数:</span> <span class="num flow">4300</span> 层</p>
+            <p><span class="title">车位情况:</span> 剩<span class="num flow">2000</span> 个</p>
+            <p><span class="title">电梯:</span> <span class="num flow">4300</span> 个</p>
+        </div>
+    </div>
+</div>
+<script>
+    var query = window.location.search.substring(1);
+    // 分割&
+    var queryArr = query.split('&')
+    let num1 = queryArr[0].split('=')[1]
+    let placeIndex = queryArr[1].split('=')[1]
+
+    const placeArr = ['商业区','住宅区','办公区']
+    // 获取实有人口
+    let act = document.getElementById('act')
+    // 设置实有人口数量
+    act.innerText = num1
+    // 获取流动人口
+    // let flow = document.getElementById('flow')
+    let flow = document.getElementsByClassName('flow')
+    console.log(flow)
+    // 获取区域
+    let place = document.getElementById('place')
+    // 设置区域
+    place.innerText = placeArr[placeIndex]
+
+    // 获取随机值函数
+    function getRandom(min, max,i) {
+        return Math.floor(Math.random() * (max - min + 1) * i + min);
+    }
+
+    for (let i = 0; i < flow.length; i++) {
+        let min = getRandom(100, 300,i)
+        flow[i].innerText = min + ''
+    }
+</script>
+</body>
+</html>
