@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-18 22:05:57
- * @LastEditTime: 2025-05-16 17:04:48
+ * @LastEditTime: 2025-05-20 07:36:02
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \fdaircityinit\src\Views\home\index.vue
@@ -9,7 +9,8 @@
 <template>
  
     <!-- <Player /> -->
-    <Map ></Map>
+    <!-- <Map ></Map> -->
+    <Map3d @init="init" />
 
     <!-- <transition appear name="custom-classes-transition" enter-active-class="animate__animated  animate__fadeInDown" leave-active-class="animate__animated  animate__fadeOutUp">
         <div class="back" @click="back" v-if="!UIShow">
@@ -79,8 +80,9 @@
 
 import Player from '@/components/player/player.vue'
 import Map from '@/components/map/map.vue'
+import Map3d from '@/components/Map-3d.vue'
 import Header from '@/components/header/index.vue'
-import shpCheckBox from '@/components/shpCheckBox'
+// import shpCheckBox from '@/components/shpCheckBox'
 // import { getMockData } from '@/api/connect'
 import { computed, onMounted } from 'vue'
 // import { useAirCityStore } from '@/stores/aircity'
@@ -95,7 +97,19 @@ import Weather from '@/components/tools/weather.vue'
 import ToolBar from '@/components/tools/toolBar.vue'
 import Build from '@/components/tools/build.vue'
 import mainPanel from '@/Views/home/main/index.vue'
+import {ref} from "vue";
+const isOkRef = ref(false)
 
+const init = () => {
+  isOkRef.value = true
+  // Native.setAuthorize({})
+  Native.img()
+  Native.flyTo({
+    lng: 114.130165,
+    lat: 22.260256,
+    alt: 1300
+  })
+}
 const Route = useRoute()
 const path = computed(() => Route.path)
 const ToolsStore = useToolsStore()
