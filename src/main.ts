@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-11-27 19:52:04
- * @LastEditTime: 2023-10-08 09:27:21
- * @LastEditors: your name
+ * @LastEditTime: 2025-05-21 13:48:25
+ * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \智慧广州\src\main.ts
  */
@@ -16,6 +16,7 @@ import "qweather-icons/font/qweather-icons.css";
 import "@/assets/scss/rest.scss";
 import "@/assets/scss/global.scss";
 import "@/assets/scss/normalize.scss";
+// import "@/utils/browserPatch";
 import "animate.css";
 import "default-passive-events";
 import ElementPlus from "element-plus";
@@ -35,7 +36,7 @@ console.log(1111)
 createApp(App)
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
-  .use(ElementPlus)
+  .use(ElementPlus,{})
   .use(Antd)
   .use(createPinia())
   .use(router)

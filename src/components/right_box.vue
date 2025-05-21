@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 22:38:25
- * @LastEditTime: 2022-05-30 10:41:21
- * @LastEditors: 张祥 17839092765@163.com
+ * @LastEditTime: 2025-05-21 15:29:18
+ * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \DTSWeekly_zhyq\src\components\right_box.vue
 -->
@@ -35,7 +35,7 @@ const animate = computed(() => animatestore.$state.Animate);
   position: absolute;
   @include Width(560);
   height: 100%;
-  @include Top(0);
+  @include Top(30);
   @include Right(0);
   z-index: 9;
   // background: url("../assets/images/基础/right_bg_dark@2x.png") no-repeat

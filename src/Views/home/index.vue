@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-18 22:05:57
- * @LastEditTime: 2025-05-20 07:36:02
+ * @LastEditTime: 2025-05-21 11:51:26
  * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \fdaircityinit\src\Views\home\index.vue
@@ -48,7 +48,7 @@
         </div>
     </transition>
     <transition appear name="custom-classes-transition" enter-active-class="animate__animated  animate__fadeInDown" leave-active-class="animate__animated  animate__fadeOutUp">
-        <Header />
+        <Header ></Header>
     </transition>
     <transition appear name="custom-classes-transition" enter-active-class="animate__animated   animate__fadeInDown" leave-active-class="animate__animated  animate__fadeOutUp">
         <HeaderLink v-if="!TooBarShow && !LayerTreeShow && !AnimationShow && !SkyBoxShow && !WeatherShow" />
@@ -140,7 +140,7 @@ defineProps({
 // const IsOnReady = computed(() => AirCityStore.$state.IsOnReady)
 onMounted(async () => {
     // const result = await getMockData()
-    console.log(result)
+    // console.log(result)
     // __g.shapeFileLayer.clear()
 })
 </script>
