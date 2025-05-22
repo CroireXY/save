@@ -82,7 +82,7 @@ const handleChange = (i: number) => {
 // 区域总览
 
 onMounted(() => {
-    __g.camera.playAnimation(12)
+    // __g.camera.playAnimation(12)
 })
 
 onBeforeUnmount(() => {

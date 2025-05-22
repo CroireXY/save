@@ -1,27 +1,22 @@
 /*
- * @Author: your name
- * @Date: 2021-12-03 23:49:49
- * @LastEditTime: 2021-12-03 23:56:20
- * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \vue3\src\tools\broswer.ts
+ * @Author: Sun ruiqi
+ * @Date: 2025-05-12 06:14:25
+ * @LastEditors: viola
+ * @LastEditTime: 2025-05-22 11:30:17
+ * @FilePath: \code\src\tools\broswer.ts
  */
-/**
- * @description: 浏览器型号和版本
- * @param {*}
- * @return {*}
- */
+
 export const getExplorerInfo = () => {
 	const t: any = navigator.userAgent.toLowerCase();
 	return 0 <= t.indexOf("msie")
 			? {
-				//ie < 11
+				//ie 
 				type: "IE",
 				version: Number(t.match(/msie ([\d]+)/)[1]),
 			}
 			: t.match(/trident\/.+?rv:(([\d.]+))/)
 					? {
-						// ie 11
+						
 						type: "IE",
 						version: 11,
 					}

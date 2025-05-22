@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-05-21 16:37:02
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime: 2025-05-22 15:53:20
+ * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWeekly_zhyq\src\Views\home\header\index.vue
+ * @FilePath: \code\src\components\header\index.vue
 -->
 <!-- header -->
 <template>
@@ -165,7 +165,7 @@
 
 <script lang="ts" setup>
 import Dayjs from "dayjs";
-import { getWeather, getWeatherCityId, getWeatherPm2P5 } from "@/api/connect";
+// import { getWeather, getWeatherCityId, getWeatherPm2P5 } from "@/api/connect";
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useWeatherStore } from "@/stores/weather";
 import { useToolsStore } from "@/stores/tools";
@@ -266,45 +266,45 @@ let WeatherData = ref({
   },
   fxLink: "",
 });
-let WeatherPm2P5 = ref();
-const WeatherStore = useWeatherStore();
-const getWeatherData = async () => {
-  // 开发环境时把天气地区设置成深圳
-  let name = process.env.NODE_ENV === "development" ? "深圳" : "深圳";
-  /**
-   * @description: 获取城市ID
-   * @param {any} 城市名
-   * @return {any} 城市ID
-   */
-  const CityId: any = await getWeatherCityId(name);
-  /**
-   * @description: 获取城市一天的天气信息
-   * @param {any} 城市ID
-   * @return {any}城市一天的天气信息
-   */
-  // console.log(CityId, "CityId");
+// let WeatherPm2P5 = ref();
+// const WeatherStore = useWeatherStore();
+// const getWeatherData = async () => {
+//   // 开发环境时把天气地区设置成深圳
+//   let name = process.env.NODE_ENV === "development" ? "深圳" : "深圳";
+//   /**
+//    * @description: 获取城市ID
+//    * @param {any} 城市名
+//    * @return {any} 城市ID
+//    */
+//   const CityId: any = await getWeatherCityId(name);
+//   /**
+//    * @description: 获取城市一天的天气信息
+//    * @param {any} 城市ID
+//    * @return {any}城市一天的天气信息
+//    */
+//   // console.log(CityId, "CityId");
 
-  const CityWeather: any = await getWeather(CityId.location[0].id);
-  console.log(CityWeather, "------CityWeather");
-  // CityWeather.now.icon === "154" ? (CityWeather.now.icon = "104") : null;
-  // console.log(CityWeather, "CityWeather");
+//   const CityWeather: any = await getWeather(CityId.location[0].id);
+//   console.log(CityWeather, "------CityWeather");
+//   // CityWeather.now.icon === "154" ? (CityWeather.now.icon = "104") : null;
+//   // console.log(CityWeather, "CityWeather");
 
-  // WeatherData.value = CityWeather
-  WeatherStore.SetWeatherData(WeatherData.value);
-  // console.log(WeatherData, "WeatherData");
+//   // WeatherData.value = CityWeather
+//   WeatherStore.SetWeatherData(WeatherData.value);
+//   // console.log(WeatherData, "WeatherData");
 
-  /**
-   * @description: 获取pm2.5数据
-   * @param {any}  城市id
-   * @return {any} pm2.5数据
-   */
-  const CityWeather_Pm2P5 = await getWeatherPm2P5(CityId.location[0].id);
-  WeatherPm2P5.value = CityWeather_Pm2P5;
-  WeatherStore.SetWeatherPm2P5(WeatherPm2P5.value);
-};
-const WeahterLink = () => {
-  window.open(WeatherData.value.fxLink);
-};
+//   /**
+//    * @description: 获取pm2.5数据
+//    * @param {any}  城市id
+//    * @return {any} pm2.5数据
+//    */
+//   const CityWeather_Pm2P5 = await getWeatherPm2P5(CityId.location[0].id);
+//   WeatherPm2P5.value = CityWeather_Pm2P5;
+//   WeatherStore.SetWeatherPm2P5(WeatherPm2P5.value);
+// };
+// const WeahterLink = () => {
+//   window.open(WeatherData.value.fxLink);
+// };
 
 let timer = ref();
 onMounted(async () => {
@@ -316,7 +316,7 @@ onMounted(async () => {
   timer.value = setInterval(() => {
     get_Date_Time();
   }, 500);
-  await getWeatherData();
+  // await getWeatherData();
 });
 onUnmounted(() => {
   // clearInterval(timer.value)
@@ -436,7 +436,7 @@ onUnmounted(() => {
   }
 }
 .left-bg {
-  @include Width(756);
+  @include Width(700);
   @include wHeight(77);
   position: absolute;
   @include Top(20);

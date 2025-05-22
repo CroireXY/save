@@ -1,3 +1,10 @@
+/*
+ * @Author: Sun ruiqi
+ * @Date: 2025-05-12 06:15:48
+ * @LastEditors: viola
+ * @LastEditTime: 2025-05-22 16:35:35
+ * @FilePath: \code\src\Views\home\WisdomSix\opers\intelligenceCommunity2.ts
+ */
 import { hideAllTreeInfo, hideNeedTreeInfo, showNeedTreeInfo } from '@/utils/showOrHideInfoTree'
 import { useDisplayStore } from '@/stores/display'
 
@@ -24,10 +31,10 @@ const addCustomTag = async () => {
     shCustomTagArr.push('community-pop-' + index)
   })
   // 添加标注对象
-  const res = await __g.customTag.add(addCustomTagArr)
-  if (res.result) {
-    __g.customTag.show(shCustomTagArr)
-  }
+  // const res = await __g.customTag.add(addCustomTagArr)
+  // if (res.result) {
+    // __g.customTag.show(shCustomTagArr)
+  // }
 }
 
 const displayStore = useDisplayStore()
@@ -35,24 +42,24 @@ const displayStore = useDisplayStore()
  * 初始化智慧规划
  */
 const initIntelligenceCommunity2 = async () => {
-  await __g.camera.stopAnimation()
-  await __g.weather.setDateTime(2023, 8, 15, 22, 8, false)
+  // await __g.camera.stopAnimation()
+  // await __g.weather.setDateTime(2023, 8, 15, 22, 8, false)
 
   await hideAllTreeInfo()
   await showNeedTreeInfo(['智慧规划', '地形影像', '智慧政务白模', '智慧政务灯光', '智慧政务核心区地形', '智慧政务核心区建筑', '智慧政务内部植物', '智慧政务外部植物', '智慧政委外围地形', '智慧政务小品'])
   if (displayStore.showIntelligenceCommunity) {
-    __g.customTag.show(shCustomTagArr)
+    // __g.customTag.show(shCustomTagArr)
   } else {
     await addCustomTag()
     await displayStore.SetShowIntelligenceCommunity(true)
   }
-  __g.camera.set(430387.194219, 2557843.330313, 1338.442656, -42.229256, 105.683197, 1);
+  // __g.camera.set(430387.194219, 2557843.330313, 1338.442656, -42.229256, 105.683197, 1);
 }
 
 const cleanIntelligenceCommunity2 = () => {
-  __g.camera.playAnimation(12)
+  // __g.camera.playAnimation(12)
   hideNeedTreeInfo(['智慧规划'])
-  __g.customTag.hide(shCustomTagArr)
+  // __g.customTag.hide(shCustomTagArr)
 }
 
 // 坐标

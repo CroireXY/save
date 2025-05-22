@@ -15,7 +15,7 @@ export const showNeedTreeInfo = async (showArr: string[]) => {
 
     const showTreeIdList = treeObjList && (treeObjList as any).filter((item: any) => showArr.includes(item.name)).map((p: any) => p.iD)
 
-    await __g.infoTree.show(showTreeIdList)
+    // await __g.infoTree.show(showTreeIdList)
 }
 
 /**
@@ -29,7 +29,7 @@ export const hideNeedTreeInfo = async (showArr: string[]) => {
     const treeObjList = tileLayerStore.TreeInfo
     const showTreeIdList = treeObjList && (treeObjList as any).filter((item: any) => showArr.includes(item.name)).map((p: any) => p.iD)
 
-    const r = await __g.infoTree.hide(showTreeIdList)
+    // const r = await __g.infoTree.hide(showTreeIdList)
     // console.log(showArr, showTreeIdList, r, '---------showTreeIdList')
 }
 
@@ -44,7 +44,7 @@ export const showAllTreeInfo = async () => {
     const treeObjList = tileLayerStore.TreeInfo
     const showTreeIdList = treeObjList && (treeObjList as any).map((p: any) => p.iD)
 
-    await __g.infoTree.show(showTreeIdList)
+    // await __g.infoTree.show(showTreeIdList)
 }
 
 /**
@@ -60,5 +60,5 @@ export const hideAllTreeInfo = async () => {
     // const showTreeIdList = treeObjList.map((p: any) => p.iD)
     const treeObjList = tileLayerStore.TreeInfo
     const showTreeIdList = treeObjList && (treeObjList as any).map((p: any) => p.iD)
-    await __g.infoTree.hide(showTreeIdList)
+    // await __g.infoTree.hide(showTreeIdList)
 }

@@ -1,3 +1,10 @@
+<!--
+ * @Author: Sun ruiqi
+ * @Date: 2025-05-12 06:15:48
+ * @LastEditors: viola
+ * @LastEditTime: 2025-05-22 16:38:42
+ * @FilePath: \code\src\Views\home\contactOccurs\index.vue
+-->
 <template>
     <Left_box>
         <Lease_title>今日交通情况</Lease_title>
@@ -71,18 +78,18 @@ const handleChange = (i: number) => {
     } else {
         cleanShortConnection()
         cleanTrafficSituation()
-        __g.camera.playAnimation(12)
+        // __g.camera.playAnimation(12)
         console.log('取消')
     }
 }
 
 onMounted(() => {
-    __g.camera.playAnimation(12)
+    // __g.camera.playAnimation(12)
 })
 onBeforeUnmount(() => {
     cleanShortConnection()
     cleanTrafficSituation()
-    __g.camera.stopAnimation()
+    // __g.camera.stopAnimation()
 })
 </script>
 <style lang="scss" scoped></style>

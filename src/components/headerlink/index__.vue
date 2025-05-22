@@ -1,11 +1,12 @@
 <!--
- * @Author: your name
- * @Date: 2022-03-13 23:28:11
- * @LastEditTime: 2022-05-30 10:41:31
- * @LastEditors: 张祥 17839092765@163.com
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWEEKLY_ZHJT\src\components\footer\index.vue
+ * @Author: Sun ruiqi
+ * @Date: 2025-05-12 06:07:22
+ * @LastEditors: viola
+ * @LastEditTime: 2025-05-22 16:30:47
+ * @FilePath: \code\src\components\headerlink\index__.vue
+ * @Description: 
 -->
+
 <!-- footer -->
 <template>
   <div class="footer">

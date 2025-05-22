@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2022-03-13 23:28:11
- * @LastEditTime: 2025-05-15 16:23:16
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime: 2025-05-22 17:07:57
+ * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWEEKLY_ZHJT\src\components\footer\index.vue
+ * @FilePath: \code\src\components\headerlink\index.vue
 -->
 <!-- footer -->
 <template>
@@ -40,11 +40,11 @@ const Link: any = reactive([
         name: '飞行活动',
         key: 0,
         path: '/home/cityAppearance'
-    },
+    },                   
     {
         name: '航线管理',
-        key: 2,
-        path: '/home/wisdomone'
+        key: 1,
+        path: '/home/wisdomsix'
     },
     // {
     //     name: '航线管理',

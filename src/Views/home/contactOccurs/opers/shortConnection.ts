@@ -67,17 +67,17 @@ const addMinuteMarker = async () => {
         occlusionCull: false //是否参与遮挡剔除
     }
 
-    const res = await __g.marker.add(o)
-    if (res.result) {
-        __g.marker.show('MinuteMarker0')
-    }
-    shMarkerArr.push('MinuteMarker0')
-    await delay(2000)
-    const res1 = await __g.marker.add(o1)
-    if (res1.result) {
-        __g.marker.show('MinuteMarker1')
-    }
-    shMarkerArr.push('MinuteMarker1')
+    // const res = await __g.marker.add(o)
+    // if (res.result) {
+    //     __g.marker.show('MinuteMarker0')
+    // }
+    // shMarkerArr.push('MinuteMarker0')
+    // await delay(2000)
+    // const res1 = await __g.marker.add(o1)
+    // if (res1.result) {
+    //     __g.marker.show('MinuteMarker1')
+    // }
+    // shMarkerArr.push('MinuteMarker1')
 }
 
 /**
@@ -108,15 +108,15 @@ const createCircle = async () => {
         shape: 0, //折线类型 0：直线， 1：曲线
         depthTest: false //是否做深度检测
     }
-    const res = await __g.polyline.add(o1)
-    if (res.result) {
-        __g.polyline.show('circle1')
-    }
-    await delay(2000)
-    const res1 = await __g.polyline.add(o)
-    if (res1.result) {
-        __g.polyline.show('circle0')
-    }
+    // const res = await __g.polyline.add(o1)
+    // if (res.result) {
+    //     __g.polyline.show('circle1')
+    // }
+    // await delay(2000)
+    // const res1 = await __g.polyline.add(o)
+    // if (res1.result) {
+    //     __g.polyline.show('circle0')
+    // }
 }
 
 /**
@@ -134,10 +134,10 @@ const addMark = async () => {
         range: [1, 10000], //3D标注的可视距离范围：[min,max]，单位：米
         autoHeight: false //自动判断下方是否有物体，设置正确高度，默认值：false
     }
-    const res = await __g.marker3d.add(o)
-    if (res.result) {
-        __g.marker3d.show('CenterMark')
-    }
+    // const res = await __g.marker3d.add(o)
+    // if (res.result) {
+    //     __g.marker3d.show('CenterMark')
+    // }
 }
 
 /**
@@ -176,10 +176,10 @@ const addCustomTag = async () => {
         shCustomTag.push('shortCustom-' + index)
     })
     //批量添加
-    const res = await __g.customTag.add(addCustomTagArr)
-    if (res.result) {
-        __g.customTag.show(shCustomTag)
-    }
+    // const res = await __g.customTag.add(addCustomTagArr)
+    // if (res.result) {
+    //     __g.customTag.show(shCustomTag)
+    // }
 }
 
 /**
@@ -215,22 +215,22 @@ const createPolyline = async () => {
         polylineArr.push(obj)
         beams.push(obj2)
     })
-    const res = await __g.polyline.add(polylineArr)
-    if (res.result) {
-        const hideArr: any = []
-        destinationCoors.forEach((item: any, index: number) => {
-            hideArr.push(`ray_polyLine_${index}`)
-        })
-        __g.polyline.show(hideArr)
-    }
-    const res1 = await __g.beam.add(beams)
-    if (res1.result) {
-        const hideBeamArr: any = []
-        destinationCoors.forEach((item: any, index: number) => {
-            hideBeamArr.push(`ray_beam_${index}`)
-        })
-        __g.beam.show(hideBeamArr)
-    }
+    // const res = await __g.polyline.add(polylineArr)
+    // if (res.result) {
+    //     const hideArr: any = []
+    //     destinationCoors.forEach((item: any, index: number) => {
+    //         hideArr.push(`ray_polyLine_${index}`)
+    //     })
+    //     __g.polyline.show(hideArr)
+    // }
+    // const res1 = await __g.beam.add(beams)
+    // if (res1.result) {
+    //     const hideBeamArr: any = []
+    //     destinationCoors.forEach((item: any, index: number) => {
+    //         hideBeamArr.push(`ray_beam_${index}`)
+    //     })
+    //     __g.beam.show(hideBeamArr)
+    // }
 }
 const displayStore = useDisplayStore()
 
@@ -238,27 +238,27 @@ const displayStore = useDisplayStore()
  * 初始化交通接驳
  */
 const initShortConnection = async () => {
-    __g.camera.stopAnimation()
-    __g.camera.set(430273.596914, 2559413.243594, 771.315938, -25.983561, 90.771606, 1)
-    __g.weather.setDateTime(2020, 9, 9, 22, 8, false)
+    // __g.camera.stopAnimation()
+    // __g.camera.set(430273.596914, 2559413.243594, 771.315938, -25.983561, 90.771606, 1)
+    // __g.weather.setDateTime(2020, 9, 9, 22, 8, false)
     if (displayStore.showShortConnection) {
-        await __g.polyline.show(['circle1'])
-        await __g.marker.show('MinuteMarker0')
-        await delay(2000)
-        __g.polyline.show(['circle0'])
-        __g.marker.show('MinuteMarker1')
+        // await __g.polyline.show(['circle1'])
+        // await __g.marker.show('MinuteMarker0')
+        // await delay(2000)
+        // __g.polyline.show(['circle0'])
+        // __g.marker.show('MinuteMarker1')
         const hideArr: any = []
         const hideBeamArr: any = []
         destinationCoors.forEach((item: any, index: number) => {
             hideArr.push(`ray_polyLine_${index}`)
             hideBeamArr.push(`ray_beam_${index}`)
         })
-        await delay(500)
-        __g.polyline.show(hideArr)
-        __g.beam.show(hideBeamArr)
-        await delay(500)
-        __g.marker3d.show('CenterMark')
-        __g.customTag.show(shCustomTag)
+        // await delay(500)
+        // __g.polyline.show(hideArr)
+        // __g.beam.show(hideBeamArr)
+        // await delay(500)
+        // __g.marker3d.show('CenterMark')
+        // __g.customTag.show(shCustomTag)
     } else {
         await createCircle()
         await addMinuteMarker()
@@ -275,19 +275,19 @@ const initShortConnection = async () => {
  * 还原
  */
 const cleanShortConnection = () => {
-    __g.weather.setDateTime(2020, 9, 9, 10, 8, false)
-    __g.polyline.hide(['circle0', 'circle1'])
+    // __g.weather.setDateTime(2020, 9, 9, 10, 8, false)
+    // __g.polyline.hide(['circle0', 'circle1'])
     const hideArr: any = []
     const hideBeamArr: any = []
     destinationCoors.forEach((item: any, index: number) => {
         hideArr.push(`ray_polyLine_${index}`)
         hideBeamArr.push(`ray_beam_${index}`)
     })
-    __g.polyline.hide(hideArr)
-    __g.beam.hide(hideBeamArr)
-    __g.marker3d.hide('CenterMark')
-    __g.customTag.hide(shCustomTag)
-    __g.marker.hide(shMarkerArr)
+    // __g.polyline.hide(hideArr)
+    // __g.beam.hide(hideBeamArr)
+    // __g.marker3d.hide('CenterMark')
+    // __g.customTag.hide(shCustomTag)
+    // __g.marker.hide(shMarkerArr)
 
     // __g.polyline.clear(null)
     // __g.beam.clear(null)

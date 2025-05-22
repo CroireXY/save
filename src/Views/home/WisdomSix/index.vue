@@ -60,11 +60,11 @@ const handleChange = async (i: number) => {
         cleanIntelligenceCommunity2()
         isShowPanel.value = false
         // 折叠两边的面板
-        await __g.camera.stopAnimation()
-        await __g.camera.playAnimation(11)
+        // await __g.camera.stopAnimation()
+        // await __g.camera.playAnimation(11)
         isNeedStopAnimation = true
     } else if (i === 1) {
-        __g.camera.playAnimation(12)
+        // __g.camera.playAnimation(12)
         if (isNeedStopAnimation) {
             setTimeout(() => {
                 isShowPanel.value = true
@@ -79,22 +79,22 @@ const handleChange = async (i: number) => {
     } else {
         isNeedStopAnimation = false
         isShowPanel.value = true
-        await __g.weather.setDateTime(2020, 9, 9, 10, 8, false)
+        // await __g.weather.setDateTime(2020, 9, 9, 10, 8, false)
         cleanIntelligenceCommunity2()
-        await __g.camera.playAnimation(12)
+        // await __g.camera.playAnimation(12)
     }
 }
 
 onMounted(() => {
     isShowPanel.value = true
-    __g.camera.playAnimation(12)
-    __g.weather.setDateTime(2020, 9, 9, 10, 8, false)
+    // __g.camera.playAnimation(12)
+    // __g.weather.setDateTime(2020, 9, 9, 10, 8, false)
 })
 onBeforeUnmount(() => {
     isShowPanel.value = true
-    __g.weather.setDateTime(2020, 9, 9, 10, 8, false)
-    __g.camera.playAnimation(12)
-    __g.camera.stopAnimation()
+    // __g.weather.setDateTime(2020, 9, 9, 10, 8, false)
+    // __g.camera.playAnimation(12)
+    // __g.camera.stopAnimation()
     cleanIntelligenceCommunity2()
 })
 </script>
