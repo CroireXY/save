@@ -78,7 +78,7 @@ const handleChange = (i: number) => {
     if (i === 0) {
         showDangerTip.value = false
         showMetroImg.value = true
-        __g.weather.setDarkMode(true)
+        // __g.weather.setDarkMode(true)
         initMetroPlanning()
         cleanTrafficWarning()
     } else if (i === 1) {
@@ -93,13 +93,13 @@ const handleChange = (i: number) => {
         cleanMetroPlanning()
         showDangerTip.value = false
         showMetroImg.value = false
-        __g.camera.playAnimation(12)
-        __g.weather.setDarkMode(false)
+        // __g.camera.playAnimation(12)
+        // __g.weather.setDarkMode(false)
     }
 }
 
 onMounted(() => {
-    __g.camera.playAnimation(12)
+    // __g.camera.playAnimation(12)
 })
 
 onBeforeUnmount(() => {
@@ -108,7 +108,7 @@ onBeforeUnmount(() => {
     clearTimeout(timer)
     cleanTrafficWarning()
     cleanMetroPlanning()
-    __g.camera.stopAnimation()
+    // __g.camera.stopAnimation()
 })
 </script>
 <style lang="scss" scoped>

@@ -15,6 +15,7 @@
         container="wisdomsix_one"
       />
     </div>
+     
     <div class="otherCharts">
       <div class="item">
         <div class="title">专项组复产达到生产水平70%以上的重点企业数</div>
@@ -41,6 +42,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import V3Echarts from "@/components/V3Echarts/index.vue";
+// import { option} from "../../cityAppearance/charOpt";
 const electricityList = ref([
   {
     id: 1,

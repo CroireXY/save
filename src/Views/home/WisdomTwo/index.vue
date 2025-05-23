@@ -130,7 +130,7 @@ const handleChange = async (i: number) => {
     if (i === 0) {
         // 历史遗留
         // 显示shp选择框
-        __g.camera.playAnimation(12)
+        // __g.camera.playAnimation(12)
         showCheck.value = true
         useDialog.setIsShp(true)
         initHistory()
@@ -143,19 +143,19 @@ const handleChange = async (i: number) => {
         scenicSpot()
     } else {
         // 隐藏shp选择框
-        __g.heatmap.hide('heatmap')
+        // __g.heatmap.hide('heatmap')
         showCheck.value = false
         useDialog.setDialogVisible(false)
         useDialog.setIsShp(false)
         cleanHistory()
-        __g.camera.playAnimation(12)
+        // __g.camera.playAnimation(12)
         console.log('取消')
     }
 }
 const useDialog = useDialogStore()
 const dialogInfo = useDialog.DialogInfo
 onMounted(() => {
-    __g.camera.playAnimation(12)
+    // __g.camera.playAnimation(12)
 })
 
 onBeforeUnmount(() => {
@@ -166,7 +166,7 @@ onBeforeUnmount(() => {
     // 还原
     cleanHistory()
     scenicrestore()
-    __g.camera.stopAnimation()
+    // __g.camera.stopAnimation()
 })
 
 watchEffect(() => {

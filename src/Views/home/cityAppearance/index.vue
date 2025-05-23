@@ -2,34 +2,39 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2025-05-12 06:16:06
  * @LastEditors: viola
- * @LastEditTime: 2025-05-22 16:34:04
+ * @LastEditTime: 2025-05-23 14:28:59
  * @FilePath: \code\src\Views\home\cityAppearance\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%A
 -->
 <template>
   <!-- <div> -->
-    <Left_box>
-      <Lease_title>数据概览</Lease_title>
-      <Box :height="250">
-        <oneVue />
-      </Box>
+  <Left_box>
+    <Lease_title>今日实况</Lease_title>
+    <Box height="245">
+      <realtime_data />
+    </Box>
 
-      <Lease_title>过去7日实飞</Lease_title>
-      <Box :height="655">
-        <twoVue />
-      </Box>
-    </Left_box>
-    <Right_box>
-      <Lease_title>数据统计</Lease_title>
-      <Box :height="300">
-        <threeVue />
-      </Box>
+    <Lease_title>过去7日实飞</Lease_title>
+    <Box :height="655">
+      <twoVue />
+    </Box>
+  </Left_box>
+  <Right_box>
+    <Lease_title>数据统计</Lease_title>
+    <Box :height="300">
+      <alldata />
+    </Box>
 
-      <Lease_title>飞行任务详情</Lease_title>
-      <Box :height="600">
-        <fourVue />
-      </Box>
-    </Right_box>
+      <Lease_title>飞行任务性质</Lease_title>
+    <Box :height="300">
+      <flight_type />
+    </Box>
+
+    <Lease_title>飞行任务详情</Lease_title>
+    <Box :height="300">
+      <fourVue />
+    </Box>
+  </Right_box>
   <!-- </div> -->
 </template>
 
@@ -38,11 +43,15 @@ import Left_box from "@/components/left_box.vue";
 import Lease_title from "@/components/Lease_title/index.vue";
 import Right_box from "@/components/right_box.vue";
 import Box from "@/components/Box/index.vue";
+import realtime_data from "./component/realtime_data.vue";
+import alldata from "./component/data.vue";
 import oneVue from "./../WisdomOne/component/one.vue";
 import twoVue from "./../WisdomOne/component/two.vue";
+import flight_type from "./component/flight_type.vue";
 import threeVue from "./../WisdomOne/component/three.vue";
 import fourVue from "./../WisdomOne/component/four.vue";
 import { onBeforeUnmount, onMounted } from "vue";
+
 onMounted(() => {
   // __g.camera.playAnimation(12)
   // setTimeout(() => {

@@ -49,10 +49,10 @@ const addSubwayStation = async (data: any) => {
         shMark.push(`SubwayStation_${index}`)
         stationMarkArr.push(o)
     })
-    const res = await __g.marker.add(stationMarkArr)
-    if (res.result) {
-        __g.marker.show(shMark)
-    }
+//     const res = await __g.marker.add(stationMarkArr)
+//     if (res.result) {
+//         __g.marker.show(shMark)
+//     }
 }
 
 /**
@@ -100,14 +100,14 @@ const AddPolyline = async (data: any) => {
             })
         })
     }
-    const res = await __g.polyline.add(datas)
-    if (res.result) {
-        __g.polyline.show(shPolyline)
-    }
-    const res1 = await __g.beam.add(beams)
-    if (res1.result) {
-        __g.beam.show(shBeam)
-    }
+    // const res = await __g.polyline.add(datas)
+    // if (res.result) {
+    //     __g.polyline.show(shPolyline)
+    // }
+    // const res1 = await __g.beam.add(beams)
+    // if (res1.result) {
+    //     __g.beam.show(shBeam)
+    // }
 }
 
 /**
@@ -135,34 +135,34 @@ const displayStore = useDisplayStore()
  * 初始化地铁规划
  */
 const initMetroPlanning = async () => {
-    __g.camera.stopAnimation()
-    __g.camera.set(440394.227031, 2558071.219609, 27668.615, -70.734909, 178.340912, 1)
-    // 开启电子地图
-    __g.settings.setMapMode(
-        2,
-        {
-            //地图模式相关的参数，具体请参考API帮助文档
-            coordType: 0, // coordType: 坐标系类型，0：经纬度；1：本地（默认值是0）
-            serviceType: 4, // serviceType: 服务类型，0：MVT矢量切片； 1：WMTS(ArcGis) （默认值是0）
-            mapPoint: [430809.12, 2556481.54], // mapPoint: 同名点，取值范围：[x,y]，（默认值是[0, 0]）
-            longitude: 113.324593, // longitude: 经度，取值范围：[0~180]（默认值是0.0）
-            latitude: 23.106405, // latitude: 纬度，取值范围：[0~90]（默认值是0.0）
-            style: 'mapbox://styles/mapbox/dark-v9', // style: 风格路径，字符串地址，（默认值是 "mapbox://styles/mapbox/streets-v10"）
-            groundHeight: 150, // groundHeight: 地面高度，取值范围：[0~任意数值]（默认值是0.0）
-            renderMode: 0, // renderMode: 渲染模式，0：正常；1：透明；2：标注；3：贴地（默认值是0）
-            coordOrder: 0, // coordOrder: 坐标顺序，0: XY; 1: YX（默认值为0）
-            maxLevel: 22 // axLevel: WMTS服务最大显示层级，取值范围：[0~22]，默认值：10
-        },
-        () => {
-            console.log('设置大地图模式完成')
-        }
-    )
+    // __g.camera.stopAnimation()
+    // __g.camera.set(440394.227031, 2558071.219609, 27668.615, -70.734909, 178.340912, 1)
+    // // 开启电子地图
+    // __g.settings.setMapMode(
+    //     2,
+    //     {
+    //         //地图模式相关的参数，具体请参考API帮助文档
+    //         coordType: 0, // coordType: 坐标系类型，0：经纬度；1：本地（默认值是0）
+    //         serviceType: 4, // serviceType: 服务类型，0：MVT矢量切片； 1：WMTS(ArcGis) （默认值是0）
+    //         mapPoint: [430809.12, 2556481.54], // mapPoint: 同名点，取值范围：[x,y]，（默认值是[0, 0]）
+    //         longitude: 113.324593, // longitude: 经度，取值范围：[0~180]（默认值是0.0）
+    //         latitude: 23.106405, // latitude: 纬度，取值范围：[0~90]（默认值是0.0）
+    //         style: 'mapbox://styles/mapbox/dark-v9', // style: 风格路径，字符串地址，（默认值是 "mapbox://styles/mapbox/streets-v10"）
+    //         groundHeight: 150, // groundHeight: 地面高度，取值范围：[0~任意数值]（默认值是0.0）
+    //         renderMode: 0, // renderMode: 渲染模式，0：正常；1：透明；2：标注；3：贴地（默认值是0）
+    //         coordOrder: 0, // coordOrder: 坐标顺序，0: XY; 1: YX（默认值为0）
+    //         maxLevel: 22 // axLevel: WMTS服务最大显示层级，取值范围：[0~22]，默认值：10
+    //     },
+    //     () => {
+    //         console.log('设置大地图模式完成')
+    //     }
+    // )
     // 隐藏所有图层
     hideAllTreeInfo()
     if (displayStore.showMetroPlanning) {
-        __g.polyline.show(shPolyline)
-        __g.beam.show(shBeam)
-        __g.marker.show(shMark)
+        // __g.polyline.show(shPolyline)
+        // __g.beam.show(shBeam)
+        // __g.marker.show(shMark)
     } else {
         // 获取地铁数据
         await accessToSubwayLines()
@@ -178,33 +178,33 @@ const initMetroPlanning = async () => {
  * 还原
  */
 const cleanMetroPlanning = () => {
-    __g.polyline.hide(shPolyline)
-    __g.beam.hide(shBeam)
-    __g.marker.hide(shMark)
+    // __g.polyline.hide(shPolyline)
+    // __g.beam.hide(shBeam)
+    // __g.marker.hide(shMark)
 
     // __g.polyline.clear(null)
     // __g.beam.clear(null)
     // __g.marker.clear(null)
     // 关闭电子地图
-    __g.settings.setMapMode(
-        0,
-        {
-            //地图模式相关的参数，具体请参考API帮助文档
-            coordType: 0, // coordType: 坐标系类型，0：经纬度；1：本地（默认值是0）
-            serviceType: 4, // serviceType: 服务类型，0：MVT矢量切片； 1：WMTS(ArcGis) （默认值是0）
-            mapPoint: [430809.12, 2556481.54], // mapPoint: 同名点，取值范围：[x,y]，（默认值是[0, 0]）
-            longitude: 113.324593, // longitude: 经度，取值范围：[0~180]（默认值是0.0）
-            latitude: 23.106405, // latitude: 纬度，取值范围：[0~90]（默认值是0.0）
-            style: 'mapbox://styles/mapbox/dark-v9', // style: 风格路径，字符串地址，（默认值是 "mapbox://styles/mapbox/streets-v10"）
-            groundHeight: 150, // groundHeight: 地面高度，取值范围：[0~任意数值]（默认值是0.0）
-            renderMode: 0, // renderMode: 渲染模式，0：正常；1：透明；2：标注；3：贴地（默认值是0）
-            coordOrder: 0, // coordOrder: 坐标顺序，0: XY; 1: YX（默认值为0）
-            maxLevel: 22 // axLevel: WMTS服务最大显示层级，取值范围：[0~22]，默认值：10
-        },
-        () => {
-            console.log('设置地图模式完成')
-        }
-    )
+    // __g.settings.setMapMode(
+        // 0,
+        // {
+        //     //地图模式相关的参数，具体请参考API帮助文档
+        //     coordType: 0, // coordType: 坐标系类型，0：经纬度；1：本地（默认值是0）
+        //     serviceType: 4, // serviceType: 服务类型，0：MVT矢量切片； 1：WMTS(ArcGis) （默认值是0）
+        //     mapPoint: [430809.12, 2556481.54], // mapPoint: 同名点，取值范围：[x,y]，（默认值是[0, 0]）
+        //     longitude: 113.324593, // longitude: 经度，取值范围：[0~180]（默认值是0.0）
+        //     latitude: 23.106405, // latitude: 纬度，取值范围：[0~90]（默认值是0.0）
+        //     style: 'mapbox://styles/mapbox/dark-v9', // style: 风格路径，字符串地址，（默认值是 "mapbox://styles/mapbox/streets-v10"）
+        //     groundHeight: 150, // groundHeight: 地面高度，取值范围：[0~任意数值]（默认值是0.0）
+        //     renderMode: 0, // renderMode: 渲染模式，0：正常；1：透明；2：标注；3：贴地（默认值是0）
+        //     coordOrder: 0, // coordOrder: 坐标顺序，0: XY; 1: YX（默认值为0）
+        //     maxLevel: 22 // axLevel: WMTS服务最大显示层级，取值范围：[0~22]，默认值：10
+        // },
+    //     () => {
+    //         console.log('设置地图模式完成')
+    //     }
+    // )
 }
 
 // 地铁线路对象

@@ -30,9 +30,9 @@ const scenicSpot = async () => {
     }
   })
   // setTimeout(() => {
-  __g.heatmap.add('heatmap', [300000, 2431071, -1000, 570000, 2731198, 1000], [0, 100], list)
+  // __g.heatmap.add('heatmap', [300000, 2431071, -1000, 570000, 2731198, 1000], [0, 100], list)
   // if (res.result) {
-  __g.heatmap.show('heatmap')
+  // __g.heatmap.show('heatmap')
   // }
   // }, 1000)
   shHeatmapArr.push('heatmap')
@@ -84,36 +84,36 @@ const addBorder = () => {
       polygonArr.push(bottom2)
     })
     //批量添加polygon
-    const res = await __g.polygon3d.add(polygonArr, null)
+    // const res = await __g.polygon3d.add(polygonArr, null)
       //@ts-ignore
 
       if (res) {
-      __g.polygon3d.show(shPolygon3dArr)
+      // __g.polygon3d.show(shPolygon3dArr)
     }
   })
 }
 
 const setStyle = async () => {
-  __g.camera.stopAnimation()
+  // __g.camera.stopAnimation()
   hideAllTreeInfo()
   showNeedTreeInfo(['地形影像'])
-  await __g.weather.setDateTime(2022, 10, 12, 6, 0, false)
-  __g.weather.setDarkMode(true)
+  // await __g.weather.setDateTime(2022, 10, 12, 6, 0, false)
+  // __g.weather.setDarkMode(true)
 
-  __g.camera.set(453606, 2528535, 117989, -70.286163, -94.771667, 1)
+  // __g.camera.set(453606, 2528535, 117989, -70.286163, -94.771667, 1)
 }
 
 const scenicrestore = async () => {
-  await __g.heatmap.hide(shHeatmapArr)
-  await __g.polygon3d.hide(shPolygon3dArr)
-  await __g.marker3d.hide(shMarker3dArr)
-  await __g.customTag.hide(shCustomTagArr)
+  // await __g.heatmap.hide(shHeatmapArr)
+  // await __g.polygon3d.hide(shPolygon3dArr)
+  // await __g.marker3d.hide(shMarker3dArr)
+  // await __g.customTag.hide(shCustomTagArr)
 
   // await __g.heatmap.clear(null)
   // await __g.polygon3d.clear(null)
   // await __g.marker3d.clear(null)
   // await __g.customTag.clear(null)
-  await __g.weather.setDarkMode(false)
+  // await __g.weather.setDarkMode(false)
 }
 
 /**
@@ -139,10 +139,10 @@ const addCustomTag = async () => {
     shCustomTagArr.push('scenic-pop-' + index)
   })
   // 添加标注对象
-  const res = await __g.customTag.add(addCustomTagArr)
-  if (res.result) {
-    __g.customTag.show(shCustomTagArr)
-  }
+  // const res = await __g.customTag.add(addCustomTagArr)
+  // if (res.result) {
+    // __g.customTag.show(shCustomTagArr)
+  // }
 }
 
 /**
@@ -166,10 +166,10 @@ const add3dPoint = async () => {
     shMarker3dArr.push('m_' + index)
     pointArr.push(o)
   })
-  const res = await __g.marker3d.add(pointArr)
-  if (res.result) {
-    __g.marker3d.show(shMarker3dArr)
-  }
+  // const res = await __g.marker3d.add(pointArr)
+  // if (res.result) {
+  //   __g.marker3d.show(shMarker3dArr)
+  // }
 }
 
 const pointCoordinate: any = [

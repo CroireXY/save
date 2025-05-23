@@ -7,11 +7,11 @@ export let timer: any = null
  * 初始化交通预警
  */
 const initTrafficWarning = async () => {
-  __g.camera.stopAnimation()
+  // __g.camera.stopAnimation()
   hideAllTreeInfo()
   showNeedTreeInfo(['地形影像', '矢量瓦片_广州', '智慧政务白模', '智慧政务灯光', '智慧政务核心区地形', '智慧政务核心区建筑', '智慧政务内部植物', '智慧政务外部植物', '智慧政委外围地形', '智慧政务小品'])
   clearTimeout(timer)
-  __g.camera.set(430495.424814, 2556917.029395, 93.102021, -41.223816, 94.287369, 1)
+  // __g.camera.set(430495.424814, 2556917.029395, 93.102021, -41.223816, 94.287369, 1)
   addCar('car0', 0, carCoors[0], [0, 90, 0])
   addCar('car1', 1, carCoors[1], [0, -90, 0])
 
@@ -21,14 +21,14 @@ const initTrafficWarning = async () => {
   if (displayStore.showTrafficWarning) {
     // 添加警报
     timer = setTimeout(() => {
-      __g.marker3d.show(['DangerMark', 'DangerMark1'])
-      __g.camera.set(430490.152158, 2556876.663741, 42.063174, -41.223785, 94.287361, 1)
+      // __g.marker3d.show(['DangerMark', 'DangerMark1'])
+      // __g.camera.set(430490.152158, 2556876.663741, 42.063174, -41.223785, 94.287361, 1)
     }, 3500)
   } else {
     // 添加警报
     timer = setTimeout(() => {
       addDangerMark()
-      __g.camera.set(430490.152158, 2556876.663741, 42.063174, -41.223785, 94.287361, 1)
+      // __g.camera.set(430490.152158, 2556876.663741, 42.063174, -41.223785, 94.287361, 1)
     }, 3500)
     displayStore.SetShowTrafficWarning(true)
   }
@@ -49,10 +49,10 @@ const addCar = async (id: string, num: number, location: number[], localRotation
     scale: [1, 1, 1], //缩放
     smoothMotion: 1 //1: 平滑插值，0: 跳跃
   }
-  const res = await __g.customObject.add(o, null)
-  if (res.result) {
-    __g.customObject.show(id)
-  }
+  // const res = await __g.customObject.add(o, null)
+  // if (res.result) {
+  //   __g.customObject.show(id)
+  // }
 }
 
 /**
@@ -70,9 +70,9 @@ const addMove = async (carNumber: number, carId: string, speed: number) => {
     pathPointArr.push(elementPoint)
   }
   //设置跟随相机
-  __g.customObject.setRotation(carId, [0, 90, 0])
-  //车辆按GPS轨迹移动
-  __g.customObject.startMove(carId, 0, pathPointArr)
+  // __g.customObject.setRotation(carId, [0, 90, 0])
+  // //车辆按GPS轨迹移动
+  // __g.customObject.startMove(carId, 0, pathPointArr)
 }
 
 /**
@@ -101,22 +101,22 @@ const addDangerMark = async () => {
     range: [1, 10000], //3D标注的可视距离范围：[min,max]，单位：米
     autoHeight: false //自动判断下方是否有物体，设置正确高度，默认值：false
   }
-  const res = await __g.marker3d.add(o)
-  if (res.result) {
-    __g.marker3d.show('DangerMark')
-  }
-  const res1 = await __g.marker3d.add(p)
-  if (res1.result) {
-    __g.marker3d.show('DangerMark1')
-  }
+  // const res = await __g.marker3d.add(o)
+  // if (res.result) {
+  //   __g.marker3d.show('DangerMark')
+  // }
+  // const res1 = await __g.marker3d.add(p)
+  // if (res1.result) {
+  //   __g.marker3d.show('DangerMark1')
+  // }
 }
 
 /**
  * 还原
  */
 const cleanTrafficWarning = async () => {
-  await __g.customObject.clear(null)
-  await __g.marker3d.hide(['DangerMark', 'DangerMark1'])
+  // await __g.customObject.clear(null)
+  // await __g.marker3d.hide(['DangerMark', 'DangerMark1'])
 }
 
 // 撞击点

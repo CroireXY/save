@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-03-13 23:28:11
- * @LastEditTime: 2025-05-22 17:07:57
+ * @LastEditTime: 2025-05-23 14:48:04
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\headerlink\index.vue
@@ -37,15 +37,16 @@ const PagePath = ref('')
 // 路由信息
 const Link: any = reactive([
     {
-        name: '飞行活动',
+        name: '首页',
         key: 0,
         path: '/home/cityAppearance'
-    },                   
-    {
-        name: '航线管理',
-        key: 1,
-        path: '/home/wisdomsix'
-    },
+    },       
+            
+    // {
+    //     name: '航线管理',
+    //     key: 1,
+    //     path: '/home/wisdomOne'
+    // },
     // {
     //     name: '航线管理',
     //     key: 2,
@@ -61,11 +62,11 @@ const Link: any = reactive([
     //     key: 5,
     //     path: '/home/wisdomfive'
     // },
-    // {
-    //     name: '城市治理',
-    //     key: 6,
-    //     path: '/home/wisdomsix'
-    // }
+    {
+        name: '航线管理',
+        key: 6,
+        path: '/home/wisdomsix'
+    }
 ])
 
 // 路由事件

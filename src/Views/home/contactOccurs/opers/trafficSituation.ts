@@ -22,10 +22,10 @@ const add = async () => {
         })
         shCustomTagArr.push('sound1-' + index)
     })
-    const res = await __g.customTag.add(addCustomTagArr)
-    if (res.result) {
-        __g.customTag.show(shCustomTagArr)
-    }
+    // const res = await __g.customTag.add(addCustomTagArr)
+    // if (res.result) {
+    //     __g.customTag.show(shCustomTagArr)
+    // }
 }
 
 /**
@@ -107,10 +107,10 @@ const createCircle = async () => {
     }
     circleArr.push(o2)
     circleArr.push(o22)
-    const res = await __g.polyline.add(circleArr)
-    if (res.result) {
-        __g.polyline.show(['situ_circle0', 'situ_circle1', 'situ_circle11', 'situ_circle2', 'situ_circle22'])
-    }
+    // const res = await __g.polyline.add(circleArr)
+    // if (res.result) {
+    //     __g.polyline.show(['situ_circle0', 'situ_circle1', 'situ_circle11', 'situ_circle2', 'situ_circle22'])
+    // }
 }
 
 /**
@@ -182,10 +182,10 @@ const createAGrid = async () => {
         generateBottom: true //是否生成底面
     }
     argidArr.push(o2)
-    const res = await __g.polygon3d.add(argidArr)
-    if (res.result) {
-        __g.polygon3d.show(['AGrid', 'AGrid1', 'AGrid2'])
-    }
+    // const res = await __g.polygon3d.add(argidArr)
+    // if (res.result) {
+    //     __g.polygon3d.show(['AGrid', 'AGrid1', 'AGrid2'])
+    // }
 }
 
 /**
@@ -222,14 +222,14 @@ const addPoint = async () => {
         }
         pointArr.push(o)
     })
-    const res = await __g.marker.add(pointArr)
-    if (res.result) {
-        const markArr: any = []
-        pointCoors.forEach((item: any, index: number) => {
-            markArr.push('point' + index)
-        })
-        await __g.marker.show(markArr)
-    }
+    // const res = await __g.marker.add(pointArr)
+    // if (res.result) {
+    //     const markArr: any = []
+    //     pointCoors.forEach((item: any, index: number) => {
+    //         markArr.push('point' + index)
+    //     })
+    //     await __g.marker.show(markArr)
+    // }
 }
 
 const displayStore = useDisplayStore()
@@ -237,18 +237,18 @@ const displayStore = useDisplayStore()
  * 初始化交通态势
  */
 const initTrafficSituation = async () => {
-    __g.camera.stopAnimation()
-    __g.camera.set(429961.124629, 2563924.87, 1712.96625, -7.604534, 87.98719, 1)
+    // __g.camera.stopAnimation()
+    // __g.camera.set(429961.124629, 2563924.87, 1712.96625, -7.604534, 87.98719, 1)
     // __g.weather.setDateTime(2020, 9, 9, 10, 8, false)
     if (displayStore.showTrafficSituation) {
-        await __g.polyline.show(['situ_circle0', 'situ_circle1', 'situ_circle11', 'situ_circle2', 'situ_circle22'])
-        await __g.polygon3d.show(['AGrid', 'AGrid1', 'AGrid2'])
+        // await __g.polyline.show(['situ_circle0', 'situ_circle1', 'situ_circle11', 'situ_circle2', 'situ_circle22'])
+        // await __g.polygon3d.show(['AGrid', 'AGrid1', 'AGrid2'])
         const markArr: any = []
         pointCoors.forEach((item: any, index: number) => {
             markArr.push('point' + index)
         })
         // await __g.marker.show(markArr)
-        await __g.customTag.show(shCustomTagArr)
+        // await __g.customTag.show(shCustomTagArr)
     } else {
         await createCircle()
         await createAGrid()
@@ -262,14 +262,14 @@ const initTrafficSituation = async () => {
  * 还原
  */
 const cleanTrafficSituation = async () => {
-    await __g.polyline.hide(['situ_circle0', 'situ_circle1', 'situ_circle11', 'situ_circle2', 'situ_circle22'])
-    await __g.polygon3d.hide(['AGrid', 'AGrid1', 'AGrid2'])
+    // await __g.polyline.hide(['situ_circle0', 'situ_circle1', 'situ_circle11', 'situ_circle2', 'situ_circle22'])
+    // await __g.polygon3d.hide(['AGrid', 'AGrid1', 'AGrid2'])
     const markArr: any = []
     pointCoors.forEach((item: any, index: number) => {
         markArr.push('point' + index)
     })
     // await __g.marker.hide(markArr)
-    await __g.customTag.hide(shCustomTagArr)
+    // await __g.customTag.hide(shCustomTagArr)
 
     // await __g.polyline.clear(null)
     // await __g.polygon3d.clear(null)

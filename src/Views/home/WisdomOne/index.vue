@@ -74,7 +74,7 @@ const handleChange = (i: number) => {
     } else {
         cleanAdminStrativeArea()
         clearPopulationDistribution()
-        __g.camera.playAnimation(12)
+        // __g.camera.playAnimation(12)
     }
     curTab.value = i.toString()
 }
@@ -86,7 +86,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-    __g.camera.stopAnimation()
+    // __g.camera.stopAnimation()
     // 已经加载了
     cleanAdminStrativeArea()
     clearPopulationDistribution()

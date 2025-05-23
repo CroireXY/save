@@ -56,10 +56,10 @@ const addTopLayer = () => {
             polygonArr.push(border)
         })
         //批量添加polygon
-        const res = await __g.polygon3d.add(polygonArr, null)
-        if (res.result) {
-            __g.polygon3d.show(polygon3dArr)
-        }
+        // const res = await __g.polygon3d.add(polygonArr, null)
+        // if (res.result) {
+        //     __g.polygon3d.show(polygon3dArr)
+        // }
     })
 }
 
@@ -122,10 +122,10 @@ const addBottomLayer = () => {
             polygonArr.push(bottom3)
         })
         //批量添加polygon
-        const res = await __g.polygon3d.add(polygonArr, null)
-        if (res.result) {
-            __g.polygon3d.show(polygon3dArr)
-        }
+        // const res = await __g.polygon3d.add(polygonArr, null)
+        // if (res.result) {
+        //     __g.polygon3d.show(polygon3dArr)
+        // }
     })
 }
 
@@ -172,10 +172,10 @@ const addMakerLayer = async () => {
         // marker3dArr.push(oMarker3d)
     })
     //添加点
-    const res = await __g.marker.add(markerArr)
-    if (res.result) {
-        __g.marker.show(shmarkerArr)
-    }
+    // const res = await __g.marker.add(markerArr)
+    // if (res.result) {
+    //     __g.marker.show(shmarkerArr)
+    // }
     // __g.marker3d.add(marker3dArr)
 }
 
@@ -192,17 +192,17 @@ const displayStore = useDisplayStore()
  * 初始化行政区划
  */
 const initAdminStrativeArea = async () => {
-    __g.camera.stopAnimation()
-    // 设置成晚上
-    // await __g.weather.setDateTime(2022, 10, 25, 20, 8, false);
-    __g.camera.set(473660.9325, 2558256.117344, 227589.52, -85.993263, -84.615585, 0)
+    // __g.camera.stopAnimation()
+    // // 设置成晚上
+    // // await __g.weather.setDateTime(2022, 10, 25, 20, 8, false);
+    // __g.camera.set(473660.9325, 2558256.117344, 227589.52, -85.993263, -84.615585, 0)
 
-    __g.weather.setDarkMode(true)
+    // __g.weather.setDarkMode(true)
 
     if (displayStore.showAdministrativeArea) {
-        __g.polygon3d.show(polygon3dArr)
-        __g.marker.show(shmarkerArr)
-        __g.marker3d.show(shmarker3dArr)
+        // __g.polygon3d.show(polygon3dArr)
+        // __g.marker.show(shmarkerArr)
+        // __g.marker3d.show(shmarker3dArr)
     } else {
         // 生成顶面和地面
         addTopLayer()
@@ -216,10 +216,10 @@ const initAdminStrativeArea = async () => {
  * 还原
  */
 const cleanAdminStrativeArea = () => {
-    __g.weather.setDarkMode(false)
-    __g.polygon3d.hide(polygon3dArr)
-    __g.marker.hide(shmarkerArr)
-    __g.marker3d.hide(shmarker3dArr)
+    // __g.weather.setDarkMode(false)
+    // __g.polygon3d.hide(polygon3dArr)
+    // __g.marker.hide(shmarkerArr)
+    // __g.marker3d.hide(shmarker3dArr)
     // __g.polygon3d.clear(null)
     // __g.marker.clear(null)
     // __g.marker3d.clear(null)

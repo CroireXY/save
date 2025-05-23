@@ -1,10 +1,17 @@
+/*
+ * @Author: Sun ruiqi
+ * @Date: 2025-05-12 09:31:19
+ * @LastEditors: viola
+ * @LastEditTime: 2025-05-23 11:12:19
+ * @FilePath: \code\src\Views\home\WisdomTwo\opers\historyOpers.ts
+ */
 import { hideAllTreeInfo, showNeedTreeInfo } from '@/utils/showOrHideInfoTree'
 
 /**
  * 初始化历史遗留
  */
 const initHistory = () => {
-    __g.camera.stopAnimation()
+    // __g.camera.stopAnimation()
     // hideAllTreeInfo()
     // showNeedTreeInfo(['地形影像', '智慧政务白模', '智慧政务灯光', '智慧政务核心区地形', '智慧政务核心区建筑', '智慧政务内部植物', '智慧政务外部植物', '智慧政委外围地形', '智慧政务小品', 'tese', '配楼w', 'CBD01','CBD02', ''])
     // __g.weather.setDateTime(2022, 10, 12, 10, 0, false)
@@ -15,7 +22,7 @@ const initHistory = () => {
  */
 const cleanHistory = () => {
     //@ts-ignore
-    __g.shapeFileLayer.clear()
+    // __g.shapeFileLayer.clear()
 }
 
 export { initHistory, cleanHistory }
