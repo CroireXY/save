@@ -1,16 +1,17 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-18 22:05:57
- * @LastEditTime: 2025-05-22 15:24:16
+ * @LastEditTime: 2025-05-28 11:03:28
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\Views\home\index.vue
 -->
 <template>
   <div>
-    <Map3d @init="init" />
+    <!-- <Map3d @init="init" /> -->
+     <Map></Map>
 
-    <transition
+    <!-- <transition
       appear
       name="custom-classes-transition"
       enter-active-class="animate__animated  animate__fadeInDown"
@@ -83,10 +84,10 @@
       leave-active-class="animate__animated  animate__fadeOutRight"
     >
       <Weather v-if="WeatherShow" />
-    </transition>
+    </transition> -->
 
     <!-- 显示还是隐藏工具栏 -->
-    <transition
+    <!-- <transition
       name="custom-classes-transition"
       enter-active-class="animate__animated   animate__fadeIn"
       leave-active-class="animate__animated  animate__fadeOut"
@@ -96,7 +97,7 @@
 
     <div class="wrap">
       <router-view></router-view>
-    </div>
+    </div> -->
   </div>
 </template>
 <script lang="ts" setup>

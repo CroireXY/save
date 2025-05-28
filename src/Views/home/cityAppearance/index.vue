@@ -2,7 +2,7 @@
  * @Author: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
  * @Date: 2025-05-12 06:16:06
  * @LastEditors: viola
- * @LastEditTime: 2025-05-23 14:28:59
+ * @LastEditTime: 2025-05-27 11:28:40
  * @FilePath: \code\src\Views\home\cityAppearance\index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%A
 -->
@@ -10,12 +10,13 @@
   <!-- <div> -->
   <Left_box>
     <Lease_title>今日实况</Lease_title>
-    <Box height="245">
+    <!-- 高度255 -->
+    <Box >
       <realtime_data />
     </Box>
-
+    <!-- 高度655 -->
     <Lease_title>过去7日实飞</Lease_title>
-    <Box :height="655">
+    <Box>
       <twoVue />
     </Box>
   </Left_box>
@@ -25,13 +26,13 @@
       <alldata />
     </Box>
 
-      <Lease_title>飞行任务性质</Lease_title>
-    <Box :height="300">
+    <Lease_title>飞行任务性质</Lease_title>
+    <Box :height="400">
       <flight_type />
     </Box>
 
     <Lease_title>飞行任务详情</Lease_title>
-    <Box :height="300">
+    <Box :height="200">
       <fourVue />
     </Box>
   </Right_box>

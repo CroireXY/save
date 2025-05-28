@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2021-11-28 01:41:11
- * @LastEditTime: 2025-05-21 10:36:25
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime: 2025-05-27 11:40:49
+ * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \vue3ts\vue3\vue.config.js
+ * @FilePath: \code\vue.config.js
  */
 
 const path = require('path')
@@ -36,8 +36,8 @@ module.exports = {
             }
         },
          headers: {
-      'Cross-Origin-Opener-Policy': 'same-origin',
-      'Cross-Origin-Embedder-Policy': 'require-corp'
+    //   'Cross-Origin-Opener-Policy': 'same-origin',
+    //   'Cross-Origin-Embedder-Policy': 'require-corp'
     }
     },
     css: {

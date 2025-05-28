@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-05-22 15:53:20
+ * @LastEditTime: 2025-05-26 16:44:58
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\header\index.vue
@@ -16,7 +16,7 @@
       <div class="time">
         {{ time }}
       </div>
-      <span class="line" />
+      <span class="line" ></span>
       <div class="weahtermon" @click="WeahterLink">
         <!-- <i :style="{ color: '#fff' }" :class="'qi-' + WeatherData.now.icon"></i> -->
         <span>

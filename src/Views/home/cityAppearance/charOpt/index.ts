@@ -800,8 +800,9 @@ export const option = {
     // shape: 'circle',
     name: {
       textStyle: {
-        color: "#fff",
-        fontSize: 16,
+        color: 'rgba(255, 255, 255, 0.8)',
+        fontSize: '1rem',
+		
       },
     },
     radius: "40%",
@@ -838,13 +839,14 @@ export const option = {
   series: [
     {
       type: "radar",
-      symbolSize: 12,
+      symbolSize: 4,
       // symbol: 'angle',
       data: dataArr,
 	   label: {
       show: true, // 始终显示
-      color: '#fff',
-      fontSize: 8,
+      color: 'rgba(255, 255, 255, 0.8)',
+	   fontWeight: 'bold',
+     fontSize: '0.9rem',
       formatter: function(params:any) {
         // params.value 是当前点的 value
         // params.dimensionIndex 是当前维度的索引

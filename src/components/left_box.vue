@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 22:38:25
- * @LastEditTime: 2025-05-21 15:28:51
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime: 2025-05-26 16:16:04
+ * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWeekly_zhyq\src\components\left_box.vue
+ * @FilePath: \code\src\components\left_box.vue
 -->
 <!-- left_box -->
 <template>

@@ -29,14 +29,14 @@
     <V3Echarts
       :options="option"
       :width="490"
-      :height="430"
+      :height="330"
       container="wisdomone_two"
     />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref } from "vue"
 import V3Echarts from "@/components/V3Echarts/index.vue";
 
 let option = ref({
@@ -44,7 +44,7 @@ let option = ref({
     trigger: "item",
     textStyle: {
       color: "#fff",
-      fontSize: 14,
+      fontSize: '1rem',
     },
     borderRadius: 20,
     backgroundColor: "rgba(0,0,0,.6)",
@@ -80,7 +80,7 @@ let option = ref({
     axisLabel: {
       show: true,
       color: "#fff",
-      fontSize: 14,
+      fontSize: '1rem',
     },
     axisTick: {
       show: false,
@@ -114,7 +114,7 @@ let option = ref({
     },
     axisLabel: {
       color: "#fff",
-      fontSize: 14,
+      fontSize: '1rem',
       formatter: "{value}",
     },
   },
@@ -126,7 +126,7 @@ let option = ref({
   series: [
     {
       type: "bar",
-      barWidth: 22,
+      barWidth: '18rem',
       // zlevel: 1,
       itemStyle: {
         // borderColor: "#208edf",
@@ -148,7 +148,7 @@ let option = ref({
         show: true,
         position: "top",
         color: "#fff",
-        fontSize: 14,
+        fontSize: '1rem',
         formatter: "{c}",
       },
       data: [189, 267, 112, 142, 118, 206,189, 267, 112, 142, 118, 206],
@@ -156,18 +156,24 @@ let option = ref({
     {
       type: "pictorialBar",
       symbol: "rect",
-      symbolSize: [20, 4],
+      symbolSize: ['1rem', '4rem'],
       // zlevel: 2,
       itemStyle: {
         color: "rgba(16,158,220,1)",
       },
       data: [
-        { value: 589, symbolOffset: [0, -123] },
-        { value: 267, symbolOffset: [0, -174] },
-        { value: 112, symbolOffset: [0, -74] },
-        { value: 142, symbolOffset: [0, -88] },
-        { value: 118, symbolOffset: [0, -80] },
-        { value: 206, symbolOffset: [0, -134] },
+        // { value: 589, symbolOffset: [0, -123] },
+        // { value: 267, symbolOffset: [0, -174] },
+        // { value: 112, symbolOffset: [0, -74] },
+        // { value: 142, symbolOffset: [0, -88] },
+        // { value: 118, symbolOffset: [0, -80] },
+        // { value: 206, symbolOffset: [0, -134] },
+        //  { value: 589, },
+        // { value: 267, },
+        // { value: 112, },
+        // { value: 142, },
+        // { value: 118,  },
+        // { value: 206,  },
       ],
     },
   ],
@@ -177,7 +183,7 @@ let option = ref({
 <style lang="scss" scoped>
 .box {
   @include boxWidth(510);
-  @include boxhHeight(400);
+  @include boxhHeight(530);
   box-sizing: border-box;
   @include Padding(10, 10, 10, 10);
   position: relative;

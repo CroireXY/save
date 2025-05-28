@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2021-11-27 19:52:04
- * @LastEditTime: 2025-05-21 13:48:25
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime: 2025-05-26 16:35:23
+ * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \智慧广州\src\main.ts
+ * @FilePath: \code\src\main.ts
  */
 import { createApp } from "vue";
 import App from "@/App.vue";
@@ -30,7 +30,17 @@ import V3Echarts from '@/components/V3Echarts/index.vue'
 import "echarts-liquidfill";
 import { nextZIndex, PopupManager } from "@/utils/common";
 import { useDialogStore } from "@/stores/dialog";
+function setRem(): void {
+  const baseWidth = 2880;
+  const html = document.documentElement;
+  const clientWidth = html.clientWidth;
+  let fontSize = (clientWidth / baseWidth) * 16;
+  fontSize = Math.max(12, Math.min(fontSize, 32)); // 可根据实际需求调整最大最小字号
+  html.style.fontSize = fontSize + 'px';
+}
 
+setRem();
+window.addEventListener('resize', setRem);
 console.log(1111)
 
 createApp(App)
