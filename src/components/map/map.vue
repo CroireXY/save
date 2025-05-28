@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-15 17:00:08
  * @LastEditors: viola
- * @LastEditTime: 2025-05-28 11:19:26
+ * @LastEditTime: 2025-05-28 13:44:18
  * @FilePath: \code\src\components\map\map.vue
 -->
 <!-- 加载视频流组件 -->
@@ -42,13 +42,13 @@ onMounted(() => {
     timeline: false, //下侧时间轴（默认true）
     animation: false, //左下角动画部件按钮（默认true）
     vrButton: false, // VR按钮（默认false）
-    fullscreenButton: true, // 全屏按钮（默认true）
+    fullscreenButton: false, // 全屏按钮（默认true）
     homeButton: false, // 视角复位按钮（默认true）
-    navigationHelpButton: true, //帮助按钮 (默认true)
-    geocoder: true, // 地理编码器（搜索框）(默认true)
+    navigationHelpButton: false, //帮助按钮 (默认true)
+    geocoder: false, // 地理编码器（搜索框）(默认true)
     sceneModePicker: false, //二三维切换按钮(默认true)
     shouldAnimate: false, // 自动播放动画(默认false)
-    infoBox: true, // 信息框（默认true）
+    infoBox: false, // 信息框（默认true）
     // 参数
     scene3DOnly: false, // 只显示3D场景（默认false）
     showRenderLoopErrors: false, // 是否显示渲染循环错误（默认false）
@@ -108,7 +108,7 @@ onMounted(() => {
   addModel("/3d_icon/drones.glb", 114.13512, 22.25008, 700);
  
   viewer.entities.add({
-    position: Cesium.Cartesian3.fromDegrees(114.1293, 22.24992, 50),
+    position: Cesium.Cartesian3.fromDegrees(114.130165, 22.260256, 50),
     billboard: {
       // 图像地址，URI或Canvas的属性
       image: "/3d_icon/dronepoint_red.png",
