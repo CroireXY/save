@@ -1,15 +1,16 @@
 <!--
  * @Author: your name
  * @Date: 2021-11-18 22:05:57
- * @LastEditTime: 2025-05-28 13:43:38
+ * @LastEditTime: 2025-05-28 15:07:50
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\Views\home\index.vue
 -->
 <template>
-  <div>
+  <div class="fullscreen-wrapper">
     <!-- <Map3d @init="init" /> -->
-     <Map></Map>
+   
+    <Map></Map>
 
     <transition
       appear
@@ -107,7 +108,10 @@ import Map3d from "@/components/Map-3d.vue";
 import Header from "@/components/header/index.vue";
 // import shpCheckBox from '@/components/shpCheckBox'
 // import { getMockData } from '@/api/connect'
-import { computed, onMounted } from "vue";
+import { computed, onMounted,
+    defineComponent,
+    toRefs,
+    reactive } from "vue";
 // import { useAirCityStore } from '@/stores/aircity'
 import HeaderLink from "@/components/headerlink/index.vue";
 import Footer from "@/components/footer/index.vue";
@@ -161,11 +165,11 @@ defineProps({
 });
 // const AirCityStore = useAirCityStore()
 // const IsOnReady = computed(() => AirCityStore.$state.IsOnReady)
-onMounted(async () => {
-  // const result = await getMockData()
-  // console.log(result)
-  // __g.shapeFileLayer.clear()
-});
+// onMounted(async () => {
+//   // const result = await getMockData()
+//   // console.log(result)
+//   // __g.shapeFileLayer.clear()
+// });
 </script>
 <style lang="scss" scoped>
 ::v-deep(.el-checkbox) {

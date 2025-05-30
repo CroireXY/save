@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-05-20 05:27:31
- * @LastEditors: error: error: git config user.name & please set dead value or install git && error: git config user.email & please set dead value or install git & please set dead value or install git
+ * @LastEditTime: 2025-05-28 13:56:33
+ * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWeekly_zhyq\README.md
+ * @FilePath: \code\README.md
 -->
 
 # vue3
@@ -12,19 +12,19 @@
 ## Project setup
 
 ```
-yarn install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 
 ```
-yarn serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 
 ```
-yarn build
+npm run build
 ```
 
 ### Run your unit tests
@@ -53,7 +53,6 @@ yarn lint
 
 - `node_modules` -- *所有的项目依赖包都放在这个目录下*
 - `public` -- *公共文件夹*
-    - `aircity` --- *放的连接视频流及配置项的 js 文件(ac.min.js ac_conf.js userinfo.js)*
     - `favicon.ico` -- *网站的显示图标*
     - `index.html` -- *入口的 html 文件*
 - `src` -- *源文件目录，编写的代码基本都在这个目录下*
@@ -85,8 +84,6 @@ yarn lint
 - `src` 
     - `api` ***根据不同的请求前缀封装好的axios请求,可当做参考及进行修改***
     - `components` 
-        - *`player`* ***连接视频流组件(不要多次引用)***
-        - *`aircityutils`* ***导出cloud云渲染的加载完成和交互事件的回调事件的方法***
          - `left_box.vue` ***页面左侧的内容-使用scss混入来定义样式-使用插槽的形式进行内容展示-请根据UI调整样式***
         - `right_box.vue` ***页面右侧的内容-使用scss混入来定义样式-使用插槽的形式进行内容展示-请根据UI调整样式***
         - *`Lease_title`* ***标题组件 根据UI进行调整***

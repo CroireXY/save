@@ -1,15 +1,15 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-01 20:58:53
- * @LastEditTime: 2022-05-30 10:42:23
- * @LastEditors: 张祥 17839092765@163.com
+ * @LastEditTime: 2025-05-30 16:59:50
+ * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWEEKLY_ZHGK\src\components\tools\weather.vue
+ * @FilePath: \code\src\components\tools\weather.vue
 -->
 <!-- weather -->
 <template>
   <div class="weather">
-    <a-divider
+    <!-- <a-divider
       orientation="left"
       style="border-color: #ddd; color: #fff"
       dashed
@@ -40,15 +40,39 @@
         <img :src="item.icon" alt="" />
         {{ item.name }}
       </div>
-    </div>
+    </div> -->
     <div class="open-dark">
       <div class="dark-item">
-        <span>黑暗模式:</span>
-        <el-switch v-model="isDark" @change="changeDarkMode" class="ml-2" style="--el-switch-on-color: #0c0c0c; --el-switch-off-color: #ccc" />
+        <button class="button" @click="toggleSceneMode">
+          切换到{{ getCurrentMode()==='3D'?'2D':'3D' }}视图
+        </button>
       </div>
       <div class="dark-item">
-        <span>UI显隐:</span>
-        <el-switch v-model="isShowMap" @change="changeShowMap" class="ml-2" style="--el-switch-on-color: #0c0c0c; --el-switch-off-color: #ccc" />
+        <span>Plot 2d icon</span>
+        <el-switch
+          v-model="isShow2DIcon"
+          @change="changeDrone2DShow"
+          class="ml-2"
+          style="--el-switch-on-color: #007aff; --el-switch-off-color: #ccc"
+        />
+      </div>
+      <div class="dark-item">
+        <span>Plot 3d icon</span>
+        <el-switch
+          v-model="isShow3DIcon"
+          @change="changeDrone3DShow"
+          class="ml-2"
+          style="--el-switch-on-color: #007aff; --el-switch-off-color: #ccc"
+        />
+      </div>
+      <div class="dark-item">
+        <span>Plot line</span>
+        <el-switch
+          v-model="isShowLine"
+          @change="changeLineShow"
+          class="ml-2"
+          style="--el-switch-on-color: #007aff; --el-switch-off-color: #ccc"
+        />
       </div>
     </div>
   </div>
@@ -57,28 +81,52 @@
 <script lang="ts" setup>
 import { useAirCityStore } from "@/stores/aircity";
 import { useToolsStore } from "@/stores/tools";
-
+import { useMapStore } from "@/stores/map";
 import { onMounted, onUnmounted, ref } from "vue";
 import { toTree } from "./layerTree";
 const AirCityStore: any = useAirCityStore();
 const ToolsStore: any = useToolsStore();
-
-const isDark = ref(false)
-const isShowMap = ref(false)
+const MapStore = useMapStore();
+const isShow2DIcon = ref(false);
+const isShow3DIcon = ref(false);
+const isShowLine = ref(false);
+const is2DMode = ref(false);
 /**
  * 开启/关闭黑暗模式
  * @param val
  */
-const changeDarkMode = (val: boolean) => {
-  __g.weather.setDarkMode(val)
-}
+const changeDrone2DShow = (val: boolean) => {
+  MapStore.setDrone2DShow(val);
+};
+
+const changeDrone3DShow = (val: boolean) => {
+  MapStore.setDrone3DShow(val);
+};
+
+const changeLineShow = (val: boolean) => {
+  MapStore.setFlightPathShow(val);
+};
+
+const getCurrentMode = () => {
+  return MapStore.getCurrentMode();
+};
+
+const toggleSceneMode = async () => {
+  const mode = await getCurrentMode();
+  if (mode === "2D") {
+    MapStore.setCurrentMode("3D");
+  } else {
+    MapStore.setCurrentMode("2D");
+  }
+};
+
 /**
  * 开启/关闭电子地图
  * @param val
  */
 const changeShowMap = (val: boolean) => {
-  __g.settings.setMainUIVisibility(val)
-}
+  __g.settings.setMainUIVisibility(val);
+};
 
 const isHideFlag = ref(false);
 const shuaxin = async () => {
@@ -111,33 +159,33 @@ const WeatherClick = (val: any) => {
   switch (val.name) {
     case "晴天":
       // 禁用雨雪效果;
-      __g.weather.disableRainSnow();
-      __g.weather.setCloudDensity(0.1);
+      // __g.weather.disableRainSnow();
+      // __g.weather.setCloudDensity(0.1);
 
       break;
     case "多云":
       // 禁用雨雪效果;
-      __g.weather.disableRainSnow();
-      //  设置云层密度
-      __g.weather.setCloudDensity(1);
-      //  设置云层厚度
-      __g.weather.setCloudThickness(2);
-      //  云层高度单位：公里
-      __g.weather.setCloudHeight(2);
+      // __g.weather.disableRainSnow();
+      // //  设置云层密度
+      // __g.weather.setCloudDensity(1);
+      // //  设置云层厚度
+      // __g.weather.setCloudThickness(2);
+      // //  云层高度单位：公里
+      // __g.weather.setCloudHeight(2);
 
       break;
     case "下雨":
       //设置云层厚度
-      __g.weather.setCloudThickness(2);
-      //设置完云层厚度后才能开启雨效
-      __g.weather.setRainParam(1, 1, 0.5);
+      // __g.weather.setCloudThickness(2);
+      // //设置完云层厚度后才能开启雨效
+      // __g.weather.setRainParam(1, 1, 0.5);
 
       break;
     case "下雪":
       //设置云层厚度
-      __g.weather.setCloudThickness(2);
-      //设置完云层厚度后才能开启雪效
-      __g.weather.setSnowParam(1, 1, 0.5);
+      // __g.weather.setCloudThickness(2);
+      // //设置完云层厚度后才能开启雪效
+      // __g.weather.setSnowParam(1, 1, 0.5);
 
       break;
 
@@ -187,18 +235,18 @@ const TimeTypeClick = (val: any) => {
   }
 };
 onMounted(() => {
-  AirCityStore.$state.TreeInfo.forEach((item: any) => {
-    if (item.name === "环境") {
-      HuanjingId.value = item.iD;
-    }
-  });
+  // AirCityStore.$state.TreeInfo.forEach((item: any) => {
+  //   if (item.name === "环境") {
+  //     HuanjingId.value = item.iD;
+  //   }
+  // });
 });
 onUnmounted(() => {
   // __g.infoTree.show(HuanjingId.value);
   isHideFlag.value = false;
   // __g.weather.setAmbientLightIntensity(0);
   // 刷新图层树仓库
-  shuaxin();
+  // shuaxin();
 });
 </script>
 <style lang="scss" scoped>
@@ -254,16 +302,28 @@ onUnmounted(() => {
   }
   .open-dark {
     @include m-FontSize(8);
-    margin-top: 16px;
+    margin-top: 6px;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     .dark-item {
       display: flex;
       align-items: center;
-      margin-right: 20px;
+      margin-top: 10px;
       span {
         margin-right: 10px;
       }
+    }
+    .button {
+      position: absolute;
+      z-index: 999;
+      top: 10px;
+      left: 10px;
+      padding: 6px 12px;
+      background: #007acc;
+      color: white;
+      border: none;
+      border-radius: 4px;
     }
   }
 }

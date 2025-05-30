@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-05-26 16:44:58
+ * @LastEditTime: 2025-05-29 14:08:51
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\header\index.vue
@@ -16,7 +16,7 @@
       <div class="time">
         {{ time }}
       </div>
-      <span class="line" ></span>
+      <span class="line"></span>
       <div class="weahtermon" @click="WeahterLink">
         <!-- <i :style="{ color: '#fff' }" :class="'qi-' + WeatherData.now.icon"></i> -->
         <span>
@@ -31,7 +31,7 @@
 
     <div class="info-right">
       <div class="tool">
-        <div @click="eleMapClick">
+        <!-- <div @click="eleMapClick">
           <el-tooltip
             popper-class="tip-popper"
             class="box-item"
@@ -45,8 +45,8 @@
               icon="tool-bar-ememap"
             />
           </el-tooltip>
-        </div>
-        <div @click="TechnologyClick">
+        </div> -->
+        <!-- <div @click="TechnologyClick">
           <el-tooltip
             popper-class="tip-popper"
             class="box-item"
@@ -60,7 +60,7 @@
               icon="tool-bar-keji"
             />
           </el-tooltip>
-        </div>
+        </div> -->
         <div @click="UIClick">
           <el-tooltip
             class="box-item"
@@ -75,7 +75,7 @@
             />
           </el-tooltip>
         </div>
-        <div @click="LayerTreeClick">
+        <!-- <div @click="LayerTreeClick">
           <el-tooltip
             popper-class="tip-popper"
             class="box-item"
@@ -89,8 +89,8 @@
               icon="tucengshu"
             />
           </el-tooltip>
-        </div>
-        <div @click="AnimationClick">
+        </div> -->
+        <!-- <div @click="AnimationClick">
           <el-tooltip
             popper-class="tip-popper"
             class="box-item"
@@ -104,21 +104,22 @@
               icon="xunimanyou"
             />
           </el-tooltip>
-        </div>
+        </div> -->
 
         <div @click="WeatherClick">
           <el-tooltip
             popper-class="tip-popper"
             class="box-item"
             effect="dark"
-            content="气象"
+            content="地图工具"
             placement="bottom"
           >
             <Icon
               :color="WeatherShow ? '#7afafe' : '#fff'"
-              :font-size="30"
-              icon="qixiangjiance"
+             :font-size="25"
+              icon="tool-bar-keji"
             />
+           
           </el-tooltip>
         </div>
         <!-- 工具栏 -->
@@ -144,7 +145,7 @@
     <div class="weather-box">
       <div class="alarm-item">
         <div class="label">温度</div>
-         <div class="value">23°C</div>
+        <div class="value">23°C</div>
       </div>
 
       <div class="weather-item">
@@ -186,21 +187,21 @@ const eleMap = ref(false);
  *加载vtpk
  */
 const eleMapClick = async () => {
-  eleMap.value = !eleMap.value;
-  let vtpk = "";
-  if (eleMap.value) {
-    let resultArr = await __g.settings.getLabelLayer();
-    await __g.settings.setLabelLayer(resultArr.vtpks[0]);
-    let res = await __g.infoTree.get();
-    vtpk = res.infotree.filter((item: any) => item.name == "矢量瓦片_广州")[0]
-      .iD;
-    await __g.infoTree.show(vtpk);
-    setTimeout(async () => {
-      // await __g.camera.set(357421.283125, 3265620.105, 6405.68875, -47.701191, -83.684891, 3)
-    }, 1000);
-  } else {
-    __g.settings.removeLabelLayer();
-  }
+  // eleMap.value = !eleMap.value;
+  // let vtpk = "";
+  // if (eleMap.value) {
+  //   let resultArr = await __g.settings.getLabelLayer();
+  //   await __g.settings.setLabelLayer(resultArr.vtpks[0]);
+  //   let res = await __g.infoTree.get();
+  //   vtpk = res.infotree.filter((item: any) => item.name == "矢量瓦片_广州")[0]
+  //     .iD;
+  //   await __g.infoTree.show(vtpk);
+  //   setTimeout(async () => {
+  //     // await __g.camera.set(357421.283125, 3265620.105, 6405.68875, -47.701191, -83.684891, 3)
+  //   }, 1000);
+  // } else {
+  //   __g.settings.removeLabelLayer();
+  // }
 };
 
 // 科技风
@@ -209,18 +210,18 @@ const Technologyshow = ref(false);
 const TechnologyClick = async () => {
   Technologyshow.value = !Technologyshow.value;
   if (Technologyshow.value) {
-    __g.camera.playAnimation(15);
-    __g.camera.set(
-      430241.658257,
-      2555518.182109,
-      542.386953,
-      -4.551392,
-      -90.668999,
-      1
-    );
+    // __g.camera.playAnimation(15);
+    // __g.camera.set(
+    //   430241.658257,
+    //   2555518.182109,
+    //   542.386953,
+    //   -4.551392,
+    //   -90.668999,
+    //   1
+    // );
   } else {
-    await __g.camera.stopAnimation();
-    __g.camera.playAnimation(12);
+    // await __g.camera.stopAnimation();
+    // __g.camera.playAnimation(12);
   }
 };
 /**
@@ -241,9 +242,10 @@ const WeatherClick = () => {
 };
 
 const UIClick = () => {
-  const val = !UIShow.value;
-  ToolsStore.SetUIShow(val);
-  __g.settings.setMainUIVisibility(!val);
+  // const val = !UIShow.value;
+  // ToolsStore.SetUIShow(val);
+  // __g.settings.setMainUIVisibility(!val);
+  document.documentElement.requestFullscreen();
 };
 
 const reset = () => {
@@ -466,7 +468,7 @@ onUnmounted(() => {
     }
     .alarm-item {
       @include Padding(0, 22, 0, 20);
-    //   border-left: 1.5px solid rgba(255, 255, 255, 0.4);
+      //   border-left: 1.5px solid rgba(255, 255, 255, 0.4);
       @include wHeight(31);
       .label {
         //@include LineHeight(23);
@@ -478,7 +480,7 @@ onUnmounted(() => {
         //   font-weight: bold;
         // z-index: 1;
       }
-       .value {
+      .value {
         //@include LineHeight(23);
         position: relative;
         @include Bottom(-10);
