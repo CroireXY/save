@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-25 04:18:38
- * @LastEditTime: 2022-03-28 12:54:29
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2025-06-02 10:32:19
+ * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWeekly_zhyq\src\components\box\index.vue
+ * @FilePath: \code\src\components\Box\index.vue
 -->
 <!-- box     -->
 <template>
@@ -26,6 +26,7 @@ const props = defineProps(["width", "height"]);
   @include FontSize(14);
   @include hLineHeight(18);
   @include LetterSpacing(0.5);
-  background: #021f2fc7;
+  // background: #021f2fc7;
+ ;
 }
 </style>

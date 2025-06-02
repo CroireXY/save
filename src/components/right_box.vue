@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 22:38:25
- * @LastEditTime: 2025-05-26 16:16:54
+ * @LastEditTime: 2025-06-02 15:08:38
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\right_box.vue
@@ -37,15 +37,19 @@ const animate = computed(() => animatestore.$state.Animate);
   height: 100%;
   // @include Top(30);
   @include Right(0);
+   @include Top(0);
   z-index: 9;
   // background: url("../assets/images/基础/right_bg_dark@2x.png") no-repeat
   //   center/cover;
-  background-image: linear-gradient(to left, #021f2f, #021f2f05);
-  @include Padding(0, 20, 20, 30);
+  // background-image: linear-gradient(to left, #021f2f, #021f2f05);
+  @include Padding(44, 20, 20, 30);
   box-sizing: border-box;
   .content {
     width: 100%;
     height: 100%;
+     box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
   }
 }
 </style>

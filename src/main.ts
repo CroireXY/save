@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-11-27 19:52:04
- * @LastEditTime: 2025-05-26 16:35:23
+ * @LastEditTime: 2025-06-02 11:16:15
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\main.ts
@@ -30,6 +30,7 @@ import V3Echarts from '@/components/V3Echarts/index.vue'
 import "echarts-liquidfill";
 import { nextZIndex, PopupManager } from "@/utils/common";
 import { useDialogStore } from "@/stores/dialog";
+import VueFullscreen from "vue-fullscreen";
 function setRem(): void {
   const baseWidth = 2880;
   const html = document.documentElement;
@@ -50,6 +51,7 @@ createApp(App)
   .use(Antd)
   .use(createPinia())
   .use(router)
+  // .use(VueFullscreen)
   .component("LeaseTitle", LeaseTitle)
   .component("V3Echarts", V3Echarts)
   .directive("drag", {

@@ -1,13 +1,14 @@
 <template>
   <div class="box">
-    <div class="title">日均飞行</div>
-    <div class="content">
+    <div class="title">7日歷史數據</div>
+
+    <!-- <div class="content">
       <div class="text">
         <span class="name">总数</span>
         <span class="value">0</span>
       </div>
-    </div>
-    <div class="info">
+    </div> -->
+    <!-- <div class="info">
       <div class="item">
         <div class="icon">
           <img src="@/assets/images/wisdom/办结率.svg" alt="" />
@@ -22,9 +23,9 @@
         <div class="name">累计飞行公里</div>
         <div class="value">4000</div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="title">过去7日实际飞行次数</div>
+    <!-- <div class="title">过去7日实际飞行次数</div> -->
 
     <V3Echarts
       :options="option"
@@ -36,15 +37,15 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
+import { ref } from "vue";
 import V3Echarts from "@/components/V3Echarts/index.vue";
-
+import SubTitle from "@/components/SubTitle/SubTitle.vue";
 let option = ref({
   tooltip: {
     trigger: "item",
     textStyle: {
       color: "#fff",
-      fontSize: '1rem',
+      fontSize: "1rem",
     },
     borderRadius: 20,
     backgroundColor: "rgba(0,0,0,.6)",
@@ -80,7 +81,7 @@ let option = ref({
     axisLabel: {
       show: true,
       color: "#fff",
-      fontSize: '1rem',
+      fontSize: "1rem",
     },
     axisTick: {
       show: false,
@@ -114,7 +115,7 @@ let option = ref({
     },
     axisLabel: {
       color: "#fff",
-      fontSize: '1rem',
+      fontSize: "1rem",
       formatter: "{value}",
     },
   },
@@ -126,7 +127,7 @@ let option = ref({
   series: [
     {
       type: "bar",
-      barWidth: '18rem',
+      barWidth: "18rem",
       // zlevel: 1,
       itemStyle: {
         // borderColor: "#208edf",
@@ -148,15 +149,15 @@ let option = ref({
         show: true,
         position: "top",
         color: "#fff",
-        fontSize: '1rem',
+        fontSize: "1rem",
         formatter: "{c}",
       },
-      data: [189, 267, 112, 142, 118, 206,189, 267, 112, 142, 118, 206],
+      data: [189, 267, 112, 142, 118, 206, 189, 267, 112, 142, 118, 206],
     },
     {
       type: "pictorialBar",
       symbol: "rect",
-      symbolSize: ['1rem', '4rem'],
+      symbolSize: ["1rem", "4rem"],
       // zlevel: 2,
       itemStyle: {
         color: "rgba(16,158,220,1)",
@@ -188,11 +189,14 @@ let option = ref({
   @include Padding(10, 10, 10, 10);
   position: relative;
   .title {
-    width: 100%;
-    @include wHeight(30);
-    @include LineHeight(30);
+    @include Width(488);
+    background-size: 100% 100%;
+    @include wHeight(34);
+    @include PaddingLeft(40);
+    @include PaddingTop(24);
+    box-sizing: border-box;
+    color: #fff;
     @include FontSize(16);
-    color: rgba(255, 255, 255, 0.6);
   }
   .content {
     width: 100%;

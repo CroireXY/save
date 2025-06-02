@@ -2,15 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-12 06:15:48
  * @LastEditors: viola
- * @LastEditTime: 2025-05-30 14:27:44
- * @FilePath: \code\vue.config.js
- */
-/*
- * @Author: your name
- * @Date: 2021-11-28 01:41:11
- * @LastEditTime: 2025-05-30 14:27:20
- * @LastEditors: viola
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ * @LastEditTime: 2025-06-02 14:05:32
  * @FilePath: \code\vue.config.js
  */
 
@@ -43,8 +35,8 @@ module.exports = {
       },
     },
     headers: {
-      //   'Cross-Origin-Opener-Policy': 'same-origin',
-      //   'Cross-Origin-Embedder-Policy': 'require-corp'
+        // 'Cross-Origin-Opener-Policy': 'same-origin',
+        // 'Cross-Origin-Embedder-Policy': 'require-corp'
     },
   },
   css: {

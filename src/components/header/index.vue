@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-05-29 14:08:51
+ * @LastEditTime: 2025-06-02 15:18:01
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\header\index.vue
@@ -14,19 +14,21 @@
         {{ date }}
       </div>
       <div class="time">
+        {{ day }}
+      </div>
+      <div class="time">
         {{ time }}
       </div>
-      <span class="line"></span>
+      <!-- <span class="line"></span>
       <div class="weahtermon" @click="WeahterLink">
-        <!-- <i :style="{ color: '#fff' }" :class="'qi-' + WeatherData.now.icon"></i> -->
         <span>
           {{ "无警报电磁" }}
         </span>
-      </div>
+      </div> -->
     </div>
 
     <div class="logo">
-      <div class="tit" @click="reset">飞服平台</div>
+      <div class="tit" @click="reset">香港低空飛行服務平臺</div>
     </div>
 
     <div class="info-right">
@@ -116,10 +118,9 @@
           >
             <Icon
               :color="WeatherShow ? '#7afafe' : '#fff'"
-             :font-size="25"
+              :font-size="25"
               icon="tool-bar-keji"
             />
-           
           </el-tooltip>
         </div>
         <!-- 工具栏 -->
@@ -141,27 +142,7 @@
       </div>
     </div>
   </div>
-  <div class="left-bg" v-show="UIShow">
-    <div class="weather-box">
-      <div class="alarm-item">
-        <div class="label">温度</div>
-        <div class="value">23°C</div>
-      </div>
-
-      <div class="weather-item">
-        <div class="label">能见度</div>
-        <div class="value">3km</div>
-      </div>
-      <div class="weather-item">
-        <div class="label">东南风</div>
-        <div class="value">2级</div>
-      </div>
-      <div class="weather-item">
-        <div class="label">湿度</div>
-        <div class="value">60%</div>
-      </div>
-    </div>
-  </div>
+ 
 </template>
 
 <script lang="ts" setup>
@@ -256,10 +237,21 @@ const reset = () => {
 // 获取当前时间
 const date: any = ref("");
 const time: any = ref("");
+const day: any = ref("");
 const get_Date_Time = () => {
   let date_time = Dayjs().format("YYYY-MM-DD/HH:mm:ss").split("/");
   date.value = date_time[0];
   time.value = date_time[1];
+  const weekMap = [
+    "星期日",
+    "星期一",
+    "星期二",
+    "星期三",
+    "星期四",
+    "星期五",
+    "星期六",
+  ];
+  day.value = weekMap[Dayjs().day()];
 };
 let WeatherData = ref({
   now: {
@@ -335,20 +327,30 @@ onUnmounted(() => {
   align-items: center;
   width: 100%;
   @include wHeight(60);
+  
   justify-content: center;
   top: 0;
   @include FontSize(12);
   z-index: 10;
   &::after {
     content: "";
-    position: absolute;
+    position: relative;
+    justify-content: center;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    width: 100%;
+    // width: 50%;
     height: 100%;
-    background: url("~@/assets/images/wisdom/header.png") no-repeat;
+    // width: 1364;
+    @include Width(1364);
+    // height: 139;
+    // top: -31px;
+    // left: 658px;
+    // border-radius: 10px;
+    // border-width: 3px;
+
+    background: url("~@/assets/componentCard/header.png") no-repeat;
     background-size: 100% 100%;
     opacity: 0.99;
     z-index: 0;
@@ -382,6 +384,8 @@ onUnmounted(() => {
       @include FontSize(16);
       font-family: SJyunhei;
       z-index: 1;
+      flex: 1;
+      text-align: center;   
     }
     .line {
       @include Width(1);
@@ -434,89 +438,98 @@ onUnmounted(() => {
       @include LineHeight(45);
       font-family: Oppo, serif;
       font-weight: 600;
+      display: flex;
+      align-items: center;     //垂直
+      justify-content: center; //水平
     }
   }
 }
-.left-bg {
-  @include Width(700);
-  @include wHeight(77);
-  position: absolute;
-  @include Top(20);
-  z-index: 20;
-  @include PaddingRight(60);
-}
+// .left-bg {
+//   // @include Width(700);
+//   // @include wHeight(77);
+//   position: absolute;
+//   // @include Top(20);
+//   z-index: 20;
+//   // @include PaddingRight(60);
+//   // background: url("~@/assets/componentCard/Card_time.png")
+//   //   no-repeat;
+//   //   @include Width(488);
+//   //    background-size: contain;
+//   //    @include hHeight(70);
+// }
 
-.left-bg {
-  left: 0;
-  // background: url('~@/assets/images/基础/top_left_bg@2x.png') no-repeat;
-  background-size: 100% 100%;
-  display: flex;
-  //justify-content: center;
-  align-items: center;
+// .left-bg {
+//   left: 0;
+//   // background: url('~@/assets/images/基础/top_left_bg@2x.png') no-repeat;
+//   background: url("~@/assets/componentCard/Card_time.png") no-repeat;
+//   background-size: 100% 100%;
+//   display: flex;
+//   //justify-content: center;
+//   align-items: center;
 
-  .weather-box {
-    @include PaddingLeft(20);
-    display: flex;
-    @include PaddingTop(20);
+//   .weather-box {
+//     @include PaddingLeft(20);
+//     display: flex;
+//     @include PaddingTop(20);
 
-    .bg-box {
-      background: url("~@/assets/images/基础/header/103@2x.png") no-repeat;
-      background-size: 100% 100%;
-      @include Width(47);
-      @include wHeight(41);
-      @include MarginRight(31);
-    }
-    .alarm-item {
-      @include Padding(0, 22, 0, 20);
-      //   border-left: 1.5px solid rgba(255, 255, 255, 0.4);
-      @include wHeight(31);
-      .label {
-        //@include LineHeight(23);
+//     .bg-box {
+//       background: url("~@/assets/images/基础/header/103@2x.png") no-repeat;
+//       background-size: 100% 100%;
+//       @include Width(47);
+//       @include wHeight(41);
+//       @include MarginRight(31);
+//     }
+//     .alarm-item {
+//       @include Padding(0, 22, 0, 20);
+//       //   border-left: 1.5px solid rgba(255, 255, 255, 0.4);
+//       @include wHeight(31);
+//       .label {
+//         //@include LineHeight(23);
 
-        position: relative;
-        @include Top(5);
-        @include FontSize(20);
-        color: rgba(255, 255, 255, 0.9);
-        //   font-weight: bold;
-        // z-index: 1;
-      }
-      .value {
-        //@include LineHeight(23);
-        position: relative;
-        @include Bottom(-10);
+//         position: relative;
+//         @include Top(5);
+//         @include FontSize(20);
+//         color: rgba(255, 255, 255, 0.9);
+//         //   font-weight: bold;
+//         // z-index: 1;
+//       }
+//       .value {
+//         //@include LineHeight(23);
+//         position: relative;
+//         @include Bottom(-10);
 
-        @include FontSize(20);
-        color: rgba(255, 255, 255, 0.9);
-      }
-    }
+//         @include FontSize(20);
+//         color: rgba(255, 255, 255, 0.9);
+//       }
+//     }
 
-    .weather-item {
-      @include Padding(0, 22, 0, 22);
-      border-left: 1.5px solid rgba(255, 255, 255, 0.4);
-      @include wHeight(31);
+//     .weather-item {
+//       @include Padding(0, 22, 0, 22);
+//       border-left: 1.5px solid rgba(255, 255, 255, 0.4);
+//       @include wHeight(31);
 
-      .label {
-        //@include LineHeight(23);
-        position: relative;
-        @include Top(5);
-        @include FontSize(20);
-        color: rgba(255, 255, 255, 0.9);
-        // font-weight: bold;
-        // z-index: 1;
-      }
+//       .label {
+//         //@include LineHeight(23);
+//         position: relative;
+//         @include Top(5);
+//         @include FontSize(20);
+//         color: rgba(255, 255, 255, 0.9);
+//         // font-weight: bold;
+//         // z-index: 1;
+//       }
 
-      .value {
-        //@include LineHeight(23);
-        position: relative;
-        @include Bottom(-10);
+//       .value {
+//         //@include LineHeight(23);
+//         position: relative;
+//         @include Bottom(-10);
 
-        @include FontSize(20);
-        color: rgba(255, 255, 255, 0.9);
-      }
+//         @include FontSize(20);
+//         color: rgba(255, 255, 255, 0.9);
+//       }
 
-      &:first-child {
-      }
-    }
-  }
-}
+//       &:first-child {
+//       }
+//     }
+//   }
+// }
 </style>

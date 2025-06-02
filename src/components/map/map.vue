@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-15 17:00:08
  * @LastEditors: viola
- * @LastEditTime: 2025-05-30 16:46:05
+ * @LastEditTime: 2025-06-02 10:53:26
  * @FilePath: \code\src\components\map\map.vue
 -->
 <!-- 加载视频流组件 -->
@@ -327,8 +327,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-html,
-body,
+
 #cesiumContainer {
   width: 100%;
   height: 100%;

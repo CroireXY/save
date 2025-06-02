@@ -2,12 +2,12 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-23 14:26:03
  * @LastEditors: viola
- * @LastEditTime: 2025-05-26 17:04:15
+ * @LastEditTime: 2025-06-02 14:53:43
  * @FilePath: \code\src\Views\home\cityAppearance\component\flight_type.vue
 -->
 <template>
   <div class="box">
-      <SubTitle title-text="实时数据"></SubTitle>
+      <SubTitle title-text="飛行任務性質"></SubTitle>
         <V3Echarts :options="option" :height="425"/>
   </div>
 </template>

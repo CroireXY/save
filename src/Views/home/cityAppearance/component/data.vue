@@ -1,4 +1,5 @@
 <template>
+  <div class="title">數據統計</div>
   <div class="box">
     <template v-for="item in infoList" :key="item.id">
       <div class="item">
@@ -41,17 +42,27 @@ const infoList = [
 </script>
 
 <style lang="scss" scoped>
-.box {
-  @include boxWidth(510);
-  @include boxhHeight(267);
+.title {
+  @include Width(488);
+  background-size: 100% 100%;
+  @include wHeight(34);
+  @include PaddingLeft(40);
+  @include PaddingTop(34);
   box-sizing: border-box;
-  @include Padding(10, 30, 10, 30);
+  color: #fff;
+  @include FontSize(16);
+}
+.box {
+  @include Width(488);
+  @include wHeight(267);
+  box-sizing: border-box;
+  @include Padding(67, 30, 10, 30);
   position: relative;
   display: flex;
   flex-wrap: wrap;
   .item {
-    @include Width(200);
-    @include wHeight(80);
+    @include Width(180);
+    @include wHeight(60);
     background-color: #123247b4;
     cursor: pointer;
     display: flex;

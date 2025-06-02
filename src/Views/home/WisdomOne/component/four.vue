@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="tab">
+    <!-- <div class="tab">
       <template v-for="item in tabList" :key="item.id">
         <div
           :class="[
@@ -11,7 +11,7 @@
           {{ item.tabName }}
         </div>
       </template>
-    </div>
+    </div> -->
 
     <div class="content">
       <div class="title">

@@ -1,10 +1,3 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 06:15:48
- * @LastEditors: viola
- * @LastEditTime: 2025-05-22 16:38:42
- * @FilePath: \code\src\Views\home\contactOccurs\index.vue
--->
 <template>
     <Left_box>
         <Lease_title>今日交通情况</Lease_title>
