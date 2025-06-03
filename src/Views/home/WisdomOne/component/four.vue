@@ -136,7 +136,7 @@ const firmlist = ref([
 
   .content {
     width: 100%;
-    @include wHeight(525);
+    @include wHeight(150);
     .title {
       width: 100%;
       @include wHeight(26);
@@ -164,7 +164,7 @@ const firmlist = ref([
     }
     .list {
       width: 100%;
-      @include wHeight(500);
+      @include wHeight(150);
       overflow-y: scroll;
       .item {
         width: 100%;

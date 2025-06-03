@@ -1,33 +1,33 @@
 <template>
     <Left_box>
         <Lease_title>今日交通情况</Lease_title>
-        <Box :height="260">
+        <Box height="260">
             <oneVue />
         </Box>
 
         <Lease_title>事故统计</Lease_title>
-        <Box :height="290">
+        <Box height="290">
             <twoVue />
         </Box>
 
         <Lease_title>出行统计</Lease_title>
-        <Box :height="290">
+        <Box height="290">
             <threeVue />
         </Box>
     </Left_box>
     <Right_box>
         <Lease_title>应急资源</Lease_title>
-        <Box :height="290">
+        <Box height="290">
             <fourVue />
         </Box>
 
         <Lease_title>重点防护</Lease_title>
-        <Box :height="290">
+        <Box height="290">
             <fiveVue />
         </Box>
 
         <Lease_title>视频监控</Lease_title>
-        <Box :height="260">
+        <Box height="260">
             <sixVue />
         </Box>
     </Right_box>

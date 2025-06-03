@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-15 17:00:08
  * @LastEditors: viola
- * @LastEditTime: 2025-06-02 10:53:26
+ * @LastEditTime: 2025-06-03 17:41:02
  * @FilePath: \code\src\components\map\map.vue
 -->
 <!-- 加载视频流组件 -->
@@ -22,7 +22,6 @@ import { onMounted, watch, watchEffect } from "vue";
 import { useMapStore } from "@/stores/map";
 import axios from "axios";
 const mapStore = useMapStore();
-
 // 设置cesium的静态资源路径
 window.CESIUM_BASE_URL = "/cesium";
 let inter = null;
@@ -98,7 +97,8 @@ onMounted(() => {
   // 添加Cesium3DTileset图层
   const addLayer = async () => {
     let tileset = new Cesium.Cesium3DTileset({
-      url: "https://data.map.gov.hk/api/3d-data/3dtiles/f2/tileset.json?key=3967f8f365694e0798af3e7678509421",
+      url:'/map_data/tileset.json',
+      // url: "https://data.map.gov.hk/api/3d-data/3dtiles/f2/tileset.json?key=3967f8f365694e0798af3e7678509421",
     });
     await tileset.readyPromise;
     viewer.scene.primitives.add(tileset);
@@ -136,8 +136,6 @@ onMounted(() => {
       })
     );
   }
-
-  
 
   // Declare droneEntity in a higher scope so it can be accessed in both branches
   let droneEntity: Cesium.Entity[] = [];
@@ -241,83 +239,157 @@ onMounted(() => {
 
   let points: Cesium.Entity[] = [];
 
-  function onFlightPathShowChanged(val: boolean) {
+  async function onFlightPathShowChanged(val: boolean) {
     if (val) {
-      let flightData = [
-        [114.12918853370209, 22.260153696529716, 30],
-        [114.12904924062073, 22.260207408533567, 32],
-        [114.1287706545875, 22.26023963376461, 40],
-        [114.12857100262859, 22.26009997721904, 50],
-        [114.12833420653861, 22.259900160819686, 70],
-        [114.12817167973085, 22.25977935382772, 100],
-        [114.12780725065208, 22.25958184421282, 100],
-        [114.12791559170181, 22.259399549981563, 50],
-        [114.12804035462904, 22.25917470399307, 45],
-        [114.12779083634175, 22.259044044395747, 40],
-        [114.12763847183552, 22.259177242251944, 35],
-        [114.12749791868961, 22.258942368592717, 25],
-        [114.12725585077793, 22.258801440449528, 15],
-        [114.12705673020025, 22.258693033367265, 5],
-      ];
-      const timeStepInSeconds = 60;
-      const totalSeconds = timeStepInSeconds * (flightData.length - 1);
-      const start = Cesium.JulianDate.fromIso8601("2020-03-09T23:10:00Z");
-      const stop = Cesium.JulianDate.addSeconds(
-        start,
-        totalSeconds,
-        new Cesium.JulianDate()
-      );
-      viewer.clock.startTime = start.clone();
-      viewer.clock.stopTime = stop.clone();
-      viewer.clock.currentTime = start.clone();
-      viewer.clock.multiplier = 50;
-      viewer.clock.shouldAnimate = true;
-      const positionProperty = new Cesium.SampledPositionProperty();
+      try {
+        const { data } = await axios.get(
+          "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250401000000&etime=20250530235959&recordId=1",
+          {
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsc2NtIiwiYWRtaW5JZCI6MSwiaWF0IjoxNzQ4ODQ5NDAzLCJleHAiOjE3NDg4OTI2MDN9.suPHxyWq8CJbY1O9rRW6ZwfanUco8ywIL_VJmarjmAw",
+            },
+          }
+        );
 
-      for (let i = 0; i < flightData.length; i++) {
-        const dataPoint = flightData[i];
-        const time = Cesium.JulianDate.addSeconds(
+        if (data.responseCode !== 200 || !Array.isArray(data.body)) {
+          console.error("接口数据异常");
+          return;
+        }
+        const rawData = data.body;
+         function toDegrees(item:any) {
+                        return {
+                            lon: item.longitude / 1e7,
+                            lat: item.latitude / 1e7,
+                            alt: item.altitude / 10,
+                            timeStamp: item.timeStamp
+                        };
+                    }
+
+                    function calcDistance(p1:any, p2:any) {
+                        const R = 6371000;
+                        const dLat = (p2.lat - p1.lat) * Math.PI / 180;
+                        const dLon = (p2.lon - p1.lon) * Math.PI / 180;
+                        const a = Math.sin(dLat / 2) ** 2 +
+                            Math.cos(p1.lat * Math.PI / 180) * Math.cos(p2.lat * Math.PI / 180) *
+                            Math.sin(dLon / 2) ** 2;
+                        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                        const horizontalDist = R * c;
+                        const verticalDist = Math.abs(p2.alt - p1.alt);
+                        return Math.sqrt(horizontalDist ** 2 + verticalDist ** 2);
+                    }
+
+                    let filtered = [];
+                    let lastTime = null;
+                    let lastPoint = null;
+
+                    for (const item of rawData) {
+                        const p = toDegrees(item);
+                        if (!p.lon || !p.lat || p.alt === undefined) continue;
+
+
+                        // filter: 重复点（经纬高相同）
+                        if (lastPoint &&
+                            lastPoint.lon === p.lon &&
+                            lastPoint.lat === p.lat &&
+                            lastPoint.alt === p.alt) continue;
+
+                            
+                        // filter: 时间间隔（≥0.5s）点位
+                        if (lastTime) {
+                            const t1 = new Date(
+                                `${p.timeStamp.slice(0, 4)}-${p.timeStamp.slice(4, 6)}-${p.timeStamp.slice(6, 8)}T${p.timeStamp.slice(8, 10)}:${p.timeStamp.slice(10, 12)}:${p.timeStamp.slice(12, 14)}`
+                            );
+                            const t0 = new Date(
+                                `${lastTime.slice(0, 4)}-${lastTime.slice(4, 6)}-${lastTime.slice(6, 8)}T${lastTime.slice(8, 10)}:${lastTime.slice(10, 12)}:${lastTime.slice(12, 14)}`
+                            );
+                            const dt = (t1.getTime() - t0.getTime()) / 1000;
+                            if (dt < 0) continue; //关闭Filter: 时间间隔
+                            // if (dt < 0.5) continue; //开启filter: 时间间隔（≥0.5s）点位
+                        }
+
+                        // filter: 相邻距离小于2m点位
+                        if (lastPoint && calcDistance(lastPoint, p) < 2) continue;
+
+                        filtered.push(p);
+                        lastPoint = p;
+                        lastTime = p.timeStamp;
+                    }
+
+                    const flightData = filtered.map(p => [p.lon, p.lat, p.alt]);
+
+
+        // const flydata = data.body.map((item: any) => {
+        //   console.log(item.longitude);
+        //   return {
+        //     longitude: (item.longitude ?? 0) / 1e7, // 转换为真实经纬度
+        //     latitude: (item.latitude??0) / 1e7,
+        //     altitude: (item.altitude??0)/10,
+        //   };
+        // });
+        const timeStepInSeconds = 60;
+        const totalSeconds = timeStepInSeconds * (flightData.length - 1);
+        const start = Cesium.JulianDate.fromIso8601("2020-03-09T23:10:00Z");
+        const stop = Cesium.JulianDate.addSeconds(
           start,
-          i * timeStepInSeconds,
+          totalSeconds,
           new Cesium.JulianDate()
         );
-        const position = Cesium.Cartesian3.fromDegrees(
-          dataPoint[0],
-          dataPoint[1],
-          dataPoint[2]
-        );
-        positionProperty.addSample(time, position);
+        viewer.clock.startTime = start.clone();
+        viewer.clock.stopTime = stop.clone();
+        viewer.clock.currentTime = start.clone();
+        viewer.clock.multiplier = 50;
+        viewer.clock.shouldAnimate = true;
+        const positionProperty = new Cesium.SampledPositionProperty();
 
-        points[i] = viewer.entities.add({
-          description: `Location: (${dataPoint[0]}, ${dataPoint[1]}, ${dataPoint[2]})`,
-          position: position,
-          point: { pixelSize: 10, color: Cesium.Color.BLUE },
+        for (let i = 0; i < flightData.length; i++) {
+          const dataPoint = flightData[i];
+          const time = Cesium.JulianDate.addSeconds(
+            start,
+            i * timeStepInSeconds,
+            new Cesium.JulianDate()
+          );
+          const position = Cesium.Cartesian3.fromDegrees(
+            dataPoint[0],
+            dataPoint[1],
+            dataPoint[2]
+          );
+          positionProperty.addSample(time, position);
+
+          // points[i] = viewer.entities.add({
+          //   description: `Location: (${dataPoint[0]}, ${dataPoint[1]}, ${dataPoint[2]})`,
+          //   position: position,
+          //   point: { pixelSize: 10, color: Cesium.Color.BLUE },
+          // });
+        }
+
+        // STEP 4 CODE (green circle entity)
+        const airplaneEntity = viewer.entities.add({
+          availability: new Cesium.TimeIntervalCollection([
+            new Cesium.TimeInterval({ start: start, stop: stop }),
+          ]),
+          position: positionProperty,
+          path: new Cesium.PathGraphics({ width: 3 }),
+          model: {
+            uri: "/3d_icon/drones.glb",
+            minimumPixelSize: 64,
+            color: Cesium.Color.WHITE.withAlpha(1),
+            maximumScale: 20000, // 模型的最大比例大小
+            silhouetteColor: Cesium.Color.BLACK, // 设置模型轮廓（边框）颜色
+            silhouetteSize: 2, // 设置模型轮廓（边框）大小
+            runAnimations: true, // 是否执行模型动画
+            scale: 1.0, // 应用于图像的统一比例。比例大于会1.0放大标签，而比例小于会1.0缩小标签。
+            distanceDisplayCondition: new Cesium.DistanceDisplayCondition( // 显示在距相机的距离处的属性，多少区间内是可以显示的
+              0,
+              1500
+            ),
+            show: true,
+          },
         });
+      } catch (error) {
+        console.error("获取数据失败:", error);
+        return;
       }
-
-      // STEP 4 CODE (green circle entity)
-      const airplaneEntity = viewer.entities.add({
-        availability: new Cesium.TimeIntervalCollection([
-          new Cesium.TimeInterval({ start: start, stop: stop }),
-        ]),
-        position: positionProperty,
-        path: new Cesium.PathGraphics({ width: 3 }),
-        model: {
-          uri: "/3d_icon/drones.glb",
-          minimumPixelSize: 64,
-          color: Cesium.Color.WHITE.withAlpha(1),
-          maximumScale: 20000, // 模型的最大比例大小
-          silhouetteColor: Cesium.Color.BLACK, // 设置模型轮廓（边框）颜色
-          silhouetteSize: 2, // 设置模型轮廓（边框）大小
-          runAnimations: true, // 是否执行模型动画
-          scale: 1.0, // 应用于图像的统一比例。比例大于会1.0放大标签，而比例小于会1.0缩小标签。
-          distanceDisplayCondition: new Cesium.DistanceDisplayCondition( // 显示在距相机的距离处的属性，多少区间内是可以显示的
-            0,
-            1500
-          ),
-          show: true,
-        },
-      });
     } else {
       points.forEach((entity) => viewer.entities.remove(entity));
       points = [];
@@ -327,7 +399,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
 #cesiumContainer {
   width: 100%;
   height: 100%;

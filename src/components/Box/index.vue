@@ -1,20 +1,31 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-25 04:18:38
- * @LastEditTime: 2025-06-02 10:32:19
+ * @LastEditTime: 2025-06-03 16:23:46
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\Box\index.vue
 -->
 <!-- box     -->
 <template>
-  <div class="box">
+  <div class="box" :style="backgroundDirection">
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts" setup>
-const props = defineProps(["width", "height"]);
+import { computed } from "vue";
+const props = defineProps<{
+  width?: string;
+  height?: string;
+  direction?: 'left' | 'right';
+}>();
+const backgroundDirection = computed(() => {
+  const dir = props.direction === 'left' ? 'to right' : 'to left';
+  return {
+    backgroundImage: `linear-gradient(${dir}, #0a2a43, #0a2a43B3, #0a2a4366)`
+  };
+});
 </script>
 <style lang="scss" scoped>
 .box {
@@ -26,7 +37,8 @@ const props = defineProps(["width", "height"]);
   @include FontSize(14);
   @include hLineHeight(18);
   @include LetterSpacing(0.5);
-  // background: #021f2fc7;
- ;
+  
+  // background:#09263cB3;
+  // background-image: linear-gradient(to right,#0a2a43, #0a2a43B3, #0a2a4366); 
 }
 </style>

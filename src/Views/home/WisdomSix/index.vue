@@ -37,7 +37,7 @@ import fourVue from './component/four.vue'
 import fiveVue from './component/five.vue'
 import floatButton from '@/components/floatButton/index.vue'
 import { onBeforeUnmount, onMounted, reactive, ref } from 'vue'
-import { hideAllTreeInfo, showNeedTreeInfo } from '@/utils/showOrHideInfoTree'
+import { hideAllTreeInfo, showNeedTreeInfo } from 'public/utils/showOrHideInfoTree'
 import { cleanIntelligenceCommunity1, initIntelligenceCommunity1 } from '@/Views/home/WisdomSix/opers/intelligenceCommunity1'
 import { cleanIntelligenceCommunity2, initIntelligenceCommunity2 } from '@/Views/home/WisdomSix/opers/intelligenceCommunity2'
 

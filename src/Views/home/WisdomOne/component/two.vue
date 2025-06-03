@@ -30,7 +30,7 @@
     <V3Echarts
       :options="option"
       :width="490"
-      :height="330"
+      :height="300"
       container="wisdomone_two"
     />
   </div>
@@ -45,7 +45,7 @@ let option = ref({
     trigger: "item",
     textStyle: {
       color: "#fff",
-      fontSize: "1rem",
+      fontSize: "12",
     },
     borderRadius: 20,
     backgroundColor: "rgba(0,0,0,.6)",
@@ -58,8 +58,8 @@ let option = ref({
   },
   grid: {
     top: "15%",
-    left: "0%",
-    bottom: "5%",
+    left: "3%",
+    bottom: "0%",
     right: "2%",
     containLabel: true,
   },
@@ -72,11 +72,11 @@ let option = ref({
       "08/05",
       "09/05",
       "10/05",
-      "11/05",
-      "12/05",
-      "13/05",
-      "14/05",
-      "15/05",
+      // "11/05",
+      // "12/05",
+      // "13/05",
+      // "14/05",
+      // "15/05",
     ],
     axisLabel: {
       show: true,
@@ -152,7 +152,7 @@ let option = ref({
         fontSize: "1rem",
         formatter: "{c}",
       },
-      data: [189, 267, 112, 142, 118, 206, 189, 267, 112, 142, 118, 206],
+      data: [189, 267, 112, 142, 118, 206, 189],
     },
     {
       type: "pictorialBar",
@@ -184,12 +184,12 @@ let option = ref({
 <style lang="scss" scoped>
 .box {
   @include boxWidth(510);
-  @include boxhHeight(530);
+  @include boxhHeight(400);
   box-sizing: border-box;
   @include Padding(10, 10, 10, 10);
   position: relative;
   .title {
-    @include Width(488);
+    @include Width(510);
     background-size: 100% 100%;
     @include wHeight(34);
     @include PaddingLeft(40);

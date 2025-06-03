@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 22:38:25
- * @LastEditTime: 2025-06-02 14:38:25
+ * @LastEditTime: 2025-06-03 15:43:29
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\left_box.vue
@@ -32,7 +32,7 @@ const animate = computed(() => animatestore.$state.Animate);
 <style lang="scss" scoped>
 .left_box {
   position: absolute;
-  @include Width(536);
+  @include Width(560);
   height: 100%;
   // background: url("~@/assets/images/基础/left_bg_dark@2x.png") no-repeat;
   // background-size: 100% 100%;

@@ -138,7 +138,7 @@ import Dayjs from "dayjs";
 import { getWeather, getWeatherCityId, getWeatherPm2P5 } from "@/api/connect";
 import { onMounted, onUnmounted, ref } from "vue";
 // import Heard_link from "./heard_link.vue";
-import { BPFunction } from "@/utils/BPFunction";
+import { BPFunction } from "public/utils/BPFunction";
 import { useRouter } from "vue-router";
 import { useWeatherStore } from "@/stores/weather";
 import Icon from "../Icon/index.vue";

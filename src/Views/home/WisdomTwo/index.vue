@@ -82,7 +82,7 @@ import { onBeforeUnmount, onMounted, reactive, ref, watchEffect } from 'vue'
 import { cleanHistory, initHistory } from '@/Views/home/WisdomTwo/opers/historyOpers'
 import { scenicSpot, scenicrestore } from '@/Views/home/WisdomTwo/opers/scenicSpot'
 import { useDialogStore } from '@/stores/dialog'
-import { showNeedTreeInfo } from '@/utils/showOrHideInfoTree'
+import { showNeedTreeInfo } from 'public/utils/showOrHideInfoTree'
 
 const showCheck = ref(false)
 // shp点
