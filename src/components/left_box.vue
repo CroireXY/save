@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 22:38:25
- * @LastEditTime: 2025-06-03 15:43:29
+ * @LastEditTime: 2025-06-04 16:47:59
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\left_box.vue
@@ -48,6 +48,19 @@ const animate = computed(() => animatestore.$state.Animate);
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
+  }
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    //  background: #021f2fc7;
+    // background:#113648;
+    // background-image: linear-gradient(to right,#0a2a43, #0a2a43B3, #0a2a4366);
+    opacity: 0.8;
+    z-index: -1;
   }
 }
 </style>

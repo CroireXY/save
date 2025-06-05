@@ -1,10 +1,10 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2022-06-21 14:29:18
- * @LastEditors: 张祥 17839092765@163.com
+ * @LastEditTime: 2025-06-05 15:20:37
+ * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWeekly_zhyq\src\Views\home\header\index.vue
+ * @FilePath: \code\src\components\header\index__.vue
 -->
 <!-- header -->
 <template>
@@ -138,7 +138,7 @@ import Dayjs from "dayjs";
 import { getWeather, getWeatherCityId, getWeatherPm2P5 } from "@/api/connect";
 import { onMounted, onUnmounted, ref } from "vue";
 // import Heard_link from "./heard_link.vue";
-import { BPFunction } from "public/utils/BPFunction";
+import { BPFunction } from "@/utils/BPFunction";
 import { useRouter } from "vue-router";
 import { useWeatherStore } from "@/stores/weather";
 import Icon from "../Icon/index.vue";

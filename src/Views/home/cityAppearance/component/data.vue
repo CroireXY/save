@@ -1,5 +1,5 @@
 <template>
-  <div class="title">數據統計</div>
+  <!-- <div class="title">數據統計</div> -->
   <div class="box">
     <template v-for="item in infoList" :key="item.id">
       <div class="item">

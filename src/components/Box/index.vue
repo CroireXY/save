@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-25 04:18:38
- * @LastEditTime: 2025-06-03 16:23:46
+ * @LastEditTime: 2025-06-04 16:50:10
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\Box\index.vue
@@ -23,6 +23,7 @@ const props = defineProps<{
 const backgroundDirection = computed(() => {
   const dir = props.direction === 'left' ? 'to right' : 'to left';
   return {
+    // background: `radial-gradient(#0a2a43, #0a2a43B3, #0a2a4366,#0a2a434D)`,
     backgroundImage: `linear-gradient(${dir}, #0a2a43, #0a2a43B3, #0a2a4366)`
   };
 });

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-06-02 15:18:01
+ * @LastEditTime: 2025-06-03 22:23:37
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\header\index.vue
@@ -67,7 +67,7 @@
           <el-tooltip
             class="box-item"
             effect="dark"
-            content="UI显隐"
+            content="全屏"
             placement="bottom"
           >
             <Icon

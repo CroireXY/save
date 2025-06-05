@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="title">7日歷史數據</div>
+    <!-- <div class="title">7日歷史數據</div> -->
 
     <!-- <div class="content">
       <div class="text">

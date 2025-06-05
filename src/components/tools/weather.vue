@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-01 20:58:53
- * @LastEditTime: 2025-05-30 16:59:50
+ * @LastEditTime: 2025-06-05 17:16:50
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\tools\weather.vue
@@ -43,11 +43,22 @@
     </div> -->
     <div class="open-dark">
       <div class="dark-item">
-        <button class="button" @click="toggleSceneMode">
+        <el-button @click="toggleSceneMode">
           切换到{{ getCurrentMode()==='3D'?'2D':'3D' }}视图
-        </button>
+        </el-button>
       </div>
+     
       <div class="dark-item">
+        <!-- <span>Plot line</span> -->
+        <!-- <el-switch
+          v-model="isShowLine"
+         
+          class="ml-2"
+          style="--el-switch-on-color: #007aff; --el-switch-off-color: #ccc"
+        /> -->
+        <el-button @click="onClickDrawPath">{{ getPathShow() ? '停止' : '绘制' }}飞行轨迹</el-button>
+      </div>
+       <div class="dark-item">
         <span>Plot 2d icon</span>
         <el-switch
           v-model="isShow2DIcon"
@@ -61,15 +72,6 @@
         <el-switch
           v-model="isShow3DIcon"
           @change="changeDrone3DShow"
-          class="ml-2"
-          style="--el-switch-on-color: #007aff; --el-switch-off-color: #ccc"
-        />
-      </div>
-      <div class="dark-item">
-        <span>Plot line</span>
-        <el-switch
-          v-model="isShowLine"
-          @change="changeLineShow"
           class="ml-2"
           style="--el-switch-on-color: #007aff; --el-switch-off-color: #ccc"
         />
@@ -95,6 +97,15 @@ const is2DMode = ref(false);
  * 开启/关闭黑暗模式
  * @param val
  */
+const onClickDrawPath = () => {
+  // if (MapStore.drawFlightPath) {
+    const isShow= MapStore.getFlightPathShow();
+    MapStore.setFlightPathShow(!isShow);
+    // MapStore.drawFlightPath();
+  // } else {
+  //   console.warn("map 尚未初始化或 drawFlightPath 未注册");
+  // }
+};
 const changeDrone2DShow = (val: boolean) => {
   MapStore.setDrone2DShow(val);
 };
@@ -109,6 +120,10 @@ const changeLineShow = (val: boolean) => {
 
 const getCurrentMode = () => {
   return MapStore.getCurrentMode();
+};
+
+const getPathShow = () => {
+  return MapStore.getFlightPathShow();
 };
 
 const toggleSceneMode = async () => {

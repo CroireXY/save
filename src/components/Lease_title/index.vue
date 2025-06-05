@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-25 01:59:49
- * @LastEditTime: 2025-06-03 16:16:01
+ * @LastEditTime: 2025-06-04 13:53:33
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\Lease_title\index.vue
@@ -49,7 +49,7 @@ const props = defineProps({
     top: 0;
     //  background: #021f2fc7;
     // background:#113648;
-    background-image: radial-gradient(#0a2a43, #0a2a43B3, #0a2a4366);
+    // background-image: radial-gradient(#0a2a43, #0a2a43B3, #0a2a4366);
     opacity: 0.8;
     z-index: -1;
   }
