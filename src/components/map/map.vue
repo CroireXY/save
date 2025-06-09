@@ -411,6 +411,7 @@ async function onFlightPathShowChanged(value: boolean) {
           material: Cesium.Color.fromCssColorString("#00F0FF"), // 实线颜色
         }),
       });
+      
       // 虚线轨迹（尚未飞过的部分）
       futurePathEntity = viewer.entities.add({
         availability: new Cesium.TimeIntervalCollection([

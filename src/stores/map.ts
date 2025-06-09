@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-29 10:49:13
  * @LastEditors: viola
- * @LastEditTime: 2025-06-05 17:16:10
+ * @LastEditTime: 2025-06-09 15:36:24
  * @FilePath: \code\src\stores\map.ts
  */
 import { get } from "lodash";
@@ -10,7 +10,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const useMapStore = defineStore("map", {
-  //选项式api
+  
   state: () => ({
     Drone2DShow: false, // 2D点位展示
     Drone3DShow: false, // 3D点位展示
