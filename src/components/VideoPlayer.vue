@@ -1,46 +1,46 @@
 <template>
   <div>
-    <button class="playback-button" @click="toggleVisible">
-      视频回放
-    </button>
+    <button class="playback-button" @click="toggleVisible">视频回放</button>
 
     <div class="video-wrapper" v-show="visible">
       <button class="close-button" @click="closeVideo">×</button>
 
       <div class="video-container">
-        <video
-          ref="videoRef"
-          :src="videoSrc"
-          autoplay
-          muted
-          loop
-          playsinline
-        ></video>
+         <canvas ref="canvas" class="canvas"></canvas>
       </div>
     </div>
   </div>
 </template>
-
+<!-- <script type="text/javascript" src="jsmpeg.min.js"></script> -->
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from "vue";
 
-const visible = ref(false)
-const videoSrc = ref('/assets/videodrone.mov')
-const videoRef = ref(null)
+const visible = ref(false);
 
+const canvas = ref(null);
 const toggleVisible = () => {
-  visible.value = !visible.value
-}
+  visible.value = !visible.value;
+};
 
 const closeVideo = () => {
-  visible.value = false
-}
+  visible.value = false;
+};
 
 onMounted(() => {
-  videoRef.value?.play().catch(err => {
-    console.error('Autoplay failed:', err)
-  })
-})
+  const el = canvas.value;
+
+  // 设置 canvas 尺寸 = DOM 尺寸
+  el.width = el.clientWidth;
+  el.height = el.clientHeight;
+
+
+  // 初始化 JSMpeg 播放器
+  const player = new JSMpeg.Player("ws://localhost:9999", {
+    canvas: el
+  });
+
+  player.play();
+});
 </script>
 
 <style scoped>
@@ -49,7 +49,7 @@ onMounted(() => {
   top: 9vh;
   right: 20vw;
   padding: 6px 12px;
-  background-image: url('/assets/buttonbg.png');
+  background-image: url("/assets/buttonbg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -61,26 +61,15 @@ onMounted(() => {
   user-select: none;
   font-size: 14px;
   z-index: 1100;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .playback-button:hover {
   filter: brightness(1.1);
 }
-
-/* 视频窗口容器*/
-.video-wrapper {
-  position: absolute;
-  top: 12vh;  
-  right: 20vw;
-  width: 12vw;
-  height: 16vh;
-  z-index: 1000;
-}
-
 .close-button {
   position: absolute;
-  top: 1px;    
+  top: 1px;
   right: 0;
   width: 24px;
   height: 24px;
@@ -92,18 +81,30 @@ onMounted(() => {
   z-index: 1200;
 }
 
+/* 视频窗口容器*/
+.video-wrapper {
+  position: absolute;
+  top: 12vh;
+  right: 20vw;
+  width: 12vw;
+  height: 16vh;
+  z-index: 1000;
+}
+
 .video-container {
   width: 100%;
   height: 100%;
-  border: 1.5px solid #58A8CB;
+  position: relative;
+  border: 1.5px solid #58a8cb;
   border-radius: 3px;
   overflow: hidden;
   box-shadow: 0 0 8px rgba(0, 0, 50, 0.5);
 }
 
-video {
+canvas {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* object-fit: contain; */
+  display: block;
 }
 </style>

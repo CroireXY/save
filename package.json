@@ -28,6 +28,7 @@
     "ffmpeg": "^0.0.4",
     "js-cookie": "^3.0.1",
     "mitt": "^3.0.1",
+    "node-rtsp-stream": "^0.0.9",
     "pinia": "^2.0.4",
     "qweather-icons": "^1.1.0",
     "swiper": "^7.4.1",
