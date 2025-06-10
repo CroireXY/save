@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-29 10:49:13
  * @LastEditors: viola
- * @LastEditTime: 2025-06-09 15:36:24
+ * @LastEditTime: 2025-06-10 11:44:32
  * @FilePath: \code\src\stores\map.ts
  */
 import { get } from "lodash";
@@ -14,8 +14,8 @@ export const useMapStore = defineStore("map", {
   state: () => ({
     Drone2DShow: false, // 2D点位展示
     Drone3DShow: false, // 3D点位展示
-    FlightPathShow: false, // 飞行路径展示
-    CurrentMode: "3D", // 当前模式，默认为2D
+    FlightPathShow:ref( false), // 飞行路径展示
+    CurrentMode: ref("3D"), // 当前模式，默认为2D
     drawFlightPath: null as null | (() => void),
     // closeFlightPath: null as null | (() => void),
   }),

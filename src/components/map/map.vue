@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-15 17:00:08
  * @LastEditors: viola
- * @LastEditTime: 2025-06-05 23:41:06
+ * @LastEditTime: 2025-06-10 11:36:43
  * @FilePath: \code\src\components\map\map.vue
 -->
 <!-- 加载视频流组件 -->
@@ -188,15 +188,19 @@ async function onDrone2DShowChanged(val: boolean) {
   let droneEntity: Cesium.Entity[] = [];
   if (val) {
     try {
-      const { data } = await axios.get(
-        "http://lae.lscm.hk/fsp/api/getFlightRecords?stime=20250401000000&etime=20250530235959",
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsc2NtIiwiYWRtaW5JZCI6MSwiaWF0IjoxNzQ5MTM2MTA1LCJleHAiOjE3NDkxNzkzMDV9.41TDAoEODVBnaQjY-LRPCB-lpZQsEijtJufPHPNovDg",
-          },
-        }
+      // const { data } = await axios.get(
+      //   "http://lae.lscm.hk/fsp/api/getFlightRecords?stime=20250401000000&etime=20250530235959",
+      //   {
+      //     headers: {
+      //       Authorization:
+      //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsc2NtIiwiYWRtaW5JZCI6MSwiaWF0IjoxNzQ5MTM2MTA1LCJleHAiOjE3NDkxNzkzMDV9.41TDAoEODVBnaQjY-LRPCB-lpZQsEijtJufPHPNovDg",
+      //     },
+      //   }
+      // );
+      const res = await fetchWithAuth(
+        "http://lae.lscm.hk/fsp/api/getFlightRecords?stime=20250401000000&etime=20250530235959"
       );
+      const data = await res.data;
 
       if (data.responseCode !== 200 || !Array.isArray(data.body)) {
         console.error("接口数据异常");
