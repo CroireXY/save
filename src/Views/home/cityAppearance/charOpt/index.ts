@@ -779,7 +779,7 @@ export const option = {
     itemHeight: 14, // 图例标记的图形高度。[ default: 14 ]
     itemGap: 40, // 图例每项之间的间隔。[ default: 10 ]横向布局时为水平间隔，纵向布局时为纵向间隔。
     textStyle: {
-      fontSize: 14,
+      // fontSize: 14,
       color: "#00E4FF",
     },
   },
@@ -801,7 +801,7 @@ export const option = {
     name: {
       textStyle: {
         color: 'rgba(255, 255, 255, 0.8)',
-        fontSize: '1rem',
+        // fontSize: '1rem',
 		
       },
     },
@@ -846,7 +846,7 @@ export const option = {
       show: true, // 始终显示
       color: 'rgba(255, 255, 255, 0.8)',
 	   fontWeight: 'bold',
-     fontSize: '0.9rem',
+    //  fontSize: '0.9rem',
       formatter: function(params:any) {
         // params.value 是当前点的 value
         // params.dimensionIndex 是当前维度的索引

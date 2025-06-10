@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-25 01:59:49
- * @LastEditTime: 2025-06-04 13:53:33
+ * @LastEditTime: 2025-06-10 10:42:56
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\Lease_title\index.vue
@@ -34,9 +34,11 @@ const props = defineProps({
   @include boxWidth(v-bind("props.width"));
   @include hHeight(40);
   overflow: hidden;
+  background-image:  linear-gradient(to right, #266dab, #29455d);
   // background: url("~@/assets/images/wisdom/title.png") no-repeat;
-   background: url("~@/assets/componentCard/title.png") no-repeat;
-  background-size: 90% 100%;
+  //  background: url("~@/assets/componentCard/title.png") no-repeat;
+
+  // background-size: 90% 100%;
   background-position: 5%;
   // text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 

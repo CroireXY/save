@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-06-03 22:23:37
+ * @LastEditTime: 2025-06-09 17:00:36
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\header\index.vue
@@ -10,7 +10,7 @@
 <template>
   <div class="header" v-show="UIShow">
     <div class="info">
-      <div class="time">
+      <!-- <div class="time">
         {{ date }}
       </div>
       <div class="time">
@@ -18,7 +18,7 @@
       </div>
       <div class="time">
         {{ time }}
-      </div>
+      </div> -->
       <!-- <span class="line"></span>
       <div class="weahtermon" @click="WeahterLink">
         <span>
@@ -223,9 +223,6 @@ const WeatherClick = () => {
 };
 
 const UIClick = () => {
-  // const val = !UIShow.value;
-  // ToolsStore.SetUIShow(val);
-  // __g.settings.setMainUIVisibility(!val);
   document.documentElement.requestFullscreen();
 };
 
@@ -234,25 +231,6 @@ const reset = () => {
   (window as any).Common_config.reset();
 };
 
-// 获取当前时间
-const date: any = ref("");
-const time: any = ref("");
-const day: any = ref("");
-const get_Date_Time = () => {
-  let date_time = Dayjs().format("YYYY-MM-DD/HH:mm:ss").split("/");
-  date.value = date_time[0];
-  time.value = date_time[1];
-  const weekMap = [
-    "星期日",
-    "星期一",
-    "星期二",
-    "星期三",
-    "星期四",
-    "星期五",
-    "星期六",
-  ];
-  day.value = weekMap[Dayjs().day()];
-};
 let WeatherData = ref({
   now: {
     icon: 101,
@@ -302,14 +280,7 @@ let WeatherData = ref({
 
 let timer = ref();
 onMounted(async () => {
-  // setTimeout(() => {
-  //     __g.marker.clear(null)
-  // }, 1000)
-  get_Date_Time();
 
-  timer.value = setInterval(() => {
-    get_Date_Time();
-  }, 500);
   // await getWeatherData();
 });
 onUnmounted(() => {
@@ -368,53 +339,7 @@ onUnmounted(() => {
       align-items: center;
     }
   }
-  .info {
-    position: absolute;
-    @include Width(300);
-    @include wHeight(30);
-    @include Left(20);
-    @include Top(2);
-    display: flex;
-    justify-content: space-between;
-    z-index: 1;
-    .time {
-      @include Width(108);
-      @include wHeight(30);
-      @include LineHeight(30);
-      @include FontSize(16);
-      font-family: SJyunhei;
-      z-index: 1;
-      flex: 1;
-      text-align: center;   
-    }
-    .line {
-      @include Width(1);
-      @include wHeight(13);
-      @include MarginTop(10);
-      background-color: rgba(255, 255, 255, 0.7);
-      z-index: 1;
-    }
 
-    .weahtermon {
-      cursor: pointer;
-      position: relative;
-      height: 100%;
-      @include wHeight(30);
-      @include LineHeight(30);
-      i:nth-of-type(1) {
-        @include FontSize(18);
-        display: inline-block;
-        @include MarginRight(5);
-        @include MarginTop(1);
-      }
-      > span {
-        display: inline-block;
-        @include MarginLeft(10);
-        @include FontSize(14);
-        font-weight: 800;
-      }
-    }
-  }
 
   .logo {
     @include Width(400);
