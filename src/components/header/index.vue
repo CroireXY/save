@@ -312,16 +312,19 @@ onUnmounted(() => {
     right: 0;
     bottom: 0;
     // width: 50%;
-    height: 100%;
+    // height: 100%;
     // width: 1364;
     @include Width(1364);
+    @include wHeight(150);
     // height: 139;
     // top: -31px;
     // left: 658px;
     // border-radius: 10px;
     // border-width: 3px;
 
-    background: url("~@/assets/componentCard/header.png") no-repeat;
+    // background: url("~@/assets/componentCard/header.png") no-repeat;
+    background: url("../../assets/icons/buttons/titlebg.png") no-repeat;
+
     background-size: 100% 100%;
     opacity: 0.99;
     z-index: 0;
@@ -357,7 +360,7 @@ onUnmounted(() => {
     z-index: 1;
 
     .tit {
-      @include FontSize(24);
+      @include FontSize(36);
       @include LetterSpacing(3);
       @include wHeight(60);
       @include LineHeight(45);

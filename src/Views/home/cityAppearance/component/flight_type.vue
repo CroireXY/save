@@ -96,7 +96,7 @@ const option = {
     itemWidth: 12,
     itemHeight: 12,
     textStyle: {
-      fontSize: 12,
+      fontSize: 16,
       color: '#ffffff'
     },
     formatter(name: string) {

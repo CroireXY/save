@@ -35,14 +35,22 @@ const animate = computed(() => animatestore.$state.Animate);
   position: absolute;
   @include Width(560);
   height: 100%;
-  // @include Top(30);
   @include Right(0);
    @include Top(0);
   z-index: 9;
-  // background: url("../assets/images/基础/right_bg_dark@2x.png") no-repeat
-  //   center/cover;
-  // background-image: linear-gradient(to left, #021f2f, #021f2f05);
-  @include Padding(44, 20, 20, 30);
+
+  background-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.9) 20%,     
+    rgba(0, 0, 0, 0.8) 40%,  
+    rgba(0, 0, 0, 0.6) 60%, 
+    rgba(0, 0, 0, 0.3) 80%,  
+    rgba(0, 0, 0, 0.0) 100%  
+  );
+
+  @include Padding(44, 30, 20, 60);
+
+
   box-sizing: border-box;
   .content {
     width: 100%;

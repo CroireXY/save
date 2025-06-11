@@ -1,28 +1,25 @@
-<!--
- * @Author: your name
- * @Date: 2022-03-13 23:28:11
- * @LastEditTime: 2025-05-26 16:53:24
- * @LastEditors: viola
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \code\src\components\headerlink\index.vue
--->
-<!-- footer -->
 <template>
   <div class="footer" v-show="UIShow">
-        <div class="footer_Box">
-            <template v-for="item in Link" :key="item.key">
-                <div :class="PagePath.indexOf(item.path) !== -1 ? 'item isactive' : 'item'" @click="LinkClick(item)">
-                    {{ item.name }}
-                </div>
-            </template>
+    <!-- 渐变背景 -->
+    <div class="footer-bg"></div>
+
+    <!-- 按钮背景 -->
+    <div class="footer-button-bg"></div>
+
+    <!-- 按钮组 -->
+    <div class="footer_Box">
+      <template v-for="item in Link" :key="item.key">
+        <div :class="PagePath.indexOf(item.path) !== -1 ? 'item isactive' : 'item'" @click="LinkClick(item)">
+          {{ item.name }}
         </div>
+      </template>
     </div>
-  <footer class="lscm_footer">
+
+    <!-- 文本版权 -->
     <p class="footer-text">
-      © 2025 Hong Kong Logistics and Supply Chain MultiTech R&D Centre. All
-      rights reserved.
+      © 2025 Hong Kong Logistics and Supply Chain MultiTech R&D Centre. All rights reserved.
     </p>
-  </footer>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -53,13 +50,8 @@ const Link: any = reactive([
   //     key: 1,
   //     path: '/home/wisdomOne'
   // },
-  // {
-  //     name: '航线管理',
-  //     key: 2,
-  //     path: '/home/wisdomtwo'
-  // },
   {
-    name: "安全告警",
+    name: "飞行活动",
     key: 3,
     path: "/home/contactOccurs",
   },
@@ -73,6 +65,12 @@ const Link: any = reactive([
     key: 6,
     path: "/home/wisdomsix",
   },
+  {
+    name: "安全告警",
+    key: 1,
+    path: "/home/wisdomsix",
+  },
+  
 ]);
 
 // 路由事件
@@ -95,65 +93,83 @@ onMounted(() => {
 <style lang="scss" scoped>
 .footer {
   position: absolute;
-  @include Bottom(50);
+  bottom: 0;
   width: 100%;
+  height: 160px;
   z-index: 10;
-  @include wHeight(30);
+  pointer-events: none;
+
+  .footer-bg {
+    position: absolute;
+    bottom: 0px; // 放在按钮上方
+    left: 0;
+    width: 100%;
+    height: 60px; // ✅ 设置固定高度（可以按实际图片高度设置，比如 60px、80px）
+    background: url("~@/assets/icons/buttons/bottombg.png") no-repeat center bottom;
+    background-size: 100% 100%; // 让背景适配容器宽高
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .footer-button-bg {
+    position: absolute;
+    bottom: 0px; // ✅ 让它浮在.footer-bg内部
+    left: 50%;
+    transform: translateX(-50%);
+    // width: 600px;
+    // height: 50px;
+    @include Width(1364);
+    @include wHeight(80);
+    background: url("~@/assets/icons/buttons/bottombuttonbg.png") no-repeat center center;
+    background-size: 100% 100%;
+    z-index: 2;
+  }
+
   .footer_Box {
     position: absolute;
-    // left: 0;
-    // right: 0;
-    @include Left(330);
-    @include Right(330);
-    bottom: 0;
-    top: 0;
-    z-index: 10;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    gap: 10px;
+    z-index: 3;
+    pointer-events: auto;
+
     .item {
       @include Width(120);
-      @include wHeight(30);
-      @include LineHeight(30);
-      @include FontSize(15);
+      @include wHeight(50);
+      @include LineHeight(50);
+      @include FontSize(24);
       color: rgba(255, 255, 255, 0.7);
       font-weight: bold;
       text-align: center;
       cursor: pointer;
-      background: url("~@/assets/images/wisdom/btn.png") no-repeat;
+      background: url("~@/assets/icons/buttons/bottombutton.png") no-repeat;
       background-size: 100% 100%;
-      &:nth-child(4) {
-        @include MarginLeft(640);
-      }
+
       &:hover {
         color: rgba(255, 255, 255, 0.9);
-        background: url("~@/assets/images/wisdom/btn_.png") no-repeat;
         background-size: 100% 105%;
       }
     }
+
     .isactive {
       color: rgba(255, 255, 255, 0.9);
-      background: url("~@/assets/images/wisdom/btn_.png") no-repeat;
       background-size: 100% 105%;
     }
   }
-}
-
-.lscm_footer {
-  position: absolute;
-  @include Bottom(5);
-  width: 100%;
-  z-index: 10;
-//   @include wHeight(15);
 
   .footer-text {
-    margin: 0;
-    padding: 0 10px;
-    // line-height: 1.2;
-    word-break: break-word;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
     text-align: center;
-   @include FontSize(12);
-
+    color: white;
+    @include FontSize(12);
+    z-index: 3;
+    pointer-events: auto;
   }
 }
+
+
 </style>

@@ -59,7 +59,7 @@ const props = defineProps({
   .title-text {
     flex: 1;
     @include MarginLeft(35);
-    @include FontSize(18);
+    @include FontSize(24);
     position: relative;
     @include Top(1);
     font-style: italic;
