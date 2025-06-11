@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-10-22 10:27:11
- * @LastEditTime: 2021-12-04 00:04:58
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue-ts\src\tools\index.js
- */
 //将一个数组等分成多个数组
 export const group = (array: string | any[], subGroupLength: number) => {
 	//数组，一组有多少个数据

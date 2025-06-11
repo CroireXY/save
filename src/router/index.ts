@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-10-18 15:32:37
- * @LastEditTime: 2022-05-28 11:22:45
- * @LastEditors: 张祥 17839092765@163.com
- * @Description: In User Settings Edit
- * @FilePath: \vue-ts\src\router\index.js
- */
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { HomeItem } from './modules/home'
 import { useAnimateStore } from '@/stores/animate'
@@ -15,10 +7,17 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         redirect: '/home'
     },
-    {
+    // {
+    //     path: '/home',
+    //     name: 'home',
+    //     redirect: '/home/cityAppearance',
+    //     component: () => import('@/Views/home/index.vue'),
+    //     children: HomeItem
+    // },
+        {
         path: '/home',
         name: 'home',
-        redirect: '/home/cityAppearance',
+        redirect: '/home/homePage',
         component: () => import('@/Views/home/index.vue'),
         children: HomeItem
     },

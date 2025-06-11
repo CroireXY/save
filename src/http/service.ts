@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-08-02 00:30:53
- * @LastEditTime: 2021-12-07 15:27:23
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \aircityinit\src\utils\service.js
- */
 const Mock = {
 	// mock模块 (test)
 	aircity: "/mock",

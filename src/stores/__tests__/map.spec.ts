@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-06-09 15:22:13
- * @LastEditors: viola
- * @LastEditTime: 2025-06-09 15:35:52
- * @FilePath: \code\src\stores\__tests__\map.spec.ts
- */
 import { setActivePinia, createPinia } from 'pinia'
 import { defineStore } from "pinia";
 import { useMapStore } from '../map'

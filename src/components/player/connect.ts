@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-08-31 14:22:31
- * @LastEditTime: 2022-10-10 16:43:34
- * @LastEditors: 张祥 zhangxiang@sidri.com
- * @Description: In User Settings Edit
- * @FilePath: \aircityinit\src\components\player\connect.js
- */
 //5.0管理命令
 const ManageCommand = {
   Login: -1, //登录，只有登录成功以后，下面的命令才能调用

@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-06-05 23:10:30
- * @LastEditors: viola
- * @LastEditTime: 2025-06-05 23:19:09
- * @FilePath: \code\src\utils\auth.ts
- */
 import axios from 'axios';
 
 let cachedToken: string | null = null;

@@ -1,18 +1,10 @@
-<!--
- * @Author: your name
- * @Date: 2021-11-18 22:05:57
- * @LastEditTime: 2025-06-02 14:06:28
- * @LastEditors: viola
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \code\src\Views\home\index.vue
--->
 <template>
   <div class="fullscreen-wrapper">
-    <!-- <Map3d @init="init" /> -->
 
     <Map></Map>
 
     <VideoPlayer></VideoPlayer>
+
     <transition
       appear
       name="custom-classes-transition"
@@ -45,18 +37,10 @@
     <transition
       appear
       name="custom-classes-transition"
-      enter-active-class="animate__animated   animate__fadeInDown"
-      leave-active-class="animate__animated  animate__fadeOutUp"
+      enter-active-class="animate__animated   animate__fadeInUp"
+      leave-active-class="animate__animated  animate__fadeOutDown"
     >
-      <HeaderLink
-        v-if="
-          !TooBarShow &&
-          !LayerTreeShow &&
-          !AnimationShow &&
-          !SkyBoxShow &&
-          !WeatherShow
-        "
-      />
+    <HeaderLink></HeaderLink>
     </transition>
 
     <transition
@@ -98,14 +82,13 @@
     </transition>
 
     <div class="wrap">
-      <router-view></router-view>
+      <router-view :key="$route.fullPath"></router-view>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import Player from "@/components/player/player.vue";
+// import Player from "@/components/player/player.vue";
 import Map from "@/components/map/map.vue";
-import Map3d from "@/components/Map-3d.vue";
 import Header from "@/components/header/index.vue";
 // import shpCheckBox from '@/components/shpCheckBox'
 // import { getMockData } from '@/api/connect'
@@ -123,8 +106,10 @@ import ToolBar from "@/components/tools/toolBar.vue";
 import Build from "@/components/tools/build.vue";
 import mainPanel from "@/Views/home/main/index.vue";
 import VideoPlayer from "@/components/VideoPlayer.vue";
+
 import { ref } from "vue";
 const isOkRef = ref(false);
+declare const Native: any;
 
 const init = () => {
   isOkRef.value = true;

@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 06:15:48
- * @LastEditors: viola
- * @LastEditTime: 2025-05-22 16:35:35
- * @FilePath: \code\src\Views\home\WisdomSix\opers\intelligenceCommunity2.ts
- */
 import { hideAllTreeInfo, hideNeedTreeInfo, showNeedTreeInfo } from '@/utils/showOrHideInfoTree'
 import { useDisplayStore } from '@/stores/display'
 

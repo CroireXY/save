@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-06-09 17:00:36
- * @LastEditors: viola
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \code\src\components\header\index.vue
--->
 <!-- header -->
 <template>
   <div class="header" v-show="UIShow">
@@ -360,7 +352,7 @@ onUnmounted(() => {
     z-index: 1;
 
     .tit {
-      @include FontSize(36);
+      @include FontSize(32);
       @include LetterSpacing(3);
       @include wHeight(60);
       @include LineHeight(45);
