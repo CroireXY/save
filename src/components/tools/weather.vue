@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-04-01 20:58:53
- * @LastEditTime: 2025-06-10 11:49:47
+ * @LastEditTime: 2025-06-10 13:52:35
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\tools\weather.vue
@@ -43,9 +43,9 @@
     </div> -->
     <div class="open-dark">
       <div class="dark-item">
-        <el-button @click="toggleSceneMode">
+        <button @click="toggleSceneMode" class="button">
           切换到{{ getCurrentMode()==='3D'?'2D':'3D' }}视图
-        </el-button>
+        </button>
       </div>
      
       <div class="dark-item">
@@ -56,26 +56,28 @@
           class="ml-2"
           style="--el-switch-on-color: #007aff; --el-switch-off-color: #ccc"
         /> -->
-        <el-button @click="onClickDrawPath">{{ getPathShow() ? '停止' : '绘制' }}飞行轨迹</el-button>
+        <button class="button"@click="onClickDrawPath">{{ getPathShow() ? '停止' : '绘制' }}飞行轨迹</button>
       </div>
        <div class="dark-item">
-        <span>Plot 2d icon</span>
-        <el-switch
+        <span>显示无人机的当前位置</span>
+         <el-switch
           v-model="isShow2DIcon"
           @change="changeDrone2DShow"
           class="ml-2"
-          style="--el-switch-on-color: #007aff; --el-switch-off-color: #ccc"
+          style="--el-switch-on-color: aqua; --el-switch-off-color: #ccc"
         />
+        
+       
       </div>
-      <div class="dark-item">
+      <!-- <div class="dark-item">
         <span>Plot 3d icon</span>
         <el-switch
           v-model="isShow3DIcon"
           @change="changeDrone3DShow"
           class="ml-2"
-          style="--el-switch-on-color: #007aff; --el-switch-off-color: #ccc"
+          style="--el-switch-on-color:aqua; --el-switch-off-color: #ccc"
         />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -316,7 +318,8 @@ onUnmounted(() => {
     }
   }
   .open-dark {
-    @include m-FontSize(8);
+    // @include m-FontSize(8);
+     @include FontSize(18);
     margin-top: 6px;
     display: flex;
     flex-direction: column;
@@ -329,16 +332,25 @@ onUnmounted(() => {
         margin-right: 10px;
       }
     }
+    // .el-button {
+    //   // @include FontSize(12);
+    //   @include Width(200);
+    //   @include wHeight(10);
+    
+    // }
     .button {
-      position: absolute;
-      z-index: 999;
+      // position: absolute;
+      // z-index: 999;
       top: 10px;
       left: 10px;
       padding: 6px 12px;
-      background: #007acc;
-      color: white;
+      @include FontSize(16);
+      color: black;
       border: none;
       border-radius: 4px;
+      &:hover {
+        background-color: aqua;
+      }
     }
   }
 }

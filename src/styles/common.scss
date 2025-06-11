@@ -1,6 +1,6 @@
 // PC size
 $referanceWidth: 2880;
-$referanceHeight: 1080;
+$referanceHeight: 1620;
 $widthRatio: calc($referanceWidth / 100);
 $heightRatio: calc(100 / $referanceWidth);
 $heightRatioByHeight: calc($referanceHeight / 100);
@@ -67,6 +67,7 @@ $R: 400;
  
 @mixin boxhHeight($h) {
   height: calc(100vh * #{$h} / #{$referanceHeight});
+
 }
  
 @mixin minHHeight($h) {

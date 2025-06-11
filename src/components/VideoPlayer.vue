@@ -43,7 +43,7 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .playback-button {
   position: fixed;
   top: 9vh;
@@ -59,7 +59,9 @@ onMounted(() => {
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
-  font-size: 14px;
+  /* font-size: 14px; */
+   @include FontSize(20); 
+
   z-index: 1100;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }

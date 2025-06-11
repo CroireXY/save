@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-03-13 23:28:11
- * @LastEditTime: 2025-05-26 16:53:24
+ * @LastEditTime: 2025-06-10 17:47:18
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\headerlink\index.vue
@@ -9,14 +9,21 @@
 <!-- footer -->
 <template>
   <div class="footer" v-show="UIShow">
-        <div class="footer_Box">
-            <template v-for="item in Link" :key="item.key">
-                <div :class="PagePath.indexOf(item.path) !== -1 ? 'item isactive' : 'item'" @click="LinkClick(item)">
-                    {{ item.name }}
-                </div>
-            </template>
+    <div class="footer_Box">
+      <template v-for="item in Link" :key="item.key">
+        <div class="gradient-border">
+          <div
+            :class="
+              PagePath.indexOf(item.path) !== -1 ? 'item isactive' : 'item'
+            "
+            @click="LinkClick(item)"
+          >
+            {{ item.name }}
+          </div>
         </div>
+      </template>
     </div>
+  </div>
   <footer class="lscm_footer">
     <p class="footer-text">
       © 2025 Hong Kong Logistics and Supply Chain MultiTech R&D Centre. All
@@ -111,30 +118,57 @@ onMounted(() => {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    .item {
-      @include Width(120);
-      @include wHeight(30);
-      @include LineHeight(30);
-      @include FontSize(15);
-      color: rgba(255, 255, 255, 0.7);
-      font-weight: bold;
-      text-align: center;
-      cursor: pointer;
-      background: url("~@/assets/images/wisdom/btn.png") no-repeat;
-      background-size: 100% 100%;
-      &:nth-child(4) {
-        @include MarginLeft(640);
+    .gradient-border {
+       @include Width(120);
+        @include wHeight(30);
+        @include LineHeight(30);
+        @include FontSize(15);
+      //  border: 1px solid transparent;
+        padding: 1px; /* 边框厚度 */
+  // display: inline-block;
+        border-radius: 20px;
+      
+        overflow: hidden;
+        background: linear-gradient(
+          332.79deg,
+          #1e7fc8 27.72%,
+          #e1e1e1 39.39%,
+          #1de8f8 53.84%,
+          #1e7fc8 65.1%
+        );
+         border-image-slice: 1;
+      .item {
+        border-radius: 20px; /* 内部圆角略小以显示边框 */
+        // color: rgba(255, 255, 255, 0.7);
+        // color: #4de1ff;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+
+        // background: url("~@/assets/images/wisdom/btn.png") no-repeat;
+        background-color: #0a2b44;
+        background-size: 100% 100%;
+       
+
+       
+        &:nth-child(4) {
+          @include MarginLeft(640);
+        }
+        &:hover {
+          // color: rgba(255, 255, 255, 0.9);
+          color: #0a2b44;
+          background-color: #a3b8c0;
+          // background: url("~@/assets/images/wisdom/btn_.png") no-repeat;
+          background-size: 100% 105%;
+        }
       }
-      &:hover {
-        color: rgba(255, 255, 255, 0.9);
-        background: url("~@/assets/images/wisdom/btn_.png") no-repeat;
+      .isactive {
+        // color: rgba(255, 255, 255, 0.9);
+        color: #0a2b44;
+        background-color: #a3b8c0;
+        // background: url("~@/assets/images/wisdom/btn_.png") no-repeat;
         background-size: 100% 105%;
       }
-    }
-    .isactive {
-      color: rgba(255, 255, 255, 0.9);
-      background: url("~@/assets/images/wisdom/btn_.png") no-repeat;
-      background-size: 100% 105%;
     }
   }
 }
@@ -144,7 +178,7 @@ onMounted(() => {
   @include Bottom(5);
   width: 100%;
   z-index: 10;
-//   @include wHeight(15);
+  //   @include wHeight(15);
 
   .footer-text {
     margin: 0;
@@ -152,8 +186,7 @@ onMounted(() => {
     // line-height: 1.2;
     word-break: break-word;
     text-align: center;
-   @include FontSize(12);
-
+    @include FontSize(12);
   }
 }
 </style>

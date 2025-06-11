@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-06-09 17:00:36
+ * @LastEditTime: 2025-06-11 15:52:52
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\header\index.vue
@@ -296,11 +296,12 @@ onUnmounted(() => {
   position: relative;
   display: flex;
   align-items: center;
+  // background-color: radial-gradient(#0a2b44, transparent);
   width: 100%;
-  @include wHeight(60);
+  @include hHeight(139);
+ 
   
   justify-content: center;
-  top: 0;
   @include FontSize(12);
   z-index: 10;
   &::after {
@@ -308,7 +309,7 @@ onUnmounted(() => {
     position: relative;
     justify-content: center;
     left: 0;
-    top: 0;
+    @include hTop(-31);
     right: 0;
     bottom: 0;
     // width: 50%;
@@ -320,15 +321,16 @@ onUnmounted(() => {
     // left: 658px;
     // border-radius: 10px;
     // border-width: 3px;
-
-    background: url("~@/assets/componentCard/header.png") no-repeat;
+// background: #0a2b4499;
+// opacity: 0.7;
+    background: url("~@/assets/componentCard/header2.png") no-repeat;
     background-size: 100% 100%;
     opacity: 0.99;
     z-index: 0;
   }
   .info-right {
     position: absolute;
-    @include wHeight(30);
+    @include hHeight(30);
     @include Right(10);
     @include Top(2);
     @include Width(200);
@@ -343,12 +345,13 @@ onUnmounted(() => {
 
   .logo {
     @include Width(400);
-    @include wHeight(60);
+    @include hHeight(139);
+     @include hTop(-31);
     text-align: center;
     position: absolute;
     @include Left(0);
     right: 0;
-    top: 0;
+   
     display: flex;
     margin: auto;
     flex-direction: column;
@@ -359,7 +362,7 @@ onUnmounted(() => {
     .tit {
       @include FontSize(24);
       @include LetterSpacing(3);
-      @include wHeight(60);
+      @include hHeight(60);
       @include LineHeight(45);
       font-family: Oppo, serif;
       font-weight: 600;
@@ -371,7 +374,7 @@ onUnmounted(() => {
 }
 // .left-bg {
 //   // @include Width(700);
-//   // @include wHeight(77);
+//   // @include hHeight(77);
 //   position: absolute;
 //   // @include Top(20);
 //   z-index: 20;
@@ -401,13 +404,13 @@ onUnmounted(() => {
 //       background: url("~@/assets/images/基础/header/103@2x.png") no-repeat;
 //       background-size: 100% 100%;
 //       @include Width(47);
-//       @include wHeight(41);
+//       @include hHeight(41);
 //       @include MarginRight(31);
 //     }
 //     .alarm-item {
 //       @include Padding(0, 22, 0, 20);
 //       //   border-left: 1.5px solid rgba(255, 255, 255, 0.4);
-//       @include wHeight(31);
+//       @include hHeight(31);
 //       .label {
 //         //@include LineHeight(23);
 
@@ -431,7 +434,7 @@ onUnmounted(() => {
 //     .weather-item {
 //       @include Padding(0, 22, 0, 22);
 //       border-left: 1.5px solid rgba(255, 255, 255, 0.4);
-//       @include wHeight(31);
+//       @include hHeight(31);
 
 //       .label {
 //         //@include LineHeight(23);

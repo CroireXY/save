@@ -6,10 +6,10 @@ body {
 }
 
 #app {
-  width: 100%;
-  height: 100%;
-  // @include Width(1920);
-  // @include wHeight(1080);
+  // width: 100%;
+  // height: 100%;
+  @include Width(2880);
+  @include wHeight(1620);
   /*//   margin: 0 auto; */
   font-family: Oppo;
   user-select: none;

@@ -71,6 +71,7 @@ const getIcon = (file: string) => {
 .box0 {
   background-image: url("~@/assets/componentCard/time.png") no-repeat;
   @include Width(560);
+  @include wHeight(217);
   //   background-size: contain;
 
   //   @include wHeight(217);

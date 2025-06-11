@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-15 17:00:08
  * @LastEditors: viola
- * @LastEditTime: 2025-06-10 11:36:43
+ * @LastEditTime: 2025-06-10 12:03:28
  * @FilePath: \code\src\components\map\map.vue
 -->
 <!-- 加载视频流组件 -->
@@ -109,22 +109,22 @@ onMounted(() => {
     }
   );
 
-  urls.forEach((url) => {
-    const tileset = new Cesium.Cesium3DTileset({ url, projectTo2D: true });
-    viewer.scene.primitives.add(tileset);
+  // urls.forEach((url) => {
+  //   const tileset = new Cesium.Cesium3DTileset({ url, projectTo2D: true });
+  //   viewer.scene.primitives.add(tileset);
 
-    tileset.readyPromise.then(() => {
-      console.log("Loaded tileset:", url);
-      const boundingSphere = tileset.boundingSphere;
-      const radius = boundingSphere.radius;
+  //   tileset.readyPromise.then(() => {
+  //     console.log("Loaded tileset:", url);
+  //     const boundingSphere = tileset.boundingSphere;
+  //     const radius = boundingSphere.radius;
 
-      // 设置最小缩放距离为模型半径的一部分，避免穿模
-      viewer.scene.screenSpaceCameraController.minimumZoomDistance =
-        radius * 0.05;
-      // 如果你只加载一个，也可以用 viewer.zoomTo(tileset)
-    });
-  });
-  // addLayer();
+  //     // 设置最小缩放距离为模型半径的一部分，避免穿模
+  //     viewer.scene.screenSpaceCameraController.minimumZoomDistance =
+  //       radius * 0.05;
+  //     // 如果你只加载一个，也可以用 viewer.zoomTo(tileset)
+  //   });
+  // });
+  addLayer();
   // viewer.scene.screenSpaceCameraController.minimumZoomDistance = 10;
   viewer.scene.screenSpaceCameraController.enableCollisionDetection = true; //不允许去地下
   viewer.camera.flyTo({
@@ -179,7 +179,7 @@ async function addLayer() {
 
   // 设置最小缩放距离为模型半径的一部分，避免穿模
   // if (viewer.value) {
-  viewer.scene.screenSpaceCameraController.minimumZoomDistance = radius * 0.5;
+  // viewer.scene.screenSpaceCameraController.minimumZoomDistance = radius * 0.5;
   viewer.scene.primitives.add(tileset);
   // }
 }
@@ -513,7 +513,7 @@ function calcDistance(p1: any, p2: any) {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #cesiumContainer {
   width: 100%;
   height: 100%;
