@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-25 04:18:38
- * @LastEditTime: 2025-06-11 16:22:03
+ * @LastEditTime: 2025-06-11 17:00:17
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\Box\index.vue
@@ -33,7 +33,8 @@ const backgroundDirection = computed(() => {
 .box {
   position: relative;
   @include boxWidth(v-bind("props.width"));
-  @include boxhHeight(v-bind("props.height"));
+  // @include boxhHeight(v-bind("props.height"));
+ @include boxwHeight(v-bind("props.height"));
   @include MarginBottom(10);
   @include BorderRadius(2);
   @include FontSize(14);

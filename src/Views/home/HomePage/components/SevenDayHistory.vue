@@ -30,7 +30,7 @@
       <V3Echarts
         :options="option"
         :width="490"
-        :height="300"
+        :height='500'
         container="wisdomone_two"
       />
     </div>
@@ -127,7 +127,7 @@
     series: [
       {
         type: "bar",
-        barWidth: "18rem",
+        barWidth: 20,
         // zlevel: 1,
         itemStyle: {
           // borderColor: "#208edf",
@@ -135,16 +135,7 @@
           // shadowColor: "#208edf",
           // shadowBlur: 10,
           color: "rgba(16,158,220,0.2)",
-          // color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          //   { offset: 0, color: "rgba(16,158,220,0.1)" },
-          //   { offset: 0.5, color: "rgba(16,158,220,0.1)" },
-          //   { offset: 1, color: "rgba(99,189,219,0.1)" },
-          // ]),
         },
-        // showBackground: true,
-        // backgroundStyle: {
-        //   color: "rgba(180, 180, 180, 0.08)",
-        // },
         label: {
           show: true,
           position: "top",
@@ -158,23 +149,10 @@
         type: "pictorialBar",
         symbol: "rect",
         symbolSize: ["1rem", "4rem"],
-        // zlevel: 2,
         itemStyle: {
           color: "rgba(16,158,220,1)",
         },
         data: [
-          // { value: 589, symbolOffset: [0, -123] },
-          // { value: 267, symbolOffset: [0, -174] },
-          // { value: 112, symbolOffset: [0, -74] },
-          // { value: 142, symbolOffset: [0, -88] },
-          // { value: 118, symbolOffset: [0, -80] },
-          // { value: 206, symbolOffset: [0, -134] },
-          //  { value: 589, },
-          // { value: 267, },
-          // { value: 112, },
-          // { value: 142, },
-          // { value: 118,  },
-          // { value: 206,  },
         ],
       },
     ],

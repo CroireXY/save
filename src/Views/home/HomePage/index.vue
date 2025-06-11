@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-06-11 16:17:04
  * @LastEditors: viola
- * @LastEditTime: 2025-06-11 16:37:59
+ * @LastEditTime: 2025-06-11 16:49:44
  * @FilePath: \code\src\Views\home\HomePage\index.vue
 -->
 <template>
@@ -11,12 +11,12 @@
        <weatherCard :date="date" :day="day" :time="time" />
   
       <Lease_title>今日實況</Lease_title>
-      <Box direction="left" height="600" width="560">
+      <Box direction="left" height="500" width="560">
       <realtime_data />
     </Box>
   
       <Lease_title>7日歷史數據</Lease_title>
-      <Box direction="left" height="400" width="560">
+      <Box direction="left" height="600" width="560">
         <SevenDayHistory />
       </Box>
     </Left_box>
@@ -27,12 +27,12 @@
       </Box>
   
       <Lease_title>飞行任务性质</Lease_title>
-      <Box height="450">
+      <Box height="600">
         <FlightTaskNature />
       </Box>
   
       <Lease_title>起降場及航線信息總覽</Lease_title>
-      <Box height="200">
+      <Box height="400">
         <TakeoffLandingOverview />
       </Box>
     </Right_box>
