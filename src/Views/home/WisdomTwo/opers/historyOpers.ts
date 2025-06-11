@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 09:31:19
- * @LastEditors: viola
- * @LastEditTime: 2025-05-23 11:12:19
- * @FilePath: \code\src\Views\home\WisdomTwo\opers\historyOpers.ts
- */
 import { hideAllTreeInfo, showNeedTreeInfo } from '@/utils/showOrHideInfoTree'
 
 /**

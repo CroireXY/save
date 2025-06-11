@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-05-29 10:49:13
- * @LastEditors: viola
- * @LastEditTime: 2025-06-10 11:44:32
- * @FilePath: \code\src\stores\map.ts
- */
 import { get } from "lodash";
 import { defineStore } from "pinia";
 import { ref } from "vue";

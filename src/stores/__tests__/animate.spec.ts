@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-06-09 15:58:13
- * @LastEditors: viola
- * @LastEditTime: 2025-06-09 15:59:35
- * @FilePath: \code\src\stores\__tests__\animate.spec.ts
- */
 import { setActivePinia, createPinia } from 'pinia'
 import { useAnimateStore } from '../animate'
 

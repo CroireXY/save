@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2022-03-27 02:04:18
- * @LastEditTime: 2022-05-31 18:45:37
- * @LastEditors: 张祥 17839092765@163.com
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWEEKLY_ZHGK\src\utils\index.js
- */
 import { onBeforeUnmount } from "vue";
 /* Echarts图表尺寸自适应 */
 export const fitChartSize = (size: number, defalteWidth = 1920) => {

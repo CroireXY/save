@@ -1,10 +1,3 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 06:16:07
- * @LastEditors: viola
- * @LastEditTime: 2025-06-03 22:56:58
- * @FilePath: \code\src\components\Icon\index.vue
--->
 <template>
   <i v-if="isElementUiIcon" :class="iconName"> </i>
   <span title="title" v-else>

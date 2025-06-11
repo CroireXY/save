@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-25 01:59:49
- * @LastEditTime: 2025-06-11 16:06:32
+ * @LastEditTime: 2025-06-11 16:22:46
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\Lease_title\index.vue
@@ -59,7 +59,7 @@ const props = defineProps({
   .title-text {
     flex: 1;
     @include MarginLeft(35);
-    @include FontSize(18);
+    @include FontSize(24);
     position: relative;
     @include Top(1);
     font-style: italic;

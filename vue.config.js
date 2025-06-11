@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 06:15:48
- * @LastEditors: viola
- * @LastEditTime: 2025-06-02 14:05:32
- * @FilePath: \code\vue.config.js
- */
 
 const path = require("path");
 

@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-08-02 01:30:11
- * @LastEditTime: 2022-06-02 16:43:57
- * @LastEditors: 张祥 17839092765@163.com
- * @Description: In User Settings Edit
- * @FilePath: \aircityinit\src\tools\Event.js
- */
 // import {useDialogStore} from "@/stores/dialog";
 
 import { useDialogStore } from '@/stores/dialog'

@@ -1,11 +1,3 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 06:07:22
- * @LastEditors: viola
- * @LastEditTime: 2025-05-22 16:30:47
- * @FilePath: \code\src\components\headerlink\index__.vue
- * @Description: 
--->
 
 <!-- footer -->
 <template>

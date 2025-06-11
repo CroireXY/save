@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 09:31:19
- * @LastEditors: viola
- * @LastEditTime: 2025-06-09 15:57:26
- * @FilePath: \code\src\stores\animate.ts
- */
 
 // @ts-check
 import { defineStore } from "pinia";

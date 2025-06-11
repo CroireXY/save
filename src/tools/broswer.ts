@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 06:14:25
- * @LastEditors: viola
- * @LastEditTime: 2025-05-22 11:30:17
- * @FilePath: \code\src\tools\broswer.ts
- */
 
 export const getExplorerInfo = () => {
 	const t: any = navigator.userAgent.toLowerCase();

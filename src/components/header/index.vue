@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-06-11 15:52:52
+ * @LastEditTime: 2025-06-11 16:39:23
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\header\index.vue
@@ -26,10 +26,12 @@
         </span>
       </div> -->
     </div>
-
-    <div class="logo">
-      <div class="tit" @click="reset">香港低空飛行服務平臺</div>
+    
+    <div class="logo" @click="reset">
+      <img src="@/assets/icons/buttons/titlename.png" alt="香港低空飛行服務平臺" class="title-img" />
     </div>
+
+
 
     <div class="info-right">
       <div class="tool">
@@ -306,16 +308,17 @@ onUnmounted(() => {
   z-index: 10;
   &::after {
     content: "";
-    position: relative;
+    position: absolute;
     justify-content: center;
-    left: 0;
     @include hTop(-31);
-    right: 0;
-    bottom: 0;
-    // width: 50%;
-    height: 100%;
+    // right: 0;
+    // bottom: 0;
+    // width: 100%;
+
+@include Width(1364);    // height: 100%;
     // width: 1364;
-    @include Width(1364);
+    // @include Width(1364);
+    @include wHeight(140);
     // height: 139;
     // top: -31px;
     // left: 658px;
@@ -360,7 +363,7 @@ onUnmounted(() => {
     z-index: 1;
 
     .tit {
-      @include FontSize(24);
+      @include FontSize(32);
       @include LetterSpacing(3);
       @include hHeight(60);
       @include LineHeight(45);

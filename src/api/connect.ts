@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-10-14 11:58:49
- * @LastEditTime: 2025-05-22 15:16:21
- * @LastEditors: viola
- * @Description: In User Settings Edit
- * @FilePath: \code\src\api\connect.ts
- */
 // import axios from "@/http/HTTP";
 // import {Mock, Service} from "@/http/service";
 

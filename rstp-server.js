@@ -2,14 +2,15 @@
  * @Author: Sun ruiqi
  * @Date: 2025-06-06 10:48:21
  * @LastEditors: viola
- * @LastEditTime: 2025-06-10 11:57:16
+ * @LastEditTime: 2025-06-11 16:21:19
  * @FilePath: \code\rstp-server.js
  */
 const Stream = require("node-rtsp-stream");
 
 stream = new Stream({
   name: "camera1",
-  streamUrl: "rtsp://lae.lscm.hk:8554/live2",
+  streamUrl: "rtmp://lae.lscm.hk:1935/live5",
+  // streamUrl: "rtmp://lae.lscm.hk:8554/live2",
   wsPort: 9999, // WebSocket 端口
   ffmpegOptions: {
     "-stats": "",

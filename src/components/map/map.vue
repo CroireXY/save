@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-15 17:00:08
  * @LastEditors: viola
- * @LastEditTime: 2025-06-10 12:03:28
+ * @LastEditTime: 2025-06-11 16:23:08
  * @FilePath: \code\src\components\map\map.vue
 -->
 <!-- 加载视频流组件 -->
@@ -306,7 +306,7 @@ async function onFlightPathShowChanged(value: boolean) {
       //   }
       // );
       // const res = await fetchWithAuth( "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250401000000&etime=20250530235959&recordId=1");
-      const res = await fetchWithAuth('http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250401000000&etime=20250530235959&recordId=1');//一条往返数据
+      const res = await fetchWithAuth('http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250610000000&etime=20250610235959&recordId=1');//一条往返数据
                
       const data = await res.data;
       if (data.responseCode !== 200 || !Array.isArray(data.body)) {

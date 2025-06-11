@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2022-03-30 10:07:00
- * @LastEditTime: 2022-10-14 18:14:57
- * @LastEditors: 张祥 zhangxiang@sidri.com
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWEEKLY_ZHGK\src\components\tools\layerTree.vue
--->
 <!-- 图层树组件 -->
 <template>
   <div @click.stop="clearstyle" id="layertree" v-drag>

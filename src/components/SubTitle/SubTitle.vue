@@ -1,10 +1,3 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 09:31:19
- * @LastEditors: viola
- * @LastEditTime: 2025-06-02 10:59:59
- * @FilePath: \code\src\components\SubTitle\SubTitle.vue
--->
 <template>
   <div class="sub-title">
     {{ titleText }}

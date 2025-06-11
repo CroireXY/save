@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-10-21 17:38:35
- * @LastEditTime: 2022-05-30 20:35:51
- * @LastEditors: 张祥 17839092765@163.com
- * @Description: In User Settings Edit
- * @FilePath: \vue-ts\src\AirCity.d.ts
- */
 
 declare let AirCityPlayer: any;
 declare let $: any;

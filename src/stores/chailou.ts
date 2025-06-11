@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2022-03-12 14:06:05
- * @LastEditTime: 2022-03-12 15:39:40
- * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWEEKLY_ZHJT\src\stores\chailou.ts
- */
 // @ts-check
 import {ChaiLou} from "@/utils/chailou";
 import {message} from "ant-design-vue";

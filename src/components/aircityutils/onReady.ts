@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-08-30 15:24:44
- * @LastEditTime: 2022-05-11 09:22:59
- * @LastEditors: 张祥 17839092765@163.com
- * @Description: In User Settings Edit
- * @FilePath: \aircityinit\src\AirCityUtils\onReady.js
- */
 import { useAirCityStore } from "@/stores/aircity";
 import { useDialogStore } from "@/stores/dialog";
 import { useToolsStore } from "@/stores/tools";

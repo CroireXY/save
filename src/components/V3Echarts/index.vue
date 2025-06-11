@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2022-02-25 05:56:18
- * @LastEditTime: 2022-05-31 18:28:32
- * @LastEditors: 张祥 17839092765@163.com
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \DTSWeekly_zhyq\src\components\V3Echarts\index.vue
--->
 <template>
   <div class="container" :id="container" ref="chartRef"></div>
 </template>
