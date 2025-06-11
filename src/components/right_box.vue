@@ -28,7 +28,7 @@ const animate = computed(() => animatestore.$state.Animate);
   @include Width(560);
   height: 100%;
   @include Right(0);
-   @include Top(0);
+   @include Top(20);
   z-index: 9;
 
   background-image: linear-gradient(

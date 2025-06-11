@@ -29,7 +29,7 @@ const animate = computed(() => animatestore.$state.Animate);
   // background: url("~@/assets/images/基础/left_bg_dark@2x.png") no-repeat;
   // background-size: 100% 100%;
   // background-image: linear-gradient(to right, #021f2f, #021f2f05);
-  @include Top(0);
+  @include Top(20);
   @include Left(0);
   box-sizing: border-box;
   @include Padding(44, 24, 0, 24);

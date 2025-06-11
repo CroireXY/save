@@ -18,10 +18,12 @@
         </span>
       </div> -->
     </div>
-
-    <div class="logo">
-      <div class="tit" @click="reset">香港低空飛行服務平臺</div>
+    
+    <div class="logo" @click="reset">
+      <img src="@/assets/icons/buttons/titlename.png" alt="香港低空飛行服務平臺" class="title-img" />
     </div>
+
+
 
     <div class="info-right">
       <div class="tool">
@@ -297,17 +299,17 @@ onUnmounted(() => {
   z-index: 10;
   &::after {
     content: "";
-    position: relative;
+    position: absolute;
     justify-content: center;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    // width: 50%;
+    width: 100%;
     // height: 100%;
     // width: 1364;
-    @include Width(1364);
-    @include wHeight(150);
+    // @include Width(1364);
+    @include wHeight(140);
     // height: 139;
     // top: -31px;
     // left: 658px;
@@ -343,7 +345,7 @@ onUnmounted(() => {
     position: absolute;
     @include Left(0);
     right: 0;
-    top: 0;
+    @include Top(20);
     display: flex;
     margin: auto;
     flex-direction: column;
