@@ -1,202 +1,161 @@
 <template>
-  <div class="box">
-    <!-- <div class="tab">
-      <template v-for="item in tabList" :key="item.id">
-        <div
-          :class="[
-            item.id == TabCurrentIndex ? 'tabname tabActive' : 'tabname',
-          ]"
-          @click="TabClickEvent(item.id)"
-        >
-          {{ item.tabName }}
-        </div>
-      </template>
-    </div> -->
-
-    <div class="content">
-      <div class="title">
-        <span>飞行器名称</span>
-        <span>飞行器注册人</span>
-        <span>飞行器种类</span>
+  <div class="video-wrapper">
+    <!-- 左边视频框 -->
+    <div class="video-box">
+      <div v-if="!showVideoLeft" class="video-info">
+        <p class="num">{{ leftCount }}</p>
+        <p class="desc">{{ leftLabel }}</p>
+        <p class="view" @click="showVideoLeft = true">详情速览</p>
       </div>
-      <div class="list">
-        <Vue3SeamlessScroll
-          :singleWaitTime="1500"
-          :singleHeight="70"
-          hover
-          :list="firmlist"
-        >
-          <template v-for="item in firmlist" :key="item.id">
-            <div class="item">
-              <span>{{ item.name }}</span>
-              <span>{{ item.nature }}</span>
-              <span>{{ item.money }}</span>
-            </div>
-          </template>
-        </Vue3SeamlessScroll>
+      <div v-else class="video-canvas">
+        <button class="close-button" @click="showVideoLeft = false">×</button>
+        <canvas ref="canvasRefLeft"></canvas>
+      </div>
+    </div>
+
+    <!-- 右边视频框 -->
+    <div class="video-box">
+      <div v-if="!showVideoRight" class="video-info">
+        <p class="num">{{ rightCount }}</p>
+        <p class="desc">{{ rightLabel }}</p>
+        <p class="view" @click="showVideoRight = true">详情速览</p>
+      </div>
+      <div v-else class="video-canvas">
+        <button class="close-button" @click="showVideoRight = false">×</button>
+        <canvas ref="canvasRefRight"></canvas>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from "vue";
-import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
+<script setup lang="ts">
+import { ref, watch } from 'vue';
 
-let TabCurrentIndex = ref(1);
-const tabList = [
-  {
-    id: 1,
-    tabName: "飞行器信息",
-  },
-  {
-    id: 2,
-    tabName: "航线信息",
-  },
-];
-const TabClickEvent = (id: number) => (TabCurrentIndex.value = id);
+const showVideoLeft = ref(false);
+const showVideoRight = ref(false);
 
-const firmlist = ref([
-  {
-    id: 1,
-    name: "DJI1",
-    nature: "A",
-    money: "",
-  },
-  {
-    id: 2,
-    name: "DJI2",
-    nature: "B",
-    money: "",
-  },
-  {
-    id: 3,
-    name: "DJI3",
-    nature: "C",
-    money: "1",
-  },
-  {
-    id: 4,
-    name: "DJI4",
-    nature: "D",
-    money: "1",
-  },
-  {
-    id: 5,
-    name: "DJI5",
-    nature: "E",
-    money: "",
-  },
- 
-]);
+const leftCount = ref('14个');
+const leftLabel = ref('可用起降场');
+const rightCount = ref('20条');
+const rightLabel = ref('无人机航线');
+
+const canvasRefLeft = ref(null);
+const canvasRefRight = ref(null);
+
+let playerLeft: any = null;
+let playerRight: any = null;
+
+watch(showVideoLeft, (val) => {
+  if (val && canvasRefLeft.value && !playerLeft) {
+    const script = document.createElement('script');
+    script.src = '/js/jsmpeg.min.js';
+    script.onload = () => {
+      playerLeft = new (window as any).JSMpeg.Player('ws://127.0.0.1:9999', {
+        canvas: canvasRefLeft.value,
+        autoplay: true,
+        audio: false,
+        loop: true,
+      });
+    };
+    document.body.appendChild(script);
+  }
+});
+
+watch(showVideoRight, (val) => {
+  if (val && canvasRefRight.value && !playerRight) {
+    const script = document.createElement('script');
+    script.src = '/js/jsmpeg.min.js';
+    script.onload = () => {
+      playerRight = new (window as any).JSMpeg.Player('ws://127.0.0.1:9999', {
+        canvas: canvasRefRight.value,
+        autoplay: true,
+        audio: false,
+        loop: true,
+      });
+    };
+    document.body.appendChild(script);
+  }
+});
 </script>
 
 <style lang="scss" scoped>
-.box {
-  @include boxWidth(510);
-  @include boxhHeight(750);
+.video-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   box-sizing: border-box;
+  @include boxhHeight(150); 
   @include Padding(10, 10, 10, 10);
+}
+
+.video-box {
+  width: 49%;
+  height: 100%;
   position: relative;
-  .tab {
-    width: 100%;
-    @include wHeight(24);
-    @include LineHeight(24);
-    display: flex;
-    justify-content: space-between;
-    @include MarginTop(5);
-    @include MarginBottom(10);
-    .tabname {
-      @include Width(235);
-      @include wHeight(24);
-      @include LineHeight(24);
-      background-color: #124563;
-      color: rgba(255, 255, 255, 0.78);
-      text-align: center;
-      @include BorderRadius(4);
-      position: relative;
-      cursor: pointer;
-      &:nth-child(1) {
-        &:after {
-          content: "";
-          position: absolute;
-          @include Right(-10);
-          @include Width(1);
-          @include wHeight(12);
-          @include Top(6);
-          background-color: rgba(255, 255, 255, 0.8);
-        }
-      }
-    }
-    .tabActive {
-      background-color: #127aac;
-      color: rgba(255, 255, 255, 1);
-    }
+  border: 1.5px solid #58A8CB;
+  border-radius: 3px;
+  box-shadow: 0 0 8px rgba(0, 0, 50, 0.5);
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-info {
+  text-align: center;
+  color: #ffffff;
+  width: 100%;
+
+  .num {
+    @include FontSize(22);
+    font-weight: bold;
+    margin-bottom: 6px;
   }
 
-  .content {
-    width: 100%;
-    @include wHeight(150);
-    .title {
-      width: 100%;
-      @include wHeight(26);
-      @include LineHeight(26);
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      span {
-        display: inline-block;
-        @include wHeight(26);
-        color: rgba(255, 255, 255, 0.7);
-        @include LineHeight(26);
-        &:nth-child(1) {
-          @include Width(227);
-          text-align: left;
-        }
-        &:nth-child(2) {
-          @include Width(130);
-          text-align: center;
-        }
-        &:nth-child(3) {
-          @include Width(130);
-          text-align: center;
-        }
-      }
-    }
-    .list {
-      width: 100%;
-      @include wHeight(150);
-      overflow-y: scroll;
-      .item {
-        width: 100%;
-        @include wHeight(50);
-        @include LineHeight(50);
-        cursor: pointer;
-        span {
-          display: inline-block;
-          @include wHeight(50);
-          @include LineHeight(50);
-          &:nth-child(1) {
-            @include Width(227);
-            text-align: left;
-          }
-          &:nth-child(2) {
-            @include Width(130);
-            text-align: center;
-          }
-          &:nth-child(3) {
-            @include Width(130);
-            text-align: center;
-          }
-        }
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.05);
-        }
-      }
+  .desc {
+    @include FontSize(14);
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+
+  .view {
+    @include FontSize(14);
+    color: #00e4ff;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+    &:hover {
+      color: #fff;
     }
   }
 }
-::-webkit-scrollbar {
-  @include Width(0.5);
-  @include hHeight(0.5);
+
+.video-canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
 }
 </style>

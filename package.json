@@ -6,8 +6,8 @@
   "scripts": {
     "serve": "node ./scripts/prepare.js serve",
     "build": "node ./scripts/prepare.js build",
-    "serve17": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
-    "build17": "SET NODE_OPTIONS=--openssl-legacy-provider &&  vue-cli-service build",
+    "serve17": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "build17": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
     "serve14": "vue-cli-service serve",
     "build14": "vue-cli-service build",
     "test:unit": "jest"

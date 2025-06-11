@@ -23,17 +23,17 @@
   </Left_box>
   <Right_box>
     <Lease_title>數據統計</Lease_title>
-    <Box height="300">
+    <Box height="200">
       <alldata />
     </Box>
 
     <Lease_title>飞行任务性质</Lease_title>
-    <Box height="400">
+    <Box height="450">
       <flight_type />
     </Box>
 
-    <Lease_title>飞行任务详情</Lease_title>
-    <Box height="180">
+    <Lease_title>起降場及航線信息總覽</Lease_title>
+    <Box height="200">
       <fourVue />
     </Box>
   </Right_box>

@@ -1,87 +1,125 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-23 14:26:03
- * @LastEditors: viola
- * @LastEditTime: 2025-06-02 14:53:43
- * @FilePath: \code\src\Views\home\cityAppearance\component\flight_type.vue
--->
 <template>
   <div class="box">
-      <SubTitle title-text="飛行任務性質"></SubTitle>
-        <V3Echarts :options="option" :height="425"/>
+    <V3Echarts :options="option" :height="425" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
 import V3Echarts from "@/components/V3Echarts/index.vue";
 
-import SubTitle from "@/components/SubTitle/SubTitle.vue";
 const pieData = [
-  { value: 335, name: '货物运输' },
-  { value: 310, name: '应急物资投递' },
-  { value: 234, name: '表演飞行' },
-  { value: 135, name: '空中巡查' },
-  { value: 154, name: '个人娱乐' },
-  { value: 100, name: '其他' }
+  {
+    value: 45,
+    name: '物流运输',
+    itemStyle: {
+      color: {
+        type: 'linear',
+        x: 1, y: 0, x2: 0, y2: 0,
+        colorStops: [
+          { offset: 0, color: 'rgba(79, 142, 255, 0.3)' },
+          { offset: 1, color: 'rgba(79, 142, 255, 1)' }
+        ]
+      }
+    }
+  },
+  {
+    value: 15,
+    name: '表演飞行',
+    itemStyle: {
+      color: {
+        type: 'linear',
+        x: 1, y: 0, x2: 0, y2: 0,
+        colorStops: [
+          { offset: 0, color: 'rgba(0, 207, 255, 0.3)' },
+          { offset: 1, color: 'rgba(0, 207, 255, 1)' }
+        ]
+      }
+    }
+  },
+  {
+    value: 15,
+    name: '个人娱乐',
+    itemStyle: {
+      color: {
+        type: 'linear',
+        x: 1, y: 0, x2: 0, y2: 0,
+        colorStops: [
+          { offset: 0, color: 'rgba(60, 92, 209, 0.3)' },
+          { offset: 1, color: 'rgba(60, 92, 209, 1)' }
+        ]
+      }
+    }
+  },
+  {
+    value: 25,
+    name: '城市巡检',
+    itemStyle: {
+      color: {
+        type: 'linear',
+        x: 1, y: 0, x2: 0, y2: 0,
+        colorStops: [
+          { offset: 0, color: 'rgba(151, 191, 255, 0.3)' },
+          { offset: 1, color: 'rgba(151, 191, 255, 1)' }
+        ]
+      }
+    }
+  },
+  {
+    value: 0,
+    name: '其他',
+    itemStyle: {
+      color: {
+        type: 'linear',
+        x: 1, y: 0, x2: 0, y2: 0,
+        colorStops: [
+          { offset: 0, color: 'rgba(106, 209, 255, 0.3)' },
+          { offset: 1, color: 'rgba(106, 209, 255, 1)' }
+        ]
+      }
+    }
+  }
 ];
+
+
+const total = pieData.reduce((sum, item) => sum + item.value, 0);
+
+// ECharts 配置
 const option = {
-//   backgroundColor: '#101736', // 深蓝色底色
-  color: [
-    '#4F8EFF', // 明亮蓝
-  '#00CFFF', // 青蓝
-  '#3C5CD1', // 靛青
-  '#97BFFF', // 浅蓝
-  '#2753A7', // 深蓝
-  '#6AD1FF'  // 湖蓝
-],
-  
-//   title: {
-//     // text: '飞行活动分类统计',
-//     left: 'center',
-//     top: 20,
-//     textStyle: {
-//       color: '#fff',
-//       fontSize: 20
-//     }
-//   },
   tooltip: {
     trigger: 'item',
     formatter: '{b} : {c} ({d}%)'
   },
-//   legend: {
-//     orient: 'vertical',
-//     left: 3, // 或 40，单位像素，让图例离左侧边远一点
-//     data: ['货物运输', '应急物资投递', '表演飞行', '空中巡查', '个人娱乐', '其他'],
-//     textStyle: {
-//       fontSize: 14,
-//       color: '#fff'
-//     }
-//   },
+  legend: {
+    orient: 'vertical',
+    top: '58%',
+    left: 'center',
+    itemWidth: 12,
+    itemHeight: 12,
+    textStyle: {
+      fontSize: 12,
+      color: '#ffffff'
+    },
+    formatter(name: string) {
+      const item = pieData.find(i => i.name === name);
+      const percent = item && total ? ((item.value / total) * 100).toFixed(0) : 0;
+      return `${name} ${percent}%`;
+    },
+    data: pieData.map(i => i.name)
+  },
   series: [
     {
       name: '活动类别',
       type: 'pie',
-      radius: '35%',
-      center: ['50%', '50%'],
-      data: [
-        { value: 335, name: '货物运输' },
-        { value: 310, name: '应急物资投递' },
-        { value: 234, name: '表演飞行' },
-        { value: 135, name: '空中巡查' },
-        { value: 154, name: '个人娱乐' },
-        { value: 100, name: '其他' }
-      ],
-      label: {
-        formatter: '{b}: {c} ({d}%)',
-        fontSize: '0.8rem',
-        color: '#fff'
-      },
+      radius: ['30%', '50%'],
+      center: ['50%', '30%'], 
+      data: pieData,
+      label: { show: false },
+      labelLine: { show: false },
       emphasis: {
         itemStyle: {
-          shadowBlur: 10,
+          shadowBlur: 8,
           shadowOffsetX: 0,
-          shadowColor: 'rgba(0, 0, 0, 0.5)'
+          shadowColor: 'rgba(0, 0, 0, 0.3)'
         }
       }
     }
