@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-06-11 16:39:23
+ * @LastEditTime: 2025-06-11 17:42:32
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\header\index.vue
@@ -26,12 +26,14 @@
         </span>
       </div> -->
     </div>
-    
-    <div class="logo" @click="reset">
-      <img src="@/assets/icons/buttons/titlename.png" alt="香港低空飛行服務平臺" class="title-img" />
-    </div>
 
-
+    <!-- <div class="logo" @click="reset"> -->
+      <img
+        src="@/assets/icons/buttons/titlename.png"
+        alt="香港低空飛行服務平臺"
+         class="logo"
+      />
+    <!-- </div> -->
 
     <div class="info-right">
       <div class="tool">
@@ -144,7 +146,6 @@
       </div>
     </div>
   </div>
- 
 </template>
 
 <script lang="ts" setup>
@@ -282,7 +283,6 @@ let WeatherData = ref({
 
 let timer = ref();
 onMounted(async () => {
-
   // await getWeatherData();
 });
 onUnmounted(() => {
@@ -295,14 +295,13 @@ onUnmounted(() => {
   font-size: inherit;
 }
 .header {
-  position: relative;
+  position: absolute;
   display: flex;
   align-items: center;
-  // background-color: radial-gradient(#0a2b44, transparent);
   width: 100%;
-  @include hHeight(139);
- 
-  
+  top:0;
+  @include hHeight(140);
+
   justify-content: center;
   @include FontSize(12);
   z-index: 10;
@@ -310,23 +309,14 @@ onUnmounted(() => {
     content: "";
     position: absolute;
     justify-content: center;
-    @include hTop(-31);
-    // right: 0;
-    // bottom: 0;
-    // width: 100%;
 
-@include Width(1364);    // height: 100%;
-    // width: 1364;
-    // @include Width(1364);
+    width: 100%;
+    top:0;
+    // @include Top
+
     @include wHeight(140);
-    // height: 139;
-    // top: -31px;
-    // left: 658px;
-    // border-radius: 10px;
-    // border-width: 3px;
-// background: #0a2b4499;
-// opacity: 0.7;
-    background: url("~@/assets/componentCard/header2.png") no-repeat;
+
+    background: url("~@/assets/componentCard/header3.png") no-repeat;
     background-size: 100% 100%;
     opacity: 0.99;
     z-index: 0;
@@ -345,27 +335,27 @@ onUnmounted(() => {
     }
   }
 
-
   .logo {
-    @include Width(400);
-    @include hHeight(139);
-     @include hTop(-31);
+    @include Width(500);
+   height: auto;
+   top:0;
+    
     text-align: center;
     position: absolute;
-    @include Left(0);
-    right: 0;
    
     display: flex;
-    margin: auto;
-    flex-direction: column;
+   
     justify-content: center;
-    cursor: pointer;
+    // cursor: pointer;
     z-index: 1;
+    .title-img {
+    
+    }
 
     .tit {
       @include FontSize(32);
       @include LetterSpacing(3);
-      @include hHeight(60);
+      // @include hHeight(60);
       @include LineHeight(45);
       font-family: Oppo, serif;
       font-weight: 600;

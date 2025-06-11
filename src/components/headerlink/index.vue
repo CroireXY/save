@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-03-13 23:28:11
- * @LastEditTime: 2025-06-11 16:20:54
+ * @LastEditTime: 2025-06-11 17:56:59
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\headerlink\index.vue
@@ -95,8 +95,9 @@ onMounted(() => {
     bottom: 0px; 
     left: 0;
     width: 100%;
-    height: 60px; 
-    background: url("~@/assets/icons/buttons/bottombg.png") no-repeat center bottom;
+    height: 90px; 
+    
+    background: url("~@/assets/componentCard/footer.png") no-repeat center bottom;
     background-size: 100% 100%; 
     z-index: 1;
     opacity: 0.6;
@@ -109,7 +110,7 @@ onMounted(() => {
     transform: translateX(-50%);
     @include Width(1364);
     @include wHeight(80);
-    background: url("~@/assets/icons/buttons/bottombuttonbg.png") no-repeat center center;
+    // background: url("~@/assets/componentCard/footer.png") no-repeat center center;
     background-size: 100% 100%;
     z-index: 2;
   }

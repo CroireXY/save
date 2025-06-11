@@ -132,7 +132,7 @@ onUnmounted(() => {
 .container {
   @include boxWidth(v-bind("props.width"));
 
-  @include boxhHeight(v-bind("props.height"));
+  @include boxwHeight(v-bind("props.height"));
 
   @include boxMarginTop(v-bind("props.top"));
   //   background: #000;

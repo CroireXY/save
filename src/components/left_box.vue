@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-22 22:38:25
- * @LastEditTime: 2025-06-11 16:21:53
+ * @LastEditTime: 2025-06-11 17:13:22
  * @LastEditors: viola
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: \code\src\components\left_box.vue
@@ -40,8 +40,8 @@ const animate = computed(() => animatestore.$state.Animate);
 
   // background: url("~@/assets/images/基础/left_bg_dark@2x.png") no-repeat;
   // background-size: 100% 100%;
-  background-image: linear-gradient(to right,#0a2b44  ,#0a2b44B3,80%, #0a2b4400) ;
-  @include Top(0);
+  // background-image: linear-gradient(to right,#0a2b44  ,#0a2b44B3,70%, #0a2b4400) ;
+  @include Top(50);
   @include Left(0);
   box-sizing: border-box;
   @include Padding(44, 24, 0, 24);

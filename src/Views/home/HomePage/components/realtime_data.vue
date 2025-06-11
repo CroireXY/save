@@ -2,8 +2,8 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-23 12:04:10
  * @LastEditors: viola
- * @LastEditTime: 2025-06-11 16:23:50
- * @FilePath: \code\src\Views\home\cityAppearance\component\realtime_data.vue
+ * @LastEditTime: 2025-06-11 17:50:54
+ * @FilePath: \code\src\Views\home\HomePage\components\realtime_data.vue
 -->
 <!-- <template>
   <div class="box">
@@ -132,13 +132,7 @@ const infoList = [
     @include Padding(10, 0, 0, 10);
     border-radius: 20px;
     cursor: pointer;
-    border-image: linear-gradient(
-      332.79deg,
-      #1e7fc8 27.72%,
-      #e1e1e1 39.39%,
-      #1de8f8 53.84%,
-      #1e7fc8 65.1%
-    );
+    border-image:'~@/assets/icons/smaller_icon/small_header.jpg' ;
     border-image-slice: 1;
 
     // &:hover {
@@ -153,7 +147,7 @@ const infoList = [
        padding-left: 20px;
     }
     &:nth-child(2) {
-      padding-left: 40px;
+      padding-left: 20px;
       border-right: 1px solid transparent;
       border-top: 1px solid transparent;
     }
@@ -167,7 +161,7 @@ const infoList = [
       border-bottom: 1px solid transparent;
     }
     &:nth-child(4) {
-      padding-left: 40px;
+      padding-left: 20px;
       //  border-right: 1px solid transparent;
       //   border-bottom: 1px solid transparent;
     }
@@ -181,13 +175,19 @@ const infoList = [
 
       transition: box-shadow 0.3s ease;
       @include PaddingLeft(110);
+      .icon{
+        margin-left:-30px;
+        margin-right: 10px;
+      }
       .wrapper {
         border: none !important;
+       margin-left:-20px;
       }
       // @include MarginBottom(10);
     }
     .icon {
-      @include Width(45);
+      // @include Width(45);
+      flex:1;
       height: auto;
       object-fit: contain; /* 防止拉伸变形 */
       background-image: linear-gradient(to bottom, 50%, #1e7fc8e6, #1de8f8e6);
@@ -201,7 +201,9 @@ const infoList = [
     }
     .wrapper {
       display: flex;
-      @include Width(145);
+      // @include Width(145);
+      flex:1;
+      margin-left:20px;
 
       // flex:2;
       border-image: linear-gradient(

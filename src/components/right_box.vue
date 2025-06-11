@@ -1,3 +1,10 @@
+<!--
+ * @Author: Sun ruiqi
+ * @Date: 2025-05-12 06:16:06
+ * @LastEditors: viola
+ * @LastEditTime: 2025-06-11 17:11:12
+ * @FilePath: \code\src\components\right_box.vue
+-->
 <!-- right_box -->
 <template>
   <transition
@@ -28,7 +35,7 @@ const animate = computed(() => animatestore.$state.Animate);
   @include Width(560);
   height: 100%;
   @include Right(0);
-   @include Top(20);
+   @include Top(50);
   z-index: 9;
 
   background-image: linear-gradient(
