@@ -1,3 +1,4 @@
+<!-- /src/components/Lease_title/index.vue -->
 <template>
   <div class="alease_title_left">
     <div class="title-text">
@@ -10,10 +11,11 @@
 const props = defineProps({
   width: {
     type: Number,
-    default: 560,
+    default: 493,
   },
 });
 </script>
+
 <style lang="scss" scoped>
 .alease_title_left {
   position: relative;
@@ -24,15 +26,16 @@ const props = defineProps({
   justify-content: flex-start;
   align-items: center;
   @include boxWidth(v-bind("props.width"));
-  @include wHeight(40);
+  @include wHeight(64);
   overflow: hidden;
-  background-image:  linear-gradient(to right, #266dab, #29455d);
-  // background: url("~@/assets/images/wisdom/title.png") no-repeat;
-  //  background: url("~@/assets/componentCard/title.png") no-repeat;
+  background-image: linear-gradient(to right, #266dab, #29455d);
+  border-radius: 3px;
 
-  // background-size: 90% 100%;
-  background-position: 5%;
-  // text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  clip-path: polygon(
+    12px 0%, 100% 0%, 100% 12px,
+    100% calc(100% - 12px), calc(100% - 12px) 100%,
+    0% 100%, 0% 12px
+  );
 
   &::after {
     content: "";
@@ -41,9 +44,6 @@ const props = defineProps({
     position: absolute;
     left: 0;
     top: 0;
-    //  background: #021f2fc7;
-    // background:#113648;
-    // background-image: radial-gradient(#0a2a43, #0a2a43B3, #0a2a4366);
     opacity: 0.8;
     z-index: -1;
   }
@@ -57,4 +57,5 @@ const props = defineProps({
     font-style: italic;
   }
 }
+
 </style>

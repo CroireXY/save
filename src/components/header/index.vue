@@ -29,7 +29,7 @@
 
     <!-- <div class="logo" @click="reset"> -->
       <img
-        src="@/assets/icons/buttons/titlename.png"
+        src="@/assets/icons/oldversion/titlename.png"
         alt="香港低空飛行服務平臺"
          class="logo"
       />

@@ -1,43 +1,46 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-06-11 16:17:04
- * @LastEditors: viola
- * @LastEditTime: 2025-06-12 11:19:39
- * @FilePath: \code\src\Views\home\HomePage\index.vue
--->
+<!-- \code\src\Views\home\HomePage\index.vue -->
 <template>
-    <!-- <div> -->
-    <Left_box>
-      <!-- 243 -->
-       <weatherCard :date="date" :day="day" :time="time" />
-  
+<Left_box>
+  <weatherCard :date="date" :day="day" :time="time" />
+
+  <Box direction="left" height="573" width="512">
+    <template #title>
       <Lease_title>今日實況</Lease_title>
-      <Box direction="left" height="464" width="560">
-      <TodayLive />
-    </Box>
-  
+    </template>
+    <TodayLive />
+  </Box>
+
+  <Box direction="left" height="573" width="512">
+    <template #title>
       <Lease_title>7日歷史數據</Lease_title>
-      <Box direction="left" height="650" width="560">
-        <SevenDayHistory />
-      </Box>
-    </Left_box>
-    <Right_box>
+    </template>
+    <SevenDayHistory />
+  </Box>
+</Left_box>
+
+<Right_box>
+  <Box direction="right" height="367" width="512">
+    <template #title>
       <Lease_title>數據統計</Lease_title>
-      <Box height="268">
-        <DataStatistics />
-      </Box>
-  
+    </template>
+    <DataStatistics />
+  </Box>
+
+  <Box direction="right" height="702" width="512">
+    <template #title>
       <Lease_title>飞行任务性质</Lease_title>
-      <Box height="650" width="560">
-        <FlightTaskNature />
-      </Box>
-  
+    </template>
+    <FlightTaskNature />
+  </Box>
+
+  <Box direction="right" height="337" width="512">
+    <template #title>
       <Lease_title>起降場及航線信息總覽</Lease_title>
-      <Box height="400">
-        <TakeoffLandingOverview />
-      </Box>
-    </Right_box>
-    <!-- </div> -->
+    </template>
+    <TakeoffLandingOverview />
+  </Box>
+</Right_box>
+
   </template>
   
   <script lang="ts" setup>
