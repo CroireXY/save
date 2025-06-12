@@ -2,8 +2,7 @@ const Stream = require("node-rtsp-stream");
 
 stream = new Stream({
   name: "camera1",
-  streamUrl: "rtmp://lae.lscm.hk:1935/live5",
-  // streamUrl: "rtmp://lae.lscm.hk:8554/live2",
+  streamUrl: "rtmp://lae.lscm.hk:8554/live2",
   wsPort: 9999, // WebSocket 端口
   ffmpegOptions: {
     "-stats": "",
