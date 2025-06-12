@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-23 12:04:10
  * @LastEditors: viola
- * @LastEditTime: 2025-06-12 00:31:55
+ * @LastEditTime: 2025-06-12 10:49:19
  * @FilePath: \code\src\Views\home\HomePage\components\realtime_data.vue
 -->
 <!-- <template>

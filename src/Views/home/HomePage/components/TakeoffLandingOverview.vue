@@ -5,7 +5,7 @@
         <div v-if="!showVideoLeft" class="video-info">
           <p class="num">{{ leftCount }}</p>
           <p class="desc">{{ leftLabel }}</p>
-          <p class="view" @click="showVideoLeft = true">详情速览</p>
+          <p class="view" @click="showBottomVideo = true">详情速览</p>
         </div>
         <div v-else class="video-canvas">
           <button class="close-button" @click="showVideoLeft = false">×</button>
@@ -18,7 +18,7 @@
         <div v-if="!showVideoRight" class="video-info">
           <p class="num">{{ rightCount }}</p>
           <p class="desc">{{ rightLabel }}</p>
-          <p class="view" @click="showVideoRight = true">详情速览</p>
+          <p class="view" @click="showBottomVideo = true">详情速览</p>
         </div>
         <div v-else class="video-canvas">
           <button class="close-button" @click="showVideoRight = false">×</button>
@@ -26,11 +26,15 @@
         </div>
       </div>
     </div>
+    <VideoPlayer :visible="showBottomVideo" @update:visible="showBottomVideo = $event" />
   </template>
   
   <script setup lang="ts">
   import { ref, watch } from 'vue';
-  
+  import VideoPlayer from './VideoPlayer.vue';
+
+  const showBottomVideo = ref(false); 
+
   const showVideoLeft = ref(false);
   const showVideoRight = ref(false);
   
@@ -45,37 +49,46 @@
   let playerLeft: any = null;
   let playerRight: any = null;
   
-  watch(showVideoLeft, (val) => {
-    if (val && canvasRefLeft.value && !playerLeft) {
-      const script = document.createElement('script');
-      script.src = '/js/jsmpeg.min.js';
-      script.onload = () => {
-        playerLeft = new (window as any).JSMpeg.Player('ws://127.0.0.1:9999', {
-          canvas: canvasRefLeft.value,
-          autoplay: true,
-          audio: false,
-          loop: true,
-        });
-      };
-      document.body.appendChild(script);
-    }
-  });
-  
-  watch(showVideoRight, (val) => {
-    if (val && canvasRefRight.value && !playerRight) {
-      const script = document.createElement('script');
-      script.src = '/js/jsmpeg.min.js';
-      script.onload = () => {
-        playerRight = new (window as any).JSMpeg.Player('ws://127.0.0.1:9999', {
-          canvas: canvasRefRight.value,
-          autoplay: true,
-          audio: false,
-          loop: true,
-        });
-      };
-      document.body.appendChild(script);
-    }
-  });
+// 顶部添加
+let jsmpegLoaded = false
+
+function loadJSMpeg(callback) {
+  if (jsmpegLoaded) {
+    callback()
+    return
+  }
+
+  const script = document.createElement('script')
+  script.src = '/js/jsmpeg.min.js'
+  script.onload = () => {
+    jsmpegLoaded = true
+    callback()
+  }
+  document.body.appendChild(script)
+}
+
+
+watch(showVideoLeft, (val) => {
+  if (val && canvasRefLeft.value && !playerLeft) {
+    loadJSMpeg(() => {
+      playerLeft = new (window as any).JSMpeg.Player('ws://127.0.0.1:9999', {
+        canvas: canvasRefLeft.value,
+        autoplay: true,
+        audio: false,
+        loop: true
+      })
+    })
+  }
+})
+;
+
+playerRight = new (window as any).JSMpeg.Player('ws://127.0.0.1:9999', {
+  canvas: canvasRefRight.value,
+  autoplay: true,
+  audio: false,
+  loop: true
+})
+
   </script>
   
   <style lang="scss" scoped>

@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-06-11 16:17:04
  * @LastEditors: viola
- * @LastEditTime: 2025-06-12 00:35:20
+ * @LastEditTime: 2025-06-12 10:54:06
  * @FilePath: \code\src\Views\home\HomePage\index.vue
 -->
 <template>
@@ -12,7 +12,7 @@
   
       <Lease_title>今日實況</Lease_title>
       <Box direction="left" height="500" width="560">
-      <realtime_data />
+      <TodayLive />
     </Box>
   
       <Lease_title>7日歷史數據</Lease_title>

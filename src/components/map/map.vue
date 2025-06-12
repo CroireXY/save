@@ -1,10 +1,3 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-15 17:00:08
- * @LastEditors: viola
- * @LastEditTime: 2025-06-11 16:23:08
- * @FilePath: \code\src\components\map\map.vue
--->
 <!-- 加载视频流组件 -->
 <template>
   <div>

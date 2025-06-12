@@ -3,7 +3,7 @@
 
     <Map></Map>
 
-    <VideoPlayer></VideoPlayer>
+    <VideoTest></VideoTest>
 
     <transition
       appear
@@ -105,7 +105,8 @@ import Weather from "@/components/tools/weather.vue";
 import ToolBar from "@/components/tools/toolBar.vue";
 import Build from "@/components/tools/build.vue";
 import mainPanel from "@/Views/home/main/index.vue";
-import VideoPlayer from "@/components/VideoPlayer.vue";
+import VideoPlayer from "@/Views/home/HomePage/components/VideoPlayer.vue";
+import VideoTest from "@/Views/home/HomePage/components/VideoTest.vue";
 
 import { ref } from "vue";
 const isOkRef = ref(false);
