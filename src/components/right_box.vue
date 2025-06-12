@@ -1,10 +1,3 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 06:16:06
- * @LastEditors: viola
- * @LastEditTime: 2025-06-11 17:11:12
- * @FilePath: \code\src\components\right_box.vue
--->
 <!-- right_box -->
 <template>
   <transition

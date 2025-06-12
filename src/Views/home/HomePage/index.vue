@@ -1,10 +1,3 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-06-11 16:17:04
- * @LastEditors: viola
- * @LastEditTime: 2025-06-11 16:49:44
- * @FilePath: \code\src\Views\home\HomePage\index.vue
--->
 <template>
     <!-- <div> -->
     <Left_box>

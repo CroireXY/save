@@ -1,11 +1,3 @@
-<!--
- * @Author: your name
- * @Date: 2022-03-13 23:28:11
- * @LastEditTime: 2025-06-11 17:56:59
- * @LastEditors: viola
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \code\src\components\headerlink\index.vue
--->
 <!-- footer -->
 <template>
   <div class="footer" v-show="UIShow">
@@ -95,25 +87,24 @@ onMounted(() => {
     bottom: 0px; 
     left: 0;
     width: 100%;
-    height: 90px; 
-    
-    background: url("~@/assets/componentCard/footer.png") no-repeat center bottom;
+    @include wHeight(140);
+    background: url("~@/assets/icons/buttons/bottombg.png") no-repeat center bottom;
     background-size: 100% 100%; 
     z-index: 1;
     opacity: 0.6;
   }
 
-  .footer-button-bg {
-    position: absolute;
-    bottom: 0px; 
-    left: 50%;
-    transform: translateX(-50%);
-    @include Width(1364);
-    @include wHeight(80);
-    // background: url("~@/assets/componentCard/footer.png") no-repeat center center;
-    background-size: 100% 100%;
-    z-index: 2;
-  }
+  // .footer-button-bg {
+  //   position: absolute;
+  //   bottom: 0px; 
+  //   left: 50%;
+  //   transform: translateX(-50%);
+  //   @include Width(1364);
+  //   @include wHeight(80);
+  //   background: url("~@/assets/icons/buttons/bottombuttonbg.png") no-repeat center center;
+  //   background-size: 100% 100%;
+  //   z-index: 2;
+  // }
 
   .footer_Box {
     position: absolute;
@@ -130,7 +121,7 @@ onMounted(() => {
       @include wHeight(50);
       @include LineHeight(50);
       @include FontSize(24);
-      color: rgba(255, 255, 255, 0.7);
+      color: #4DE1FF;
       font-weight: bold;
       text-align: center;
       cursor: pointer;
@@ -162,6 +153,5 @@ onMounted(() => {
     pointer-events: auto;
   }
 }
-
 
 </style>

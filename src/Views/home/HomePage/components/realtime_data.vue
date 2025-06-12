@@ -1,10 +1,3 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-23 12:04:10
- * @LastEditors: viola
- * @LastEditTime: 2025-06-11 17:50:54
- * @FilePath: \code\src\Views\home\HomePage\components\realtime_data.vue
--->
 <!-- <template>
   <div class="box">
     <SubTitle title-text="今日實況"></SubTitle>
