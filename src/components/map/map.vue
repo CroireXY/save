@@ -299,7 +299,7 @@ async function onFlightPathShowChanged(value: boolean) {
       //   }
       // );
       // const res = await fetchWithAuth( "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250401000000&etime=20250530235959&recordId=1");
-      const res = await fetchWithAuth('http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250610000000&etime=20250610235959&recordId=1');//一条往返数据
+      const res = await fetchWithAuth('http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250510000000&etime=20250610235959&recordId=1');//一条往返数据
                
       const data = await res.data;
       if (data.responseCode !== 200 || !Array.isArray(data.body)) {

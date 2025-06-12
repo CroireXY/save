@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-06-11 16:17:04
  * @LastEditors: viola
- * @LastEditTime: 2025-06-12 11:15:44
+ * @LastEditTime: 2025-06-12 11:19:39
  * @FilePath: \code\src\Views\home\HomePage\index.vue
 -->
 <template>
@@ -28,7 +28,7 @@
       </Box>
   
       <Lease_title>飞行任务性质</Lease_title>
-      <Box height="650">
+      <Box height="650" width="560">
         <FlightTaskNature />
       </Box>
   
