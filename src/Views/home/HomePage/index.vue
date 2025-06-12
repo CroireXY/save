@@ -2,27 +2,28 @@
  * @Author: Sun ruiqi
  * @Date: 2025-06-11 16:17:04
  * @LastEditors: viola
- * @LastEditTime: 2025-06-12 10:54:06
+ * @LastEditTime: 2025-06-12 11:15:44
  * @FilePath: \code\src\Views\home\HomePage\index.vue
 -->
 <template>
     <!-- <div> -->
     <Left_box>
+      <!-- 243 -->
        <weatherCard :date="date" :day="day" :time="time" />
   
       <Lease_title>今日實況</Lease_title>
-      <Box direction="left" height="500" width="560">
+      <Box direction="left" height="464" width="560">
       <TodayLive />
     </Box>
   
       <Lease_title>7日歷史數據</Lease_title>
-      <Box direction="left" height="600" width="560">
+      <Box direction="left" height="650" width="560">
         <SevenDayHistory />
       </Box>
     </Left_box>
     <Right_box>
       <Lease_title>數據統計</Lease_title>
-      <Box height="250">
+      <Box height="268">
         <DataStatistics />
       </Box>
   

@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-      <V3Echarts :options="option" :height="425" />
+      <V3Echarts :options="option" :height="600" />
     </div>
   </template>
   

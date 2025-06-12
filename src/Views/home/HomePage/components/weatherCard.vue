@@ -1,5 +1,5 @@
 <template>
-  <Box class="box0" direction="left" height="200" width="560">
+  <Box class="box0" direction="left" >
     <!-- <div class="bg-box"></div> -->
     <div class="info">
       <div class="time">
@@ -70,8 +70,8 @@ const getIcon = (file: string) => {
 <style lang="scss" scoped>
 .box0 {
   background-image: url("~@/assets/componentCard/time.png") no-repeat;
-  @include Width(560);
-  @include wHeight(217);
+  @include boxWidth(560);
+  @include boxwHeight(243);
   //   background-size: contain;
 
   //   @include wHeight(217);

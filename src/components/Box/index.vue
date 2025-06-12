@@ -1,3 +1,10 @@
+<!--
+ * @Author: Sun ruiqi
+ * @Date: 2025-05-12 09:30:23
+ * @LastEditors: viola
+ * @LastEditTime: 2025-06-12 11:02:15
+ * @FilePath: \code\src\components\Box\index.vue
+-->
 <!-- box     -->
 <template>
   <div class="box" :style="backgroundDirection">
@@ -16,7 +23,7 @@ const backgroundDirection = computed(() => {
   const dir = props.direction === "left" ? "to right" : "to left";
   return {
     // background: `radial-gradient(#0a2a43, #0a2a43B3, #0a2a4366,#0a2a434D)`,
-    // backgroundImage: `linear-gradient(${dir}, #0a2b44, #0a2b44B3, #0a2b4466)`
+    backgroundImage: `linear-gradient(${dir}, #0a2b44, #0a2b44B3, #0a2b4466)`
   };
 });
 </script>
@@ -32,7 +39,7 @@ const backgroundDirection = computed(() => {
   @include hLineHeight(18);
   @include LetterSpacing(0.5);
 
-  background: #0a2b44cc;
+  // background: #0a2b44cc;
   // opacity: 0.7;
   // background-image: linear-gradient(to right,#0a2a43, #0a2a43B3, #0a2a4366);
 }
