@@ -87,7 +87,7 @@ playerRight = new (window as any).JSMpeg.Player('ws://127.0.0.1:9999', {
   autoplay: true,
   audio: false,
   loop: true
-});
+})
 
   </script>
   

@@ -35,8 +35,8 @@ const size = ref({ width: 400, height: 300 })
 
 // 初始位置（右下角偏移）
 const position = ref({
-  left: window.innerWidth * 0.65,
-  top: window.innerHeight * 0.7
+  left: window.innerWidth * 0.6,
+  top: window.innerHeight * 0.6
 })
 
 // 拖动逻辑
@@ -74,10 +74,8 @@ const closeVideo = () => {
 watch(
   () => props.visible,
   (val) => {
-    if (val && canvasRef.value && !player) {
-      const script = document.createElement('script')
-      script.src = '/js/jsmpeg.min.js'
-      script.onload = () => {
+    if (val && canvasRef.value) {
+      const createPlayer = () => {
         player = new window.JSMpeg.Player('ws://127.0.0.1:9999', {
           canvas: canvasRef.value,
           autoplay: true,
@@ -85,7 +83,15 @@ watch(
           loop: true
         })
       }
-      document.body.appendChild(script)
+
+      if (!window.JSMpeg) {
+        const script = document.createElement('script')
+        script.src = '/js/jsmpeg.min.js'
+        script.onload = createPlayer
+        document.body.appendChild(script)
+      } else {
+        createPlayer()
+      }
     }
   }
 )
