@@ -4,12 +4,12 @@
       <Weather :date="date" :day="day" :time="time" />
   
       <Lease_title>今日實況</Lease_title>
-      <Box direction="left" height="300" width="560">
+      <Box direction="left" height="350" width="560">
         <TodayLive />
       </Box>
   
       <Lease_title>7日歷史數據</Lease_title>
-      <Box direction="left" height="400" width="560">
+      <Box direction="left" height="350" width="560">
         <SevenDayHistory />
       </Box>
     </Left_box>
