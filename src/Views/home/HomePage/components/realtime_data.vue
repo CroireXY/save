@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-23 12:04:10
  * @LastEditors: viola
- * @LastEditTime: 2025-06-11 17:50:54
+ * @LastEditTime: 2025-06-12 00:31:55
  * @FilePath: \code\src\Views\home\HomePage\components\realtime_data.vue
 -->
 <!-- <template>
@@ -166,22 +166,24 @@ const infoList = [
       //   border-bottom: 1px solid transparent;
     }
     &:nth-child(5) {
-      @include MarginRight(25);
-      @include MarginLeft(14);
-      @include Width(420);
+      position: relative;
+      // @include MarginBottom(25);
+      // @include MarginLeft(14);
+      @include Width(320);
+      @include Left(244-160);
       border-radius: 20px;
 
       box-shadow: 0 0 10px #e1e1e1, 0 0 20px #1de8f8, 0 0 40px #1e7fc8;
 
       transition: box-shadow 0.3s ease;
-      @include PaddingLeft(110);
+      // @include PaddingLeft(110);
       .icon{
-        margin-left:-30px;
-        margin-right: 10px;
+        // margin-left:-30px;
+        // margin-right: 10px;
       }
       .wrapper {
         border: none !important;
-       margin-left:-20px;
+      //  margin-left:-20px;
       }
       // @include MarginBottom(10);
     }
