@@ -39,7 +39,6 @@ let timermon: any = null
 router.beforeEach((to: any, from, next) => {
     // console.log(to, "tototo");
     // console.log(from, "from");
-
     // if (
     //   ![
     //     // "Expressinterworking",
@@ -49,12 +48,10 @@ router.beforeEach((to: any, from, next) => {
     //     // "ServiceArea",
     //   ].includes(to.name)
     // ) {
-
     // } else {
     //   next();
     // }
     // console.log(to);
-
     const animatestore = useAnimateStore && useAnimateStore()
     animatestore && animatestore.SetAnimate(false)
     timer && clearTimeout(timer)

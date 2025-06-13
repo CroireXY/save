@@ -70,7 +70,7 @@ const getIcon = (file: string) => {
 <style lang="scss" scoped>
 .box0 {
   background-image: url("~@/assets/componentCard/time.png") no-repeat;
-  @include boxWidth(560);
+  @include boxWidth(512);
   @include boxwHeight(243);
   //   background-size: contain;
 

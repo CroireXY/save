@@ -1,4 +1,4 @@
-<!-- right_box -->
+<!-- \code\src\components\right_box.vue-->
 <template>
   <transition
     appear
@@ -33,14 +33,14 @@ const animate = computed(() => animatestore.$state.Animate);
 
   background-image: linear-gradient(
     to left,
-    rgba(0, 0, 0, 0.9) 20%,     
-    rgba(0, 0, 0, 0.8) 40%,  
-    rgba(0, 0, 0, 0.6) 60%, 
+    rgba(0, 0, 0, 0.7) 20%,     
+    rgba(0, 0, 0, 0.6) 50%,  
+    rgba(0, 0, 0, 0.5) 60%, 
     rgba(0, 0, 0, 0.3) 80%,  
     rgba(0, 0, 0, 0.0) 100%  
   );
 
-  @include Padding(44, 30, 20, 60);
+  @include Padding(44, 30, 20, 24);
 
 
   box-sizing: border-box;
@@ -50,6 +50,7 @@ const animate = computed(() => animatestore.$state.Animate);
      box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    transform: translateY(20px);
   }
 }
 </style>

@@ -1,46 +1,61 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 09:30:23
- * @LastEditors: viola
- * @LastEditTime: 2025-06-12 11:02:15
- * @FilePath: \code\src\components\Box\index.vue
--->
-<!-- box     -->
+<!-- /src/components/Box/index.vue -->
 <template>
   <div class="box" :style="backgroundDirection">
-    <slot></slot>
+    <div v-if="$slots.title" class="box-title">
+      <slot name="title" />
+    </div>
+    <div class="box-content">
+      <slot />
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed } from "vue";
+import boxbg from '@/assets/icons/Box/boxbg.png';
+
 const props = defineProps<{
   width?: string;
   height?: string;
-  direction?: "left" | "right";
+  direction?: 'left' | 'right';
 }>();
+
 const backgroundDirection = computed(() => {
-  const dir = props.direction === "left" ? "to right" : "to left";
+  const dir = props.direction === 'left' ? 'to right' : 'to left';
   return {
-    // background: `radial-gradient(#0a2a43, #0a2a43B3, #0a2a4366,#0a2a434D)`,
-    backgroundImage: `linear-gradient(${dir}, #0a2b44, #0a2b44B3, #0a2b4466)`
+    backgroundImage: `url(${boxbg})`,
+    backgroundSize: '100% 100%',
+    backgroundRepeat: 'no-repeat'
   };
 });
 </script>
+
 <style lang="scss" scoped>
 .box {
   position: relative;
+  display: flex;
+  flex-direction: column;
   @include boxWidth(v-bind("props.width"));
-  // @include boxhHeight(v-bind("props.height"));
-  @include boxwHeight(v-bind("props.height"));
+  @include boxhHeight(v-bind("props.height"));
   @include MarginBottom(10);
   @include BorderRadius(2);
   @include FontSize(14);
   @include hLineHeight(18);
   @include LetterSpacing(0.5);
+}
 
-  // background: #0a2b44cc;
-  // opacity: 0.7;
-  // background-image: linear-gradient(to right,#0a2a43, #0a2a43B3, #0a2a4366);
+.box-title {
+  @include wHeight(64); // 保持和 Lease_title 一致高度
+  @include boxWidth(493);
+  display: flex;
+  align-items: flex-start;
+  padding: 15px 0 0 10px; // 向下15px，向右10px
+  box-sizing: border-box;
+}
+
+.box-content {
+  flex: 1;
+  overflow: hidden;
+  padding: 15px 0px;
 }
 </style>

@@ -1,11 +1,4 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 06:16:06
- * @LastEditors: viola
- * @LastEditTime: 2025-06-12 11:06:24
- * @FilePath: \code\src\components\left_box.vue
--->
-<!-- left_box -->
+<!--\code\src\components\left_box.vue-->
 <template>
   <transition
     appear
@@ -51,6 +44,7 @@ const animate = computed(() => animatestore.$state.Animate);
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    transform: translateY(20px);
   }
   &::after {
     content: "";
@@ -63,12 +57,12 @@ const animate = computed(() => animatestore.$state.Animate);
     // background:#113648;
     background-image: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.9) 20%,     
-    rgba(0, 0, 0, 0.8) 40%,  
-    rgba(0, 0, 0, 0.6) 60%, 
+    rgba(0, 0, 0, 0.7) 20%,     
+    rgba(0, 0, 0, 0.6) 50%,  
+    rgba(0, 0, 0, 0.5) 60%, 
     rgba(0, 0, 0, 0.3) 80%,  
-    rgba(0, 0, 0, 0.0) 100% );
-    opacity: 0.8;
+    rgba(0, 0, 0, 0.0) 100%  
+  );
     z-index: -1;
   }
 }

@@ -1,4 +1,3 @@
-<!-- footer -->
 <template>
   <div class="footer" v-show="UIShow">
     <div class="footer-bg"></div>
@@ -88,7 +87,7 @@ onMounted(() => {
     left: 0;
     width: 100%;
     @include wHeight(140);
-    background: url("~@/assets/icons/buttons/bottombg.png") no-repeat center bottom;
+    background: url("~@/assets/icons/oldversion/bottombg.png") no-repeat center bottom;
     background-size: 100% 100%; 
     z-index: 1;
     opacity: 0.6;
@@ -101,14 +100,15 @@ onMounted(() => {
   //   transform: translateX(-50%);
   //   @include Width(1364);
   //   @include wHeight(80);
-  //   background: url("~@/assets/icons/buttons/bottombuttonbg.png") no-repeat center center;
+  //   background: url("~@/assets/icons/oldversion/bottombuttonbg.png") no-repeat center center;
   //   background-size: 100% 100%;
   //   z-index: 2;
   // }
 
   .footer_Box {
     position: absolute;
-    bottom: 35px;
+    width: auto;  
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -117,28 +117,29 @@ onMounted(() => {
     pointer-events: auto;
 
     .item {
-      @include Width(120);
-      @include wHeight(50);
-      @include LineHeight(50);
-      @include FontSize(24);
+      @include Width(233);
+      @include wHeight(81);
+      @include LineHeight(80);
+      @include FontSize(32);
+      padding: 0 10px;
       color: #4DE1FF;
       font-weight: bold;
       text-align: center;
       cursor: pointer;
-      background: url("~@/assets/icons/buttons/bottombutton.png") no-repeat;
+      background: url("~@/assets/icons/oldversion/bottombutton.png") no-repeat;
       background-size: 100% 100%;
 
       &:hover {
         color: rgba(255, 255, 255, 0.9);
-        background: url("~@/assets/icons/buttons/bottombutton_hover.png") no-repeat;
-        background-size: 100% 105%;
+        background: url("~@/assets/icons/oldversion/bottombutton_hover.png") no-repeat;
+        background-size: 100% 100%;
       }
     }
 
     .isactive {
       color: rgba(255, 255, 255, 0.9);
-      background: url("~@/assets/icons/buttons/bottombutton_hover.png") no-repeat;
-      background-size: 100% 105%;
+      background: url("~@/assets/icons/oldversion/bottombutton_hover.png") no-repeat;
+      background-size: 100% 100%;
     }
   }
 
@@ -153,5 +154,6 @@ onMounted(() => {
     pointer-events: auto;
   }
 }
+
 
 </style>
