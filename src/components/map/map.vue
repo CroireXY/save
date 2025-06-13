@@ -15,12 +15,12 @@ import { onMounted, watch, watchEffect, ref } from "vue";
 import { useMapStore } from "@/stores/map";
 import axios from "axios";
 import { fetchWithAuth } from "@/utils/auth";
+import websocketServer from "@/tools/websocket";
 // import eventBus from "@/utils/eventBus";
 let viewer: Cesium.Viewer; // 在 setup 外部函数也能访问
 const mapStore = useMapStore();
 // 设置cesium的静态资源路径
 window.CESIUM_BASE_URL = "/cesium";
-let inter = null;
 const basemapProvider = new Cesium.UrlTemplateImageryProvider({
   url: "https://mapapi.geodata.gov.hk/gs/api/v1.0.0/xyz/imagery/WGS84/{z}/{x}/{y}.png",
   credit: "© Map from Lands Department",
@@ -29,20 +29,31 @@ const basemapProvider = new Cesium.UrlTemplateImageryProvider({
   minimumLevel: 0,
   hasAlphaChannel: true,
 });
+let skyBox = new Cesium.SkyBox({
+  sources: {
+    positiveX: "/skybox/box2/px.png",
+    negativeX: "/skybox/box2/nx.png",
+    positiveY: "/skybox/box2/pz.png",
+    negativeY: "/skybox/box2/nz.png",
+    positiveZ: "/skybox/box2/py.png",
+    negativeZ: "/skybox/box2/ny.png",
+  },
+});
 const urls = [
-  "http://localhost:9000/11-SW-16B/tileset.json",
+  // "http://localhost:9000/11-SW-16B/tileset.json",
   "http://localhost:9000/11-SW-16D/tileset.json",
-  "http://localhost:9000/11-SW-17A/tileset.json",
+  // "http://localhost:9000/11-SW-17A/tileset.json",
   "http://localhost:9000/11-SW-17C/tileset.json",
-  "http://localhost:9000/11-SW-21B/tileset.json",
-  "http://localhost:9000/11-SW-22A/tileset.json",
+  // "http://localhost:9000/11-SW-21B/tileset.json",
+  // "http://localhost:9000/11-SW-22A/tileset.json",
   // '/map/area2/tileset.json',
   // '/map_data/area3/tileset.json'
 ];
+const ws = new websocketServer("ws://lae.lscm.hk/fsp/websocketConnection");
 
 onMounted(() => {
   // eventBus.on("drawFlightPath", onFlightPathShowChanged);
-
+  // ws.connect(2);
   Cesium.Ion.defaultAccessToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxMTZmYTNlZi02NzU2LTQ3MTYtYWUwYS03NWRmNzllZTk5YWUiLCJpZCI6MzAzMDI1LCJpYXQiOjE3NDczODg0NTN9.paeLe2jzSEv9-YXWxw-m9hNcJHoTNQJrSZKZDkLXYF0";
   viewer = new Cesium.Viewer("cesiumContainer", {
@@ -65,15 +76,10 @@ onMounted(() => {
     showRenderLoopErrors: false, // 是否显示渲染循环错误（默认false）
     requestRenderMode: true,
     creditContainer: "credit",
+    skyBox: skyBox,
+    skyAtmosphere: false,
   });
-  // mapStore.drawFlightPath = () => {
 
-  //   onFlightPathShowChanged(true);
-  // };
-
-  // mapStore.closeFlightPath = () => {
-  //   onFlightPathShowChanged(false);
-  // };
   watch(
     [
       () => mapStore.Drone2DShow,
@@ -101,23 +107,64 @@ onMounted(() => {
       }
     }
   );
+  const socket = new WebSocket("ws://lae.lscm.hk/fsp/websocketConnection");
 
-  // urls.forEach((url) => {
-  //   const tileset = new Cesium.Cesium3DTileset({ url, projectTo2D: true });
-  //   viewer.scene.primitives.add(tileset);
+  socket.onopen = function () {
+    console.log("✅ WebSocket connected");
+    // 发送注册消息
+    socket.send(
+      JSON.stringify({
+        userId: 2,
+        clientMessageCode: "REGISTER_CONNECTION",
+      })
+    );
+  };
 
-  //   tileset.readyPromise.then(() => {
-  //     console.log("Loaded tileset:", url);
-  //     const boundingSphere = tileset.boundingSphere;
-  //     const radius = boundingSphere.radius;
+  socket.onmessage = function (event) {
+    console.log("📩 Received:", event.data);
+  };
 
-  //     // 设置最小缩放距离为模型半径的一部分，避免穿模
-  //     viewer.scene.screenSpaceCameraController.minimumZoomDistance =
-  //       radius * 0.05;
-  //     // 如果你只加载一个，也可以用 viewer.zoomTo(tileset)
-  //   });
-  // });
-  addLayer();
+  socket.onerror = function (error) {
+    console.error("❌ WebSocket error:", error);
+  };
+
+  socket.onclose = function () {
+    console.log("🔌 WebSocket closed");
+  };
+
+  urls.forEach((url) => {
+    const tileset = new Cesium.Cesium3DTileset({ url, projectTo2D: true });
+    viewer.scene.primitives.add(tileset);
+
+    tileset.readyPromise.then(() => {
+      console.log("Loaded tileset:", url);
+      const boundingSphere = tileset.boundingSphere;
+      const radius = boundingSphere.radius;
+
+      const z = tileset.boundingSphere.center.z;
+
+      // const color =
+      //   z >= 2500000
+      //     ? Cesium.Color.BLUE
+      //     : z >= 2400000
+      //     ? Cesium.Color.LIGHTBLUE
+      //     : Cesium.Color.GRAY;
+
+      // tileset.style = new Cesium.Cesium3DTileStyle({
+      //   color: `color('${color.toCssColorString()}')`,
+      // });
+
+      // 设置最小缩放距离为模型半径的一部分，避免穿模
+      viewer.scene.screenSpaceCameraController.minimumZoomDistance =
+        radius * 0.05;
+
+      // viewer.scene.globe.enableLighting = true;
+      // viewer.scene.light = new Cesium.DirectionalLight({
+      //   direction: new Cesium.Cartesian3(-1, -1, -1),
+      // });
+    });
+  });
+  // addLayer();
   // viewer.scene.screenSpaceCameraController.minimumZoomDistance = 10;
   viewer.scene.screenSpaceCameraController.enableCollisionDetection = true; //不允许去地下
   viewer.camera.flyTo({
@@ -132,10 +179,6 @@ onMounted(() => {
   });
 
   viewer.scene.globe.depthTestAgainstTerrain = false;
-
-  // onDrone2DShowChanged(mapStore.Drone2DShow);
-  // onDrone3DShowChanged(mapStore.Drone3DShow);
-  // onFlightPathShowChanged(mapStore.FlightPathShow);
 });
 
 function addModel(
@@ -299,8 +342,10 @@ async function onFlightPathShowChanged(value: boolean) {
       //   }
       // );
       // const res = await fetchWithAuth( "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250401000000&etime=20250530235959&recordId=1");
-      const res = await fetchWithAuth('http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250510000000&etime=20250610235959&recordId=1');//一条往返数据
-               
+      const res = await fetchWithAuth(
+        "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250529143106&etime=20250529143511&recordId=2&offset=0"
+      ); //一条往返数据
+
       const data = await res.data;
       if (data.responseCode !== 200 || !Array.isArray(data.body)) {
         console.error("接口数据异常");
@@ -408,7 +453,7 @@ async function onFlightPathShowChanged(value: boolean) {
           material: Cesium.Color.fromCssColorString("#00F0FF"), // 实线颜色
         }),
       });
-      
+
       // 虚线轨迹（尚未飞过的部分）
       futurePathEntity = viewer.entities.add({
         availability: new Cesium.TimeIntervalCollection([
