@@ -14,7 +14,7 @@
         <img class="icon" :src="getIcon(item.src)" />
         <div class="wrapper">
           <div class="name">{{ item.name }}</div>
-          <div class="value glow-blue-soft">
+          <div class="value glow-blue">
             {{ item.value }}<i>{{ item.unit }}</i>
           </div>
         </div>
@@ -222,7 +222,7 @@ const infoList = [
         @include PaddingRight(10);
         @include LineHeight(50);
         @include FontSize(28);
-        color: #119ad5;
+        color: #ffffff;
         font-weight: bold;
         text-align: center;
         i {

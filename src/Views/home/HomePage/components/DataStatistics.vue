@@ -6,7 +6,7 @@
           <img :src="item.icon" alt="icon" />
         </div>
         <div class="text-box">
-          <div class="value glow-blue-soft">{{ item.value }}{{ item.unit }}</div>
+          <div class="value glow-blue">{{ item.value }}{{ item.unit }}</div>
           <div class="name">{{ item.name }}</div>
         </div>
       </div>
@@ -20,28 +20,28 @@
       name: "飛行衝突",
       value: 17,
       unit: "次",
-      icon: require('@/assets/icons/smaller_icon/flightConflict.png'),
+      icon: require('@/assets/icons/icons_Alerts/flightConflict_s2.png'),
     },
     {
       id: 2,
       name: "闖入禁區",
       value: 7,
       unit: "次",
-      icon: require('@/assets/icons/smaller_icon/no_entry_warning.png'),
+      icon: require('@/assets/icons/icons_Alerts/no_entry_warning_s2.png'),
     },
     {
       id: 3,
       name: "偏航告警",
       value: 10,
       unit: "次",
-      icon: require('@/assets/icons/smaller_icon/deviationAlert.png'),
+      icon: require('@/assets/icons/icons_Alerts/deviationAlert_s2.png'),
     },
     {
       id: 4,
       name: "氣象異常",
       value: 9,
       unit: "次",
-      icon: require('@/assets/icons/smaller_icon/weatherAlert.png'),
+      icon: require('@/assets/icons/icons_Alerts/deviationAlert_s2.png'),
     },
   ];
   </script>
@@ -61,13 +61,14 @@
     display: flex;
     align-items: center;
     height: auto;
-    padding: 6px 0;
+    // padding: 6px 0;
     box-sizing: border-box;
+    margin-left: 5px;
   }
   
   .icon-box {
-    @include Width(80);
-    @include wHeight(80);
+    @include Width(96);
+    @include wHeight(96);
     margin-right: 10px;
     flex-shrink: 0;
   
@@ -84,16 +85,17 @@
     justify-content: center;
   
     .value {
-      @include FontSize(24);
-      color: #119ad5;
+      @include FontSize(32);
+      color: #ffffff;
       font-weight: bold;
       line-height: 1.2;
     }
   
     .name {
-      @include FontSize(20);
+      @include FontSize(18);
       color: rgba(255, 255, 255, 0.8);
       line-height: 1.2;
+      margin-top: 3px;
     }
   }
   

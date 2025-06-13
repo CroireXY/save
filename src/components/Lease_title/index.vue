@@ -51,10 +51,9 @@ const props = defineProps({
   .title-text {
     flex: 1;
     @include MarginLeft(35);
-    @include FontSize(24);
+    @include FontSize(28);
     position: relative;
-    @include Top(1);
-    font-style: italic;
+    // font-style: italic;
   }
 }
 

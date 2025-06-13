@@ -28,7 +28,7 @@
 
   <Box direction="right" height="702" width="512">
     <template #title>
-      <Lease_title>飞行任务性质</Lease_title>
+      <Lease_title>飛行任務性質</Lease_title>
     </template>
     <FlightTaskNature />
   </Box>
