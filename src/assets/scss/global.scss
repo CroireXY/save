@@ -1,8 +1,20 @@
+// src/assets/scss/global.scss
 html,
 body {
   width: 100%;
   height: 100%;
   /* overflow: hidden; */
+}
+
+html, body {
+  font-family: 'Noto Sans TC', 'PingFang SC', 'Microsoft JhengHei', sans-serif;
+  color: #ffffff;
+
+  // 全局文字发光描边效果
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.6),
+    0 0 6px rgba(0, 157, 255, 0.4),
+    0 0 12px rgba(0, 157, 255, 0.3);
 }
 
 #app {
@@ -62,4 +74,44 @@ body {
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
+}
+
+.glow-title {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 2.4rem;
+  color: #ffffff;
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.8),
+    0 0 8px rgba(0, 162, 255, 0.4),
+    0 0 16px rgba(0, 162, 255, 0.2);
+}
+
+.glow-blue {
+  text-shadow: 
+    0 0 4px #00bfff,
+    0 0 8px #00bfff,
+    0 0 12px #00bfff;
+}
+
+.glow-white {
+  text-shadow: 
+    0 0 4px #ffffff,
+    0 0 8px #ffffff,
+    0 0 12px #ffffff;
+}
+
+.glow-blue-soft {
+  color: #66ccff;
+  -webkit-text-stroke: 0.1px #84c1ea; // 蓝色描边
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); // 发光
+}
+
+.glow-outline-blue {
+  color: #ffffff;
+  text-shadow:
+    -0.1px -0.1px 0 #00bfff, // 左上
+     0.1px -0.1px 0 #00bfff, // 右上
+    -0.1px  0.1px 0 #00bfff, // 左下
+     0.1px  0.1px 0 #00bfff, // 右下
+     0 0 10px rgba(255, 255, 255, 0.8)    // 中心发光
 }

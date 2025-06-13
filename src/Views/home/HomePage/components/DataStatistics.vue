@@ -1,3 +1,4 @@
+<!-- /src/Views/home/HomePage/components/DataStatistics.vue -->
 <template>
     <div class="grid-box">
       <div class="grid-item" v-for="item in infoList" :key="item.id">
@@ -5,7 +6,7 @@
           <img :src="item.icon" alt="icon" />
         </div>
         <div class="text-box">
-          <div class="value">{{ item.value }}{{ item.unit }}</div>
+          <div class="value glow-blue-soft">{{ item.value }}{{ item.unit }}</div>
           <div class="name">{{ item.name }}</div>
         </div>
       </div>

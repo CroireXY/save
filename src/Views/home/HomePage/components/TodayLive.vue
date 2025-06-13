@@ -14,7 +14,7 @@
         <img class="icon" :src="getIcon(item.src)" />
         <div class="wrapper">
           <div class="name">{{ item.name }}</div>
-          <div class="value">
+          <div class="value glow-blue-soft">
             {{ item.value }}<i>{{ item.unit }}</i>
           </div>
         </div>
