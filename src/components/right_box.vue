@@ -1,4 +1,4 @@
-<!-- \code\src\components\left_box.vue-->
+<!-- \code\src\components\right_box.vue-->
 <template>
   <transition
     appear
@@ -50,6 +50,7 @@ const animate = computed(() => animatestore.$state.Animate);
      box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    transform: translateY(20px);
   }
 }
 </style>

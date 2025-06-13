@@ -44,6 +44,7 @@ const animate = computed(() => animatestore.$state.Animate);
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    transform: translateY(20px);
   }
   &::after {
     content: "";
