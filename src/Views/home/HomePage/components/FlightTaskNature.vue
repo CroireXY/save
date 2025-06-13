@@ -75,14 +75,13 @@
           type: 'linear',
           x: 1, y: 0, x2: 0, y2: 0,
           colorStops: [
-            { offset: 0, color: 'rgba(106, 209, 255, 0.3)' },
-            { offset: 1, color: 'rgba(106, 209, 255, 1)' }
+            { offset: 0, color: '#6A71E5' },
+            { offset: 1, color: '#454A97' }
           ]
         }
       }
     }
   ];
-  
   
   const total = pieData.reduce((sum, item) => sum + item.value, 0);
   
@@ -110,10 +109,10 @@
       },
       value: {
         fontSize: 18,
-        color: '#66ccff',
-        fontWeight: 'bold',
-        textShadowColor: '#66ccff',
-        textShadowBlur: 8,
+        color: '#ffffff',
+        fontWeight: '',
+        textShadowColor: '#84c1ea',
+        textShadowBlur: 15,
         align: 'right',
         width: 100 // 给 value 固定宽度以右对齐
       }

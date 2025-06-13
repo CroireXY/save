@@ -41,7 +41,7 @@
       name: "氣象異常",
       value: 9,
       unit: "次",
-      icon: require('@/assets/icons/icons_Alerts/deviationAlert_s2.png'),
+      icon: require('@/assets/icons/icons_Alerts/weatherAlert_s2.png'),
     },
   ];
   </script>

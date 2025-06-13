@@ -56,8 +56,9 @@
   import TakeoffLandingOverview from "./components/TakeoffLandingOverview.vue";
   import { onBeforeUnmount, onMounted, ref } from "vue";
   import dayjs from "dayjs";
-  import realtime_data from "./components/realtime_data.vue";
-import weatherCard from "./components/weatherCard.vue";
+  import weatherCard from "./components/weatherCard.vue";
+  import VideoPathCard from "./components/Video/VideoPathCard.vue"
+
   // 获取当前时间
   const date: any = ref("");
   const time: any = ref("");
