@@ -382,30 +382,29 @@ function onDrone3DShowChanged(
       drone[length] = viewer.entities.add({
         id: id || "drone3d", // 推荐用唯一id
         position: Cesium.Cartesian3.fromDegrees(lon, lat, alt),
-        // orientation: orientation,
-        // model: {
-        //   uri: "/3d_icon/drones.glb",
-        //   scale: 1.5,
-        //   color: Cesium.Color.fromCssColorString('#4de1ff'), // 颜色和透明度
-        //   colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
-        //   colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
-        //   minimumPixelSize: 48,
+        model: {
+          uri: "/3d_icon/drones.glb",
+          scale: 2,
+          color: Cesium.Color.fromCssColorString('#4de1ff'), // 颜色和透明度
+          colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
+          colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
+          minimumPixelSize: 64,
 
-        //   silhouetteColor: Cesium.Color.BLACK,
-        //   silhouetteSize: 4,
-        //   shadows: Cesium.ShadowMode.ENABLED,
+          silhouetteColor: Cesium.Color.BLACK,
+          silhouetteSize: 4,
+          shadows: Cesium.ShadowMode.ENABLED,
           
-        // },
-         billboard: {
-            image: droneIcon, // 替换为实际的无人机图标路径
-            width: 50,
-            height: 50,
-            scale: 0.8,
-            verticalOrigin: Cesium.VerticalOrigin.CENTER,
-            horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-            // pixelOffset: new Cesium.Cartesian2(10, 0),
-            show: true,
-          },
+        },
+        //  billboard: {
+        //     image: droneIcon, // 替换为实际的无人机图标路径
+        //     width: 50,
+        //     height: 50,
+        //     scale: 0.8,
+        //     verticalOrigin: Cesium.VerticalOrigin.CENTER,
+        //     horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+        //     // pixelOffset: new Cesium.Cartesian2(10, 0),
+        //     show: true,
+        //   },
         label: {
           text: "无人机编号001",
           // font: "14px ",
