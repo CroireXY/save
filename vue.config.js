@@ -2,7 +2,7 @@
 const path = require("path");
 
 const TITLE = require("./public/aircity/Config");
-const title = TITLE.title || "飞服平台";
+const title = TITLE.title || "香港飛服平臺";
 module.exports = {
   publicPath: "/",
 

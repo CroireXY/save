@@ -1,184 +1,119 @@
+<!-- src/Views/home/HomePage/components/weatherCard.vue -->
 <template>
-  <Box class="box0" direction="left" >
-    <!-- <div class="bg-box"></div> -->
-    <div class="info">
-      <div class="time">
-        {{ date }}
-      </div>
-      <div class="time">
-        {{ day }}
-      </div>
-      <div class="time">
-        {{ time }}
-      </div>
-    </div>
-    <!-- <div class="icon-box">
-      <div class="alarm-icon">
-        <div class="label">氣溫</div>
-      </div>
+  <Box direction="left" height="243" width="512">
+    <template #title>
+      <Lease_title style="margin-top: -3px;">{{ title }}</Lease_title>
+    </template>
 
-      <div class="weather-icon">
-        <div class="label">東南風</div>
-      </div>
-      <div class="weather-icon">
-        <div class="label">風速</div>
-      </div>
-      <div class="weather-icon">
-        <div class="label">無警報</div>
-      </div>
-    </div> -->
-
-    <div class="weather-box">
-      <div class="alarm-item">
-        <div class="label">氣溫</div>
-        <div class="value">23°C</div>
-        <img :src="getIcon('sunny.png')" class="icon" />
-      </div>
-
-      <div class="weather-item">
-        <div class="label">東南風</div>
-        <div class="value">2級</div>
-        <img :src="getIcon('SE wind.png')" class="icon" />
-      </div>
-      <div class="weather-item">
-        <div class="label">東南風</div>
-        <div class="value">3km/h</div>
-        <img :src="getIcon('windSpeed.png')" class="icon" />
-      </div>
-      <div class="weather-item">
-        <div class="label">無警報</div>
-        <div class="value">電磁</div>
-        <img :src="getIcon('EMI.png')" class="icon" />
+    <div class="grid-box">
+      <div class="grid-item" v-for="(item, index) in weatherData" :key="index">
+        <div class="icon-box">
+          <img :src="item.icon" alt="weather icon" />
+        </div>
+        <div class="text-box">
+          <div class="value glow-blue">{{ item.info }}</div>
+          <div class="name">{{ item.name }}</div>
+        </div>
       </div>
     </div>
   </Box>
 </template>
 
+
 <script setup lang="ts">
 import Box from "@/components/Box/index.vue";
-defineProps<{
-  date: any;
-  day: any;
-  time: any;
-}>();
+import Lease_title from "@/components/Lease_title/index.vue";
+import { ref, onMounted } from "vue";
+import dayjs from "dayjs";
+import sunnyIcon from "@/assets/icons/icons_Weather/sunny.png";
+import seWindIcon from "@/assets/icons/icons_Weather/SEwind.png";
+import windSpeedIcon from "@/assets/icons/icons_Weather/windSpeed.png";
+import emiIcon from "@/assets/icons/icons_Weather/EMI.png";
 
-const getIcon = (file: string) => {
-  return require(`@/assets/icons/smaller_icon/${file}`);
+const title = ref("");
+
+// 更新时间字符串
+const updateTitle = () => {
+  const now = dayjs();
+  const weekMap = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+  title.value = `${now.format("YYYY年MM月DD日")} ${weekMap[now.day()]} ${now.format("HH:mm:ss")}`;
 };
+
+onMounted(() => {
+  updateTitle();
+  setInterval(updateTitle, 1000);
+});
+
+const weatherData = [
+  {
+    icon: sunnyIcon,
+    info: "27℃",
+    name: "气温",
+  },
+  {
+    icon: seWindIcon,
+    info: "东南风",
+    name: "2级",
+  },
+  {
+    icon: windSpeedIcon,
+    info: "3km/h",
+    name: "风速",
+  },
+  {
+    icon: emiIcon,
+    info: "无警报",
+    name: "电磁",
+  },
+];
 </script>
 
 <style lang="scss" scoped>
-.box0 {
-  background-image: url("~@/assets/componentCard/time.png") no-repeat;
-  @include boxWidth(512);
-  @include boxwHeight(243);
-  //   background-size: contain;
+.grid-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 16px;
+  @include Padding(20, 40, 0, 40);
+  width: 100%;
+  box-sizing: border-box;
+}
 
-  //   @include wHeight(217);
-  //   //   position: relative;
-  //   @include MarginBottom(10);
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-  .info {
-    background-image: linear-gradient(to right, #266dab, #29455d);
-    // position: absolute;
-    // @include Width(300);
-    @include Padding(10, 24, 0, 0);
-    display: flex;
-    justify-content: space-between;
-    .time {
-      @include Width(108);
-      // @include wHeight(30);
-      @include LineHeight(30);
-      @include FontSize(16);
-      font-family: SJyunhei;
-      // z-index: 1;
-      flex: 1;
-      text-align: center;
-    }
-    .line {
-      @include Width(1);
-      @include wHeight(13);
-      @include MarginTop(10);
-      background-color: rgba(255, 255, 255, 0.7);
-      // z-index: 1;
-    }
+.icon-box {
+  @include Width(44);
+  @include wHeight(44);
+  margin-bottom: 4px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.text-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .value {
+    @include FontSize(18);
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 2px;
   }
 
-  .weather-box {
-    @include Padding(48, 24, 24, 24);
-    display: flex;
-
-    .alarm-item {
-      @include Padding(0, 22, 0, 20);
-      //   border-left: 1.5px solid rgba(255, 255, 255, 0.4);
-      @include wHeight(31);
-
-      .label {
-        position: relative;
-        @include Top(5);
-        @include FontSize(20);
-        color: rgba(255, 255, 255, 0.9);
-        //   font-weight: bold;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        // z-index: 1;
-      }
-      .value {
-        //@include LineHeight(23);
-        position: relative;
-        @include Bottom(-10);
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @include FontSize(24);
-        color: rgba(255, 255, 255, 0.9);
-      }
-    }
-
-    .weather-item {
-      @include Padding(0, 22, 0, 22);
-      border-left: 1.5px solid rgba(255, 255, 255, 0.4);
-      @include wHeight(70);
-
-      .label {
-        //@include LineHeight(23);
-        position: relative;
-        @include Top(5);
-        @include FontSize(20);
-        color: rgba(255, 255, 255, 0.9);
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        // font-weight: bold;
-        // z-index: 1;
-      }
-
-      .value {
-        //@include LineHeight(23);
-        position: relative;
-        @include Bottom(-10);
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @include FontSize(24);
-        color: rgba(255, 255, 255, 0.9);
-      }
-
-      &:first-child {
-      }
-    }
-    .icon {
-      position: relative;
-      @include Top(20);
-      @include Width(60);
-      @include wHeight(60);
-      // margin-left: 10px;
-    }
+  .name {
+    @include FontSize(16);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.2;
   }
 }
 </style>

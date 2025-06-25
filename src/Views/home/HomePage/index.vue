@@ -1,7 +1,7 @@
 <!-- \code\src\Views\home\HomePage\index.vue -->
 <template>
 <Left_box>
-  <weatherCard :date="date" :day="day" :time="time" />
+  <weatherCard/>
 
   <Box direction="left" height="573" width="512">
     <template #title>
@@ -21,7 +21,7 @@
 <Right_box>
   <Box direction="right" height="367" width="512">
     <template #title>
-      <Lease_title>數據統計</Lease_title>
+      <Lease_title  style="margin-top: -2px;">數據統計</Lease_title>
     </template>
     <DataStatistics />
   </Box>
@@ -35,7 +35,7 @@
 
   <Box direction="right" height="337" width="512">
     <template #title>
-      <Lease_title>起降場及航線信息總覽</Lease_title>
+      <Lease_title  style="margin-top: -3px;">起降場及航線信息總覽</Lease_title>
     </template>
     <TakeoffLandingOverview />
   </Box>

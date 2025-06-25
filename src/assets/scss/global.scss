@@ -86,11 +86,26 @@ html, body {
     0 0 16px rgba(0, 162, 255, 0.2);
 }
 
+// .glow-blue {
+//   text-shadow: 
+//     0 0 4px #00bfff,
+//     0 0 8px #00bfff,
+//     0 0 12px #00bfff;
+// }
+
 .glow-blue {
   text-shadow: 
-    0 0 4px #00bfff,
-    0 0 8px #00bfff,
-    0 0 12px #00bfff;
+    0 0 4px #3dbeff,
+    0 0 8px #3dbeff,
+    0 0 12px #3dbeff;
+}
+
+.glow-blue-blue {
+  color: #4de1ff;
+  text-shadow: 
+    0 0 4px #44a1f8,
+    0 0 8px #44a1f8,
+    0 0 12px #44a1f8;
 }
 
 .glow-white {
@@ -98,6 +113,14 @@ html, body {
     0 0 4px #ffffff,
     0 0 8px #ffffff,
     0 0 12px #ffffff;
+}
+
+.glow-red {
+  color: #ff4c4c;
+  text-shadow: 
+    0 0 4px #dd2727,
+    0 0 8px #dd2727,
+    0 0 12px #dd2727;
 }
 
 .glow-blue-soft {

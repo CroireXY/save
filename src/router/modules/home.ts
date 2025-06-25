@@ -2,16 +2,31 @@
 import {RouteRecordRaw} from "vue-router";
 
 export const HomeItem: Array<RouteRecordRaw> = [
-    // {
-	// 	name: "cityAppearance",
-	// 	path: "cityAppearance",
-	// 	component: () => import("@/Views/home/cityAppearance/index.vue"),
-	// },
 	{
 		name: "HomePage",  
 		path: "homepage",  
 		component: () => import("@/Views/home/HomePage/index.vue"),
-	  },
+	},
+	{
+		name: "FlightActivity",
+		path: "flightActivity",
+		component: () => import("@/Views/home/FlightActivity/index.vue"),
+	},
+	{
+		name: "PathManagement",
+		path: "pathManagement",
+		component: () => import("@/Views/home/PathManagement/index.vue"),
+	},
+	{
+		name: "SafetyAlert",
+		path: "safetyAlert",
+		component: () => import("@/Views/home/SafetyAlert/index.vue"),
+	},
+	// {
+	// 	name: "cityAppearance",
+	// 	path: "cityAppearance",
+	// 	component: () => import("@/Views/home/cityAppearance/index.vue"),
+	// },
 	{
 		name: "WisdomOne",
 		path: "wisdomone",

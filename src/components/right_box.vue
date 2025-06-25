@@ -28,29 +28,36 @@ const animate = computed(() => animatestore.$state.Animate);
   @include Width(560);
   height: 100%;
   @include Right(0);
-   @include Top(20);
+  @include Top(20);
   z-index: 9;
-
-  background-image: linear-gradient(
-    to left,
-    rgba(0, 0, 0, 0.7) 20%,     
-    rgba(0, 0, 0, 0.6) 50%,  
-    rgba(0, 0, 0, 0.5) 60%, 
-    rgba(0, 0, 0, 0.3) 80%,  
-    rgba(0, 0, 0, 0.0) 100%  
-  );
-
   @include Padding(44, 30, 20, 24);
-
-
   box-sizing: border-box;
+
   .content {
     width: 100%;
     height: 100%;
-     box-sizing: border-box;
+    box-sizing: border-box;
     position: relative;
     overflow: hidden;
     transform: translateY(20px);
+  }
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0.5) 20%,     
+      rgba(0, 0, 0, 0.4) 50%,  
+      rgba(0, 0, 0, 0.3) 60%, 
+      rgba(0, 0, 0, 0.2) 80%,  
+      rgba(0, 0, 0, 0.0) 100%  
+    );
+    z-index: -1;
   }
 }
 </style>

@@ -1,3 +1,4 @@
+<!-- src/components/headerlink/index.vue -->
 <template>
   <div class="footer" v-show="UIShow">
     <div class="footer-bg"></div>
@@ -40,19 +41,28 @@ const Link: any = reactive([
   {
     name: "飞行活动",
     key: 1,
-    path: "/home/wisdomtwo",
+    path: "/home/flightActivity", 
   },
   {
     name: "航线管理",
     key: 2,
-    path: "/home/wisdomsix",
+    path: "/home/pathManagement", 
   },
   {
     name: "安全告警",
     key: 3,
-    path: "/home/contactOccurs",
+    path: "/home/safetyAlert", 
   },
-  
+  // {
+  //   name: "飞行活动",
+  //   key: 1,
+  //   path: "/home/wisdomtwo",
+  // },
+  // {
+  //   name: "航线管理",
+  //   key: 2,
+  //   path: "/home/wisdomsix",
+  // },
 ]);
 
 // 路由事件
@@ -87,23 +97,11 @@ onMounted(() => {
     left: 0;
     width: 100%;
     @include wHeight(140);
-    background: url("~@/assets/icons/oldversion/bottombg.png") no-repeat center bottom;
+    background: url("~@/assets/icons/BottomBar/bottombg.png") no-repeat center bottom;
     background-size: 100% 100%; 
     z-index: 1;
     opacity: 0.6;
   }
-
-  // .footer-button-bg {
-  //   position: absolute;
-  //   bottom: 0px; 
-  //   left: 50%;
-  //   transform: translateX(-50%);
-  //   @include Width(1364);
-  //   @include wHeight(80);
-  //   background: url("~@/assets/icons/oldversion/bottombuttonbg.png") no-repeat center center;
-  //   background-size: 100% 100%;
-  //   z-index: 2;
-  // }
 
   .footer_Box {
     position: absolute;
@@ -126,19 +124,19 @@ onMounted(() => {
       font-weight: bold;
       text-align: center;
       cursor: pointer;
-      background: url("~@/assets/icons/oldversion/bottombutton.png") no-repeat;
+      background: url("~@/assets/icons/BottomBar/bottombutton.png") no-repeat;
       background-size: 100% 100%;
 
       &:hover {
         color: rgba(255, 255, 255, 0.9);
-        background: url("~@/assets/icons/oldversion/bottombutton_hover.png") no-repeat;
+        background: url("~@/assets/icons/BottomBar/bottombutton_hover.png") no-repeat;
         background-size: 100% 100%;
       }
     }
 
     .isactive {
       color: rgba(255, 255, 255, 0.9);
-      background: url("~@/assets/icons/oldversion/bottombutton_hover.png") no-repeat;
+      background: url("~@/assets/icons/BottomBar/bottombutton_hover.png") no-repeat;
       background-size: 100% 100%;
     }
   }
@@ -154,6 +152,5 @@ onMounted(() => {
     pointer-events: auto;
   }
 }
-
 
 </style>

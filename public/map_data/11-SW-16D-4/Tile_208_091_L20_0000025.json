@@ -1,0 +1,130 @@
+{
+    "asset": {
+        "generatetool": "kara",
+        "gltfUpAxis": "Z",
+        "version": "0.0"
+    },
+    "geometricError": 1.875,
+    "root": {
+        "boundingVolume": {
+            "sphere": [
+                -2414049.1865101294,
+                5389635.475053522,
+                2401394.695049724,
+                31.75818634033203
+            ]
+        },
+        "children": [
+            {
+                "boundingVolume": {
+                    "sphere": [
+                        -2414038.247570787,
+                        5389634.724450364,
+                        2401382.781604808,
+                        15.566985130310059
+                    ]
+                },
+                "content": {
+                    "uri": "Tile_208_091_L21_00000250.json"
+                },
+                "geometricError": 0.9375,
+                "refine": "REPLACE"
+            },
+            {
+                "boundingVolume": {
+                    "sphere": [
+                        -2414056.2609596294,
+                        5389629.072505733,
+                        2401383.690985676,
+                        16.635873794555664
+                    ]
+                },
+                "content": {
+                    "uri": "Tile_208_091_L21_00000251.json"
+                },
+                "geometricError": 0.9375,
+                "refine": "REPLACE"
+            },
+            {
+                "boundingVolume": {
+                    "sphere": [
+                        -2414036.55811123,
+                        5389630.967717075,
+                        2401401.3495192006,
+                        16.02975845336914
+                    ]
+                },
+                "content": {
+                    "uri": "Tile_208_091_L21_00000252.json"
+                },
+                "geometricError": 0.9375,
+                "refine": "REPLACE"
+            },
+            {
+                "boundingVolume": {
+                    "sphere": [
+                        -2414054.7941560755,
+                        5389625.812915598,
+                        2401402.4882504977,
+                        14.727960586547852
+                    ]
+                },
+                "content": {
+                    "uri": "Tile_208_091_L21_00000253.json"
+                },
+                "geometricError": 0.9375,
+                "refine": "REPLACE"
+            },
+            {
+                "boundingVolume": {
+                    "sphere": [
+                        -2414066.7555295615,
+                        5389632.211209881,
+                        2401392.812926845,
+                        4.348217487335205
+                    ]
+                },
+                "content": {
+                    "uri": "Tile_208_091_L21_00000254.json"
+                },
+                "geometricError": 0.9375,
+                "refine": "REPLACE"
+            },
+            {
+                "boundingVolume": {
+                    "sphere": [
+                        -2414046.697862281,
+                        5389631.806242303,
+                        2401412.184679708,
+                        1.6413506269454956
+                    ]
+                },
+                "content": {
+                    "uri": "Tile_208_091_L21_00000255.json"
+                },
+                "geometricError": 0.9375,
+                "refine": "REPLACE"
+            },
+            {
+                "boundingVolume": {
+                    "sphere": [
+                        -2414059.5114499526,
+                        5389636.346009713,
+                        2401407.213216895,
+                        15.468480110168457
+                    ]
+                },
+                "content": {
+                    "uri": "Tile_208_091_L21_00000256.json"
+                },
+                "geometricError": 0.9375,
+                "refine": "REPLACE"
+            }
+        ],
+        "content": {
+            "uri": "Tile_208_091_L20_0000025.b3dm"
+        },
+        "geometricError": 1.875,
+        "refine": "REPLACE"
+    }
+}

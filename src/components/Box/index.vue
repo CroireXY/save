@@ -34,28 +34,32 @@ const backgroundDirection = computed(() => {
 .box {
   position: relative;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   @include boxWidth(v-bind("props.width"));
   @include boxhHeight(v-bind("props.height"));
-  @include MarginBottom(10);
-  @include BorderRadius(2);
+  // @include MarginBottom(10);
+  // @include BorderRadius(2);
   @include FontSize(14);
-  @include hLineHeight(18);
-  @include LetterSpacing(0.5);
+  // @include hLineHeight(18);
+  // @include LetterSpacing(0.5);
 }
 
 .box-title {
   @include wHeight(64); // 保持和 Lease_title 一致高度
+  overflow: visible;
   @include boxWidth(493);
   display: flex;
-  align-items: flex-start;
-  padding: 15px 0 0 10px; // 向下15px，向右10px
+  // align-items: flex-start;
+  align-items: stretch;
+  @include Padding(15, 0, 0, 15);
+  // padding: 10px 0 0 10px; // 向下15px，向右10px
   box-sizing: border-box;
 }
 
 .box-content {
   flex: 1;
   overflow: hidden;
-  padding: 15px 0px;
+  padding: 10px 0px;
 }
 </style>

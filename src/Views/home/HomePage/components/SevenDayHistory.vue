@@ -1,36 +1,11 @@
+<!-- src/Views/home/HomePage/components/SevenDayHistory.vue -->
 <template>
     <div class="box">
-      <!-- <div class="title">7日歷史數據</div> -->
-  
-      <!-- <div class="content">
-        <div class="text">
-          <span class="name">总数</span>
-          <span class="value">0</span>
-        </div>
-      </div> -->
-      <!-- <div class="info">
-        <div class="item">
-          <div class="icon">
-            <img src="@/assets/images/wisdom/办结率.svg" alt="" />
-          </div>
-          <div class="name">累计飞行次数</div>
-          <div class="value">100</div>
-        </div>
-        <div class="item">
-          <div class="icon">
-            <img src="@/assets/images/wisdom/满意度.svg" alt="" />
-          </div>
-          <div class="name">累计飞行公里</div>
-          <div class="value">4000</div>
-        </div>
-      </div> -->
-  
-      <!-- <div class="title">过去7日实际飞行次数</div> -->
-  
+      <p class="chart-title">飛行次數總覽 （日期/架次）</p>
       <V3Echarts
         :options="option"
         :width="490"
-        :height='500'
+        :height='400'
         container="wisdomone_two"
       />
     </div>
@@ -39,7 +14,17 @@
   <script lang="ts" setup>
   import { ref } from "vue";
   import V3Echarts from "@/components/V3Echarts/index.vue";
-  import SubTitle from "@/components/SubTitle/SubTitle.vue";
+
+  const today = new Date();
+  const xData = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(today);
+    d.setDate(today.getDate() - (6 - i + 1)); // 包含昨天，往前推6天
+    const dd = String(d.getDate()).padStart(2, "0");
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    return `${dd}/${mm}`;
+  });
+
+
   let option = ref({
     tooltip: {
       trigger: "item",
@@ -64,24 +49,13 @@
       containLabel: true,
     },
     xAxis: {
-      data: [
-        "04/05",
-        "05/05",
-        "06/05",
-        "07/05",
-        "08/05",
-        "09/05",
-        "10/05",
-        // "11/05",
-        // "12/05",
-        // "13/05",
-        // "14/05",
-        // "15/05",
-      ],
+      // data: ["04/05","05/05","06/05","07/05","08/05","09/05","10/05",],
+      data: xData,
       axisLabel: {
         show: true,
         color: "#fff",
         fontSize: "1rem",
+        rotate: 30,
       },
       axisTick: {
         show: false,
@@ -105,7 +79,7 @@
         show: true,
         lineStyle: {
           type: "dashed",
-          color: "#193451",
+          color: "rgba(255, 255, 255, 0.4)",
           width: 1,
         },
       },
@@ -128,32 +102,54 @@
       {
         type: "bar",
         barWidth: 20,
-        // zlevel: 1,
         itemStyle: {
-          // borderColor: "#208edf",
-          // borderWidth: 2,
-          // shadowColor: "#208edf",
-          // shadowBlur: 10,
-          color: "rgba(16,158,220,0.2)",
+          color: {
+          type: "linear",
+          x: 0,
+          y: 0,
+          x2: 0,
+          y2: 1,
+          colorStops: [
+            {
+              offset: 0,
+              color: "#4EE4FF",
+            },
+            {
+              offset: 1,
+              color: "rgba(2,23,44,0.8)", 
+            },
+          ],
         },
+      },
         label: {
           show: true,
           position: "top",
+          // formatter: "{c}",
+          formatter: (params: any) => `{glow|${params.value}}`,
           color: "#fff",
           fontSize: "1rem",
-          formatter: "{c}",
+          rich: {
+            glow: {
+              color: "#ffffff",
+              fontSize: 14,
+              textShadowColor: "#00bfff",
+              textShadowBlur: 12,
+            }
+          }
         },
         data: [189, 267, 112, 142, 118, 206, 189],
       },
       {
         type: "pictorialBar",
         symbol: "rect",
-        symbolSize: ["1rem", "4rem"],
+        symbolSize: [20, 4],
+        symbolOffset: [0, -25], 
+        symbolPosition: "end",
+        z: 10, 
         itemStyle: {
-          color: "rgba(16,158,220,1)",
+          color: "#4DE1FF",
         },
-        data: [
-        ],
+        data: [189, 267, 112, 142, 118, 206, 189], // 与主柱图一致
       },
     ],
   });
@@ -166,15 +162,13 @@
     box-sizing: border-box;
     @include Padding(10, 10, 10, 10);
     position: relative;
-    .title {
-      @include Width(510);
-      background-size: 100% 100%;
-      @include wHeight(34);
-      @include PaddingLeft(40);
-      @include PaddingTop(24);
-      box-sizing: border-box;
+    .chart-title {
       color: #fff;
-      @include FontSize(16);
+      @include FontSize(24);
+      // font-weight: bold;
+      margin-top: 8px;
+      text-align: center;
+      padding-left: 0; 
     }
     .content {
       width: 100%;

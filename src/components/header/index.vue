@@ -1,72 +1,11 @@
-<!--
- * @Author: your name
- * @Date: 2022-02-22 18:36:34
- * @LastEditTime: 2025-06-12 10:48:54
- * @LastEditors: viola
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \code\src\components\header\index.vue
--->
-<!-- header -->
+<!-- src/components/header/index.vue -->
 <template>
   <div class="header" v-show="UIShow">
     <div class="info">
-      <!-- <div class="time">
-        {{ date }}
-      </div>
-      <div class="time">
-        {{ day }}
-      </div>
-      <div class="time">
-        {{ time }}
-      </div> -->
-      <!-- <span class="line"></span>
-      <div class="weahtermon" @click="WeahterLink">
-        <span>
-          {{ "无警报电磁" }}
-        </span>
-      </div> -->
     </div>
-
-    <!-- <div class="logo" @click="reset"> -->
-      <img
-        src="@/assets/icons/oldversion/titlename.png"
-        alt="香港低空飛行服務平臺"
-         class="logo"
-      />
-    <!-- </div> -->
-
+      <img src="@/assets/icons/AtTitleBar/titlename.png" alt="香港低空飛行服務平臺" class="logo" />
     <div class="info-right">
       <div class="tool">
-        <!-- <div @click="eleMapClick">
-          <el-tooltip
-            popper-class="tip-popper"
-            class="box-item"
-            effect="dark"
-            content="加载vtpk"
-            placement="bottom"
-          >
-            <Icon
-              :color="eleMap ? '#7afafe' : '#fff'"
-              :font-size="25"
-              icon="tool-bar-ememap"
-            />
-          </el-tooltip>
-        </div> -->
-        <!-- <div @click="TechnologyClick">
-          <el-tooltip
-            popper-class="tip-popper"
-            class="box-item"
-            effect="dark"
-            content="科技"
-            placement="bottom"
-          >
-            <Icon
-              :color="Technologyshow ? '#7afafe' : '#fff'"
-              :font-size="25"
-              icon="tool-bar-keji"
-            />
-          </el-tooltip>
-        </div> -->
         <div @click="UIClick">
           <el-tooltip
             class="box-item"
@@ -152,9 +91,9 @@
 import Dayjs from "dayjs";
 // import { getWeather, getWeatherCityId, getWeatherPm2P5 } from "@/api/connect";
 import { computed, onMounted, onUnmounted, ref } from "vue";
-import { useWeatherStore } from "@/stores/weather";
+// import { useWeatherStore } from "@/stores/weather";
 import { useToolsStore } from "@/stores/tools";
-import { hideAllTreeInfo, showNeedTreeInfo } from "@/utils/showOrHideInfoTree";
+// import { hideAllTreeInfo, showNeedTreeInfo } from "@/utils/showOrHideInfoTree";
 
 // 工具点击事件
 const ToolsStore = useToolsStore();
@@ -301,7 +240,6 @@ onUnmounted(() => {
   width: 100%;
   top:0;
   @include hHeight(140);
-
   justify-content: center;
   @include FontSize(12);
   z-index: 10;
@@ -309,13 +247,9 @@ onUnmounted(() => {
     content: "";
     position: absolute;
     justify-content: center;
-
     width: 100%;
     top:0;
-    // @include Top
-
     @include wHeight(140);
-
     background: url("~@/assets/componentCard/header3.png") no-repeat;
     background-size: 100% 100%;
     opacity: 0.99;
@@ -337,21 +271,14 @@ onUnmounted(() => {
 
   .logo {
     @include Width(500);
-   height: auto;
-   top:0;
-    
+    height: auto;
+    top:0;
     text-align: center;
     position: absolute;
-   
     display: flex;
-   
     justify-content: center;
     // cursor: pointer;
     z-index: 1;
-    .title-img {
-    
-    }
-
     .tit {
       @include FontSize(32);
       @include LetterSpacing(3);
@@ -365,92 +292,4 @@ onUnmounted(() => {
     }
   }
 }
-// .left-bg {
-//   // @include Width(700);
-//   // @include hHeight(77);
-//   position: absolute;
-//   // @include Top(20);
-//   z-index: 20;
-//   // @include PaddingRight(60);
-//   // background: url("~@/assets/componentCard/Card_time.png")
-//   //   no-repeat;
-//   //   @include Width(488);
-//   //    background-size: contain;
-//   //    @include hHeight(70);
-// }
-
-// .left-bg {
-//   left: 0;
-//   // background: url('~@/assets/images/基础/top_left_bg@2x.png') no-repeat;
-//   background: url("~@/assets/componentCard/Card_time.png") no-repeat;
-//   background-size: 100% 100%;
-//   display: flex;
-//   //justify-content: center;
-//   align-items: center;
-
-//   .weather-box {
-//     @include PaddingLeft(20);
-//     display: flex;
-//     @include PaddingTop(20);
-
-//     .bg-box {
-//       background: url("~@/assets/images/基础/header/103@2x.png") no-repeat;
-//       background-size: 100% 100%;
-//       @include Width(47);
-//       @include hHeight(41);
-//       @include MarginRight(31);
-//     }
-//     .alarm-item {
-//       @include Padding(0, 22, 0, 20);
-//       //   border-left: 1.5px solid rgba(255, 255, 255, 0.4);
-//       @include hHeight(31);
-//       .label {
-//         //@include LineHeight(23);
-
-//         position: relative;
-//         @include Top(5);
-//         @include FontSize(20);
-//         color: rgba(255, 255, 255, 0.9);
-//         //   font-weight: bold;
-//         // z-index: 1;
-//       }
-//       .value {
-//         //@include LineHeight(23);
-//         position: relative;
-//         @include Bottom(-10);
-
-//         @include FontSize(20);
-//         color: rgba(255, 255, 255, 0.9);
-//       }
-//     }
-
-//     .weather-item {
-//       @include Padding(0, 22, 0, 22);
-//       border-left: 1.5px solid rgba(255, 255, 255, 0.4);
-//       @include hHeight(31);
-
-//       .label {
-//         //@include LineHeight(23);
-//         position: relative;
-//         @include Top(5);
-//         @include FontSize(20);
-//         color: rgba(255, 255, 255, 0.9);
-//         // font-weight: bold;
-//         // z-index: 1;
-//       }
-
-//       .value {
-//         //@include LineHeight(23);
-//         position: relative;
-//         @include Bottom(-10);
-
-//         @include FontSize(20);
-//         color: rgba(255, 255, 255, 0.9);
-//       }
-
-//       &:first-child {
-//       }
-//     }
-//   }
-// }
 </style>
