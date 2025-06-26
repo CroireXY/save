@@ -1,3 +1,4 @@
+<!-- src/components/V3Echarts/index.vue -->
 <template>
   <div class="container" :id="container" ref="chartRef"></div>
 </template>

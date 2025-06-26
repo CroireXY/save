@@ -1,3 +1,4 @@
+<!-- src/components/headerlink/index.vue -->
 <template>
   <div class="footer" v-show="UIShow">
     <div class="footer-bg"></div>
@@ -40,19 +41,28 @@ const Link: any = reactive([
   {
     name: "飞行活动",
     key: 1,
-    path: "/home/wisdomtwo",
+    path: "/home/flightActivity", 
   },
   {
     name: "航线管理",
     key: 2,
-    path: "/home/wisdomsix",
+    path: "/home/pathManagement", 
   },
   {
     name: "安全告警",
     key: 3,
-    path: "/home/contactOccurs",
+    path: "/home/safetyAlert", 
   },
-  
+  // {
+  //   name: "飞行活动",
+  //   key: 1,
+  //   path: "/home/wisdomtwo",
+  // },
+  // {
+  //   name: "航线管理",
+  //   key: 2,
+  //   path: "/home/wisdomsix",
+  // },
 ]);
 
 // 路由事件
@@ -75,44 +85,32 @@ onMounted(() => {
 <style lang="scss" scoped>
 .footer {
   position: absolute;
-  bottom: 0;
+  @include Bottom(0);
   width: 100%;
-  height: 160px;
+  @include wHeight(160);
   z-index: 10;
   pointer-events: none;
 
   .footer-bg {
     position: absolute;
-    bottom: 0px; 
-    left: 0;
+    @include Bottom(0);
+    @include Left(0);
     width: 100%;
     @include wHeight(140);
-    background: url("~@/assets/icons/oldversion/bottombg.png") no-repeat center bottom;
+    background: url("~@/assets/icons/BottomBar/bottombg.png") no-repeat center bottom;
     background-size: 100% 100%; 
     z-index: 1;
     opacity: 0.6;
   }
 
-  // .footer-button-bg {
-  //   position: absolute;
-  //   bottom: 0px; 
-  //   left: 50%;
-  //   transform: translateX(-50%);
-  //   @include Width(1364);
-  //   @include wHeight(80);
-  //   background: url("~@/assets/icons/oldversion/bottombuttonbg.png") no-repeat center center;
-  //   background-size: 100% 100%;
-  //   z-index: 2;
-  // }
-
   .footer_Box {
     position: absolute;
     width: auto;  
-    bottom: 25px;
+    @include Bottom(45);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    @include Gap(10);
     z-index: 3;
     pointer-events: auto;
 
@@ -121,39 +119,38 @@ onMounted(() => {
       @include wHeight(81);
       @include LineHeight(80);
       @include FontSize(32);
-      padding: 0 10px;
+      @include Padding(0,10,0,10);
       color: #4DE1FF;
       font-weight: bold;
       text-align: center;
       cursor: pointer;
-      background: url("~@/assets/icons/oldversion/bottombutton.png") no-repeat;
+      background: url("~@/assets/icons/BottomBar/bottombutton.png") no-repeat;
       background-size: 100% 100%;
 
       &:hover {
         color: rgba(255, 255, 255, 0.9);
-        background: url("~@/assets/icons/oldversion/bottombutton_hover.png") no-repeat;
+        background: url("~@/assets/icons/BottomBar/bottombutton_hover.png") no-repeat;
         background-size: 100% 100%;
       }
     }
 
     .isactive {
       color: rgba(255, 255, 255, 0.9);
-      background: url("~@/assets/icons/oldversion/bottombutton_hover.png") no-repeat;
+      background: url("~@/assets/icons/BottomBar/bottombutton_hover.png") no-repeat;
       background-size: 100% 100%;
     }
   }
 
   .footer-text {
     position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    color: white;
+    @include Bottom(15);
     @include FontSize(12);
+    width: 100%;
+    color: white;
+    text-align: center;
     z-index: 3;
     pointer-events: auto;
   }
 }
-
 
 </style>

@@ -26,13 +26,6 @@ const animate = computed(() => animatestore.$state.Animate);
   position: absolute;
   @include Width(560);
   height: 100%;
-  // border: 3px solid;
-
-
-
-  // background: url("~@/assets/images/基础/left_bg_dark@2x.png") no-repeat;
-  // background-size: 100% 100%;
-  // background-image: linear-gradient(to right,#0a2b44  ,#0a2b44B3,70%, #0a2b4400) ;
   @include Top(20);
   @include Left(0);
   box-sizing: border-box;
@@ -53,14 +46,12 @@ const animate = computed(() => animatestore.$state.Animate);
     position: absolute;
     left: 0;
     top: 0;
-    //  background: #021f2fc7;
-    // background:#113648;
     background-image: linear-gradient(
     to right,
-    rgba(0, 0, 0, 0.7) 20%,     
-    rgba(0, 0, 0, 0.6) 50%,  
-    rgba(0, 0, 0, 0.5) 60%, 
-    rgba(0, 0, 0, 0.3) 80%,  
+    rgba(0, 0, 0, 0.5) 20%,     
+    rgba(0, 0, 0, 0.4) 50%,  
+    rgba(0, 0, 0, 0.3) 60%, 
+    rgba(0, 0, 0, 0.2) 80%,  
     rgba(0, 0, 0, 0.0) 100%  
   );
     z-index: -1;

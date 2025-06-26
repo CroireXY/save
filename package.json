@@ -6,8 +6,8 @@
   "scripts": {
     "serve": "node ./scripts/prepare.js serve",
     "build": "node ./scripts/prepare.js build",
-    "serve17": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
-    "build17": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+    "serve17": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "build17": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
     "serve14": "vue-cli-service serve",
     "build14": "vue-cli-service build",
     "test:unit": "jest"
@@ -33,6 +33,7 @@
     "node-rtsp-stream": "^0.0.9",
     "pinia": "^2.0.4",
     "qweather-icons": "^1.1.0",
+    "register-service-worker": "^1.7.2",
     "swiper": "^7.4.1",
     "vue": "^3.2.13",
     "vue-fullscreen": "^3.1.3",
@@ -41,6 +42,7 @@
     "websocket": "^1.0.35"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-typescript": "^7.27.1",
     "@types/node": "^20.8.3",

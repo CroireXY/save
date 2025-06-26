@@ -1,14 +1,12 @@
 <!-- src/Views/home/HomePage/components/TakeoffLandingOverview.vue -->
 <template>
   <div class="card-wrapper">
-    <!-- 左边卡片：ApronInfo -->
     <div class="card">
       <p class="num">{{ leftCount }}</p>
       <p class="desc">{{ leftLabel }}</p>
       <VideoApronCard />
     </div>
 
-    <!-- 右边卡片：PathInfo -->
     <div class="card">
       <p class="num">{{ rightCount }}</p>
       <p class="desc">{{ rightLabel }}</p>
@@ -36,7 +34,7 @@ const rightLabel = ref('無人機航線');
   justify-content: space-between;
   align-items: center;
   @include boxhHeight(143);
-  @include Padding(30, 0, 0, 0); //上，右，下，左
+  @include Padding(40, 0, 0, 0); 
   box-sizing: border-box;
 }
 
@@ -47,33 +45,33 @@ const rightLabel = ref('無人機航線');
   background: url('~@/assets/icons/icons_TakeoffLandingOverview/cardbg.png') center center no-repeat;
   background-size: contain;
   background-color: transparent;
-  border-radius: 4px;
+  @include BorderRadius(4);
+  @include Padding(0, 0, 10, 40);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 25px;
   color: #ffffff;
   box-shadow: none;
 }
 .card:first-child {
-  margin-left: 10px; // 左边距更大
+  @include MarginLeft(10);
 }
 
 .card:last-child {
-  margin-right: 10px; // 右边距更大
+  @include MarginRight(10);
 }
 
 .num {
   @include FontSize(22);
+  @include MarginBottom(10);
   font-weight: bold;
-  margin-bottom: 6px;
   text-align: left;
 }
 
 .desc {
   @include FontSize(14);
+  @include MarginBottom(30);
   opacity: 0.85;
   text-align: left;
-  margin-bottom: 8px;
 }
 </style>

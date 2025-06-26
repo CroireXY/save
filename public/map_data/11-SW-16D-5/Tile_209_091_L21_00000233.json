@@ -1,0 +1,24 @@
+{
+    "asset": {
+        "generatetool": "kara",
+        "gltfUpAxis": "Z",
+        "version": "0.0"
+    },
+    "geometricError": 0.9375,
+    "root": {
+        "boundingVolume": {
+            "sphere": [
+                -2414210.8420643033,
+                5389514.903468467,
+                2401387.229454503,
+                15.347640991210938
+            ]
+        },
+        "children": null,
+        "content": {
+            "uri": "Tile_209_091_L21_00000233.b3dm"
+        },
+        "geometricError": 0.9375,
+        "refine": "REPLACE"
+    }
+}

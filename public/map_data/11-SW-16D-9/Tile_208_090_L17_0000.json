@@ -1,0 +1,40 @@
+{
+    "asset": {
+        "generatetool": "kara",
+        "gltfUpAxis": "Z",
+        "version": "0.0"
+    },
+    "geometricError": 15.0,
+    "root": {
+        "boundingVolume": {
+            "sphere": [
+                -2414116.8280458176,
+                5389648.699246826,
+                2401188.103730974,
+                107.85211181640625
+            ]
+        },
+        "children": [
+            {
+                "boundingVolume": {
+                    "sphere": [
+                        -2414116.408854775,
+                        5389646.831504924,
+                        2401187.361260623,
+                        108.18446350097656
+                    ]
+                },
+                "content": {
+                    "uri": "Tile_208_090_L18_00000.json"
+                },
+                "geometricError": 7.5,
+                "refine": "REPLACE"
+            }
+        ],
+        "content": {
+            "uri": "Tile_208_090_L17_0000.b3dm"
+        },
+        "geometricError": 15.0,
+        "refine": "REPLACE"
+    }
+}

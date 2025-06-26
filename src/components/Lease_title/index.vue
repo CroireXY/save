@@ -28,7 +28,6 @@ const props = defineProps({
   @include boxWidth(v-bind("props.width"));
   @include wHeight(64);
   overflow: hidden;
-  background-image: linear-gradient(to right, #266dab, #29455d);
   border-radius: 3px;
 
   clip-path: polygon(
@@ -37,24 +36,21 @@ const props = defineProps({
     0% 100%, 0% 12px
   );
 
-  &::after {
+  &::before {
     content: "";
-    width: 100%;
-    height: 100%;
     position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0.8;
+    inset: 0;
     z-index: -1;
+    background-image: linear-gradient(to right, rgba(38, 109, 171, 1), rgba(41, 69, 93, 0.5));
+    opacity: 0.7; 
   }
 
   .title-text {
     flex: 1;
-    @include MarginLeft(35);
+    @include MarginLeft(20);
     @include FontSize(28);
     position: relative;
-    // font-style: italic;
+    z-index: 1; 
   }
 }
-
 </style>

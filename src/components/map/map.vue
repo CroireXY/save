@@ -16,7 +16,7 @@ import { useMapStore } from "@/stores/map";
 import { fetchWithAuth } from "@/utils/auth";
 import { getFlightRecordInDetails } from "@/api/connect";
 import websocketServer from "@/tools/websocket";
-import droneIcon from "@/assets/icons/icons_OnMap/drone.png";
+import droneIcon from "@/assets/icons/icons_OnMap/Drone.png"; // 替换为实际的无人机图标路径
 // import eventBus from "@/utils/eventBus";
 let viewer: Cesium.Viewer; // 在 setup 外部函数也能访问
 const mapStore = useMapStore();
@@ -41,10 +41,11 @@ let skyBox = new Cesium.SkyBox({
   },
 });
 const urls = [
+  '/map_data/tileset.json',
   // "http://localhost:9000/11-SW-16B/tileset.json",
-  "http://localhost:9000/11-SW-16D/tileset.json",
+  // "http://localhost:9000/11-SW-16D/tileset.json",
   // "http://localhost:9000/11-SW-17A/tileset.json",
-  "http://localhost:9000/11-SW-17C/tileset.json",
+  // "http://localhost:9000/11-SW-17C/tileset.json",
   // "http://localhost:9000/11-SW-21B/tileset.json",
   // "http://localhost:9000/11-SW-22A/tileset.json",
   // '/map/area2/tileset.json',
@@ -87,7 +88,6 @@ onMounted(() => {
   // });
   // viewer.scene.light.color = new Cesium.Color(0.8, 0.8, 0.8, 1.0);
   // viewer.scene.light.intensity = 2.8;
-
   watch(
     [
       () => mapStore.Drone2DShow,
@@ -231,11 +231,9 @@ onMounted(() => {
     duration: 3,
   });
   const center = Cesium.Cartesian3.fromDegrees(114.130165, 22.260256, 1300); // 观察目标点（注意高度可以为 0）
-
   const heading = Cesium.Math.toRadians(0);
   const pitch = Cesium.Math.toRadians(-45);
   const range = 1300; // 距离目标点 1300 米
-
   // viewer.camera.lookAt(
   //   center,
   //   new Cesium.HeadingPitchRange(heading, pitch, range)
@@ -278,7 +276,6 @@ function addModel(
 async function addLayer() {
   let tileset = new Cesium.Cesium3DTileset({
     // url:'/map_data/tileset.json',
-
     url: "https://data.map.gov.hk/api/3d-data/3dtiles/f2/tileset.json?key=3967f8f365694e0798af3e7678509421",
   });
   await tileset.readyPromise;
@@ -401,7 +398,6 @@ function onDrone3DShowChanged(
       // entity.position = new Cesium.ConstantPositionProperty(
       //   Cesium.Cartesian3.fromDegrees(lon, lat, alt)
       // );
-
       const currentPos =
         entity.position?.getValue(Cesium.JulianDate.now()) ??
         Cesium.Cartesian3.fromDegrees(lon, lat, alt);
@@ -435,7 +431,7 @@ function onDrone3DShowChanged(
         //     show: true,
         //   },
         label: {
-          text: "无人机编号001",
+          text: "無人機D001",
           // font: "14px ",
           // fillColor: Cesium.Color.AQUA,
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),
@@ -466,25 +462,22 @@ function onDrone3DShowChanged(
     });
 
     // viewer.trackedEntity = entity;
-
     // // 添加标签（文字）
     // const labelCollection = viewer.scene.primitives.add(
     //   new Cesium.LabelCollection()
     // );
-
     // const label = labelCollection.add({
     //   position: Cesium.Cartesian3.add(
     //     Cesium.Cartesian3.fromDegrees(lon, lat, alt),
     //     new Cesium.Cartesian3(0, 0, 0), // 向上偏移 50 米，避免重叠
     //     new Cesium.Cartesian3()
     //   ),
-    //   text: "无人机编号001",
+    //   text: "無人機D001",
     //   font: "14px sans-serif",
     //   fillColor: Cesium.Color.CYAN,
     //   pixelOffset: new Cesium.Cartesian2(0, -30),
     //   show: true,
     // });
-
     // addModel("/3d_icon/drones.glb", 114.130165, 22.260256, 100);
   } else {
     viewer.scene.primitives.remove(drone3dEntity);
@@ -502,7 +495,6 @@ function moveEntitySmoothly(
   function animate(currentTime: number) {
     const elapsed = currentTime - startTime;
     const t = Math.min(elapsed / duration, 1); // 0 到 1 之间
-
     // 插值计算
     const interpolated = Cesium.Cartesian3.lerp(
       start,
@@ -610,7 +602,6 @@ async function onFlightPathShowChanged(value: boolean) {
       viewer.clock.multiplier = 50;
       viewer.clock.shouldAnimate = true;
       const positionProperty = new Cesium.SampledPositionProperty(); // 创建动态位置属性，表示飞机在时间轴上的位置变化，用于动态飞行轨迹、播放飞行动画
-
       for (let i = 0; i < flightData.length; i++) {
         const dataPoint = flightData[i];
         const time = Cesium.JulianDate.addSeconds(
@@ -680,7 +671,6 @@ async function onFlightPathShowChanged(value: boolean) {
         //   silhouetteSize: 2, // 设置模型轮廓（边框）大小
         //   runAnimations: true, // 是否执行模型动画
         //   scale: 1.0, // 应用于图像的统一比例。比例大于会1.0放大标签，而比例小于会1.0缩小标签。
-
         //   distanceDisplayCondition: new Cesium.DistanceDisplayCondition( // 显示在距相机的距离处的属性，多少区间内是可以显示的
         //     0,
         //     3000
@@ -703,7 +693,7 @@ async function onFlightPathShowChanged(value: boolean) {
           lightColor: Cesium.Color.GREY, // 模型光照颜色
         },
         label: {
-          text: "无人机编号001",
+          text: "無人機D001",
           // font: "14px ",
           // fillColor: Cesium.Color.AQUA,
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),
