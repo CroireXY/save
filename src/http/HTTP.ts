@@ -1,24 +1,33 @@
+/*
+ * @Author: Sun ruiqi
+ * @Date: 2025-05-12 06:15:48
+ * @LastEditors: viola
+ * @LastEditTime: 2025-06-26 10:56:28
+ * @FilePath: \code\src\http\HTTP.ts
+ */
 import axios from "axios";
-import {getToken} from "@/http/auth";
+import {getToken} from "@/utils/auth";
 
 // create an axios instance
 const request = axios.create({
-	// baseURL: process.env.VUE_APP_URL,
+	baseURL: 'http://lae.lscm.hk/fsp',
 	//   baseURL: 'https://easy-mock.bookset.io/mock/5e90379d00bfc566e5bb1acb/example',
 	// withCredentials: true,  // 跨域请求时发送cookie
 	timeout: 60000,
+	
 });
 
-const TOKEN = getToken(); // 获取token
+// const TOKEN = await getToken(); // 获取token
 
 // 请求拦截器
 request.interceptors.request.use(
-		(config: any) => {
+		async(config: any) => {
+			 const TOKEN = await getToken(); // ✅ 放在这里没问题
 			if (TOKEN) {
 				// let each request carry token
 				// ['X-Token'] is a custom headers key
 				// please modify it according to the actual situation
-				config.headers["Authorization"] = TOKEN;
+				config.headers["Authorization"] = `Bearer ${TOKEN}`;
 			}
 
 			// 扩展管理--expands:[]
@@ -77,7 +86,7 @@ request.interceptors.response.use(
 			//   return res
 			// }
 
-			return response.data;
+			return response;
 		},
 		(error) => {
 			const data = error.response.data;

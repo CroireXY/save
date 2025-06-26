@@ -1,5 +1,44 @@
-// import axios from "@/http/HTTP";
+/*
+ * @Author: Sun ruiqi
+ * @Date: 2025-05-12 09:31:19
+ * @LastEditors: viola
+ * @LastEditTime: 2025-06-26 12:01:46
+ * @FilePath: \code\src\api\connect.ts
+ */
+import axios from "@/http/HTTP";
+import qs from "qs";
 // import {Mock, Service} from "@/http/service";
+function getCurrentTimeString(): string {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const MM = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  const HH = String(now.getHours()).padStart(2, "0");
+  const mm = String(now.getMinutes()).padStart(2, "0");
+
+  return `${yyyy}${MM}${dd}${HH}${mm}`;
+}
+const timeString = getCurrentTimeString();
+
+export function getWeather(params: any) {
+  return axios.get(`/api/getWeather?time=${timeString}`, {
+    params,
+    paramsSerializer: (params) =>
+      qs.stringify(params, { arrayFormat: "repeat" }),
+  });
+}
+
+export function getWeatherStation(params: any) {
+  return axios.get("/api/getWeatherStation", {
+    params,
+  });
+}
+
+export function getFlightRecordInDetails(params:any){
+    return axios.get("/api/getFlightRecordInDetails", {
+    params,
+});
+}
 
 // export const getMockData = () => {
 // 	return axios.get(Mock.aircity + "/test.json");
@@ -29,4 +68,3 @@
 // 			`/v7/air/now?location=${id}&key=c9ababc26a504434b6fc709c2005e503`
 // 	);
 // };
-

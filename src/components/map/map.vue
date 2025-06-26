@@ -13,8 +13,8 @@ import * as Cesium from "cesium";
 import "../../Widgets/widgets.css";
 import { onMounted, watch, watchEffect, ref } from "vue";
 import { useMapStore } from "@/stores/map";
-import axios from "axios";
 import { fetchWithAuth } from "@/utils/auth";
+import { getFlightRecordInDetails } from "@/api/connect";
 import websocketServer from "@/tools/websocket";
 import droneIcon from "@/assets/icons/icons_OnMap/drone.png";
 // import eventBus from "@/utils/eventBus";
@@ -158,28 +158,26 @@ onMounted(() => {
     console.log("🔌 WebSocket closed");
   };
 
-  urls.forEach((url) => {
-    const tileset = new Cesium.Cesium3DTileset({ url, projectTo2D: true });
-    viewer.scene.primitives.add(tileset);
+  // urls.forEach((url) => {
+  //   const tileset = new Cesium.Cesium3DTileset({ url, projectTo2D: true });
+  //   viewer.scene.primitives.add(tileset);
 
-    tileset.readyPromise.then(() => {
-      console.log("Loaded tileset:", url);
-      const boundingSphere = tileset.boundingSphere;
-      const radius = boundingSphere.radius;
+  //   tileset.readyPromise.then(() => {
+  //     console.log("Loaded tileset:", url);
+  //     const boundingSphere = tileset.boundingSphere;
+  //     const radius = boundingSphere.radius;
 
-      const z = tileset.boundingSphere.center.z;
-      //  tileset.shadows = Cesium.ShadowMode.ENABLED;
+  //     const z = tileset.boundingSphere.center.z;
+  //     //  tileset.shadows = Cesium.ShadowMode.ENABLED;
 
-      // 设置最小缩放距离为模型半径的一部分，避免穿模
-      viewer.scene.screenSpaceCameraController.minimumZoomDistance =
-        radius * 0.05;
+  //     // 设置最小缩放距离为模型半径的一部分，避免穿模
+  //     viewer.scene.screenSpaceCameraController.minimumZoomDistance =
+  //       radius * 0.05;
 
-      // viewer.scene.light = new Cesium.DirectionalLight({
-      //   direction: new Cesium.Cartesian3(-1, -1, -1),
-      // });
-    });
-  });
-  // addLayer();
+  //   });
+  // });
+
+  addLayer();
 
   // 设置阴影
   // viewer.shadows = true;
@@ -187,17 +185,51 @@ onMounted(() => {
   // viewer.scene.shadowMap.darkness = 0.4; // 阴影透明度
   // viewer.scene.shadowMap.size = 2048; // 阴影清晰度
   viewer.scene.screenSpaceCameraController.enableCollisionDetection = true; //不允许去地下
+  var ambientOcclusion = viewer.scene.postProcessStages.ambientOcclusion;
+  ambientOcclusion.enabled = true;
+  ambientOcclusion.uniforms.ambientOcclusionOnly = false;
+  ambientOcclusion.uniforms.intensity = 3;
+  ambientOcclusion.uniforms.bias = 0.1;
+  ambientOcclusion.uniforms.lengthCap = 0.03;
+  ambientOcclusion.uniforms.stepSize = 1;
+  ambientOcclusion.uniforms.blurStepSize = 0.86;
 
-  // viewer.camera.flyTo({
-  //   // lng, lat, alt
-  //   destination: Cesium.Cartesian3.fromDegrees(114.130165, 22.260256, 1300),
-  //    orientation: {
-  //   heading: Cesium.Math.toRadians(0),         // 朝向角（东为0，逆时针）
-  //   pitch: Cesium.Math.toRadians(-45),         // 倾斜角：0是垂直向下，-90是水平
-  //   roll: 0,
-  // },
-  //   duration: 3,
-  // });
+  viewer.scene.globe.enableLighting = true; // 开启全球光照
+  // viewer.shadows = true;
+
+  var fs =
+    "uniform sampler2D colorTexture;\n" +
+    "varying vec2 v_textureCoordinates;\n" +
+    "uniform float scale;\n" +
+    "uniform vec3 offset;\n" +
+    "void main() {\n" +
+    "    vec4 color = texture2D(colorTexture, v_textureCoordinates);\n" + //获取片段颜色
+    "    gl_FragColor = vec4(color.rgb * scale + offset, 10.0);\n" +
+    "}\n"; //放大片段颜色系数
+
+  viewer.scene.postProcessStages.add(
+    new Cesium.PostProcessStage({
+      fragmentShader: fs,
+      uniforms: {
+        scale: 1.2,
+        offset: function () {
+          // return new Cesium.Cartesian3(0.1, 0.2, 0.3);
+          return new Cesium.Cartesian3(0.01, 0.02, 0.03);
+        },
+      },
+    })
+  );
+
+  viewer.camera.flyTo({
+    // lng, lat, alt
+    destination: Cesium.Cartesian3.fromDegrees(114.130165, 22.260256, 1300),
+    orientation: {
+      heading: Cesium.Math.toRadians(0), // 朝向角（东为0，逆时针）
+      pitch: Cesium.Math.toRadians(-45), // 倾斜角：0是垂直向下，-90是水平
+      roll: 0,
+    },
+    duration: 3,
+  });
   const center = Cesium.Cartesian3.fromDegrees(114.130165, 22.260256, 1300); // 观察目标点（注意高度可以为 0）
 
   const heading = Cesium.Math.toRadians(0);
@@ -252,8 +284,6 @@ async function addLayer() {
   await tileset.readyPromise;
   const boundingSphere = tileset.boundingSphere;
   const radius = boundingSphere.radius;
- 
-
 
   // 设置最小缩放距离为模型半径的一部分，避免穿模
   // if (viewer.value) {
@@ -324,7 +354,7 @@ async function onDrone2DShowChanged(val: boolean) {
           label: {
             text: name,
             font: "14px sans-serif",
-            fillColor: Cesium.Color.fromCssColorString('#4de1ff'),
+            fillColor: Cesium.Color.fromCssColorString("#4de1ff"),
             pixelOffset: new Cesium.Cartesian2(0, -35),
             show: true,
           },
@@ -385,7 +415,7 @@ function onDrone3DShowChanged(
         model: {
           uri: "/3d_icon/drones.glb",
           scale: 2,
-          color: Cesium.Color.fromCssColorString('#4de1ff'), // 颜色和透明度
+          color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
           colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
           colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
           minimumPixelSize: 64,
@@ -393,7 +423,6 @@ function onDrone3DShowChanged(
           silhouetteColor: Cesium.Color.BLACK,
           silhouetteSize: 4,
           shadows: Cesium.ShadowMode.ENABLED,
-          
         },
         //  billboard: {
         //     image: droneIcon, // 替换为实际的无人机图标路径
@@ -412,7 +441,7 @@ function onDrone3DShowChanged(
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),
           // show: true,
           font: "bold 20px Arial",
-          fillColor: Cesium.Color.fromCssColorString('#4de1ff'),
+          fillColor: Cesium.Color.fromCssColorString("#4de1ff"),
           outlineColor: Cesium.Color.BLACK,
           outlineWidth: 0.3,
           style: Cesium.LabelStyle.FILL_AND_OUTLINE,
@@ -499,20 +528,15 @@ async function onFlightPathShowChanged(value: boolean) {
   if (value) {
     mapStore.setFlightPathShow(true);
     try {
-      // const { data } = await axios.get(
-      //   "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250401000000&etime=20250530235959&recordId=1",
-      //   {
-      //     headers: {
-      //       Authorization:
-      //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsc2NtIiwiYWRtaW5JZCI6MSwiaWF0IjoxNzQ5MTM2MTA1LCJleHAiOjE3NDkxNzkzMDV9.41TDAoEODVBnaQjY-LRPCB-lpZQsEijtJufPHPNovDg",
-      //     },
-      //   }
-      // );
-      // const res = await fetchWithAuth( "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250401000000&etime=20250530235959&recordId=1");
-      const res = await fetchWithAuth(
-        "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250529143106&etime=20250529143511&recordId=2&offset=0"
-      ); //一条往返数据
-
+      // const res = await fetchWithAuth(
+      //   "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250529143106&etime=20250529143511&recordId=2&offset=0"
+      // ); //一条往返数据
+      const res = await getFlightRecordInDetails({
+        stime: "20250529143106",
+        etime: "20250529143511",
+        recordId: 2,
+        offset: 0,
+      });
       const data = await res.data;
       if (data.responseCode !== 200 || !Array.isArray(data.body)) {
         console.error("接口数据异常");
@@ -663,19 +687,20 @@ async function onFlightPathShowChanged(value: boolean) {
         //   ),
         //   show: true,
         // },
-       
+
         model: {
           uri: "/3d_icon/drones.glb",
           scale: 1.5,
-          color: Cesium.Color.fromCssColorString('#4de1ff'), // 颜色和透明度
+          color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
           colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
           colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
           minimumPixelSize: 48,
+          maximumScale: 20000, // 模型的最大比例大小
 
           silhouetteColor: Cesium.Color.BLACK,
           silhouetteSize: 4,
-          shadows: Cesium.ShadowMode.ENABLED,
-          
+          // shadows: Cesium.ShadowMode.ENABLED,
+          lightColor: Cesium.Color.GREY, // 模型光照颜色
         },
         label: {
           text: "无人机编号001",
@@ -684,7 +709,7 @@ async function onFlightPathShowChanged(value: boolean) {
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),
           // show: true,
           font: "bold 20px Arial",
-          fillColor: Cesium.Color.fromCssColorString('#4de1ff'),
+          fillColor: Cesium.Color.fromCssColorString("#4de1ff"),
           outlineColor: Cesium.Color.BLACK,
           outlineWidth: 0.3,
           style: Cesium.LabelStyle.FILL_AND_OUTLINE,

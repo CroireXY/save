@@ -110,6 +110,7 @@ import mainPanel from "@/Views/home/main/index.vue";
 // import VideoTest2 from "@/Views/home/HomePage/components/Video/VideoTest2.vue";
 
 import { ref } from "vue";
+import { getWeather } from "@/api/connect";
 const isOkRef = ref(false);
 declare const Native: any;
 
@@ -133,15 +134,25 @@ const SkyBoxShow = computed(() => ToolsStore.$state.SkyBoxShow);
 const WeatherShow = computed(() => ToolsStore.$state.WeatherShow);
 const BuildShow = computed(() => ToolsStore.$state.BuildShow);
 const TooBarShow = computed(() => ToolsStore.TooBarShow);
-
+const weatherData = ref(null)
 const back = () => {
   const val = !UIShow.value;
   ToolsStore.SetUIShow(val);
   __g.settings.setMainUIVisibility(!val);
 };
 
-onMounted(() => {
+onMounted(async() => {
+  // const stations
   console.log(Route.path, "route");
+   try {
+    const res = await getWeather({
+      station: ['Sha Tin','Tuen Mun'],
+    })
+    weatherData.value = res.data
+    console.log('天气接口返回数据:', res.data)
+  } catch (error) {
+    console.error('天气接口请求失败:', error)
+  }
 });
 defineProps({
   msg: {
