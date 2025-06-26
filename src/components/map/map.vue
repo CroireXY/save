@@ -88,6 +88,13 @@ onMounted(() => {
   // });
   // viewer.scene.light.color = new Cesium.Color(0.8, 0.8, 0.8, 1.0);
   // viewer.scene.light.intensity = 2.8;
+
+  // viewer.scene.globe.enableLighting = true;
+  // viewer.scene.light = new Cesium.DirectionalLight({
+  //   direction: new Cesium.Cartesian3(0.354925, -1.1290918, -0.383358),
+  // });
+  // viewer.scene.light.color = new Cesium.Color(0.8, 0.8, 0.8, 1.0);
+  // viewer.scene.light.intensity = 2.8;
   watch(
     [
       () => mapStore.Drone2DShow,
@@ -168,7 +175,18 @@ onMounted(() => {
       const radius = boundingSphere.radius;
 
       const z = tileset.boundingSphere.center.z;
-      //  tileset.shadows = Cesium.ShadowMode.ENABLED;
+
+      // const color =
+      //   z >= 2500000
+      //     ? Cesium.Color.BLUE
+      //     : z >= 2400000
+      //     ? Cesium.Color.LIGHTBLUE
+      //     : Cesium.Color.GRAY;
+
+      // tileset.style = new Cesium.Cesium3DTileStyle({
+      //   color: `color('${color.toCssColorString()}')`,
+      // });
+
       // 设置最小缩放距离为模型半径的一部分，避免穿模
       viewer.scene.screenSpaceCameraController.minimumZoomDistance =
         radius * 0.05;
@@ -179,30 +197,8 @@ onMounted(() => {
     });
   });
   // addLayer();
-  // 设置阴影
-  // viewer.shadows = true;
-  // viewer.scene.shadowMap.enabled = true;
-  // viewer.scene.shadowMap.darkness = 0.4; // 阴影透明度
-  // viewer.scene.shadowMap.size = 2048; // 阴影清晰度
+  // viewer.scene.screenSpaceCameraController.minimumZoomDistance = 10;
   viewer.scene.screenSpaceCameraController.enableCollisionDetection = true; //不允许去地下
-  // viewer.camera.flyTo({
-  //   // lng, lat, alt
-  //   destination: Cesium.Cartesian3.fromDegrees(114.130165, 22.260256, 1300),
-  //    orientation: {
-  //   heading: Cesium.Math.toRadians(0),         // 朝向角（东为0，逆时针）
-  //   pitch: Cesium.Math.toRadians(-45),         // 倾斜角：0是垂直向下，-90是水平
-  //   roll: 0,
-  // },
-  //   duration: 3,
-  // });
-  const center = Cesium.Cartesian3.fromDegrees(114.130165, 22.260256, 1300); // 观察目标点（注意高度可以为 0）
-  const heading = Cesium.Math.toRadians(0);
-  const pitch = Cesium.Math.toRadians(-45);
-  const range = 1300; // 距离目标点 1300 米
-  // viewer.camera.lookAt(
-  //   center,
-  //   new Cesium.HeadingPitchRange(heading, pitch, range)
-  // );
   viewer.camera.flyTo({
     destination: center,
     orientation: {
@@ -358,126 +354,24 @@ function onDrone3DShowChanged(
     return;
   }
   if (val) {
-    const length = drone.length;
+    var modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
+      Cesium.Cartesian3.fromDegrees(114.130165, 22.260256, 100)
+    );
 
-    const entity = viewer.entities.getById(id);
-    if (entity) {
-      // entity.position = new Cesium.ConstantPositionProperty(
-      //   Cesium.Cartesian3.fromDegrees(lon, lat, alt)
-      // );
-      const currentPos =
-        entity.position?.getValue(Cesium.JulianDate.now()) ??
-        Cesium.Cartesian3.fromDegrees(lon, lat, alt);
-      const targetPos = Cesium.Cartesian3.fromDegrees(lon, lat, alt);
-
-      moveEntitySmoothly(entity, currentPos, targetPos, 2000); // 1秒平滑移动
-    } else {
-      drone[length] = viewer.entities.add({
-        id: id || "drone3d", // 推荐用唯一id
-        position: Cesium.Cartesian3.fromDegrees(lon, lat, alt),
-        model: {
-          uri: "/3d_icon/drones.glb",
-          scale: 2,
-          color: Cesium.Color.fromCssColorString('#4de1ff'), // 颜色和透明度
-          colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
-          colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
-          minimumPixelSize: 64,
-
-          silhouetteColor: Cesium.Color.BLACK,
-          silhouetteSize: 4,
-          shadows: Cesium.ShadowMode.ENABLED,
-          
-        },
-        //  billboard: {
-        //     image: droneIcon, // 替换为实际的无人机图标路径
-        //     width: 50,
-        //     height: 50,
-        //     scale: 0.8,
-        //     verticalOrigin: Cesium.VerticalOrigin.CENTER,
-        //     horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-        //     // pixelOffset: new Cesium.Cartesian2(10, 0),
-        //     show: true,
-        //   },
-        label: {
-          text: "無人機D001",
-          // font: "14px ",
-          // fillColor: Cesium.Color.AQUA,
-          pixelOffset: new Cesium.Cartesian3(0, -35, 30),
-          // show: true,
-          font: "bold 20px Arial",
-          fillColor: Cesium.Color.fromCssColorString('#4de1ff'),
-          outlineColor: Cesium.Color.BLACK,
-          outlineWidth: 0.3,
-          style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-          heightReference: Cesium.HeightReference.NONE,
-          scale: 0.8,
-          disableDepthTestDistance: Number.POSITIVE_INFINITY, // 防止被遮挡
-        },
-      });
-    }
-    let delta = 0;
-    viewer.scene.preRender.addEventListener(() => {
-      delta += 0.02;
-      const offset = Math.sin(delta) * 3; // 上下浮动 ±3 米
-      const updatedPos = Cesium.Cartesian3.fromDegrees(lon, lat, alt + offset);
-      // entity.position = new Cesium.ConstantPositionProperty(updatedPos);
-      drone.forEach((e) => {
-        // if (e.id === id) {
-        e.position = new Cesium.ConstantPositionProperty(updatedPos);
-        // }
-      });
-    });
-
-    // viewer.trackedEntity = entity;
-    // // 添加标签（文字）
-    // const labelCollection = viewer.scene.primitives.add(
-    //   new Cesium.LabelCollection()
-    // );
-    // const label = labelCollection.add({
-    //   position: Cesium.Cartesian3.add(
-    //     Cesium.Cartesian3.fromDegrees(lon, lat, alt),
-    //     new Cesium.Cartesian3(0, 0, 0), // 向上偏移 50 米，避免重叠
-    //     new Cesium.Cartesian3()
-    //   ),
-    //   text: "無人機D001",
-    //   font: "14px sans-serif",
-    //   fillColor: Cesium.Color.CYAN,
-    //   pixelOffset: new Cesium.Cartesian2(0, -30),
-    //   show: true,
-    // });
+    drone3dEntity = viewer.scene.primitives.add(
+      Cesium.Model.fromGltf({
+        //Gltf和glb模型都用fromGltf
+        url: "/3d_icon/drones.glb",
+        modelMatrix: modelMatrix,
+        minimumPixelSize: 64,
+        maximumScale: 20000,
+        scale: 0.05,
+      })
+    );
     // addModel("/3d_icon/drones.glb", 114.130165, 22.260256, 100);
   } else {
     viewer.scene.primitives.remove(drone3dEntity);
   }
-}
-
-function moveEntitySmoothly(
-  entity: Cesium.Entity,
-  start: Cesium.Cartesian3,
-  end: Cesium.Cartesian3,
-  duration = 1000
-) {
-  const startTime = performance.now();
-
-  function animate(currentTime: number) {
-    const elapsed = currentTime - startTime;
-    const t = Math.min(elapsed / duration, 1); // 0 到 1 之间
-    // 插值计算
-    const interpolated = Cesium.Cartesian3.lerp(
-      start,
-      end,
-      t,
-      new Cesium.Cartesian3()
-    );
-    entity.position = new Cesium.ConstantPositionProperty(interpolated);
-
-    if (t < 1) {
-      requestAnimationFrame(animate);
-    }
-  }
-
-  requestAnimationFrame(animate);
 }
 
 let points: Cesium.Entity[] = [];
@@ -633,51 +527,21 @@ async function onFlightPathShowChanged(value: boolean) {
         ]), // 实体存在的时间范围：start--stop时间段可见
         position: positionProperty, // 动态位置属性
         // path: new Cesium.PathGraphics({ width: 3 }), // 轨迹线样式，绘制出该实体的“飞行轨迹”
-        // model: {
-        //   // 3d模型
-        //   uri: "/3d_icon/drones.glb",
-        //   minimumPixelSize: 64,
-        //   color: Cesium.Color.WHITE.withAlpha(1),
-        //   maximumScale: 20000, // 模型的最大比例大小
-        //   silhouetteColor: Cesium.Color.BLACK, // 设置模型轮廓（边框）颜色
-        //   silhouetteSize: 2, // 设置模型轮廓（边框）大小
-        //   runAnimations: true, // 是否执行模型动画
-        //   scale: 1.0, // 应用于图像的统一比例。比例大于会1.0放大标签，而比例小于会1.0缩小标签。
-        //   distanceDisplayCondition: new Cesium.DistanceDisplayCondition( // 显示在距相机的距离处的属性，多少区间内是可以显示的
-        //     0,
-        //     3000
-        //   ),
-        //   show: true,
-        // },
-       
         model: {
           uri: "/3d_icon/drones.glb",
-          scale: 1.5,
-          color: Cesium.Color.fromCssColorString('#4de1ff'), // 颜色和透明度
-          colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
-          colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
-          minimumPixelSize: 48,
+          minimumPixelSize: 64,
+          color: Cesium.Color.WHITE.withAlpha(1),
+          maximumScale: 20000, // 模型的最大比例大小
+          silhouetteColor: Cesium.Color.BLACK, // 设置模型轮廓（边框）颜色
+          silhouetteSize: 2, // 设置模型轮廓（边框）大小
+          runAnimations: true, // 是否执行模型动画
+          scale: 1.0, // 应用于图像的统一比例。比例大于会1.0放大标签，而比例小于会1.0缩小标签。
 
-          silhouetteColor: Cesium.Color.BLACK,
-          silhouetteSize: 4,
-          shadows: Cesium.ShadowMode.ENABLED,
-          
-        },
-        label: {
-          text: "無人機D001",
-          // font: "14px ",
-          // fillColor: Cesium.Color.AQUA,
-          pixelOffset: new Cesium.Cartesian3(0, -35, 30),
-          // show: true,
-          font: "bold 20px Arial",
-          fillColor: Cesium.Color.fromCssColorString('#4de1ff'),
-          outlineColor: Cesium.Color.BLACK,
-          outlineWidth: 0.3,
-          style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-          heightReference: Cesium.HeightReference.NONE,
-          scale: 0.8,
-          disableDepthTestDistance: Number.POSITIVE_INFINITY, // 防止被遮挡
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition( // 显示在距相机的距离处的属性，多少区间内是可以显示的
+            0,
+            3000
+          ),
+          show: true,
         },
       });
 
