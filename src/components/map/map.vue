@@ -16,6 +16,7 @@ import { useMapStore } from "@/stores/map";
 import axios from "axios";
 import { fetchWithAuth } from "@/utils/auth";
 import websocketServer from "@/tools/websocket";
+import droneIcon from "@/assets/icons/icons_OnMap/drone.png";
 // import eventBus from "@/utils/eventBus";
 let viewer: Cesium.Viewer; // 在 setup 外部函数也能访问
 const mapStore = useMapStore();
@@ -40,14 +41,15 @@ let skyBox = new Cesium.SkyBox({
   },
 });
 const urls = [
+  '/map_data/tileset.json',
   // "http://localhost:9000/11-SW-16B/tileset.json",
   // "http://localhost:9000/11-SW-16D/tileset.json",
   // "http://localhost:9000/11-SW-17A/tileset.json",
   // "http://localhost:9000/11-SW-17C/tileset.json",
   // "http://localhost:9000/11-SW-21B/tileset.json",
   // "http://localhost:9000/11-SW-22A/tileset.json",
-  '/map_data/tileset.json',
-  // '/map_data/11-SW-16B/tileset.json'
+  // '/map/area2/tileset.json',
+  // '/map_data/area3/tileset.json'
 ];
 const ws = new websocketServer("ws://lae.lscm.hk/fsp/websocketConnection");
 
@@ -397,7 +399,7 @@ function onDrone3DShowChanged(
         //     show: true,
         //   },
         label: {
-          text: "无人机编号001",
+          text: "無人機D001",
           // font: "14px ",
           // fillColor: Cesium.Color.AQUA,
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),
@@ -438,7 +440,7 @@ function onDrone3DShowChanged(
     //     new Cesium.Cartesian3(0, 0, 0), // 向上偏移 50 米，避免重叠
     //     new Cesium.Cartesian3()
     //   ),
-    //   text: "无人机编号001",
+    //   text: "無人機D001",
     //   font: "14px sans-serif",
     //   fillColor: Cesium.Color.CYAN,
     //   pixelOffset: new Cesium.Cartesian2(0, -30),
@@ -662,7 +664,7 @@ async function onFlightPathShowChanged(value: boolean) {
           
         },
         label: {
-          text: "无人机编号001",
+          text: "無人機D001",
           // font: "14px ",
           // fillColor: Cesium.Color.AQUA,
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),

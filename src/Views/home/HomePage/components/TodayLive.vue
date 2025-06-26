@@ -76,10 +76,8 @@ const infoList = [
 <style lang="scss" scoped>
 .grid-box {
   display: grid;
-  // grid-template-columns: repeat(2, 1fr);
   grid-template-columns: 1fr 1fr;
-  row-gap: 5px;
-  // column-gap: 24px;
+  @include GridGap(15, 0);
   @include Padding(20, 20, 10, 30);
   width: 100%;
   box-sizing: border-box;
@@ -91,8 +89,7 @@ const infoList = [
   align-items: center;
   height: auto;
   box-sizing: border-box;
-  // margin-left: 5px;
-  padding: 8px 8px;
+  @include Padding(8, 8, 8, 8);
   @include Width(218);
   @include wHeight(128);
 }
@@ -100,7 +97,7 @@ const infoList = [
 .icon-box {
   @include Width(84);
   @include wHeight(84);
-  margin-right: 5px;
+  @include MarginRight(5);
   flex-shrink: 0;
 
   img {
@@ -116,17 +113,17 @@ const infoList = [
   justify-content: center;
 
   .value {
-    @include FontSize(32);
     color: #ffffff;
     font-weight: bold;
-    line-height: 1.2;
+    @include FontSize(32);
+    @include LineHeight(35);
   }
 
   .name {
-    @include FontSize(18);
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.2;
-    margin-top: 3px;
+    @include FontSize(18);
+    @include LineHeight(35);
+    @include MarginTop(3);
   }
 }
 </style>

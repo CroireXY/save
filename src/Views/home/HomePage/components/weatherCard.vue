@@ -32,7 +32,6 @@ import emiIcon from "@/assets/icons/icons_Weather/EMI.png";
 
 const title = ref("");
 
-// 更新时间字符串
 const updateTitle = () => {
   const now = dayjs();
   const weekMap = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
@@ -48,22 +47,22 @@ const weatherData = [
   {
     icon: sunnyIcon,
     info: "27℃",
-    name: "气温",
+    name: "氣溫",
   },
   {
     icon: seWindIcon,
-    info: "东南风",
-    name: "2级",
+    info: "東南風",
+    name: "2級",
   },
   {
     icon: windSpeedIcon,
     info: "3km/h",
-    name: "风速",
+    name: "風速",
   },
   {
     icon: emiIcon,
-    info: "无警报",
-    name: "电磁",
+    info: "無警報",
+    name: "電磁",
   },
 ];
 </script>
@@ -72,7 +71,7 @@ const weatherData = [
 .grid-box {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  column-gap: 16px;
+  @include GridGap(0, 16);
   @include Padding(20, 40, 0, 40);
   width: 100%;
   box-sizing: border-box;
@@ -88,7 +87,7 @@ const weatherData = [
 .icon-box {
   @include Width(44);
   @include wHeight(44);
-  margin-bottom: 4px;
+  @include MarginBottom(8);
 
   img {
     width: 100%;
@@ -106,14 +105,14 @@ const weatherData = [
     @include FontSize(18);
     font-weight: bold;
     color: #ffffff;
-    line-height: 1.2;
-    margin-bottom: 2px;
+    @include LineHeight(25);
+    @include MarginBottom(5);
   }
 
   .name {
     @include FontSize(16);
     color: rgba(255, 255, 255, 0.8);
-    line-height: 1.2;
+    @include LineHeight(25);
   }
 }
 </style>

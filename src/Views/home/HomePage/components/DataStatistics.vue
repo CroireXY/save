@@ -50,8 +50,7 @@
   .grid-box {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 12px;
-    column-gap: 24px;
+    @include GridGap(30, 30);
     @include Padding(20, 20, 20, 20);
     width: 100%;
     box-sizing: border-box;
@@ -61,15 +60,14 @@
     display: flex;
     align-items: center;
     height: auto;
-    // padding: 6px 0;
     box-sizing: border-box;
-    margin-left: 5px;
+    @include MarginLeft(8);
   }
   
   .icon-box {
     @include Width(96);
     @include wHeight(96);
-    margin-right: 10px;
+    @include MarginRight(15);
     flex-shrink: 0;
   
     img {
@@ -85,17 +83,17 @@
     justify-content: center;
   
     .value {
-      @include FontSize(32);
       color: #ffffff;
       font-weight: bold;
-      line-height: 1.2;
+      @include FontSize(32);
+      @include LineHeight(30);
     }
   
     .name {
-      @include FontSize(18);
       color: rgba(255, 255, 255, 0.8);
-      line-height: 1.2;
-      margin-top: 3px;
+      @include FontSize(18);
+      @include LineHeight(30);
+      @include MarginTop(8);
     }
   }
   

@@ -18,12 +18,12 @@
   const today = new Date();
   const xData = Array.from({ length: 7 }, (_, i) => {
     const d = new Date(today);
-    d.setDate(today.getDate() - (6 - i + 1)); // 包含昨天，往前推6天
+    d.setDate(today.getDate() - (6 - i + 1)); 
     const dd = String(d.getDate()).padStart(2, "0");
     const mm = String(d.getMonth() + 1).padStart(2, "0");
     return `${dd}/${mm}`;
   });
-
+  const flightHistoryData = [189, 267, 112, 142, 118, 206, 189];
 
   let option = ref({
     tooltip: {
@@ -37,9 +37,6 @@
       borderWidth: 1,
       borderColor: "transparent",
       padding: 10,
-      // axisPointer: {
-      //   type: "shadow",
-      // },
     },
     grid: {
       top: "15%",
@@ -49,7 +46,6 @@
       containLabel: true,
     },
     xAxis: {
-      // data: ["04/05","05/05","06/05","07/05","08/05","09/05","10/05",],
       data: xData,
       axisLabel: {
         show: true,
@@ -124,7 +120,6 @@
         label: {
           show: true,
           position: "top",
-          // formatter: "{c}",
           formatter: (params: any) => `{glow|${params.value}}`,
           color: "#fff",
           fontSize: "1rem",
@@ -137,7 +132,7 @@
             }
           }
         },
-        data: [189, 267, 112, 142, 118, 206, 189],
+        data: flightHistoryData,
       },
       {
         type: "pictorialBar",
@@ -149,7 +144,7 @@
         itemStyle: {
           color: "#4DE1FF",
         },
-        data: [189, 267, 112, 142, 118, 206, 189], // 与主柱图一致
+        data: flightHistoryData,
       },
     ],
   });
@@ -165,8 +160,7 @@
     .chart-title {
       color: #fff;
       @include FontSize(24);
-      // font-weight: bold;
-      margin-top: 8px;
+      @include MarginTop(25);
       text-align: center;
       padding-left: 0; 
     }
@@ -220,7 +214,7 @@
         .name {
           display: inline-block;
           color: rgba(255, 255, 255, 0.6);
-          margin-right: 10px;
+          @include MarginRight(10);
         }
         .value {
           display: inline-block;
@@ -235,7 +229,6 @@
       @include wHeight(100);
       display: flex;
       justify-content: space-between;
-      // background-color: red;
       @include Padding(30, 0, 0, 0);
       .item {
         @include Width(240);
@@ -265,7 +258,6 @@
           @include wHeight(30);
           @include LineHeight(30);
           position: absolute;
-          bottom: 0;
           @include Left(8);
           @include FontSize(14);
           color: rgba(255, 255, 255, 0.671);
@@ -277,7 +269,6 @@
           @include LineHeight(65);
           position: absolute;
           @include Right(8);
-          top: 0;
           text-align: right;
           @include FontSize(20);
           font-weight: bolder;

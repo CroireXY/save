@@ -25,12 +25,12 @@
         </div>
       </div>
     </div>
-  </template>
+</template>
   
   
-  <script lang="ts" setup>
-  import VideoConflictPlayback from "@/Views/home/SafetyAlert/components/VideoPlayback/VideoConflictPlayback.vue";
-  import { ref, onMounted } from "vue";
+<script lang="ts" setup>
+import VideoConflictPlayback from "@/Views/home/SafetyAlert/components/VideoPlayback/VideoConflictPlayback.vue";
+import { ref, onMounted } from "vue";
 
 const conflictRawData = {
   drone: {
@@ -102,14 +102,14 @@ onMounted(() => {
     }
   ];
 });
-  </script>
+</script>
   
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 .conflict-detail-page {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  @include Padding(15, 60, 0, 60); // 上右下左
+  @include Gap(10);
+  @include Padding(15, 60, 0, 60); 
 }
 
 .box-wrapper {
@@ -120,39 +120,34 @@ onMounted(() => {
   .conflict-box {
   background: url("~@/assets/icons/Box/redinnerbox.png") no-repeat;
   background-size: 100% 100%;
-  @include Padding(10, 30, 10, 30); //上，右，下，左
-  box-sizing: border-box;
-//   padding: 30px;
-//   padding-right: 35px; 
-//   border-radius: 6px;
-  box-sizing: border-box;
   @include Width(392);
-//   @include wHeight(648);
+  @include Padding(10, 30, 15, 30); 
+  box-sizing: border-box;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
   .conflict-title {
     color: #4de1ff;
     text-align: center;
-    @include FontSize(18);
     font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    @include FontSize(22);
+    @include Margin(12,0,12,0);
   }
   
   .conflict-header {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    justify-content: center;
+    @include MarginBottom(12);
     .icon {
-      @include Width(32);
-      @include wHeight(32);
-      margin-right: 5px;
+      @include Width(36);
+      @include wHeight(36);
+      @include MarginRight(8);
     }
     .conflict-label {
       color: #ff2929;
-      @include FontSize(24);
+      @include FontSize(28);
       font-weight: bold;
     }
   }
@@ -160,7 +155,7 @@ onMounted(() => {
   .card-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    @include Gap(8);
   }
   
   .info-card {
@@ -168,21 +163,21 @@ onMounted(() => {
     min-width: 180px;
     background-image: url("~@/assets/icons/Box/innerbox_s2.png");
     background-size: 100% 100%;
-    @include Padding(8, 0, 10, 20); //上，右，下，左
-    border-radius: 4px;
+    @include Padding(8, 0, 8, 20); 
+    @include BorderRadius(3);
     box-sizing: border-box;
   
     .card-title {
       color: #4DE1FF;
-      @include FontSize(14);
       font-weight: bold;
-      margin-bottom: 5px;
+      @include FontSize(16);
+      @include MarginBottom(8);
     }
   
     p {
       color: #fff;
-      @include FontSize(16);
-      margin: 4px 0;
+      @include FontSize(18);
+      @include Margin(8,0,8,0);
     }
   }
   
@@ -191,21 +186,19 @@ onMounted(() => {
   background: url('~@/assets/icons/icons_TakeoffLandingOverview/cardbg.png') center center no-repeat;
   background-size: contain;
   background-color: transparent;
-  border-radius: 4px;
+  @include BorderRadius(4);
+  @include Padding(10, 0, 0, 40);
   display: flex;
   flex-direction: column;
+  width: 100%;  
   color: #ffffff;
   box-shadow: none;
-  @include Padding(0, 0, 0, 0);
-  width: 100%;  
   box-sizing: border-box; 
-  padding-left: 20px;
 }
 
 .video-title {
-  margin-top: 25px;
-  margin-bottom: 65px;
-  @include FontSize(18);
+  @include Margin(30,0,140,0);
+  @include FontSize(24);
   font-weight: bold;
   color: #ffffff;
 }

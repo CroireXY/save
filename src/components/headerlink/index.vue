@@ -85,16 +85,16 @@ onMounted(() => {
 <style lang="scss" scoped>
 .footer {
   position: absolute;
-  bottom: 0;
+  @include Bottom(0);
   width: 100%;
-  height: 160px;
+  @include wHeight(160);
   z-index: 10;
   pointer-events: none;
 
   .footer-bg {
     position: absolute;
-    bottom: 0px; 
-    left: 0;
+    @include Bottom(0);
+    @include Left(0);
     width: 100%;
     @include wHeight(140);
     background: url("~@/assets/icons/BottomBar/bottombg.png") no-repeat center bottom;
@@ -106,11 +106,11 @@ onMounted(() => {
   .footer_Box {
     position: absolute;
     width: auto;  
-    bottom: 25px;
+    @include Bottom(45);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    @include Gap(10);
     z-index: 3;
     pointer-events: auto;
 
@@ -119,7 +119,7 @@ onMounted(() => {
       @include wHeight(81);
       @include LineHeight(80);
       @include FontSize(32);
-      padding: 0 10px;
+      @include Padding(0,10,0,10);
       color: #4DE1FF;
       font-weight: bold;
       text-align: center;
@@ -143,11 +143,11 @@ onMounted(() => {
 
   .footer-text {
     position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    color: white;
+    @include Bottom(15);
     @include FontSize(12);
+    width: 100%;
+    color: white;
+    text-align: center;
     z-index: 3;
     pointer-events: auto;
   }

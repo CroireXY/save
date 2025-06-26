@@ -285,6 +285,15 @@ $R: 400;
   backdrop-filter: blur(100vh * $p / $referanceHeight);
   /* Supported in Chrome 76 */
 }
+
+@mixin Gap($v) {
+  gap: #{$v}px;
+}
+
+@mixin GridGap($row, $col) {
+  row-gap: calc(1vw * #{$row} / #{$widthRatio});
+  column-gap: calc(1vw * #{$col} / #{$widthRatio});
+}
  
 // mobile size
 $referanceWidthMobile: 1280;

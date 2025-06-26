@@ -50,16 +50,14 @@ const backgroundDirection = computed(() => {
   overflow: visible;
   @include boxWidth(493);
   display: flex;
-  // align-items: flex-start;
   align-items: stretch;
   @include Padding(15, 0, 0, 15);
-  // padding: 10px 0 0 10px; // 向下15px，向右10px
   box-sizing: border-box;
 }
 
 .box-content {
   flex: 1;
   overflow: hidden;
-  padding: 10px 0px;
+  @include Padding(15, 0, 15, 0);
 }
 </style>
