@@ -290,7 +290,8 @@ async function addLayer() {
 }
 
 async function onDrone2DShowChanged(val: boolean) {
-  let droneEntity: Cesium.Entity[] = [];
+  let drone2DEntity: Cesium.Entity[] = [];
+  console.log("onDrone2DShowChanged", val);
   if (val) {
     try {
       // const { data } = await axios.get(
@@ -303,7 +304,7 @@ async function onDrone2DShowChanged(val: boolean) {
       //   }
       // );
       const res = await fetchWithAuth(
-        "http://lae.lscm.hk/fsp/api/getFlightRecords?stime=20250601000000&etime=20250601235959"
+        "http://lae.lscm.hk/fsp/api/getFlightRecords?stime=20250613000000&etime=20250618235959"
       );
       const data = await res.data;
 
@@ -335,7 +336,7 @@ async function onDrone2DShowChanged(val: boolean) {
         const id = feature.properties.id;
         const name = feature.properties.name;
 
-        droneEntity[index] = viewer.entities.add({
+        drone2DEntity[index] = viewer.entities.add({
           id, // 推荐用唯一id
           position: Cesium.Cartesian3.fromDegrees(lng, lat, 50), // 50为高度，可按需调整
           billboard: {
@@ -349,7 +350,7 @@ async function onDrone2DShowChanged(val: boolean) {
             show: true,
           },
           label: {
-            text: name,
+            text: `DJI:${name}`,
             font: "14px sans-serif",
             fillColor: Cesium.Color.fromCssColorString("#4de1ff"),
             pixelOffset: new Cesium.Cartesian2(0, -35),
@@ -363,8 +364,9 @@ async function onDrone2DShowChanged(val: boolean) {
     }
   } else {
     // 移除所有无人机实体
-    droneEntity.forEach((entity) => viewer.entities.remove(entity));
-    droneEntity = [];
+    await viewer.entities.removeAll();
+    // drone2DEntity.forEach((entity) => viewer.entities.remove(entity));
+    drone2DEntity = [];
   }
 }
 

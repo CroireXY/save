@@ -26,8 +26,9 @@
 <script lang="ts" setup>
 import innerBox from "@/assets/icons/Box/innerbox.png";
 import emptyCard from "@/assets/icons/Box/emptydatacard.png";
-
-const infoList = [
+import { getFlightSummary } from "@/api/connect";
+import { onMounted,reactive,ref } from "vue";
+const infoList = reactive([
   {
     id: 1,
     name: "飛行計劃",
@@ -70,7 +71,37 @@ const infoList = [
     unit: "",
     icon: "",
   },
-];
+]);
+
+onMounted(async () => {
+   try {
+      // const res = await fetchWithAuth(
+      //   "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250529143106&etime=20250529143511&recordId=2&offset=0"
+      // ); //一条往返数据
+      const res = await getFlightSummary({
+      
+       
+      });
+      const data = await res.data;
+      if (data.responseCode !== 200 ) {
+        console.error("接口数据异常");
+        return;
+      }
+      const rawData = data.body;
+      console.log("获取到的数据:", rawData);
+      // console.log('flightPlanCount:', rawData?.flightPlanCount);
+      // 处理数据
+      infoList[0].value = rawData?.flightPlanCount || 0
+      infoList[1].value = rawData?.completedFlightCount || 0;
+      // infoList.value[2].value = rawData?.totalDistance || 0;
+      infoList[3].value = rawData?.activeDroneCount || 0; 
+      infoList[4].value = rawData?.totalFlightDuration || 0;
+      console.log("处理后的数据:", infoList);
+    } catch (error) {
+      console.error("获取数据失败:", error);
+      return;
+    }
+});
 </script>
 
 <style lang="scss" scoped>

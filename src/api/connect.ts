@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-05-12 09:31:19
  * @LastEditors: viola
- * @LastEditTime: 2025-06-26 12:01:46
+ * @LastEditTime: 2025-06-27 14:18:43
  * @FilePath: \code\src\api\connect.ts
  */
 import axios from "@/http/HTTP";
@@ -18,8 +18,31 @@ function getCurrentTimeString(): string {
 
   return `${yyyy}${MM}${dd}${HH}${mm}`;
 }
-const timeString = getCurrentTimeString();
 
+function getCurrentDateString(): string {
+    const now = new Date();
+   const yyyy = now.getFullYear();
+  const MM = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  return `${yyyy}${MM}${dd}`;
+  }
+
+  function getNextDateString(): string {
+    const now = new Date();
+    now.setDate(now.getDate() + 1); // 增加一天
+    const yyyy = now.getFullYear();
+    const MM = String(now.getMonth() + 1).padStart(2, "0");
+    const dd = String(now.getDate()).padStart(2, "0");
+    return `${yyyy}${MM}${dd}`;
+  }
+const timeString = getCurrentTimeString();
+const currectDateString = getCurrentDateString();
+const nextDateString = getNextDateString();
+/*
+ * GET WEATHER
+ * 1. Get weather in details
+ * 2. Get weather station
+ */
 export function getWeather(params: any) {
   return axios.get(`/api/getWeather?time=${timeString}`, {
     params,
@@ -33,11 +56,76 @@ export function getWeatherStation(params: any) {
     params,
   });
 }
-
-export function getFlightRecordInDetails(params:any){
-    return axios.get("/api/getFlightRecordInDetails", {
+/*
+ * GET FLIGHT RECPRDS
+ * 1. Get flight records in details
+ * 2. Get flight records in list
+ */
+export function getFlightRecordInDetails(params: {
+  stime?: string;
+  etime?: string;
+  recordId: number;
+  offset?: number;
+  limit?: number;
+}) {
+  return axios.get("/api/getFlightRecordInDetails", {
     params,
-});
+  });
+}
+
+export function getFlightRecords(params: any) {
+  return axios.get("/api/getFlightRecords", {
+    params,
+  });
+}
+
+/*
+ * GET PLAN PATH
+ * 1. Get plan path in details
+ * 2. Get plan oath in list
+ */
+export function getPlanPathInDetails(params: {
+  pathId: string;
+  offset?: number;
+  limit?: number;
+}) {
+  return axios.get("/api/getPlanPathInDetails", {
+    params,
+  });
+}
+
+export function getPlanPaths(params: {
+  offset?: number;
+  limit?: number;
+  stime?: string;
+  etime?: string;
+}) {
+  return axios.get("/api/getPlanPaths", {
+    params,
+  });
+}
+
+/*
+ * GET FLIGHT STATISTICS
+ * 1. Get flight summary data
+ * 2. Get flight nature summary data
+ * 3. Get flight plan data
+ */
+export function getFlightSummary(params: { sdate?: string; edate?: string }) {
+  return axios.get(`/api/getFlightSummary?sdate=${currectDateString}&edate=${nextDateString}`, {
+    params,
+  });
+}
+export function getFlightNatureSummary(params: {}) {
+  return axios.get("/api/getFlightNatureSummaryData", {
+    params,
+  });
+}
+
+export function getFlightPlanData(params: any) {
+  return axios.get("/api/getFlightPlanData", {
+    params,
+  });
 }
 
 // export const getMockData = () => {
