@@ -41,7 +41,7 @@ let skyBox = new Cesium.SkyBox({
   },
 });
 const urls = [
-  '/map_data/tileset.json',
+  "/map_data/tileset.json",
   // "http://localhost:9000/11-SW-16B/tileset.json",
   // "http://localhost:9000/11-SW-16D/tileset.json",
   // "http://localhost:9000/11-SW-17A/tileset.json",
@@ -581,7 +581,7 @@ async function onFlightPathShowChanged(value: boolean) {
         }
 
         // filter: 相邻距离小于2m点位
-        if (lastPoint && calcDistance(lastPoint, p) < 20) continue;
+        if (lastPoint && calcDistance(lastPoint, p) < 2) continue;
 
         filtered.push(p);
         lastPoint = p;
@@ -604,6 +604,10 @@ async function onFlightPathShowChanged(value: boolean) {
       viewer.clock.multiplier = 50;
       viewer.clock.shouldAnimate = true;
       const positionProperty = new Cesium.SampledPositionProperty(); // 创建动态位置属性，表示飞机在时间轴上的位置变化，用于动态飞行轨迹、播放飞行动画
+      positionProperty.setInterpolationOptions({
+        interpolationDegree: 5,
+        interpolationAlgorithm: Cesium.HermitePolynomialApproximation,
+      });
       for (let i = 0; i < flightData.length; i++) {
         const dataPoint = flightData[i];
         const time = Cesium.JulianDate.addSeconds(
