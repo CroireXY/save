@@ -374,7 +374,7 @@ async function onDrone2DShowChanged(val: boolean) {
 let drone3dEntity: Cesium.Primitive | undefined;
 let drone: Cesium.Entity[] = [];
 
-function onDrone3DShowChanged(
+async function onDrone3DShowChanged(
   val: boolean,
   lon: number,
   lat: number,
@@ -405,19 +405,18 @@ function onDrone3DShowChanged(
         Cesium.Cartesian3.fromDegrees(lon, lat, alt);
       const targetPos = Cesium.Cartesian3.fromDegrees(lon, lat, alt);
 
-      moveEntitySmoothly(entity, currentPos, targetPos, 2000); // 1秒平滑移动
+      await moveEntitySmoothly(entity, currentPos, targetPos, 800); // 1秒平滑移动
     } else {
       drone[length] = viewer.entities.add({
         id: id || "drone3d", // 推荐用唯一id
         position: Cesium.Cartesian3.fromDegrees(lon, lat, alt),
         model: {
           uri: "/3d_icon/drones.glb",
-          scale: 2,
+          // scale: 2,
           color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
           colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
           colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
           minimumPixelSize: 64,
-
           silhouetteColor: Cesium.Color.BLACK,
           silhouetteSize: 4,
           shadows: Cesium.ShadowMode.ENABLED,
@@ -433,7 +432,7 @@ function onDrone3DShowChanged(
         //     show: true,
         //   },
         label: {
-          text: "無人機D001",
+          text: `無人機${id.substring(0, 3)}`,
           // font: "14px ",
           // fillColor: Cesium.Color.AQUA,
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),
@@ -451,17 +450,17 @@ function onDrone3DShowChanged(
       });
     }
     let delta = 0;
-    viewer.scene.preRender.addEventListener(() => {
-      delta += 0.02;
-      const offset = Math.sin(delta) * 3; // 上下浮动 ±3 米
-      const updatedPos = Cesium.Cartesian3.fromDegrees(lon, lat, alt + offset);
-      // entity.position = new Cesium.ConstantPositionProperty(updatedPos);
-      drone.forEach((e) => {
-        // if (e.id === id) {
-        e.position = new Cesium.ConstantPositionProperty(updatedPos);
-        // }
-      });
-    });
+    // viewer.scene.preRender.addEventListener(() => {
+    //   delta += 0.02;
+    //   const offset = Math.sin(delta) * 3; // 上下浮动 ±3 米
+    //   const updatedPos = Cesium.Cartesian3.fromDegrees(lon, lat, alt + offset);
+    //   // entity.position = new Cesium.ConstantPositionProperty(updatedPos);
+    //   drone.forEach((e) => {
+    //     // if (e.id === id) {
+    //     e.position = new Cesium.ConstantPositionProperty(updatedPos);
+    //     // }
+    //   });
+    // });
 
     // viewer.trackedEntity = entity;
     // // 添加标签（文字）
