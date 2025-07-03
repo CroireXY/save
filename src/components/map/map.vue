@@ -24,7 +24,7 @@ const mapStore = useMapStore();
 window.CESIUM_BASE_URL = "/cesium";
 const basemapProvider = new Cesium.UrlTemplateImageryProvider({
   url: "https://mapapi.geodata.gov.hk/gs/api/v1.0.0/xyz/imagery/WGS84/{z}/{x}/{y}.png",
-  credit: "© Map from Lands Department",
+  credit: "©️ Map from Lands Department",
 
   maximumLevel: 19,
   minimumLevel: 0,
@@ -247,6 +247,7 @@ onMounted(() => {
     },
     duration: 3, // 飞行时间
   });
+  viewer.scene.logarithmicDepthBuffer = true;
 
   viewer.scene.globe.depthTestAgainstTerrain = false;
 });
@@ -374,7 +375,7 @@ async function onDrone2DShowChanged(val: boolean) {
 let drone3dEntity: Cesium.Primitive | undefined;
 let drone: Cesium.Entity[] = [];
 
-async function onDrone3DShowChanged(
+ function onDrone3DShowChanged(
   val: boolean,
   lon: number,
   lat: number,
@@ -397,6 +398,13 @@ async function onDrone3DShowChanged(
 
     const entity = viewer.entities.getById(id);
     if (entity) {
+      console.log("📡 [onDrone3DShowChanged] 接收到更新:", {
+        val,
+        lon,
+        lat,
+        alt,
+        id,
+      });
       // entity.position = new Cesium.ConstantPositionProperty(
       //   Cesium.Cartesian3.fromDegrees(lon, lat, alt)
       // );
@@ -404,8 +412,11 @@ async function onDrone3DShowChanged(
         entity.position?.getValue(Cesium.JulianDate.now()) ??
         Cesium.Cartesian3.fromDegrees(lon, lat, alt);
       const targetPos = Cesium.Cartesian3.fromDegrees(lon, lat, alt);
-
-      await moveEntitySmoothly(entity, currentPos, targetPos, 800); // 1秒平滑移动
+      try {
+         moveEntitySmoothly(entity, currentPos, targetPos, 800); // 1秒平滑移动
+      } catch (e) {
+        console.error("平滑移动失败:", e);
+      }
     } else {
       drone[length] = viewer.entities.add({
         id: id || "drone3d", // 推荐用唯一id
@@ -420,6 +431,10 @@ async function onDrone3DShowChanged(
           silhouetteColor: Cesium.Color.BLACK,
           silhouetteSize: 4,
           shadows: Cesium.ShadowMode.ENABLED,
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+            0,
+            10000
+          ), // 距离显示条件
         },
         //  billboard: {
         //     image: droneIcon, // 替换为实际的无人机图标路径
@@ -504,7 +519,8 @@ function moveEntitySmoothly(
       new Cesium.Cartesian3()
     );
     entity.position = new Cesium.ConstantPositionProperty(interpolated);
-
+    // 触发 Cesium 主动渲染
+    viewer.scene.requestRender();
     if (t < 1) {
       requestAnimationFrame(animate);
     }
