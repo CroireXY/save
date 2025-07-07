@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 09:31:19
- * @LastEditors: viola
- * @LastEditTime: 2025-06-27 14:18:43
- * @FilePath: \code\src\api\connect.ts
- */
 import axios from "@/http/HTTP";
 import qs from "qs";
 // import {Mock, Service} from "@/http/service";

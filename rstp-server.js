@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-06-06 10:48:21
- * @LastEditors: viola
- * @LastEditTime: 2025-06-30 16:23:03
- * @FilePath: \code\rstp-server.js
- */
 // rstp-server.js
 const Stream = require("node-rtsp-stream");
 
