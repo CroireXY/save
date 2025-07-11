@@ -72,14 +72,16 @@ const WeatherShow = computed(() => ToolsStore.$state.WeatherShow);
 // 显示工具栏
 const ToolBarShow = computed(() => ToolsStore.TooBarShow);
 
-const goToRegisterPage = () => {
-  window.location.href = 'https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd'
-}
+// const goToRegisterPage = () => {
+//   window.location.href = 'https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd'
+// }
 
 //新标签
-// const goToRegisterPage = () => {
-//   window.open('https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd', '_blank')
-// }
+
+const goToRegisterPage = () => {
+  // window.open('https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd', '_blank') //全蓝主题
+  window.open('https://ddnrxbqz.manus.space/?code=h98x3Eb92vcgSzWBMQ9oAm', '_blank') //新主题
+}
 
 // 电子地图
 const eleMap = ref(false);
