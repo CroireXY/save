@@ -174,9 +174,9 @@ watch(visible, (val) => {
 
 <style scoped>
 .playback-icon {
-  position: absolute;
-  top: 40px;
-  right: 40px;
+  position: absolute; 
+  @include Top(40);
+  @include Right(40);
   width: 91.5px;
   height: 15px;
   background-size: contain;

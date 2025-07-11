@@ -1,3 +1,4 @@
+<!-- src/Views/home/index.vue -->
 <template>
   <div class="fullscreen-wrapper">
 
@@ -73,7 +74,6 @@
       <Weather v-if="WeatherShow" />
     </transition>
 
-    <!-- 显示还是隐藏工具栏 -->
     <transition
       name="custom-classes-transition"
       enter-active-class="animate__animated   animate__fadeIn"

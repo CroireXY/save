@@ -20,37 +20,6 @@
             />
           </el-tooltip>
         </div>
-        <!-- <div @click="LayerTreeClick">
-          <el-tooltip
-            popper-class="tip-popper"
-            class="box-item"
-            effect="dark"
-            content="图层树"
-            placement="bottom"
-          >
-            <Icon
-              :color="LayerTreeshow ? '#7afafe' : '#fff'"
-              :font-size="30"
-              icon="tucengshu"
-            />
-          </el-tooltip>
-        </div> -->
-        <!-- <div @click="AnimationClick">
-          <el-tooltip
-            popper-class="tip-popper"
-            class="box-item"
-            effect="dark"
-            content="导览"
-            placement="bottom"
-          >
-            <Icon
-              :color="AnimationShow ? '#7afafe' : '#fff'"
-              :font-size="26"
-              icon="xunimanyou"
-            />
-          </el-tooltip>
-        </div> -->
-
         <div @click="WeatherClick">
           <el-tooltip
             popper-class="tip-popper"
@@ -66,13 +35,13 @@
             />
           </el-tooltip>
         </div>
-        <!-- 工具栏 -->
-        <div @click="toolBarShowClick" class="too-bar-style">
+
+        <div @click="goToRegisterPage" class="too-bar-style">
           <el-tooltip
             popper-class="tip-popper"
             class="box-item"
             effect="dark"
-            content="工具栏"
+            content="注册管理"
             placement="bottom"
           >
             <Icon
@@ -88,7 +57,6 @@
 </template>
 
 <script lang="ts" setup>
-import Dayjs from "dayjs";
 // import { getWeather, getWeatherCityId, getWeatherPm2P5 } from "@/api/connect";
 import { computed, onMounted, onUnmounted, ref } from "vue";
 // import { useWeatherStore } from "@/stores/weather";
@@ -103,6 +71,15 @@ const AnimationShow = computed(() => ToolsStore.$state.AnimationShow);
 const WeatherShow = computed(() => ToolsStore.$state.WeatherShow);
 // 显示工具栏
 const ToolBarShow = computed(() => ToolsStore.TooBarShow);
+
+const goToRegisterPage = () => {
+  window.location.href = 'https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd'
+}
+
+//新标签
+// const goToRegisterPage = () => {
+//   window.open('https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd', '_blank')
+// }
 
 // 电子地图
 const eleMap = ref(false);
@@ -150,16 +127,6 @@ const TechnologyClick = async () => {
 /**
  * 显示还是隐藏工具栏
  */
-const toolBarShowClick = () => {
-  ToolsStore.SetToolBarShow(!ToolBarShow.value);
-};
-// const isShowToolBar
-const LayerTreeClick = () => {
-  ToolsStore.SetLayerTreeShow(!LayerTreeshow.value);
-};
-const AnimationClick = () => {
-  ToolsStore.SetAnimationShow(!AnimationShow.value);
-};
 const WeatherClick = () => {
   ToolsStore.SetWeatherShow(!WeatherShow.value);
 };
