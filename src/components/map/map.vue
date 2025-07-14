@@ -135,13 +135,19 @@ onMounted(() => {
       // 处理飞行记录数据
       const flightRecord = data.body;
       console.log("Flight Record:", flightRecord);
-      onDrone3DShowChanged(
-        true,
-        flightRecord.longitude / 1e7,
-        flightRecord.latitude / 1e7,
-        flightRecord.altitude / 10,
-        flightRecord.sn // 使用无人机序列号作为ID
-      );
+      
+      // 确保数据有效
+      if (flightRecord && flightRecord.longitude && flightRecord.latitude && flightRecord.altitude) {
+        onDrone3DShowChanged(
+          true,
+          flightRecord.longitude / 1e7,
+          flightRecord.latitude / 1e7,
+          flightRecord.altitude / 10,
+          flightRecord.sn || "drone_" + Date.now() // 使用无人机序列号作为ID，如果没有则生成一个
+        );
+      } else {
+        console.warn("Invalid flight record data:", flightRecord);
+      }
     } else if (data.clientMessageCode === "DRONE_POSITION") {
       // 处理无人机位置数据
       const dronePosition = data.body;
@@ -370,12 +376,20 @@ async function onDrone2DShowChanged(val: boolean) {
     drone2DEntity = [];
   }
 }
+// Map to store each drone's history and path entity
+const dronePaths = new Map<
+  string,
+  {
+    positionProperty: Cesium.SampledPositionProperty;
+    pathEntity: Cesium.Entity;
+  }
+>();
 
 // Declare droneEntity in a higher scope so it can be accessed in b3doth branches
 let drone3dEntity: Cesium.Primitive | undefined;
 let drone: Cesium.Entity[] = [];
 
- function onDrone3DShowChanged(
+function onDrone3DShowChanged(
   val: boolean,
   lon: number,
   lat: number,
@@ -393,9 +407,58 @@ let drone: Cesium.Entity[] = [];
     console.warn("坐标无效：", { lon, lat, alt });
     return;
   }
+  
   if (val) {
-    const length = drone.length;
+    const currentTime = Cesium.JulianDate.now();
+    const position = Cesium.Cartesian3.fromDegrees(lon, lat, alt);
+    
+    // Check if the drone already has a path
+    if (!dronePaths.has(id)) {
+      // Create a new SampledPositionProperty for the drone
+      const positionProperty = new Cesium.SampledPositionProperty();
+      positionProperty.addSample(currentTime, position);
 
+      // Create a new path entity for the drone
+      const pathEntity = viewer.entities.add({
+        position: positionProperty,
+        path: new Cesium.PathGraphics({
+          width: 3,
+          trailTime: Number.POSITIVE_INFINITY, // Show the entire history
+          material: Cesium.Color.fromCssColorString("#00F0FF"), // 实线颜色
+          leadTime: 999999, 
+        }),
+      });
+
+      // Store the positionProperty and pathEntity in the map
+      dronePaths.set(id, { positionProperty, pathEntity });
+      
+      console.log(`Created new path for drone ${id}`);
+    } else {
+      // Update the existing drone's path
+      const droneData = dronePaths.get(id);
+      if (droneData) {
+        droneData.positionProperty.addSample(currentTime, position);
+        console.log(`Added sample to drone ${id} path:`, {
+          time: currentTime,
+          position: { lon, lat, alt },
+        });
+        
+        // Force the path to rerender
+        viewer.scene.requestRender();
+        
+        // Alternative methods if requestRender doesn't work:
+        // Method 1: Force entity update
+        // droneData.pathEntity.position = droneData.positionProperty;
+        
+        // Method 2: Trigger clock update
+        // viewer.clock.tick();
+        
+        // Method 3: Force scene update
+        // viewer.scene.globe.beginFrame(viewer.clock.currentTime);
+      }
+    }
+    
+    // Update or add the drone entity
     const entity = viewer.entities.getById(id);
     if (entity) {
       console.log("📡 [onDrone3DShowChanged] 接收到更新:", {
@@ -405,47 +468,38 @@ let drone: Cesium.Entity[] = [];
         alt,
         id,
       });
-      // entity.position = new Cesium.ConstantPositionProperty(
-      //   Cesium.Cartesian3.fromDegrees(lon, lat, alt)
-      // );
+      
       const currentPos =
         entity.position?.getValue(Cesium.JulianDate.now()) ??
         Cesium.Cartesian3.fromDegrees(lon, lat, alt);
       const targetPos = Cesium.Cartesian3.fromDegrees(lon, lat, alt);
       try {
-         moveEntitySmoothly(entity, currentPos, targetPos, 800); // 1秒平滑移动
+        moveEntitySmoothly(entity, currentPos, targetPos, 1800); // 1.8秒平滑移动
       } catch (e) {
         console.error("平滑移动失败:", e);
       }
     } else {
+      const length = drone.length;
       drone[length] = viewer.entities.add({
         id: id || "drone3d", // 推荐用唯一id
         position: Cesium.Cartesian3.fromDegrees(lon, lat, alt),
         model: {
-          uri: "/3d_icon/drones.glb",
-          // scale: 2,
+          uri: "/3d_icon/drone2.glb",
+          scale: 0.05,
           color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
           colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
           colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
           minimumPixelSize: 64,
           silhouetteColor: Cesium.Color.BLACK,
-          silhouetteSize: 4,
+          silhouetteSize: 1,
           shadows: Cesium.ShadowMode.ENABLED,
           distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
             0,
             10000
           ), // 距离显示条件
+          // scaleByDistance: new Cesium.NearFarScalar(1.0e2, 1, 1.0e3, 0.2),//随着距离改变标注尺寸
         },
-        //  billboard: {
-        //     image: droneIcon, // 替换为实际的无人机图标路径
-        //     width: 50,
-        //     height: 50,
-        //     scale: 0.8,
-        //     verticalOrigin: Cesium.VerticalOrigin.CENTER,
-        //     horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-        //     // pixelOffset: new Cesium.Cartesian2(10, 0),
-        //     show: true,
-        //   },
+
         label: {
           text: `無人機${id.substring(0, 3)}`,
           // font: "14px ",
@@ -460,43 +514,32 @@ let drone: Cesium.Entity[] = [];
           verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
           heightReference: Cesium.HeightReference.NONE,
           scale: 0.8,
+
           disableDepthTestDistance: Number.POSITIVE_INFINITY, // 防止被遮挡
         },
       });
     }
-    let delta = 0;
-    // viewer.scene.preRender.addEventListener(() => {
-    //   delta += 0.02;
-    //   const offset = Math.sin(delta) * 3; // 上下浮动 ±3 米
-    //   const updatedPos = Cesium.Cartesian3.fromDegrees(lon, lat, alt + offset);
-    //   // entity.position = new Cesium.ConstantPositionProperty(updatedPos);
-    //   drone.forEach((e) => {
-    //     // if (e.id === id) {
-    //     e.position = new Cesium.ConstantPositionProperty(updatedPos);
-    //     // }
-    //   });
-    // });
-
-    // viewer.trackedEntity = entity;
-    // // 添加标签（文字）
-    // const labelCollection = viewer.scene.primitives.add(
-    //   new Cesium.LabelCollection()
-    // );
-    // const label = labelCollection.add({
-    //   position: Cesium.Cartesian3.add(
-    //     Cesium.Cartesian3.fromDegrees(lon, lat, alt),
-    //     new Cesium.Cartesian3(0, 0, 0), // 向上偏移 50 米，避免重叠
-    //     new Cesium.Cartesian3()
-    //   ),
-    //   text: "無人機D001",
-    //   font: "14px sans-serif",
-    //   fillColor: Cesium.Color.CYAN,
-    //   pixelOffset: new Cesium.Cartesian2(0, -30),
-    //   show: true,
-    // });
-    // addModel("/3d_icon/drones.glb", 114.130165, 22.260256, 100);
   } else {
-    viewer.scene.primitives.remove(drone3dEntity);
+    // Remove drone and its path
+    const droneData = dronePaths.get(id);
+    if (droneData) {
+      viewer.entities.remove(droneData.pathEntity);
+      dronePaths.delete(id);
+      console.log(`Removed path for drone ${id}`);
+    }
+    
+    // Remove drone entity
+    const entity = viewer.entities.getById(id);
+    if (entity) {
+      viewer.entities.remove(entity);
+      console.log(`Removed drone entity ${id}`);
+    }
+    
+    // Remove from drone array
+    const droneIndex = drone.findIndex(d => d.id === id);
+    if (droneIndex !== -1) {
+      drone.splice(droneIndex, 1);
+    }
   }
 }
 
