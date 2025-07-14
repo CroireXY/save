@@ -80,7 +80,8 @@ const ToolBarShow = computed(() => ToolsStore.TooBarShow);
 
 const goToRegisterPage = () => {
   // window.open('https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd', '_blank') //全蓝主题
-  window.open('https://ddnrxbqz.manus.space/?code=h98x3Eb92vcgSzWBMQ9oAm', '_blank') //新主题
+  // window.open('https://ddnrxbqz.manus.space/?code=h98x3Eb92vcgSzWBMQ9oAm', '_blank') //新主题
+  window.open('http://localhost:3000/', '_blank') //本地
 }
 
 // 电子地图
