@@ -143,7 +143,8 @@ onMounted(() => {
           flightRecord.longitude / 1e7,
           flightRecord.latitude / 1e7,
           flightRecord.altitude / 10,
-          flightRecord.sn || "drone_" + Date.now() // 使用无人机序列号作为ID，如果没有则生成一个
+          flightRecord.sn || "drone_" + Date.now(), // 使用无人机序列号作为ID，如果没有则生成一个
+          flightRecord.manufacturerID|| "無人機" // 使用制造商ID或默认值,
         );
       } else {
         console.warn("Invalid flight record data:", flightRecord);
@@ -394,7 +395,8 @@ function onDrone3DShowChanged(
   lon: number,
   lat: number,
   alt: number,
-  id: string
+  id: string,
+  brandId: string = "無人機" // 默认值为 "drone3d"
 ) {
   if (
     !Cesium.defined(lon) ||
@@ -416,13 +418,17 @@ function onDrone3DShowChanged(
     if (!dronePaths.has(id)) {
       // Create a new SampledPositionProperty for the drone
       const positionProperty = new Cesium.SampledPositionProperty();
+       positionProperty.setInterpolationOptions({
+        interpolationDegree: 5,
+        interpolationAlgorithm: Cesium.HermitePolynomialApproximation,
+      });
       positionProperty.addSample(currentTime, position);
 
       // Create a new path entity for the drone
       const pathEntity = viewer.entities.add({
         position: positionProperty,
         path: new Cesium.PathGraphics({
-          width: 3,
+          width: 1,
           trailTime: Number.POSITIVE_INFINITY, // Show the entire history
           material: Cesium.Color.fromCssColorString("#00F0FF"), // 实线颜色
           leadTime: 999999, 
@@ -446,15 +452,7 @@ function onDrone3DShowChanged(
         // Force the path to rerender
         viewer.scene.requestRender();
         
-        // Alternative methods if requestRender doesn't work:
-        // Method 1: Force entity update
-        // droneData.pathEntity.position = droneData.positionProperty;
-        
-        // Method 2: Trigger clock update
-        // viewer.clock.tick();
-        
-        // Method 3: Force scene update
-        // viewer.scene.globe.beginFrame(viewer.clock.currentTime);
+       
       }
     }
     
@@ -469,6 +467,7 @@ function onDrone3DShowChanged(
         id,
       });
       
+      
       const currentPos =
         entity.position?.getValue(Cesium.JulianDate.now()) ??
         Cesium.Cartesian3.fromDegrees(lon, lat, alt);
@@ -480,6 +479,7 @@ function onDrone3DShowChanged(
       }
     } else {
       const length = drone.length;
+      viewer.scene.requestRender();
       drone[length] = viewer.entities.add({
         id: id || "drone3d", // 推荐用唯一id
         position: Cesium.Cartesian3.fromDegrees(lon, lat, alt),
@@ -501,7 +501,7 @@ function onDrone3DShowChanged(
         },
 
         label: {
-          text: `無人機${id.substring(0, 3)}`,
+          text: `${brandId}${id.substring(0, 3)}`,
           // font: "14px ",
           // fillColor: Cesium.Color.AQUA,
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),
@@ -518,6 +518,7 @@ function onDrone3DShowChanged(
           disableDepthTestDistance: Number.POSITIVE_INFINITY, // 防止被遮挡
         },
       });
+      
     }
   } else {
     // Remove drone and its path

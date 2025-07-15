@@ -11,6 +11,7 @@ module.exports = {
     // open: true,
     // 项目运行时候的端口号
     port: 8090,
+    host: '0.0.0.0',
     // https: false,
     disableHostCheck: true,
 
