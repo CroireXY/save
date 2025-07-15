@@ -6,8 +6,8 @@
   "scripts": {
     "serve": "node ./scripts/prepare.js serve",
     "build": "node ./scripts/prepare.js build",
-    "serve17": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
-    "build17": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
+    "serve17": "SET NODE_OPTIONS=--openssl-legacy-provider&& vue-cli-service serve",
+    "build17": "SET NODE_OPTIONS=--openssl-legacy-provider&& vue-cli-service build",
     "serve14": "vue-cli-service serve",
     "build14": "vue-cli-service build",
     "test:unit": "jest"
@@ -28,7 +28,7 @@
     "echarts-liquidfill": "^3.1.0",
     "element-plus": "^1.2.0-beta.3",
     "ffmpeg": "^0.0.4",
-    "hls.js": "^1.6.6",
+    "hls.js": "^1.6.7",
     "js-cookie": "^3.0.1",
     "mitt": "^3.0.1",
     "node-rtsp-stream": "^0.0.9",

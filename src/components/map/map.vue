@@ -135,16 +135,21 @@ onMounted(() => {
       // 处理飞行记录数据
       const flightRecord = data.body;
       console.log("Flight Record:", flightRecord);
-      
+
       // 确保数据有效
-      if (flightRecord && flightRecord.longitude && flightRecord.latitude && flightRecord.altitude) {
+      if (
+        flightRecord &&
+        flightRecord.longitude &&
+        flightRecord.latitude &&
+        flightRecord.altitude
+      ) {
         onDrone3DShowChanged(
           true,
           flightRecord.longitude / 1e7,
           flightRecord.latitude / 1e7,
           flightRecord.altitude / 10,
           flightRecord.sn || "drone_" + Date.now(), // 使用无人机序列号作为ID，如果没有则生成一个
-          flightRecord.manufacturerID|| "無人機" // 使用制造商ID或默认值,
+          flightRecord.manufacturerID || "無人機" // 使用制造商ID或默认值,
         );
       } else {
         console.warn("Invalid flight record data:", flightRecord);
@@ -409,19 +414,19 @@ function onDrone3DShowChanged(
     console.warn("坐标无效：", { lon, lat, alt });
     return;
   }
-  
+
   if (val) {
     const currentTime = Cesium.JulianDate.now();
     const position = Cesium.Cartesian3.fromDegrees(lon, lat, alt);
-    
+
     // Check if the drone already has a path
     if (!dronePaths.has(id)) {
       // Create a new SampledPositionProperty for the drone
       const positionProperty = new Cesium.SampledPositionProperty();
-       positionProperty.setInterpolationOptions({
-        interpolationDegree: 5,
-        interpolationAlgorithm: Cesium.HermitePolynomialApproximation,
-      });
+      // positionProperty.setInterpolationOptions({
+      //   interpolationDegree: 5,
+      //   interpolationAlgorithm: Cesium.LagrangePolynomialApproximation,
+      // });
       positionProperty.addSample(currentTime, position);
 
       // Create a new path entity for the drone
@@ -431,13 +436,13 @@ function onDrone3DShowChanged(
           width: 1,
           trailTime: Number.POSITIVE_INFINITY, // Show the entire history
           material: Cesium.Color.fromCssColorString("#00F0FF"), // 实线颜色
-          leadTime: 999999, 
+          leadTime: 999999,
         }),
       });
 
       // Store the positionProperty and pathEntity in the map
       dronePaths.set(id, { positionProperty, pathEntity });
-      
+
       console.log(`Created new path for drone ${id}`);
     } else {
       // Update the existing drone's path
@@ -448,16 +453,31 @@ function onDrone3DShowChanged(
           time: currentTime,
           position: { lon, lat, alt },
         });
-        
+
         // Force the path to rerender
         viewer.scene.requestRender();
-        
-       
       }
     }
-    
+
     // Update or add the drone entity
     const entity = viewer.entities.getById(id);
+    viewer.scene.postRender.addEventListener(() => {
+
+  if (!entity || !entity.position) return;
+
+   const time = Cesium.JulianDate.now();
+  const position = entity.position.getValue(time);
+  if (!position) return;
+
+  const cameraPosition = viewer.camera.positionWC;
+  const distance = Cesium.Cartesian3.distance(position, cameraPosition);
+
+  const scale = interpolateScale(distance);
+
+  if (entity.model) {
+    entity.model.scale = new Cesium.ConstantProperty(scale);
+  }
+});
     if (entity) {
       console.log("📡 [onDrone3DShowChanged] 接收到更新:", {
         val,
@@ -466,8 +486,7 @@ function onDrone3DShowChanged(
         alt,
         id,
       });
-      
-      
+
       const currentPos =
         entity.position?.getValue(Cesium.JulianDate.now()) ??
         Cesium.Cartesian3.fromDegrees(lon, lat, alt);
@@ -501,7 +520,7 @@ function onDrone3DShowChanged(
         },
 
         label: {
-          text: `${brandId}${id.substring(0, 3)}`,
+          text: `${brandId} - ${id.substring(0, 3)}`,
           // font: "14px ",
           // fillColor: Cesium.Color.AQUA,
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),
@@ -514,11 +533,10 @@ function onDrone3DShowChanged(
           verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
           heightReference: Cesium.HeightReference.NONE,
           scale: 0.8,
-
+          scaleByDistance: new Cesium.NearFarScalar(100.0, 2.0, 5000.0, 0.3),
           disableDepthTestDistance: Number.POSITIVE_INFINITY, // 防止被遮挡
         },
       });
-      
     }
   } else {
     // Remove drone and its path
@@ -528,22 +546,34 @@ function onDrone3DShowChanged(
       dronePaths.delete(id);
       console.log(`Removed path for drone ${id}`);
     }
-    
+
     // Remove drone entity
     const entity = viewer.entities.getById(id);
     if (entity) {
       viewer.entities.remove(entity);
       console.log(`Removed drone entity ${id}`);
     }
-    
+
     // Remove from drone array
-    const droneIndex = drone.findIndex(d => d.id === id);
+    const droneIndex = drone.findIndex((d) => d.id === id);
     if (droneIndex !== -1) {
       drone.splice(droneIndex, 1);
     }
   }
 }
-
+function interpolateScale(distance: number): number {
+  if (distance <= 100) return 0.5;
+  if (distance <= 800) {
+    return 0.5 - ((distance - 100) / 700) * (0.5 - 0.3); // 1.5 到 1.0
+  }
+  if (distance <= 2000) {
+    return 0.3 - ((distance - 800) / 1200) * (0.3 - 0.2); // 1.0 到 0.5
+  }
+  if (distance <= 5000) {
+    return 0.2 - ((distance - 2000) / 3000) * (0.2 - 0.15); // 0.5 到 0.2
+  }
+  return 0.15;
+}
 function moveEntitySmoothly(
   entity: Cesium.Entity,
   start: Cesium.Cartesian3,
@@ -640,7 +670,7 @@ async function onFlightPathShowChanged(value: boolean) {
         }
 
         // filter: 相邻距离小于2m点位
-        if (lastPoint && calcDistance(lastPoint, p) < 2) continue;
+        if (lastPoint && calcDistance(lastPoint, p) < 20) continue;
 
         filtered.push(p);
         lastPoint = p;
@@ -663,10 +693,7 @@ async function onFlightPathShowChanged(value: boolean) {
       viewer.clock.multiplier = 50;
       viewer.clock.shouldAnimate = true;
       const positionProperty = new Cesium.SampledPositionProperty(); // 创建动态位置属性，表示飞机在时间轴上的位置变化，用于动态飞行轨迹、播放飞行动画
-      positionProperty.setInterpolationOptions({
-        interpolationDegree: 5,
-        interpolationAlgorithm: Cesium.HermitePolynomialApproximation,
-      });
+     
       for (let i = 0; i < flightData.length; i++) {
         const dataPoint = flightData[i];
         const time = Cesium.JulianDate.addSeconds(
@@ -687,6 +714,10 @@ async function onFlightPathShowChanged(value: boolean) {
         //   point: { pixelSize: 10, color: Cesium.Color.BLUE },
         // });
       }
+      //  positionProperty.setInterpolationOptions({
+      //   interpolationDegree: 10,
+      //   interpolationAlgorithm: Cesium.HermitePolynomialApproximation,
+      // });
       // 实线轨迹（已经飞过的部分）
       passedPathEntity = viewer.entities.add({
         availability: new Cesium.TimeIntervalCollection([
@@ -718,6 +749,7 @@ async function onFlightPathShowChanged(value: boolean) {
           }),
         }),
       });
+    
 
       // STEP 4 CODE (green circle entity)
       airplaneEntity = viewer.entities.add({
