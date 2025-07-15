@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-05-12 06:15:48
- * @LastEditors: viola
- * @LastEditTime: 2025-06-26 10:56:28
- * @FilePath: \code\src\http\HTTP.ts
- */
 import axios from "axios";
 import {getToken} from "@/utils/auth";
 

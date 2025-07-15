@@ -1,7 +1,8 @@
+<!-- src/components/tools/toolBar.vue -->
 <template>
     <div class="too-bar--container">
         <div @click="compClick(EShowCompName.sectioning)" class="item">
-            <el-tooltip popper-class="tip-popper" class="box-item" effect="dark" content="体剖切" placement="bottom">
+            <el-tooltip popper-class="tip-popper" class="box-item" effect="dark" content="" placement="bottom">
                 <Icon :color="showComp === EShowCompName.sectioning ? '#7afafe' : '#fff'" :font-size="25" icon="tool-bar-tipouqie" />
             </el-tooltip>
         </div>

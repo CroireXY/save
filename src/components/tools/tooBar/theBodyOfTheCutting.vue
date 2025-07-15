@@ -1,3 +1,4 @@
+<!-- src/components/tools/tooBar/theBodyOfTheCutting.vue -->
 <template>
   <div class="control">
     <div class="top">
