@@ -17,6 +17,7 @@ import { fetchWithAuth } from "@/utils/auth";
 import { getFlightRecordInDetails } from "@/api/connect";
 import websocketServer from "@/tools/websocket";
 import droneIcon from "@/assets/icons/icons_OnMap/Drone.png"; // 替换为实际的无人机图标路径
+import { times } from "lodash";
 // import eventBus from "@/utils/eventBus";
 let viewer: Cesium.Viewer; // 在 setup 外部函数也能访问
 const mapStore = useMapStore();
@@ -307,15 +308,6 @@ async function onDrone2DShowChanged(val: boolean) {
   console.log("onDrone2DShowChanged", val);
   if (val) {
     try {
-      // const { data } = await axios.get(
-      //   "http://lae.lscm.hk/fsp/api/getFlightRecords?stime=20250401000000&etime=20250530235959",
-      //   {
-      //     headers: {
-      //       Authorization:
-      //         "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJsc2NtIiwiYWRtaW5JZCI6MSwiaWF0IjoxNzQ5MTM2MTA1LCJleHAiOjE3NDkxNzkzMDV9.41TDAoEODVBnaQjY-LRPCB-lpZQsEijtJufPHPNovDg",
-      //     },
-      //   }
-      // );
       const res = await fetchWithAuth(
         "http://lae.lscm.hk/fsp/api/getFlightRecords?stime=20250613000000&etime=20250618235959"
       );
@@ -387,6 +379,7 @@ const dronePaths = new Map<
   string,
   {
     positionProperty: Cesium.SampledPositionProperty;
+    positions1: Cesium.Cartesian3[];
     pathEntity: Cesium.Entity;
   }
 >();
@@ -418,30 +411,45 @@ function onDrone3DShowChanged(
   if (val) {
     const currentTime = Cesium.JulianDate.now();
     const position = Cesium.Cartesian3.fromDegrees(lon, lat, alt);
-
+    var positions1: Cesium.Cartesian3[] = [];
     // Check if the drone already has a path
     if (!dronePaths.has(id)) {
       // Create a new SampledPositionProperty for the drone
       const positionProperty = new Cesium.SampledPositionProperty();
+
       // positionProperty.setInterpolationOptions({
       //   interpolationDegree: 5,
       //   interpolationAlgorithm: Cesium.LagrangePolynomialApproximation,
       // });
       positionProperty.addSample(currentTime, position);
+      positions1.push(position);
 
       // Create a new path entity for the drone
+      // const pathEntity = viewer.entities.add({
+      //   position: positionProperty,
+      //   path: new Cesium.PathGraphics({
+      //     width: 1,
+      //     trailTime: Number.POSITIVE_INFINITY, // Show the entire history
+      //     material: Cesium.Color.fromCssColorString("#00F0FF"), // 实线颜色
+      //     leadTime: 999999,
+      //   }),
+      // });
       const pathEntity = viewer.entities.add({
-        position: positionProperty,
-        path: new Cesium.PathGraphics({
-          width: 1,
-          trailTime: Number.POSITIVE_INFINITY, // Show the entire history
-          material: Cesium.Color.fromCssColorString("#00F0FF"), // 实线颜色
-          leadTime: 999999,
-        }),
+        id: id + "_path",
+        name: "line",
+        polyline: {
+          positions: new Cesium.CallbackProperty(() => positions1, false),
+     width: 6,
+          material: new Cesium.PolylineGlowMaterialProperty({
+            glowPower: 0.1,
+            color: Cesium.Color.fromCssColorString("#E0E0E099"),
+          }),
+        },
       });
 
       // Store the positionProperty and pathEntity in the map
-      dronePaths.set(id, { positionProperty, pathEntity });
+      dronePaths.set(id, { positionProperty,positions1, pathEntity });
+    
 
       console.log(`Created new path for drone ${id}`);
     } else {
@@ -449,6 +457,7 @@ function onDrone3DShowChanged(
       const droneData = dronePaths.get(id);
       if (droneData) {
         droneData.positionProperty.addSample(currentTime, position);
+        droneData.positions1.push(position);
         console.log(`Added sample to drone ${id} path:`, {
           time: currentTime,
           position: { lon, lat, alt },
@@ -462,22 +471,21 @@ function onDrone3DShowChanged(
     // Update or add the drone entity
     const entity = viewer.entities.getById(id);
     viewer.scene.postRender.addEventListener(() => {
+      if (!entity || !entity.position) return;
 
-  if (!entity || !entity.position) return;
+      const time = Cesium.JulianDate.now();
+      const position = entity.position.getValue(time);
+      if (!position) return;
 
-   const time = Cesium.JulianDate.now();
-  const position = entity.position.getValue(time);
-  if (!position) return;
+      const cameraPosition = viewer.camera.positionWC;
+      const distance = Cesium.Cartesian3.distance(position, cameraPosition);
 
-  const cameraPosition = viewer.camera.positionWC;
-  const distance = Cesium.Cartesian3.distance(position, cameraPosition);
+      const scale = interpolateScale(distance);
 
-  const scale = interpolateScale(distance);
-
-  if (entity.model) {
-    entity.model.scale = new Cesium.ConstantProperty(scale);
-  }
-});
+      if (entity.model) {
+        entity.model.scale = new Cesium.ConstantProperty(scale);
+      }
+    });
     if (entity) {
       console.log("📡 [onDrone3DShowChanged] 接收到更新:", {
         val,
@@ -670,7 +678,7 @@ async function onFlightPathShowChanged(value: boolean) {
         }
 
         // filter: 相邻距离小于2m点位
-        if (lastPoint && calcDistance(lastPoint, p) < 20) continue;
+        if (lastPoint && calcDistance(lastPoint, p) < 2) continue;
 
         filtered.push(p);
         lastPoint = p;
@@ -678,6 +686,7 @@ async function onFlightPathShowChanged(value: boolean) {
       }
 
       const flightData = filtered.map((p) => [p.lon, p.lat, p.alt]);
+      console.log("Filtered Flight Data:", flightData);
 
       const timeStepInSeconds = 60;
       const totalSeconds = timeStepInSeconds * (flightData.length - 1);
@@ -693,37 +702,86 @@ async function onFlightPathShowChanged(value: boolean) {
       viewer.clock.multiplier = 50;
       viewer.clock.shouldAnimate = true;
       const positionProperty = new Cesium.SampledPositionProperty(); // 创建动态位置属性，表示飞机在时间轴上的位置变化，用于动态飞行轨迹、播放飞行动画
-     
+
+      // for (let i = 0; i < flightData.length; i++) {
+      //   const dataPoint = flightData[i];
+      //   const time = Cesium.JulianDate.addSeconds(
+      //     start,
+      //     i * timeStepInSeconds,
+      //     new Cesium.JulianDate()
+      //   );
+      //   const position = Cesium.Cartesian3.fromDegrees(
+      //     dataPoint[0],
+      //     dataPoint[1],
+      //     dataPoint[2]
+      //   );
+      //   positionProperty.addSample(time, position);
+      // }
+      var controls = [];
+      var positions1 = [];
+      var timeStamps = [];
       for (let i = 0; i < flightData.length; i++) {
-        const dataPoint = flightData[i];
+        const dataPoint1 = flightData[i];
+
+        const position = Cesium.Cartesian3.fromDegrees(
+          dataPoint1[0],
+          dataPoint1[1],
+          dataPoint1[2]
+        );
+        positions1.push(position);
+        timeStamps.push(i);
+      }
+      let count = positions1.length;
+      let times = [];
+      let step = 1 / (count - 1);
+      for (let i = 0; i < count; i++) {
+        let time = step * i;
+        times.push(time);
+      }
+
+      // 样条线
+      var spline = new Cesium.CatmullRomSpline({
+        times,
+        points: positions1,
+      });
+
+      // 获取平滑曲线（样条线）的插值点
+      var numSamples = 300;
+      var samples = [];
+      for (var i = 0; i <= numSamples; i++) {
+        var time = i / numSamples;
+        var sample = spline.evaluate(time);
+        samples.push(sample);
+      }
+
+      futurePathEntity = viewer.entities.add({
+        name: "line",
+        polyline: {
+          positions: samples,
+          width: 6,
+          material: new Cesium.PolylineGlowMaterialProperty({
+            glowPower: 0.1,
+            color: Cesium.Color.fromCssColorString("#E0E0E099"),
+          }),
+        },
+      });
+      for (let i = 0; i < samples.length; i++) {
+        const dataPoint = samples[i];
         const time = Cesium.JulianDate.addSeconds(
           start,
           i * timeStepInSeconds,
           new Cesium.JulianDate()
         );
-        const position = Cesium.Cartesian3.fromDegrees(
-          dataPoint[0],
-          dataPoint[1],
-          dataPoint[2]
-        );
+        const position = dataPoint; // 使用样条线插值点
         positionProperty.addSample(time, position);
-
-        // points[i] = viewer.entities.add({
-        //   description: `Location: (${dataPoint[0]}, ${dataPoint[1]}, ${dataPoint[2]})`,
-        //   position: position,
-        //   point: { pixelSize: 10, color: Cesium.Color.BLUE },
-        // });
       }
-      //  positionProperty.setInterpolationOptions({
-      //   interpolationDegree: 10,
-      //   interpolationAlgorithm: Cesium.HermitePolynomialApproximation,
-      // });
+
       // 实线轨迹（已经飞过的部分）
       passedPathEntity = viewer.entities.add({
         availability: new Cesium.TimeIntervalCollection([
           new Cesium.TimeInterval({ start: start, stop: stop }),
         ]), // 实体存在的时间范围：start--stop时间段可见
-        position: positionProperty,
+        position: positionProperty, // 动态位置属性,
         path: new Cesium.PathGraphics({
           leadTime: 0, // 未来时间 = 0，即不绘制未来路径
           trailTime: 999999, // 尽可能长，表示过去轨迹都显示
@@ -732,24 +790,25 @@ async function onFlightPathShowChanged(value: boolean) {
         }),
       });
 
-      // 虚线轨迹（尚未飞过的部分）
-      futurePathEntity = viewer.entities.add({
-        availability: new Cesium.TimeIntervalCollection([
-          new Cesium.TimeInterval({ start: start, stop: stop }),
-        ]), // 实体存在的时间范围：start--stop时间段可见
-        position: positionProperty,
-        path: new Cesium.PathGraphics({
-          leadTime: 999999, // 未来轨迹全部显示
-          trailTime: 0, // 不显示过去轨迹
-          width: 2,
-          material: new Cesium.PolylineDashMaterialProperty({
-            // 使用虚线材质
-            dashLength: 16, // 虚线长度
-            color: Cesium.Color.fromCssColorString("#E0E0E099"),
-          }),
-        }),
-      });
-    
+      // // 虚线轨迹（尚未飞过的部分）
+      // futurePathEntity = viewer.entities.add({
+      //   availability: new Cesium.TimeIntervalCollection([
+      //     new Cesium.TimeInterval({ start: start, stop: stop }),
+      //   ]), // 实体存在的时间范围：start--stop时间段可见
+      //   position: positionProperty,
+      //   path: new Cesium.PathGraphics({
+      //     leadTime: 999999, // 未来轨迹全部显示
+      //     trailTime: 0, // 不显示过去轨迹
+      //     width: 1.5,
+      //     material:
+      //       // new Cesium.PolylineDashMaterialProperty({
+      //       //   // 使用虚线材质
+      //       //   dashLength: 30, // 虚线长度
+      //       //   color:
+      //       Cesium.Color.fromCssColorString("#E0E0E099"),
+      //     // }),
+      //   }),
+      // });
 
       // STEP 4 CODE (green circle entity)
       airplaneEntity = viewer.entities.add({
@@ -776,21 +835,34 @@ async function onFlightPathShowChanged(value: boolean) {
         // },
 
         model: {
-          uri: "/3d_icon/drones.glb",
-          scale: 1.5,
+          // uri: "/3d_icon/drones.glb",
+          // scale: 1.5,
+          // color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
+          // colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
+          // colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
+          // minimumPixelSize: 48,
+          // maximumScale: 20000, // 模型的最大比例大小
+
+          // silhouetteColor: Cesium.Color.BLACK,
+          // silhouetteSize: 4,
+          // // shadows: Cesium.ShadowMode.ENABLED,
+          // lightColor: Cesium.Color.GREY, // 模型光照颜色
+          uri: "/3d_icon/drone2.glb",
+          scale: 0.05,
           color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
           colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
           colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
-          minimumPixelSize: 48,
-          maximumScale: 20000, // 模型的最大比例大小
-
+          minimumPixelSize: 64,
           silhouetteColor: Cesium.Color.BLACK,
-          silhouetteSize: 4,
-          // shadows: Cesium.ShadowMode.ENABLED,
-          lightColor: Cesium.Color.GREY, // 模型光照颜色
+          silhouetteSize: 1,
+          shadows: Cesium.ShadowMode.ENABLED,
+          distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
+            0,
+            10000
+          ),
         },
         label: {
-          text: "無人機D001",
+          text: "DJI - 001",
           // font: "14px ",
           // fillColor: Cesium.Color.AQUA,
           pixelOffset: new Cesium.Cartesian3(0, -35, 30),
@@ -806,6 +878,21 @@ async function onFlightPathShowChanged(value: boolean) {
           disableDepthTestDistance: Number.POSITIVE_INFINITY, // 防止被遮挡
         },
       });
+      function interpolateParabola(
+        p1: number[],
+        p2: number[],
+        count = 10
+      ): number[][] {
+        const result: number[][] = [];
+        for (let i = 1; i < count; i++) {
+          const t = i / count;
+          const lon = Cesium.Math.lerp(p1[0], p2[0], t);
+          const lat = Cesium.Math.lerp(p1[1], p2[1], t);
+          const alt = Cesium.Math.lerp(p1[2], p2[2], t) + 50 * 4 * t * (1 - t); // 简单抛物线
+          result.push([lon, lat, alt]);
+        }
+        return result;
+      }
 
       // 添加事件监听器，监听时间变化
       function tickHandler(clock: Cesium.Clock) {
