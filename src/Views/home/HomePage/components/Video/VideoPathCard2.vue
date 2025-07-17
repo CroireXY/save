@@ -29,8 +29,8 @@
   
   <script setup>
   import { ref, computed, watch } from 'vue'
-  import defaultSrc from '@/assets/icons/icons_TakeoffLandingOverview/videodefault.png'
-  import hoverSrc from '@/assets/icons/icons_TakeoffLandingOverview/videohover.png'
+  import defaultSrc from '@/assets/icons/icons_TakeoffLandingOverview/videodefault.webp'
+  import hoverSrc from '@/assets/icons/icons_TakeoffLandingOverview/videohover.webp'
   
   const bgStyle = ref({
     backgroundImage: `url(${defaultSrc})`,
@@ -125,7 +125,7 @@
       const script = document.createElement('script')
       script.src = '/js/jsmpeg.min.js'
       script.onload = () => {
-        player = new window.JSMpeg.Player('ws://127.0.0.1:9999', {
+        player = new window.JSMpeg.Player('ws://lae.lscm.hk:9999', {
           canvas: canvasRef.value,
           autoplay: true,
           audio: false,

@@ -25,10 +25,10 @@ import Box from "@/components/Box/index.vue";
 import Lease_title from "@/components/Lease_title/index.vue";
 import { ref, onMounted } from "vue";
 import dayjs from "dayjs";
-import sunnyIcon from "@/assets/icons/icons_Weather/sunny.png";
-import seWindIcon from "@/assets/icons/icons_Weather/SEwind.png";
-import windSpeedIcon from "@/assets/icons/icons_Weather/windspeed.png";
-import emiIcon from "@/assets/icons/icons_Weather/EMI.png";
+import sunnyIcon from "@/assets/icons/icons_Weather/sunny.webp";
+import seWindIcon from "@/assets/icons/icons_Weather/SEwind.webp";
+import windSpeedIcon from "@/assets/icons/icons_Weather/windspeed.webp";
+import emiIcon from "@/assets/icons/icons_Weather/EMI.webp";
 import { getWeather } from "@/api/connect";
 
 const title = ref("");

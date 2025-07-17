@@ -50,7 +50,7 @@ watch(showVideoLeft, (val) => {
     const script = document.createElement('script');
     script.src = '/js/jsmpeg.min.js';
     script.onload = () => {
-      playerLeft = new (window as any).JSMpeg.Player('ws://127.0.0.1:9999', {
+      playerLeft = new (window as any).JSMpeg.Player('ws://lae.lscm.hk:9999', {
         canvas: canvasRefLeft.value,
         autoplay: true,
         audio: false,
@@ -66,7 +66,7 @@ watch(showVideoRight, (val) => {
     const script = document.createElement('script');
     script.src = '/js/jsmpeg.min.js';
     script.onload = () => {
-      playerRight = new (window as any).JSMpeg.Player('ws://127.0.0.1:9999', {
+      playerRight = new (window as any).JSMpeg.Player('ws://lae.lscm.hk:9999', {
         canvas: canvasRefRight.value,
         autoplay: true,
         audio: false,

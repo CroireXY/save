@@ -6,7 +6,7 @@
         <div class="conflict-box">
           <div class="conflict-title glow-blue">衝突信息</div>
           <div class="conflict-header">
-            <img class="icon" src="~@/assets/icons/icons_FlightConflict/redwarning.png" />
+            <img class="icon" src="~@/assets/icons/icons_FlightConflict/redwarning.webp" />
             <span class="conflict-label glow-red">飛行衝突</span>
           </div>
           <div class="card-container">

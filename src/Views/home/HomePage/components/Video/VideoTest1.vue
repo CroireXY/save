@@ -34,7 +34,7 @@
       const script = document.createElement('script')
       script.src = '/js/jsmpeg.min.js'
       script.onload = () => {
-        player = new window.JSMpeg.Player('ws://127.0.0.1:9999', {
+        player = new window.JSMpeg.Player('ws://lae.lscm.hk:9999', {
           canvas: canvasRef.value,
           autoplay: true,
           audio: false,

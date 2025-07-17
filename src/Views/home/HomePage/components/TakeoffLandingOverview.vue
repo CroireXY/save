@@ -42,7 +42,7 @@ const rightLabel = ref('無人機航線');
   position: relative;
   width: 49%;
   aspect-ratio: 16 / 9; 
-  background: url('~@/assets/icons/icons_TakeoffLandingOverview/cardbg.png') center center no-repeat;
+  background: url('~@/assets/icons/icons_TakeoffLandingOverview/cardbg.webp') center center no-repeat;
   background-size: contain;
   background-color: transparent;
   @include BorderRadius(4);

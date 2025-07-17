@@ -20,28 +20,28 @@
       name: "飛行衝突",
       value: 17,
       unit: "次",
-      icon: require('@/assets/icons/icons_Alerts/flightConflict_s2.png'),
+      icon: require('@/assets/icons/icons_Alerts/flightConflict_s2.webp'),
     },
     {
       id: 2,
       name: "闖入禁區",
       value: 7,
       unit: "次",
-      icon: require('@/assets/icons/icons_Alerts/no_entry_warning_s2.png'),
+      icon: require('@/assets/icons/icons_Alerts/no_entry_warning_s2.webp'),
     },
     {
       id: 3,
       name: "偏航告警",
       value: 10,
       unit: "次",
-      icon: require('@/assets/icons/icons_Alerts/deviationAlert_s2.png'),
+      icon: require('@/assets/icons/icons_Alerts/deviationAlert_s2.webp'),
     },
     {
       id: 4,
       name: "氣象異常",
       value: 9,
       unit: "次",
-      icon: require('@/assets/icons/icons_Alerts/weatherAlert_s2.png'),
+      icon: require('@/assets/icons/icons_Alerts/weatherAlert_s2.webp'),
     },
   ];
   </script>
