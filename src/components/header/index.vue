@@ -51,6 +51,21 @@
             />
           </el-tooltip>
         </div>
+        <div @click="goToUserPage" class="too-bar-style">
+          <el-tooltip
+            popper-class="tip-popper"
+            class="box-item"
+            effect="dark"
+            content="用户管理"
+            placement="bottom"
+          >
+            <Icon
+              :color="ToolBarShow ? '#7afafe' : '#fff'"
+              :font-size="24"
+              icon="tool-bar-ememap"
+            />
+          </el-tooltip>
+        </div>
       </div>
     </div>
   </div>
@@ -84,6 +99,11 @@ const goToRegisterPage = () => {
   // window.open('http://localhost:3000/', '_blank') //本地
   window.open('http://lae.lscm.hk/pilot-drone/', '_blank'); //华为云
 
+}
+const goToUserPage = () => {
+  // window.open('https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd', '_blank') //全蓝主题
+  // window.open('https://ddnrxbqz.manus.space/?code=h98x3Eb92vcgSzWBMQ9oAm', '_blank') //新主题
+  window.open('http://localhost:5173/', '_blank') //本地
 }
 
 // 电子地图

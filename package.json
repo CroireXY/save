@@ -6,8 +6,8 @@
   "scripts": {
     "serve": "node ./scripts/prepare.js serve",
     "build": "node ./scripts/prepare.js build",
-    "serve17": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
-    "build17": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
+    "serve17": " NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "build17": " NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
     "serve14": "vue-cli-service serve",
     "build14": "vue-cli-service build",
     "test:unit": "jest"
@@ -30,6 +30,7 @@
     "ffmpeg": "^0.0.4",
     "hls.js": "^1.6.7",
     "js-cookie": "^3.0.1",
+    "lucide-vue-next": "^0.344.0",
     "mitt": "^3.0.1",
     "node-rtsp-stream": "^0.0.9",
     "pinia": "^2.0.4",
@@ -52,11 +53,15 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/test-utils": "^2.4.6",
+    "autoprefixer": "^10.4.18",
     "babel-jest": "^27.5.1",
     "jest": "^27.5.1",
+    "postcss": "^8.4.35",
     "sass": "^1.69.0",
     "sass-loader": "^10.0.3",
+    "tailwindcss": "^3.4.1",
+    
     "ts-jest": "^27.1.5",
-    "typescript": "^4.9.0"
+    "typescript": "~5.4.0"
   }
 }
