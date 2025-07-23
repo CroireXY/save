@@ -18,7 +18,10 @@ import { getFlightRecordInDetails } from "@/api/connect";
 import websocketServer from "@/tools/websocket";
 import droneIcon from "@/assets/icons/icons_OnMap/Drone.png"; // 替换为实际的无人机图标路径
 import { times } from "lodash";
-// import eventBus from "@/utils/eventBus";
+import { PolylineAntialiasingMaterialProperty } from "@/components/cesium/polyline";
+import eventBus from "@/utils/eventBus";
+
+
 let viewer: Cesium.Viewer; // 在 setup 外部函数也能访问
 const mapStore = useMapStore();
 // 设置cesium的静态资源路径
@@ -208,6 +211,12 @@ onMounted(() => {
   ambientOcclusion.uniforms.blurStepSize = 0.86;
 
   viewer.scene.globe.enableLighting = true; // 开启全球光照
+   // 根据设备像素比例来设置 Cesium 场景的分辨率缩放，达到更好的视觉效果。
+            // if (Cesium.FeatureDetection.supportsImageRenderingPixelated()) {
+            //     viewer.resolutionScale = window.devicePixelRatio
+            // }
+            // 开启抗锯齿
+            viewer.scene.postProcessStages.fxaa.enabled = true;
   // viewer.shadows = true;
 
   var fs =
@@ -413,60 +422,7 @@ function onDrone3DShowChanged(
     const position = Cesium.Cartesian3.fromDegrees(lon, lat, alt);
     var positions1: Cesium.Cartesian3[] = [];
     // Check if the drone already has a path
-    if (!dronePaths.has(id)) {
-      // Create a new SampledPositionProperty for the drone
-      const positionProperty = new Cesium.SampledPositionProperty();
-
-      // positionProperty.setInterpolationOptions({
-      //   interpolationDegree: 5,
-      //   interpolationAlgorithm: Cesium.LagrangePolynomialApproximation,
-      // });
-      positionProperty.addSample(currentTime, position);
-      positions1.push(position);
-
-      // Create a new path entity for the drone
-      // const pathEntity = viewer.entities.add({
-      //   position: positionProperty,
-      //   path: new Cesium.PathGraphics({
-      //     width: 1,
-      //     trailTime: Number.POSITIVE_INFINITY, // Show the entire history
-      //     material: Cesium.Color.fromCssColorString("#00F0FF"), // 实线颜色
-      //     leadTime: 999999,
-      //   }),
-      // });
-      const pathEntity = viewer.entities.add({
-        id: id + "_path",
-        name: "line",
-        polyline: {
-          positions: new Cesium.CallbackProperty(() => positions1, false),
-     width: 6,
-          material: new Cesium.PolylineGlowMaterialProperty({
-            glowPower: 0.1,
-            color: Cesium.Color.fromCssColorString("#E0E0E099"),
-          }),
-        },
-      });
-
-      // Store the positionProperty and pathEntity in the map
-      dronePaths.set(id, { positionProperty,positions1, pathEntity });
-    
-
-      console.log(`Created new path for drone ${id}`);
-    } else {
-      // Update the existing drone's path
-      const droneData = dronePaths.get(id);
-      if (droneData) {
-        droneData.positionProperty.addSample(currentTime, position);
-        droneData.positions1.push(position);
-        console.log(`Added sample to drone ${id} path:`, {
-          time: currentTime,
-          position: { lon, lat, alt },
-        });
-
-        // Force the path to rerender
-        viewer.scene.requestRender();
-      }
-    }
+   
 
     // Update or add the drone entity
     const entity = viewer.entities.getById(id);
@@ -480,11 +436,11 @@ function onDrone3DShowChanged(
       const cameraPosition = viewer.camera.positionWC;
       const distance = Cesium.Cartesian3.distance(position, cameraPosition);
 
-      const scale = interpolateScale(distance);
+      // const scale = interpolateScale(distance);
 
-      if (entity.model) {
-        entity.model.scale = new Cesium.ConstantProperty(scale);
-      }
+      // if (entity.model) {
+      //   entity.model.scale = new Cesium.ConstantProperty(scale);
+      // }
     });
     if (entity) {
       console.log("📡 [onDrone3DShowChanged] 接收到更新:", {
@@ -513,12 +469,12 @@ function onDrone3DShowChanged(
         model: {
           uri: "/3d_icon/drone2.glb",
           scale: 0.05,
-          color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
-          colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
-          colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
+          // color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
+          // colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
+          // colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
           minimumPixelSize: 64,
-          silhouetteColor: Cesium.Color.BLACK,
-          silhouetteSize: 1,
+          // silhouetteColor: Cesium.Color.BLACK,
+          // silhouetteSize: 1,
           shadows: Cesium.ShadowMode.ENABLED,
           distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
             0,
@@ -541,10 +497,68 @@ function onDrone3DShowChanged(
           verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
           heightReference: Cesium.HeightReference.NONE,
           scale: 0.8,
-          scaleByDistance: new Cesium.NearFarScalar(100.0, 2.0, 5000.0, 0.3),
+          // scaleByDistance: new Cesium.NearFarScalar(100.0, 2.0, 10000.0, 0.3),
           disableDepthTestDistance: Number.POSITIVE_INFINITY, // 防止被遮挡
         },
       });
+    }
+     if (!dronePaths.has(id)) {
+      // Create a new SampledPositionProperty for the drone
+      const positionProperty = new Cesium.SampledPositionProperty();
+
+      // positionProperty.setInterpolationOptions({
+      //   interpolationDegree: 5,
+      //   interpolationAlgorithm: Cesium.LagrangePolynomialApproximation,
+      // });
+      positionProperty.addSample(currentTime, position);
+      positions1.push(position);
+
+      // Create a new path entity for the drone
+      // const pathEntity = viewer.entities.add({
+      //   position: positionProperty,
+      //   path: new Cesium.PathGraphics({
+      //     width: 1,
+      //     trailTime: Number.POSITIVE_INFINITY, // Show the entire history
+      //     material: Cesium.Color.fromCssColorString("#00F0FF"), // 实线颜色
+      //     leadTime: 999999,
+      //   }),
+      // });
+      const pathEntity = viewer.entities.add({
+        id: id + "_path",
+        name: "line",
+        polyline: {
+          positions: new Cesium.CallbackProperty(() => positions1, false),
+     width: 6,
+          // material: new Cesium.PolylineGlowMaterialProperty({
+          //   glowPower: 0.1,
+          //   color: Cesium.Color.fromCssColorString("#E0E0E099"),
+          // }),
+          material: new PolylineAntialiasingMaterialProperty({
+             glowPower: 0.1,
+      color: Cesium.Color.fromCssColorString("#E0E0E099")
+    }),
+        },
+      });
+
+      // Store the positionProperty and pathEntity in the map
+      dronePaths.set(id, { positionProperty,positions1, pathEntity });
+    
+
+      console.log(`Created new path for drone ${id}`);
+    } else {
+      // Update the existing drone's path
+      const droneData = dronePaths.get(id);
+      if (droneData) {
+        droneData.positionProperty.addSample(currentTime, position);
+        droneData.positions1.push(position);
+        console.log(`Added sample to drone ${id} path:`, {
+          time: currentTime,
+          position: { lon, lat, alt },
+        });
+
+        // Force the path to rerender
+        viewer.scene.requestRender();
+      }
     }
   } else {
     // Remove drone and its path
@@ -569,19 +583,7 @@ function onDrone3DShowChanged(
     }
   }
 }
-function interpolateScale(distance: number): number {
-  if (distance <= 100) return 0.5;
-  if (distance <= 800) {
-    return 0.5 - ((distance - 100) / 700) * (0.5 - 0.3); // 1.5 到 1.0
-  }
-  if (distance <= 2000) {
-    return 0.3 - ((distance - 800) / 1200) * (0.3 - 0.2); // 1.0 到 0.5
-  }
-  if (distance <= 5000) {
-    return 0.2 - ((distance - 2000) / 3000) * (0.2 - 0.15); // 0.5 到 0.2
-  }
-  return 0.15;
-}
+
 function moveEntitySmoothly(
   entity: Cesium.Entity,
   start: Cesium.Cartesian3,
@@ -849,12 +851,12 @@ async function onFlightPathShowChanged(value: boolean) {
           // lightColor: Cesium.Color.GREY, // 模型光照颜色
           uri: "/3d_icon/drone2.glb",
           scale: 0.05,
-          color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
-          colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
-          colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
+          // color: Cesium.Color.fromCssColorString("#4de1ff"), // 颜色和透明度
+          // colorBlendMode: Cesium.ColorBlendMode.MIX, // 替代、混合、乘
+          // colorBlendAmount: 0.5, // 仅对 MIX 模式有效，0~1
           minimumPixelSize: 64,
-          silhouetteColor: Cesium.Color.BLACK,
-          silhouetteSize: 1,
+          // silhouetteColor: Cesium.Color.BLACK,
+          // silhouetteSize: 1,
           shadows: Cesium.ShadowMode.ENABLED,
           distanceDisplayCondition: new Cesium.DistanceDisplayCondition(
             0,
@@ -930,6 +932,19 @@ function toDegrees(item: any) {
     timeStamp: item.timeStamp,
   };
 }
+// function interpolateScale(distance: number): number {
+//   if (distance <= 100) return 0.5;
+//   if (distance <= 800) {
+//     return 0.5 - ((distance - 100) / 700) * (0.5 - 0.3); // 1.5 到 1.0
+//   }
+//   if (distance <= 2000) {
+//     return 0.3 - ((distance - 800) / 1200) * (0.3 - 0.2); // 1.0 到 0.5
+//   }
+//   if (distance <= 5000) {
+//     return 0.2 - ((distance - 2000) / 3000) * (0.2 - 0.15); // 0.5 到 0.2
+//   }
+//   return 0.15;
+// }
 
 function calcDistance(p1: any, p2: any) {
   const R = 6371000;

@@ -1,3 +1,10 @@
+/*
+ * @Author: Sun ruiqi
+ * @Date: 2025-07-17 13:15:37
+ * @LastEditors: viola
+ * @LastEditTime: 2025-07-22 15:06:56
+ * @FilePath: /LAE_Dashboard/vue.config.js
+ */
 
 const path = require("path");
 
@@ -70,6 +77,22 @@ module.exports = {
   configureWebpack: {
     module: {
       unknownContextCritical: false,
+      rules: [
+        {
+          test: /\.js$/,
+          include: [
+            path.resolve(__dirname, 'node_modules/@cesium') // 让 cesium 源码也走 babel
+          ],
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env', { targets: 'defaults' }]
+              ]
+            }
+          }
+        }
+      ]
     },
     resolve: {
       extensions: [".js", ".vue", ".json", ".ts", ".tsx"], // 加入ts 和 tsx
