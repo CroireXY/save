@@ -18,8 +18,8 @@ import { getFlightRecordInDetails,getFlightRecords } from "@/api/connect";
 import websocketServer from "@/tools/websocket";
 import droneIcon from "@/assets/icons/icons_OnMap/Drone.png"; // 替换为实际的无人机图标路径
 import { times } from "lodash";
-import { PolylineAntialiasingMaterialProperty } from "@/components/cesium/polyline";
-import eventBus from "@/utils/eventBus";
+import { PolylineAntialiasingMaterialProperty } from "../cesium/polyline";
+// import eventBus from "@/utils/eventBus";
 
 
 let viewer: Cesium.Viewer; // 在 setup 外部函数也能访问
@@ -534,8 +534,8 @@ function onDrone3DShowChanged(
           //   color: Cesium.Color.fromCssColorString("#E0E0E099"),
           // }),
           material: new PolylineAntialiasingMaterialProperty({
-             glowPower: 0.1,
-      color: Cesium.Color.fromCssColorString("#E0E0E099")
+            //  glowPower: 0.1,
+      color: Cesium.Color.fromCssColorString("#00F0FF")
     }),
         },
       });
@@ -749,7 +749,7 @@ async function onFlightPathShowChanged(value: boolean) {
       });
 
       // 获取平滑曲线（样条线）的插值点
-      var numSamples = 300;
+      var numSamples = 800;
       var samples = [];
       for (var i = 0; i <= numSamples; i++) {
         var time = i / numSamples;
@@ -762,8 +762,11 @@ async function onFlightPathShowChanged(value: boolean) {
         polyline: {
           positions: samples,
           width: 6,
-          material: new Cesium.PolylineGlowMaterialProperty({
-            glowPower: 0.1,
+          // material: new Cesium.PolylineGlowMaterialProperty({
+          //   glowPower: 0.1,
+          //   color: Cesium.Color.fromCssColorString("#E0E0E099"),
+          // }),
+          material: new PolylineAntialiasingMaterialProperty({
             color: Cesium.Color.fromCssColorString("#E0E0E099"),
           }),
         },
@@ -779,7 +782,7 @@ async function onFlightPathShowChanged(value: boolean) {
         positionProperty.addSample(time, position);
       }
 
-      // 实线轨迹（已经飞过的部分）
+      // // 实线轨迹（已经飞过的部分）
       passedPathEntity = viewer.entities.add({
         availability: new Cesium.TimeIntervalCollection([
           new Cesium.TimeInterval({ start: start, stop: stop }),
@@ -978,7 +981,7 @@ async function onFlightPathShowChanged(value: boolean) {
       });
 
       // 获取平滑曲线（样条线）的插值点
-      var numSamples = 300;
+      var numSamples =2000;
       var samples = [];
       for (var i = 0; i <= numSamples; i++) {
         var time = i / numSamples;
