@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-07-23 16:14:06
  * @LastEditors: viola
- * @LastEditTime: 2025-07-23 16:25:33
+ * @LastEditTime: 2025-07-24 15:27:35
  * @FilePath: /LAE_Dashboard/src/utils/sharedAuth.ts
  */
 // utils/sharedAuth.js
@@ -10,7 +10,7 @@ export class SharedAuthManager {
   static STORAGE_KEYS = {
     USER_DATA: 'shared_user_data',
     AUTH_TOKEN: 'shared_auth_token',
-    RETURN_URL: 'shared_return_url',
+    RETURN_URL: 'https://localhost:5173/user-management/dashboard',
     SYSTEM_SOURCE: 'shared_system_source'
   }
 
@@ -70,18 +70,28 @@ export class SharedAuthManager {
   }
 
   // 验证token是否有效
-  static async validateToken(token:string) {
-    try {
-      const response = await fetch('/api/validateToken', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      })
-      return response.ok
-    } catch (error) {
-      return false
+  // static async validateToken(token:string) {
+  //   try {
+  //     const response = await fetch('/api/validateToken', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${token}`
+  //       }
+  //     })
+  //     return response.ok
+  //   } catch (error) {
+  //     return false
+  //   }
+  // }
+  static validateToken(token: string) {
+    if(!token) {
+      return false;
+    }else if(token.length < 10) {
+      return false; // 假设token长度小于10表示无效
+
+    }else{
+      return true; // 假设验证通过，实际应用中需要调用后端API验证
     }
   }
 }

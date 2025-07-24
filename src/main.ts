@@ -237,18 +237,18 @@ function setUserState(userData: UserData): void {
 class SweetAlertRedirectManager {
   static async showLoginRequired() {
     const result = await Swal.fire({
-      title: '需要登录',
+      title: '歡迎來到香港低空飛行服務平台',
       html: `
         <div style="text-align: center;">
-          <p>您还未登录系统，无法访问此页面</p>
-          <p style="color: #666; font-size: 14px;">将在 <b id="countdown">5</b> 秒后自动跳转到登录页面</p>
+          <p>您還未登錄系統，無法訪問此頁面</p>
+          <p style="color: #666; font-size: 14px;">将在 <b id="countdown">5</b> 秒後自動跳轉到登錄頁面</p>
         </div>
       `,
-      icon: 'warning',
+      // icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: '立即登录',
+      confirmButtonText: '立即登錄',
       cancelButtonText: '取消',
       timer: 5000, // 5秒后自动确认
       timerProgressBar: true,
@@ -399,9 +399,9 @@ const initializeUserSession = async () => {
   
   if (sharedUserData) {
     // 验证token是否仍然有效
-    // const isValidToken = await SharedAuthManager.validateToken(sharedUserData.token)
+    const isValidToken = await SharedAuthManager.validateToken(sharedUserData.token)
 
-    const isValidToken = true; // 假设验证通过，实际应用中需要调用后端API验证
+    // const isValidToken = true; // 假设验证通过，实际应用中需要调用后端API验证
     if (isValidToken) {
       // 设置其他系统的用户状态
       setCurrentUser({
@@ -414,6 +414,7 @@ const initializeUserSession = async () => {
       setAuthToken(sharedUserData.token)
       
       console.log(`用户 ${sharedUserData.username} 已从用户管理系统登录`)
+      console.log('🔑 设置认证Token:', sharedUserData.token)
     } else {
       // Token无效，清理数据并重定向到登录页
       SharedAuthManager.clearUserSession()

@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-07-17 17:12:28
  * @LastEditors: viola
- * @LastEditTime: 2025-07-24 10:33:41
+ * @LastEditTime: 2025-07-24 15:28:12
  * @FilePath: /LAE_Dashboard/src/App.vue
 -->
 <!-- App.vue -->
