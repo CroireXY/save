@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.0.0",
+    "@types/crypto-js": "^4.2.2",
     "@types/jest": "^27.5.2",
     "@types/js-cookie": "^3.0.1",
     "@types/lodash": "^4.14.179",
@@ -22,6 +23,7 @@
     "ant-design-vue": "^2.2.8",
     "axios": "^0.24.0",
     "cesium": "1.95.0",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.10.7",
     "default-passive-events": "^2.0.0",
     "echarts": "^5.2.2",
@@ -34,6 +36,7 @@
     "node-rtsp-stream": "^0.0.9",
     "pinia": "^2.0.4",
     "qweather-icons": "^1.1.0",
+    "sweetalert2": "^11.22.2",
     "swiper": "^7.4.1",
     "vue": "^3.2.13",
     "vue-fullscreen": "^3.1.3",
