@@ -2,14 +2,14 @@
  * @Author: Sun ruiqi
  * @Date: 2025-07-17 13:15:37
  * @LastEditors: viola
- * @LastEditTime: 2025-07-28 10:41:42
+ * @LastEditTime: 2025-07-28 17:01:49
  * @FilePath: /LAE_Dashboard/src/utils/auth.ts
  */
 import axios from 'axios';
 
 //每次改这个去跳转系统
-export const systemURL = 'http://lae.lscm.hk'
-// export const systemURL = 'http://localhost:5174'
+// export const systemURL = 'http://lae.lscm.hk'
+export const systemURL = 'http://localhost:5173'
 
 
 let cachedToken: string | null = null;

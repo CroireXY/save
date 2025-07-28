@@ -24,20 +24,13 @@ import "echarts-liquidfill";
 import { nextZIndex, PopupManager } from "@/utils/common";
 import { useDialogStore } from "@/stores/dialog";
 import VueFullscreen from "vue-fullscreen";
-<<<<<<< HEAD
 import { systemURL } from "@/utils/auth";
-=======
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
 
 // 导入SweetAlert2
 import Swal from 'sweetalert2'
 // 在其他系统的入口文件（如 main.js 或 App.vue）
 import { SharedAuthManager } from '@/utils/sharedAuth';
 import { setAuthToken, getToken,setCurrentUser } from '@/utils/auth';
-<<<<<<< HEAD
-
-=======
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
 interface UserData {
   username: string
   userId: string
@@ -215,12 +208,8 @@ class EncryptedDataManager {
    * 生成返回用户管理系统的URL
    */
   static getReturnUrl(): string {
-<<<<<<< HEAD
     const url = `${systemURL}/user-management/dashboard?from=external-system`
     return url
-=======
-    return 'http://localhost:5173/user-management/dashboard?from=external-system'
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
   }
 }
 
@@ -250,7 +239,6 @@ function setUserState(userData: UserData): void {
 class SweetAlertRedirectManager {
   static async showLoginRequired() {
     const result = await Swal.fire({
-<<<<<<< HEAD
       title: '歡迎來到香港低空飛行服務平台',
       html: `
         <div style="text-align: center;">
@@ -263,20 +251,6 @@ class SweetAlertRedirectManager {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: '立即登錄',
-=======
-      title: '需要登录',
-      html: `
-        <div style="text-align: center;">
-          <p>您还未登录系统，无法访问此页面</p>
-          <p style="color: #666; font-size: 14px;">将在 <b id="countdown">5</b> 秒后自动跳转到登录页面</p>
-        </div>
-      `,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '立即登录',
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
       cancelButtonText: '取消',
       timer: 5000, // 5秒后自动确认
       timerProgressBar: true,
@@ -300,14 +274,9 @@ class SweetAlertRedirectManager {
     
     if (result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
       // 用户点击确认或超时自动确认
-<<<<<<< HEAD
       window.location.href = `${systemURL}/user-management/login`
      
 
-=======
-      // window.location.href = '/user-management/login'
-      window.location.href = 'http://localhost:5173/login'
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
     } else if (result.dismiss === Swal.DismissReason.cancel) {
       // 用户点击取消，可以显示受限界面或其他处理
       console.log('用户取消了登录跳转')
@@ -347,11 +316,7 @@ class SweetAlertRedirectManager {
     })
     
     // 无论如何都跳转到登录页
-<<<<<<< HEAD
     window.location.href = `${systemURL}/user-management/login`
-=======
-    window.location.href = '/user-management/login'
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
   }
   
   static async showRestrictedAccess() {
@@ -437,15 +402,9 @@ const initializeUserSession = async () => {
   
   if (sharedUserData) {
     // 验证token是否仍然有效
-<<<<<<< HEAD
     const isValidToken = await SharedAuthManager.validateToken(sharedUserData.token)
 
     // const isValidToken = true; // 假设验证通过，实际应用中需要调用后端API验证
-=======
-    // const isValidToken = await SharedAuthManager.validateToken(sharedUserData.token)
-
-    const isValidToken = true; // 假设验证通过，实际应用中需要调用后端API验证
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
     if (isValidToken) {
       // 设置其他系统的用户状态
       setCurrentUser({
@@ -458,10 +417,7 @@ const initializeUserSession = async () => {
       setAuthToken(sharedUserData.token)
       
       console.log(`用户 ${sharedUserData.username} 已从用户管理系统登录`)
-<<<<<<< HEAD
       console.log('🔑 设置认证Token:', sharedUserData.token)
-=======
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
     } else {
       // Token无效，清理数据并重定向到登录页
       SharedAuthManager.clearUserSession()
@@ -494,7 +450,6 @@ console.log(1111)
 // 页面加载时初始化用户会话
 initializeUserSession().then(() => {
   // 只有在认证检查完成后才创建Vue应用
-<<<<<<< HEAD
   const app = createApp(App)
 
 // 注册插件
@@ -565,75 +520,6 @@ app.directive("drag", {
 // 最后挂载
 app.mount("#app")
 
-=======
-  createApp(App)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    .use(ElementPlus,{})
-    .use(Antd)
-    .use(createPinia())
-    .use(router)
-    // .use(VueFullscreen)
-    .component("LeaseTitle", LeaseTitle)
-    .component("V3Echarts", V3Echarts)
-    .directive("drag", {
-      mounted: function (el: any, binding: any, vnode: any) {
-        const value = binding.value;
-        const moveContainer =
-          (value && value.container && document.querySelector(value.container)) ||
-          document.querySelector("#map3dContainer") ||
-          document.body;
-        const selector =
-          (value && value.selector && el.querySelector(value.selector)) ||
-          el.querySelector(".drag-el") ||
-          el;
-        if (selector !== el) {
-          selector.classList.add("ls-draggable");
-        }
-        selector.onmousedown = function (e: any) {
-          el.style.transition = "none";
-          const disx = e.clientX - el.offsetLeft;
-          const disy = e.clientY - el.offsetTop;
-          const mw = moveContainer.offsetWidth;
-          const mh = moveContainer.offsetHeight;
-          const ew = el.offsetWidth;
-          const eh = el.offsetHeight;
-          // 点击后将当前组件置顶
-          if (el.style.zIndex !== "" + (PopupManager.zIndex - 1)) {
-            el.style.zIndex = nextZIndex();
-          }
-
-          moveContainer.onmousemove = function (e: any) {
-            let left = e.clientX - disx;
-            let top = e.clientY - disy;
-            if (left < 0) {
-              left = 0;
-            }
-            if (top < 0) {
-              top = 0;
-            }
-            if (left > mw - ew) {
-              left = mw - ew;
-            }
-            if (top > mh - eh) {
-              top = mh - eh;
-            }
-            el.style.left = left + "px";
-            el.style.top = top + "px";
-          };
-          moveContainer.onmouseup = function (e: any) {
-            const left = e.clientX - disx;
-            const top = e.clientY - disy;
-            moveContainer.onmousemove = moveContainer.onmouseup = null;
-            useDialogStore().setXY([left, top]);
-            el.style.transition = "all 0.3s";
-          };
-        };
-      },
-    })
-    .component("Icon", Icon)
-    .mount("#app");
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
 }).catch(error => {
   console.error('用户会话初始化失败:', error)
   // 如果初始化失败，仍然显示登录弹窗
