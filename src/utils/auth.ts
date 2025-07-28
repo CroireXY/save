@@ -2,7 +2,7 @@
  * @Author: Sun ruiqi
  * @Date: 2025-07-17 13:15:37
  * @LastEditors: viola
- * @LastEditTime: 2025-07-28 10:33:00
+ * @LastEditTime: 2025-07-28 10:41:42
  * @FilePath: /LAE_Dashboard/src/utils/auth.ts
  */
 import axios from 'axios';
