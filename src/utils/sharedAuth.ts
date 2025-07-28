@@ -2,15 +2,17 @@
  * @Author: Sun ruiqi
  * @Date: 2025-07-23 16:14:06
  * @LastEditors: viola
- * @LastEditTime: 2025-07-23 16:25:33
+ * @LastEditTime: 2025-07-28 10:45:58
  * @FilePath: /LAE_Dashboard/src/utils/sharedAuth.ts
  */
 // utils/sharedAuth.js
+
+import { systemURL } from "./auth"
 export class SharedAuthManager {
   static STORAGE_KEYS = {
     USER_DATA: 'shared_user_data',
     AUTH_TOKEN: 'shared_auth_token',
-    RETURN_URL: 'shared_return_url',
+    RETURN_URL: `${systemURL}/user-management/dashboard`,
     SYSTEM_SOURCE: 'shared_system_source'
   }
 
@@ -27,7 +29,7 @@ export class SharedAuthManager {
     
     localStorage.setItem(this.STORAGE_KEYS.USER_DATA, JSON.stringify(sessionData))
     localStorage.setItem(this.STORAGE_KEYS.AUTH_TOKEN, userData.token)
-    localStorage.setItem(this.STORAGE_KEYS.RETURN_URL, window.location.origin + '/user-management/dashboard')
+    localStorage.setItem(this.STORAGE_KEYS.RETURN_URL, `${systemURL}/user-management/dashboard`)
   }
 
   // 获取共享用户数据
@@ -70,18 +72,28 @@ export class SharedAuthManager {
   }
 
   // 验证token是否有效
-  static async validateToken(token:string) {
-    try {
-      const response = await fetch('/api/validateToken', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      })
-      return response.ok
-    } catch (error) {
-      return false
+  // static async validateToken(token:string) {
+  //   try {
+  //     const response = await fetch('/api/validateToken', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${token}`
+  //       }
+  //     })
+  //     return response.ok
+  //   } catch (error) {
+  //     return false
+  //   }
+  // }
+  static validateToken(token: string) {
+    if(!token) {
+      return false;
+    }else if(token.length < 10) {
+      return false; // 假设token长度小于10表示无效
+
+    }else{
+      return true; // 假设验证通过，实际应用中需要调用后端API验证
     }
   }
 }
