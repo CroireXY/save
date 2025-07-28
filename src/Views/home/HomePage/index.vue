@@ -40,6 +40,9 @@
     <TakeoffLandingOverview />
   </Box>
 </Right_box>
+
+<Alert_popmsg />
+
 </template>
 <script lang="ts" setup>
 import Left_box from "@/components/left_box.vue";
@@ -52,6 +55,7 @@ import DataStatistics from "./components/DataStatistics.vue";
 import FlightTaskNature from "./components/FlightTaskNature.vue";
 import TakeoffLandingOverview from "./components/TakeoffLandingOverview.vue";
 import weatherCard from "./components/weatherCard.vue";
+import Alert_popmsg from "./components/Alert_popmsg.vue";
 </script>
 <style lang="scss" scoped>
 </style>

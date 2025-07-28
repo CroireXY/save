@@ -89,23 +89,13 @@ const WeatherShow = computed(() => ToolsStore.$state.WeatherShow);
 // 显示工具栏
 const ToolBarShow = computed(() => ToolsStore.TooBarShow);
 
-// const goToRegisterPage = () => {
-//   window.location.href = 'https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd'
-// }
-
 //新标签
 
 const goToRegisterPage = () => {
-  // window.open('https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd', '_blank') //全蓝主题
-  // window.open('https://ddnrxbqz.manus.space/?code=h98x3Eb92vcgSzWBMQ9oAm', '_blank') //新主题
   // window.open('http://localhost:3000/', '_blank') //本地
   window.open('http://lae.lscm.hk/pilot-drone/', '_blank'); //华为云
-
 }
 const goToUserPage = () => {
-  // window.open('https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd', '_blank') //全蓝主题
-  // window.open('https://ddnrxbqz.manus.space/?code=h98x3Eb92vcgSzWBMQ9oAm', '_blank') //新主题
-  // window.open('http://localhost:5173/', '_blank') //本地
   const currentUserData = SharedAuthManager.getUserSession()
   if (currentUserData) {
     SharedAuthManager.setUserSession({

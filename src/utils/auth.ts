@@ -8,8 +8,8 @@
 import axios from 'axios';
 
 //每次改这个去跳转系统
-export const systemURL = 'http://lae.lscm.hk'
-// export const systemURL = 'http://localhost:5174'
+// export const systemURL = 'http://lae.lscm.hk'
+export const systemURL = 'http://localhost:5173'
 
 
 let cachedToken: string | null = null;

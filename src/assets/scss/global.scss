@@ -116,11 +116,19 @@ html, body {
 }
 
 .glow-red {
-  color: #ff4c4c;
+  color: #f88f81;
   text-shadow: 
     0 0 4px #dd2727,
     0 0 8px #dd2727,
     0 0 12px #dd2727;
+}
+
+.glow-orange {
+  color: #f2bb3b;
+  text-shadow: 
+    0 0 4px #ff7519,
+    0 0 8px #ff7519,
+    0 0 12px #ff7519;
 }
 
 .glow-blue-soft {
