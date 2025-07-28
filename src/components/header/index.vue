@@ -78,7 +78,8 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 // import { useWeatherStore } from "@/stores/weather";
 import { useToolsStore } from "@/stores/tools";
 // import { hideAllTreeInfo, showNeedTreeInfo } from "@/utils/showOrHideInfoTree";
-
+import { SharedAuthManager } from '@/utils/sharedAuth'
+import { systemURL } from "@/utils/auth";
 // 工具点击事件
 const ToolsStore = useToolsStore();
 const UIShow = computed(() => ToolsStore.$state.UIShow);
@@ -104,7 +105,21 @@ const goToRegisterPage = () => {
 const goToUserPage = () => {
   // window.open('https://rnbxykkl.manus.space/?code=kywM4mHhs8iVwMPiKguyPd', '_blank') //全蓝主题
   // window.open('https://ddnrxbqz.manus.space/?code=h98x3Eb92vcgSzWBMQ9oAm', '_blank') //新主题
-  window.open('http://localhost:5173/', '_blank') //本地
+  // window.open('http://localhost:5173/', '_blank') //本地
+  const currentUserData = SharedAuthManager.getUserSession()
+  if (currentUserData) {
+    SharedAuthManager.setUserSession({
+      ...currentUserData,
+      source: 'http://lae.lscm.hk/',
+      timestamp: Date.now() // 更新时间戳
+    })
+  }
+  
+  // 获取返回URL
+  const returnUrl = SharedAuthManager.getReturnUrl()
+  
+  // 跳转回用户管理系统
+  window.location.href = returnUrl || '/user-management/dashboard';
 }
 
 // 电子地图

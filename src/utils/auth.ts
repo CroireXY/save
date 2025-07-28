@@ -2,10 +2,15 @@
  * @Author: Sun ruiqi
  * @Date: 2025-07-17 13:15:37
  * @LastEditors: viola
- * @LastEditTime: 2025-07-23 16:45:16
+ * @LastEditTime: 2025-07-28 10:33:00
  * @FilePath: /LAE_Dashboard/src/utils/auth.ts
  */
 import axios from 'axios';
+
+//每次改这个去跳转系统
+export const systemURL = 'http://lae.lscm.hk'
+// export const systemURL = 'http://localhost:5174'
+
 
 let cachedToken: string | null = null;
 let tokenExpireTime = 0; // 以毫秒为单位的过期时间

@@ -2,15 +2,17 @@
  * @Author: Sun ruiqi
  * @Date: 2025-07-23 16:14:06
  * @LastEditors: viola
- * @LastEditTime: 2025-07-24 15:27:35
+ * @LastEditTime: 2025-07-25 18:07:44
  * @FilePath: /LAE_Dashboard/src/utils/sharedAuth.ts
  */
 // utils/sharedAuth.js
+
+import { systemURL } from "./auth"
 export class SharedAuthManager {
   static STORAGE_KEYS = {
     USER_DATA: 'shared_user_data',
     AUTH_TOKEN: 'shared_auth_token',
-    RETURN_URL: 'https://localhost:5173/user-management/dashboard',
+    RETURN_URL: `${systemURL}/user-management/dashboard`,
     SYSTEM_SOURCE: 'shared_system_source'
   }
 
@@ -27,7 +29,7 @@ export class SharedAuthManager {
     
     localStorage.setItem(this.STORAGE_KEYS.USER_DATA, JSON.stringify(sessionData))
     localStorage.setItem(this.STORAGE_KEYS.AUTH_TOKEN, userData.token)
-    localStorage.setItem(this.STORAGE_KEYS.RETURN_URL, window.location.origin + '/user-management/dashboard')
+    localStorage.setItem(this.STORAGE_KEYS.RETURN_URL, `${systemURL}/user-management/dashboard`)
   }
 
   // 获取共享用户数据

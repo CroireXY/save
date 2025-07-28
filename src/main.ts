@@ -24,12 +24,14 @@ import "echarts-liquidfill";
 import { nextZIndex, PopupManager } from "@/utils/common";
 import { useDialogStore } from "@/stores/dialog";
 import VueFullscreen from "vue-fullscreen";
+import { systemURL } from "@/utils/auth";
 
 // 导入SweetAlert2
 import Swal from 'sweetalert2'
 // 在其他系统的入口文件（如 main.js 或 App.vue）
 import { SharedAuthManager } from '@/utils/sharedAuth';
 import { setAuthToken, getToken,setCurrentUser } from '@/utils/auth';
+
 interface UserData {
   username: string
   userId: string
@@ -207,7 +209,8 @@ class EncryptedDataManager {
    * 生成返回用户管理系统的URL
    */
   static getReturnUrl(): string {
-    return 'http://localhost:5173/user-management/dashboard?from=external-system'
+    const url = `${systemURL}/user-management/dashboard?from=external-system`
+    return url
   }
 }
 
@@ -272,8 +275,9 @@ class SweetAlertRedirectManager {
     
     if (result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
       // 用户点击确认或超时自动确认
-      // window.location.href = '/user-management/login'
-      window.location.href = 'http://localhost:5173/login'
+      window.location.href = `${systemURL}/user-management/login`
+     
+
     } else if (result.dismiss === Swal.DismissReason.cancel) {
       // 用户点击取消，可以显示受限界面或其他处理
       console.log('用户取消了登录跳转')
@@ -313,7 +317,7 @@ class SweetAlertRedirectManager {
     })
     
     // 无论如何都跳转到登录页
-    window.location.href = '/user-management/login'
+    window.location.href = `${systemURL}/user-management/login`
   }
   
   static async showRestrictedAccess() {
@@ -447,73 +451,76 @@ console.log(1111)
 // 页面加载时初始化用户会话
 initializeUserSession().then(() => {
   // 只有在认证检查完成后才创建Vue应用
-  createApp(App)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    .use(ElementPlus,{})
-    .use(Antd)
-    .use(createPinia())
-    .use(router)
-    // .use(VueFullscreen)
-    .component("LeaseTitle", LeaseTitle)
-    .component("V3Echarts", V3Echarts)
-    .directive("drag", {
-      mounted: function (el: any, binding: any, vnode: any) {
-        const value = binding.value;
-        const moveContainer =
-          (value && value.container && document.querySelector(value.container)) ||
-          document.querySelector("#map3dContainer") ||
-          document.body;
-        const selector =
-          (value && value.selector && el.querySelector(value.selector)) ||
-          el.querySelector(".drag-el") ||
-          el;
-        if (selector !== el) {
-          selector.classList.add("ls-draggable");
-        }
-        selector.onmousedown = function (e: any) {
-          el.style.transition = "none";
-          const disx = e.clientX - el.offsetLeft;
-          const disy = e.clientY - el.offsetTop;
-          const mw = moveContainer.offsetWidth;
-          const mh = moveContainer.offsetHeight;
-          const ew = el.offsetWidth;
-          const eh = el.offsetHeight;
-          // 点击后将当前组件置顶
-          if (el.style.zIndex !== "" + (PopupManager.zIndex - 1)) {
-            el.style.zIndex = nextZIndex();
-          }
+  const app = createApp(App)
 
-          moveContainer.onmousemove = function (e: any) {
-            let left = e.clientX - disx;
-            let top = e.clientY - disy;
-            if (left < 0) {
-              left = 0;
-            }
-            if (top < 0) {
-              top = 0;
-            }
-            if (left > mw - ew) {
-              left = mw - ew;
-            }
-            if (top > mh - eh) {
-              top = mh - eh;
-            }
-            el.style.left = left + "px";
-            el.style.top = top + "px";
-          };
-          moveContainer.onmouseup = function (e: any) {
-            const left = e.clientX - disx;
-            const top = e.clientY - disy;
-            moveContainer.onmousemove = moveContainer.onmouseup = null;
-            useDialogStore().setXY([left, top]);
-            el.style.transition = "all 0.3s";
-          };
-        };
-      },
-    })
-    .component("Icon", Icon)
-    .mount("#app");
+// 注册插件
+app.use(ElementPlus, {
+  size: '',     //  
+  zIndex: 2000  // 默认 ElementPlus 的弹窗层级起始
+})
+app.use(Antd)
+app.use(createPinia())
+app.use(router)
+// app.use(VueFullscreen)
+
+// 注册全局组件
+app.component("LeaseTitle", LeaseTitle)
+app.component("V3Echarts", V3Echarts)
+app.component("Icon", Icon)
+
+// 注册自定义指令
+app.directive("drag", {
+  mounted(el: any, binding: any) {
+    const value = binding.value
+    const moveContainer =
+      (value?.container && document.querySelector(value.container)) ||
+      document.querySelector("#map3dContainer") ||
+      document.body
+    const selector =
+      (value?.selector && el.querySelector(value.selector)) ||
+      el.querySelector(".drag-el") ||
+      el
+    if (selector !== el) {
+      selector.classList.add("ls-draggable")
+    }
+    selector.onmousedown = function (e: any) {
+      el.style.transition = "none"
+      const disx = e.clientX - el.offsetLeft
+      const disy = e.clientY - el.offsetTop
+      const mw = moveContainer.offsetWidth
+      const mh = moveContainer.offsetHeight
+      const ew = el.offsetWidth
+      const eh = el.offsetHeight
+
+      if (el.style.zIndex !== "" + (PopupManager.zIndex - 1)) {
+        el.style.zIndex = nextZIndex()
+      }
+
+      moveContainer.onmousemove = function (e: any) {
+        let left = e.clientX - disx
+        let top = e.clientY - disy
+        if (left < 0) left = 0
+        if (top < 0) top = 0
+        if (left > mw - ew) left = mw - ew
+        if (top > mh - eh) top = mh - eh
+        el.style.left = `${left}px`
+        el.style.top = `${top}px`
+      }
+
+      moveContainer.onmouseup = function (e: any) {
+        const left = e.clientX - disx
+        const top = e.clientY - disy
+        moveContainer.onmousemove = moveContainer.onmouseup = null
+        useDialogStore().setXY([left, top])
+        el.style.transition = "all 0.3s"
+      }
+    }
+  },
+})
+
+// 最后挂载
+app.mount("#app")
+
 }).catch(error => {
   console.error('用户会话初始化失败:', error)
   // 如果初始化失败，仍然显示登录弹窗
