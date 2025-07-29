@@ -151,8 +151,10 @@ onUnmounted(() => {
     position: absolute;
     top: 5px;
     right: 5px;
-    width: 24px;
-    height: 24px;
+  //  @include Width(6);
+  //   @include hHeight(6);
+   width: 12px;
+    height: 12px;
     background-color: #58a8cb; /* 与外侧框一致 */
     border: none;
     color: white;
