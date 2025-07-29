@@ -1,14 +1,3 @@
-<!--
- * @Author: Sun ruiqi
- * @Date: 2025-07-17 17:12:28
- * @LastEditors: viola
-<<<<<<< HEAD
- * @LastEditTime: 2025-07-24 15:28:12
-=======
- * @LastEditTime: 2025-07-24 10:33:41
->>>>>>> 991ea888fd8d72aa021757f51dc999aaad0efaed
- * @FilePath: /LAE_Dashboard/src/App.vue
--->
 <!-- App.vue -->
 <template>
   <div>

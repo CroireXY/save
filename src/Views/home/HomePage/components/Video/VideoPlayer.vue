@@ -21,6 +21,7 @@
 
 <script setup>
 import { ref, watch, onBeforeUnmount } from 'vue'
+import { wsVideoURL } from '@/utils/auth'
 
 const props = defineProps({
   visible: Boolean
@@ -76,7 +77,7 @@ watch(
   (val) => {
     if (val && canvasRef.value) {
       const createPlayer = () => {
-        player = new window.JSMpeg.Player('ws://lae.lscm.hk:9999', {
+        player = new window.JSMpeg.Player(wsVideoURL, {
           canvas: canvasRef.value,
           autoplay: true,
           audio: false,

@@ -56,6 +56,7 @@ import FlightTaskNature from "./components/FlightTaskNature.vue";
 import TakeoffLandingOverview from "./components/TakeoffLandingOverview.vue";
 import weatherCard from "./components/weatherCard.vue";
 import Alert_popmsg from "./components/Alert_popmsg.vue";
+
 </script>
 <style lang="scss" scoped>
 </style>

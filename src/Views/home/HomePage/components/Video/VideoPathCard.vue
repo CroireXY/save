@@ -29,6 +29,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { wsVideoURL } from '@/utils/auth'
 import defaultSrc from '@/assets/icons/icons_TakeoffLandingOverview/videodefault.webp'
 import hoverSrc from '@/assets/icons/icons_TakeoffLandingOverview/videohover.webp'
 
@@ -125,7 +126,7 @@ watch(visible, (val) => {
     const script = document.createElement('script')
     script.src = '/js/jsmpeg.min.js'
     script.onload = () => {
-      player = new window.JSMpeg.Player('ws://lae.lscm.hk:9999', {
+      player = new window.JSMpeg.Player(wsVideoURL, {
         canvas: canvasRef.value,
         autoplay: true,
         audio: false,

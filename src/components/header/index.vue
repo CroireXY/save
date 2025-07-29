@@ -93,14 +93,15 @@ const ToolBarShow = computed(() => ToolsStore.TooBarShow);
 
 const goToRegisterPage = () => {
   // window.open('http://localhost:3000/', '_blank') //本地
-  window.open('http://lae.lscm.hk/pilot-drone/', '_blank'); //华为云
+  // window.open('http://lae.lscm.hk/pilot-drone/', '_blank'); //华为云
+  window.open(`${systemURL}/pilot-drone/`, '_blank');
 }
 const goToUserPage = () => {
   const currentUserData = SharedAuthManager.getUserSession()
   if (currentUserData) {
     SharedAuthManager.setUserSession({
       ...currentUserData,
-      source: 'http://lae.lscm.hk/',
+      source: `${systemURL}`,
       timestamp: Date.now() // 更新时间戳
     })
   }

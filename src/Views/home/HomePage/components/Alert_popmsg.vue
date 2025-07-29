@@ -23,7 +23,7 @@
   }
   
   // 当前告警索引
-  const alertIndex = ref(2);
+  const alertIndex = ref(1);
   
   // 配置对象
   const alertData: Record<number, AlertDataType> = {

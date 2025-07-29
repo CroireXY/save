@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-07-23 16:14:06
- * @LastEditors: viola
- * @LastEditTime: 2025-07-28 10:45:58
- * @FilePath: /LAE_Dashboard/src/utils/sharedAuth.ts
- */
 // utils/sharedAuth.js
 
 import { systemURL } from "./auth"

@@ -1,19 +1,30 @@
 <!-- /src/Views/home/HomePage/components/DataStatistics.vue -->
 <template>
-    <div class="grid-box">
-      <div class="grid-item" v-for="item in infoList" :key="item.id">
-        <div class="icon-box">
-          <img :src="item.icon" alt="icon" />
+  <div class="grid-box">
+    <div class="grid-item" v-for="item in infoList" :key="item.id">
+      <div class="icon-box">
+        <img :src="item.icon" alt="icon" />
+      </div>
+      <div class="text-box">
+        <div
+          class="value"
+          :class="[
+            item.id === alertIndex ? 'animate__animated animate__heartBeat animate__infinite glow-red' : 'glow-blue'
+          ]"
+        >
+          {{ item.value }}{{ item.unit }}
         </div>
-        <div class="text-box">
-          <div class="value glow-blue">{{ item.value }}{{ item.unit }}</div>
-          <div class="name">{{ item.name }}</div>
-        </div>
+
+        <div class="name">{{ item.name }}</div>
       </div>
     </div>
-  </template>
-  
+  </div>
+</template>
+
   <script lang="ts" setup>
+  import { ref } from 'vue';
+
+  const alertIndex = ref(1); 
   const infoList = [
     {
       id: 1,

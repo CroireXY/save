@@ -45,7 +45,7 @@ const infoList = reactive([
   },
   {
     id: 3,
-    name: "已飛裏程",
+    name: "已飛里程",
     value: 45,
     unit: "km",
     icon: require("@/assets/icons/icons_TodayLive/totalDistance.webp"),
@@ -75,12 +75,7 @@ const infoList = reactive([
 
 onMounted(async () => {
    try {
-      // const res = await fetchWithAuth(
-      //   "http://lae.lscm.hk/fsp/api/getFlightRecordInDetails?stime=20250529143106&etime=20250529143511&recordId=2&offset=0"
-      // ); //一条往返数据
       const res = await getFlightSummary({
-      
-       
       });
       const data = await res.data;
       if (data.responseCode !== 200 ) {

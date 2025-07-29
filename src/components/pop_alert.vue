@@ -1,20 +1,20 @@
 <!-- src/components/pop_alert.vue -->
 <template>
     <transition
-      name="custom-classes-transition"
-      enter-active-class="animate__animated animate__zoomInDown"
-      leave-active-class="animate__animated animate__zoomOutUp"
+      appear
+      enter-active-class="animate__animated animate__slow animate__zoomInDown"
+      leave-active-class="animate__animated animate__slow animate__zoomOutUp"
     >
       <div v-if="visible" class="pop-alert">
-        <img class="bg" src="@/assets/icons/icons_FlightConflict/popbox6.png" />
+        <img class="bg" src="@/assets/icons/Box/popbox.webp" />
         <div class="content">
-          <div class="top-row">
             <img class="icon" :src="iconSrc" />
-            <span :class="['conflict-label', glowColor]">{{ title }}</span>
-          </div>
-          <div class="bottom-row">{{ description }}</div>
+            <div class="text-area">
+                <div class="conflict-label" :class="glowColor">{{ title }}</div>
+                <div class="bottom-row">{{ description }}</div>
+            </div>
         </div>
-      </div>
+    </div>
     </transition>
   </template>
   
@@ -34,38 +34,48 @@
     position: absolute;
     @include Top(100);
     @include Left(550);
-    @include Width(600);
+    @include Width(650);
     z-index: 999;
+
     .bg {
-      @include Width(500);
+      @include Width(550);
       @include wHeight(120);
       position: absolute;
       pointer-events: none;
     }
+
     .content {
-      position: absolute;
-      @include Top(20);
-      @include Left(50);
-      color: #fff;
-      .top-row {
-        display: flex;
-        align-items: center;
-        @include MarginBottom(18);
+    position: relative;
+    @include Top(0);
+    @include Left(20);
+    @include Width(500);
+    @include wHeight(120);
+    color: #fff;
+
         .icon {
-            @include Width(36);
-            @include wHeight(36);
-            @include MarginRight(8);
+        @include Width(80);
+        @include wHeight(80);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        @include MarginRight(0);
         }
-        .conflict-label {
-            // color: #ff2929;
-            @include FontSize(28);
-            font-weight: bold;
+
+        .text-area {
+            position: relative;
+            @include MarginLeft(100);
+            @include Padding(25,0,0,0);
+            .conflict-label {
+                @include FontSize(28);
+                font-weight: bold;
+                @include MarginBottom(15);
+            }
+            .bottom-row {
+                @include FontSize(24);
+                @include LineHeight(30);
+            }
         }
-      }
-      .bottom-row {
-        @include FontSize(24);
       }
     }
-  }
   </style>
   

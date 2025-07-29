@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { wsVideoURL } from '@/utils/auth'
 
 const showVideoLeft = ref(false);
 const showVideoRight = ref(false);
@@ -50,7 +51,7 @@ watch(showVideoLeft, (val) => {
     const script = document.createElement('script');
     script.src = '/js/jsmpeg.min.js';
     script.onload = () => {
-      playerLeft = new (window as any).JSMpeg.Player('ws://lae.lscm.hk:9999', {
+      playerLeft = new (window as any).JSMpeg.Player(wsVideoURL, {
         canvas: canvasRefLeft.value,
         autoplay: true,
         audio: false,
@@ -66,7 +67,7 @@ watch(showVideoRight, (val) => {
     const script = document.createElement('script');
     script.src = '/js/jsmpeg.min.js';
     script.onload = () => {
-      playerRight = new (window as any).JSMpeg.Player('ws://lae.lscm.hk:9999', {
+      playerRight = new (window as any).JSMpeg.Player(wsVideoURL, {
         canvas: canvasRefRight.value,
         autoplay: true,
         audio: false,

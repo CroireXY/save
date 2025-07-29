@@ -1,10 +1,3 @@
-/*
- * @Author: Sun ruiqi
- * @Date: 2025-07-23 15:27:47
- * @LastEditors: viola
- * @LastEditTime: 2025-07-24 14:37:03
- * @FilePath: /LAE_Dashboard/src/components/cesium/polyline.ts
- */
 // src/cesium/materials/polyline.ts
 import * as Cesium from 'cesium'
 
