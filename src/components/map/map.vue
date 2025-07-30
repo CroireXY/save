@@ -272,6 +272,8 @@ onMounted(() => {
   viewer.scene.logarithmicDepthBuffer = true;
 
   viewer.scene.globe.depthTestAgainstTerrain = false;
+
+  mapStore.setViewer(viewer);
 });
 
 function addModel(

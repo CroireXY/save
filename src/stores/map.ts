@@ -1,6 +1,8 @@
+// src/stores/map.ts
 import { get } from "lodash";
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import type { Viewer } from "cesium";
 
 export const useMapStore = defineStore("map", {
   
@@ -11,6 +13,7 @@ export const useMapStore = defineStore("map", {
     CurrentMode: ref("3D"), // 当前模式，默认为2D
     drawFlightPath: null as null | (() => void),
     // closeFlightPath: null as null | (() => void),
+    viewer: null as Viewer | null,
   }),
   actions: {
     async setDrone2DShow(payload: any) {
@@ -39,6 +42,9 @@ export const useMapStore = defineStore("map", {
 
     getFlightPathShow() {
       return get(this, "FlightPathShow", false);
-    }
+    },
+    setViewer(viewer: Viewer) {
+      this.viewer = viewer;
+    },
   },
 });

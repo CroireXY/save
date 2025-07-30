@@ -25,7 +25,7 @@
             popper-class="tip-popper"
             class="box-item"
             effect="dark"
-            content="地图工具"
+            content="地圖工具"
             placement="bottom"
           >
             <Icon
@@ -42,7 +42,7 @@
             popper-class="tip-popper"
             class="box-item"
             effect="dark"
-            content="注册管理"
+            content="註冊管理"
             placement="bottom"
           >
             <Icon
@@ -57,7 +57,7 @@
             popper-class="tip-popper"
             class="box-item"
             effect="dark"
-            content="用户管理"
+            content="用戶管理"
             placement="bottom"
           >
             <Icon

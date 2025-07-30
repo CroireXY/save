@@ -24,7 +24,7 @@
   <script lang="ts" setup>
   import { ref } from 'vue';
 
-  const alertIndex = ref(1); 
+  const alertIndex = ref(0); 
   const infoList = [
     {
       id: 1,
