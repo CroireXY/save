@@ -70,7 +70,13 @@
     >
       <Weather v-if="WeatherShow" />
     </transition>
-
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animate__animated   animate__fadeInLeft"
+      leave-active-class="animate__animated  animate__fadeOutLeft"
+    >
+    <AlertTest v-if="ToolsStore.alertPanelVisible" class="alert-panel" />
+    </transition>
     <transition
       name="custom-classes-transition"
       enter-active-class="animate__animated   animate__fadeIn"
@@ -103,6 +109,7 @@ import Weather from "@/components/tools/weather.vue";
 import ToolBar from "@/components/tools/toolBar.vue";
 import Build from "@/components/tools/build.vue";
 import mainPanel from "@/Views/home/main/index.vue";
+import AlertTest from '@/components/tools/alertTest.vue';
 
 import { ref } from "vue";
 import { getWeather } from "@/api/connect";

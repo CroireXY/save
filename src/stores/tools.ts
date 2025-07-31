@@ -27,7 +27,9 @@ export const useToolsStore = defineStore({
             y: 0
         },
         // 当前右键点击坐标
-        nowLocation: []
+        nowLocation: [],
+
+        alertPanelVisible: false,
     }),
 
     actions: {
@@ -102,6 +104,9 @@ export const useToolsStore = defineStore({
             this.$patch({
                 Buildinfo: pyload
             })
-        }
+        },
+        toggleAlertPanel() {
+            this.alertPanelVisible = !this.alertPanelVisible;
+          },
     }
 })

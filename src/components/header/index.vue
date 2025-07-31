@@ -15,7 +15,7 @@
           >
             <Icon
               :color="!UIShow ? '#7afafe' : '#fff'"
-              :font-size="26"
+              :font-size="24"
               icon="mianban"
             />
           </el-tooltip>
@@ -30,9 +30,25 @@
           >
             <Icon
               :color="WeatherShow ? '#7afafe' : '#fff'"
-              :font-size="25"
+              :font-size="24"
               icon="tool-bar-ememap"
               
+            />
+          </el-tooltip>
+        </div>
+
+        <div @click="toggleAlertPanel" class="too-bar-style">
+          <el-tooltip
+            popper-class="tip-popper"
+            class="box-item"
+            effect="dark"
+            content="模擬實時告警"
+            placement="bottom"
+          >
+            <Icon
+              :color="ToolsStore.alertPanelVisible ? '#7afafe' : '#fff'"
+              :font-size="24"
+              icon="xunimanyou" 
             />
           </el-tooltip>
         </div>
@@ -86,6 +102,7 @@ const UIShow = computed(() => ToolsStore.$state.UIShow);
 const LayerTreeshow = computed(() => ToolsStore.$state.LayerTreeShow);
 const AnimationShow = computed(() => ToolsStore.$state.AnimationShow);
 const WeatherShow = computed(() => ToolsStore.$state.WeatherShow);
+const toggleAlertPanel = () => { ToolsStore.toggleAlertPanel();};
 // 显示工具栏
 const ToolBarShow = computed(() => ToolsStore.TooBarShow);
 

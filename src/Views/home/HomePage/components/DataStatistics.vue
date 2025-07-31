@@ -9,7 +9,7 @@
         <div
           class="value"
           :class="[
-            item.id === alertIndex ? 'animate__animated animate__heartBeat animate__infinite glow-red' : 'glow-blue'
+            item.id === alertStore.alertIndex ? 'animate__animated animate__heartBeat animate__infinite glow-red' : 'glow-blue'
           ]"
         >
           {{ item.value }}{{ item.unit }}
@@ -23,8 +23,11 @@
 
   <script lang="ts" setup>
   import { ref } from 'vue';
+  import { useAlertStore } from '@/stores/alert';
 
-  const alertIndex = ref(0); 
+  const alertStore = useAlertStore();
+
+  // const alertIndex = ref(0); 
   const infoList = [
     {
       id: 1,

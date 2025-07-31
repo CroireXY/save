@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import * as Cesium from "cesium";
 import "../../Widgets/widgets.css";
-import { onMounted, watch, watchEffect, ref } from "vue";
+import { onMounted, watch, watchEffect, ref, nextTick } from "vue";
 import { useMapStore } from "@/stores/map";
 import { fetchWithAuth } from "@/utils/auth";
 import { getFlightRecordInDetails,getFlightRecords } from "@/api/connect";
@@ -58,6 +58,7 @@ const urls = [
 const ws = new websocketServer("ws://lae.lscm.hk/fsp/websocketConnection");
 
 onMounted(() => {
+  nextTick(() => {
   // eventBus.on("drawFlightPath", onFlightPathShowChanged);
   // ws.connect(2);
   Cesium.Ion.defaultAccessToken =
@@ -274,6 +275,7 @@ onMounted(() => {
   viewer.scene.globe.depthTestAgainstTerrain = false;
 
   mapStore.setViewer(viewer);
+});
 });
 
 function addModel(
